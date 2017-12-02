@@ -31,7 +31,10 @@ public class Orderinfo {
 	private String phone;
 	private List<Orderdetail> orderdetails;
 	private User user;
-	
+	private Seller seller;
+
+
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getOrderId() {
@@ -120,6 +123,12 @@ public class Orderinfo {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
-	
+
+	public void setSeller(Seller seller) {
+		this.seller = seller;
+	}
+
+	public Seller getSeller() {
+		return seller;
+	}
 }
