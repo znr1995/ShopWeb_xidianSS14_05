@@ -25,6 +25,7 @@ public class Orderinfo {
 	private String deliveryAddress;
 	private String feedbackRemarks;
 	private Date orderCreateTime;
+	private Date orderFinishTime;
 	private String orderPayWay;
 	private int orderStatus;
 	private double orderTotalMoney;
@@ -66,6 +67,13 @@ public class Orderinfo {
 	}
 	public void setOrderCreateTime(Date orderCreateTime) {
 		this.orderCreateTime = orderCreateTime;
+	}
+	public void setOrderFinishTime(Date orderFinishTime) {
+		this.orderFinishTime = orderFinishTime;
+	}
+	public Date getOrderFinishTime() {
+
+		return orderFinishTime;
 	}
 	public String getOrderPayWay() {
 		return orderPayWay;

@@ -9,28 +9,28 @@ public class ProductManagementService {
     private long sellerId;
     private LinkedList<ProductInformation> products;
 
-    ProductManagementService(long sellerId)
+    public ProductManagementService(long sellerId)
     {
         this.sellerId = sellerId;
         products = getAllProducts(sellerId);
     }
 
-    boolean addProduct(ProductInformation newProduct)
+    public boolean addProduct(ProductInformation newProduct)
     {
         return  createProductInformation(sellerId, newProduct);
     }
 
-    boolean changedProduct(ProductInformation product)
+    public boolean changedProduct(ProductInformation product)
     {
         return changedProducts(product);
     }
 
-    boolean deleteProduct(ProductInformation product)
+    public boolean deleteProduct(ProductInformation product)
     {
         return  deleteProduct(product.getProductId());
     }
 
-    boolean deleteProduct(long productId)
+    public boolean deleteProduct(long productId)
     {
         return  deleteProducts(productId);
     }
