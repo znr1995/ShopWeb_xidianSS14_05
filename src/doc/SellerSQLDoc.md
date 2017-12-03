@@ -59,13 +59,10 @@ List<ProductInformation> getAllProducts(long sellerId)
 
 //删除某一个商品
 bool deleteProducts(long productID)
-  
-//为某一个商品入库（增加数量）
-bool addProducts(long productID, long num)
 
-//为某一个商品出库（减少数量）
-bool removeProducts(long productID, long num)
-  
+//为某个商品修改信息
+bool changedProducts(ProductInformation newProduct)
+
 //获取订单信息
 List<Orderinfo> getTrade(long sellerID, int type)
   //type : 0 :所有的
