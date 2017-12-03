@@ -4,12 +4,11 @@ import com.project_management.shoppingweb.domain.Product;
 
 import java.util.LinkedList;
 
-public class ProductManagement {
-
+public class ProductManagementService {
     private long sellerId;
     private LinkedList<Product> products;
 
-    ProductManagement(long sellerId)
+    ProductManagementService(long sellerId)
     {
         this.sellerId = sellerId;
 
@@ -34,4 +33,5 @@ public class ProductManagement {
     {
         return  false;
     }
+
 }
