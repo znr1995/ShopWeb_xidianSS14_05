@@ -8,7 +8,7 @@ long loginByUsername(String username, String passwd)
   //返回long为唯一的标识ID，因为小型项目，long就够了
   
 //获取商家信息接口
-String getSellerInfromation(long sellerId)
+Seller getSellerInfromation(long sellerId)
   //参数sellId为卖家的ID，唯一标识卖家的信息。返回JSON格式的字符串，信息以键值对存储
 //验证密码
 bool checkPasswd(long sellerId, String passwd)
