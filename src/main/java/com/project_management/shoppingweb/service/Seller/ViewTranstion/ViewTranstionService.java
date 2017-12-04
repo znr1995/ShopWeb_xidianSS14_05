@@ -1,12 +1,14 @@
 package com.project_management.shoppingweb.service.Seller.ViewTranstion;
 
 import com.project_management.shoppingweb.domain.Orderinfo;
+import com.project_management.shoppingweb.service.SellerSQLFunction;
 
 import java.util.LinkedList;
 
 public class ViewTranstionService {
     private long sellerId;
     private LinkedList<Orderinfo> orderlist;
+    SellerSQLFunction sellerFunction = new SellerSQLFunction();
 
     private int FINISH_ORDER = 1;
     private int UNFINISH_ORDER = 2;
@@ -14,7 +16,7 @@ public class ViewTranstionService {
     public ViewTranstionService(long sellerId)
     {
         this.sellerId = sellerId;
-        this.orderlist = getTrade(sellerId,0);  // 0 -> all of order's
+        this.orderlist = sellerFunction.getTrade(sellerId,0);  // 0 -> all of order's
     }
 
      public LinkedList<Orderinfo> getFinishedOrder()

@@ -90,4 +90,20 @@ public class Seller {
         this.address = address;
         this.sculpture = sculpture;
     }
+
+    public Seller(long sellerId) {
+        this.sellerId = sellerId;
+    }
+
+    public Seller(Seller tmpSeller)
+    {
+        this.sellerId = tmpSeller.getSellerId();
+        this.username = tmpSeller.getUsername();
+        this.email = tmpSeller.getEmail();
+        this.passwd = tmpSeller.getPasswd();
+        this.phoneNum = tmpSeller.getPhoneNum();
+        this.address = tmpSeller.getAddress();
+        this.sculpture = tmpSeller.getSculpture();
+    }
+
 }
