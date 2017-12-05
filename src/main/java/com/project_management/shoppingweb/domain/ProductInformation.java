@@ -84,7 +84,7 @@ public class ProductInformation {
         return seller;
     }
 
-    public ProductInformation(long productId, long seller, String productName, long productNumber, long productPrice, String JSONStr, String productPicture, String productNote) {
+    public ProductInformation(long productId, long seller, String productName, long productNumber, double productPrice, String JSONStr, String productPicture, String productNote) {
         this.productId = productId;
         this.seller = seller;
         this.productName = productName;

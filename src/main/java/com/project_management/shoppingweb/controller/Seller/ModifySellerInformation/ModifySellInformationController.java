@@ -4,26 +4,35 @@ import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.service.SellerSQLFunction;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import com.project_management.shoppingweb.service.SellSQLInterface;
 
-@RequestMapping("/modify")
+
+@RequestMapping("/Seller/ModifySellerInformation")
 public class ModifySellInformationController {
+    private  long sellerID = -1;
     SellerSQLFunction sellerFunction = new SellerSQLFunction();
-    @RequestMapping(value = "/checkpasswd")                     //密码确认
-    public boolean checkpasswd(@RequestParam(value = "Seller",required = true)Seller seller,
-                               @RequestParam(value = "passwd",required = true)String passwd){
-        if(seller.getPasswd().equals(passwd))
-            return true;
-        else
-            return false;
+
+    @RequestMapping("ModifySellerInformationHandler")
+    public String jumpToModiySellerInformationPage(@ModelAttribute("SellerID") long sellerId, Model model)
+    {
+        sellerID = sellerId;
+        Seller seller = sellerFunction.getSellerInfromation(sellerID);
+        model.addAttribute("Sculpture",seller.getSculpture());
+        model.addAttribute("Address",seller.getAddress());
+        model.addAttribute("Email",seller.getEmail());
+        model.addAttribute("Passwd",seller.getPasswd());
+        model.addAttribute("PhoneNum",seller.getPhoneNum());
+        model.addAttribute("Username",seller.getUsername());
+        return "Seller/ModifySellerInformationPage";
     }
 
-    //上一个方法返回true则跳转下一个页面(暂缺)
 
-    @RequestMapping(value = "/modifyFiveItem")
+
+    @RequestMapping("ModifySellerInfromation")
     // public String modifyFiveItem(@RequestParam(value = "Seller",required = true)Seller seller)
     public String modifyFiveItem(@RequestParam(value = "userId",required = true)long userId,
                                  @RequestParam(value = "userName",required = true)String userName,
@@ -34,6 +43,8 @@ public class ModifySellInformationController {
                                  @RequestParam(value = "sculpture",required = true)String sculpture
 
     ){
+
+        //TODO:如何告诉界面返回成功
         Seller newSeller=sellerFunction.getSellerInfromation(userId);    //getSellerInformation和writeInInformation等待数据库实现
         newSeller.setAddress(address);
         newSeller.setEmail(email);
@@ -42,8 +53,9 @@ public class ModifySellInformationController {
         newSeller.setSculpture(sculpture);
         newSeller.setUsername(userName);
         if(sellerFunction.writeInInformation(newSeller))
-            return "success";
+            return "../Seller/Main";
         else
-            return "fail";
+            //TODO:eroor hander
+            return "error/false";
     }
 }
