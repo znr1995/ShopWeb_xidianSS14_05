@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>登录界面</title>
+     <meta charset="UTF-8" />  
+</head>
+<body>
+<fieldset style="width:500px;">
+    <legend>登录界面</legend> -->
+    <!--form表单的action属性规定当提交表单时，向何处发送表单数据，method属性指明表单的提交方式，分为get和post，默认为get-->
+    <form action="/admin/addlogin" method="post">
+  
+    <!--输入文本框，通过value指定其显示的默认值-->
+    用户名(文本框)：<br><input type="text" name="username"><br>
+    <!--密码框，其中所有输入的内容都以密文的形式显示-->
+    密&nbsp;&nbsp;码(密码框)：<br>
+    <!--&nbsp;表示的是一个空格-->
+    <input type="password" name="password" ><br>
+      
+    <input type="submit" value="登录"/>
+    <!--重置表单按钮，当点击重置后，所有表单恢复原始显示内容-->
+	<button type="button" onclick = "a()">注册</button>
+</form>
+
+
+<!--表单结束-->
+</fieldset>
+<script>
+function a(){
+	window.location.href="/admin/register";
+}
+</script>
+</body>
+<!--完结标记-->
+</html>
+<!--完结标记-->
