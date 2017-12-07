@@ -1,109 +1,76 @@
 package com.project_management.shoppingweb.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import javax.persistence.*;
 
 @Entity
-@Table(name = "t_address")
+@Table(name = "t_seller")
 public class Seller {
-     /*商家JSON格式：
-  {	(名称，类型)
-	sellId	:	long，
-	username:	String,
-    email	:	String,
-    passwd	:	String,
-    phoneNum:	String,
-    adress	:	String,
-    sculpture:	String //(头像：图片的路径)
-  }
-  */
-     private long sellerId;
-     private String username;
-     private String email;
-     private String passwd;
-     private String phoneNum;
-     private String address;
-     private String sculpture;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int sellerId;
+    private String username;
+    private String email;
+    private String password;
+    private String phoneNum;
+    private String address;
+    private String sculpture;
 
-    public void setSellerId(long sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setPasswd(String passwd) {
-        this.passwd = passwd;
-    }
-
-    public void setPhoneNum(String phoneNum) {
-        this.phoneNum = phoneNum;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public void setSculpture(String sculpture) {
-        this.sculpture = sculpture;
-    }
-
-    public long getSellerId() {
-
+    public int getSellerId() {
         return sellerId;
+    }
+
+    public void setSellerId(int sellerId) {
+        this.sellerId = sellerId;
     }
 
     public String getUsername() {
         return username;
     }
 
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public String getPasswd() {
-        return passwd;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getPhoneNum() {
         return phoneNum;
     }
 
+    public void setPhoneNum(String phoneNum) {
+        this.phoneNum = phoneNum;
+    }
+
     public String getAddress() {
         return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getSculpture() {
         return sculpture;
     }
 
-    public Seller(long sellerId, String username, String email, String passwd, String phoneNum, String address, String sculpture) {
-        this.sellerId = sellerId;
-        this.username = username;
-        this.email = email;
-        this.passwd = passwd;
-        this.phoneNum = phoneNum;
-        this.address = address;
+    public void setSculpture(String sculpture) {
         this.sculpture = sculpture;
     }
-
-    public Seller(long sellerId) {
-        this.sellerId = sellerId;
-    }
-
-    public Seller(Seller tmpSeller)
-    {
-        this.sellerId = tmpSeller.getSellerId();
-        this.username = tmpSeller.getUsername();
-        this.email = tmpSeller.getEmail();
-        this.passwd = tmpSeller.getPasswd();
-        this.phoneNum = tmpSeller.getPhoneNum();
-        this.address = tmpSeller.getAddress();
-        this.sculpture = tmpSeller.getSculpture();
-    }
-
 }

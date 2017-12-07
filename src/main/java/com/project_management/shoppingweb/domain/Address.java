@@ -24,7 +24,7 @@ public class Address {
 	private String tel;
 	private int postcode;
 	private String province;
-	private User user;
+	private int userId;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public int getAddressId() {
@@ -81,15 +81,21 @@ public class Address {
 	public void setProvince(String province) {
 		this.province = province;
 	}
-	@ManyToOne
-	@JoinColumn(name="use_user_id")
-	@JsonIgnore
-	public User getUser() {
-		return user;
+
+	public int getUserId() {
+		return userId;
 	}
-	public void setUser(User user) {
-		this.user = user;
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
-	
-	
+
+	public Boolean getDefaultAddress() {
+
+		return isDefaultAddress;
+	}
+
+	public void setDefaultAddress(Boolean defaultAddress) {
+		isDefaultAddress = defaultAddress;
+	}
 }

@@ -1,101 +1,107 @@
 package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
-import com.project_management.shoppingweb.domain.ProductInformation;
-import com.project_management.shoppingweb.service.SellerSQLFunction;
+
+
+
+import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("Seller/AddProduct")
+@RequestMapping("/Seller/AddProduct")
 
 public class AddProductController {
 
-    private SellerSQLFunction sellerSQLFunction = new SellerSQLFunction();
 
+    Boolean judgeString(String str)
+    {
+        if(str == null || str.equals(""))
+            return false;
+        return true;
+    }
 
     @RequestMapping("AddProduct")
-    public String addProductAndReturnBack(HttpServletRequest request,Model model)
+    public String addProductAndReturnBack(HttpServletRequest request, RedirectAttributes attributes)
     {
 
-        if(!(request.getParameter("ProductID") != null &&
-                request.getParameter("SellerID") != null &&
-                request.getParameter("ProductName") != null &&
-                request.getParameter("ProductNumber") != null &&
-                request.getParameter("ProductPrice") != null &&
-                request.getParameter("JSONStr") != null &&
-                request.getParameter("ProductPiction") != null &&
-                request.getParameter("ProductNote") != null ))
-            //属性不全,有bug
-            return "error/code";
+        int sellerID = Integer.valueOf(request.getParameter("SellerID"));
+        attributes.addAttribute("SellerID",sellerID);
 
-        //(long productId, long seller, String productName, long productNumber, long productPrice, String JSONStr, String productPicture, String productNote)
-        ProductInformation newPrroduct = new ProductInformation(
-                Long.valueOf(request.getParameter("ProductID")),
-                Long.valueOf(request.getParameter("SellerID")),
-                request.getParameter("ProductName"),
-                Long.valueOf( request.getParameter("ProductNumber")),
-                Double.valueOf(request.getParameter("ProductPrice")),
-                request.getParameter("JSONStr"),
-                request.getParameter("ProductPiction"),
-                request.getParameter("ProductNote")
-        );
-        model.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
-        sellerSQLFunction.createProductInformation(Long.valueOf(request.getParameter("SellerID")),newPrroduct);
-        return "../ProductsManagement/ProductsManagementHandler";
+        if(!(judgeString(request.getParameter("productStock")) &&
+                judgeString(request.getParameter("brandName")) &&
+                judgeString(request.getParameter("isOnSale")) &&
+                judgeString(request.getParameter("productPhoto")) &&
+                judgeString(request.getParameter("productMarketPrice")) &&
+                judgeString(request.getParameter("productBriefInfo")) &&
+                judgeString(request.getParameter("productName"))
+        ))
+        {
+            attributes.addAttribute("errorMessage","every attribute must be add ! not allow empty or null");
+            return "redirect:/error/errorHandler";
+        }
+
+        int productStock;
+        boolean isOnSale;
+        double productMarkPrice;
+        Product newProduct = new Product();
+        try{
+            productStock = Integer.valueOf(request.getParameter("productStock"));
+        }
+        catch (Exception e)
+        {
+            attributes.addAttribute("errorMessage","Stock format wrong :" +e.getMessage());
+            return "redirect:/error/errorHandler";
+        }
+        try
+        {
+            isOnSale = Boolean.valueOf(request.getParameter("isOnSale"));
+        }
+        catch (Exception e)
+        {
+            attributes.addAttribute("errorMessage","isOnSale format wrong :" +e.getMessage());
+            return "redirect:/error/errorHandler";
+        }
+
+        try {
+            productMarkPrice = Double.valueOf(request.getParameter("productMarketPrice"));
+        }
+        catch (Exception e)
+        {
+            attributes.addAttribute("errorMessage","productMarkedPrice format wrong :" +e.getMessage());
+            return "redirect:/error/errorHandler";
+        }
+
+        newProduct.setProductStock(productStock);
+        newProduct.setBrandName(request.getParameter("brandName"));
+        newProduct.setIsOnSale( isOnSale);
+        newProduct.setProductPhoto(request.getParameter("productPhoto"));
+        newProduct.setProductMarketPrice(productMarkPrice);
+        newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
+        newProduct.setProductName(request.getParameter("productName"));
+
+
+        if(SellerSQLFunction.getInstance().createProductInformation(sellerID,newProduct))
+        {
+            return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
+        }
+        else
+        {
+            attributes.addAttribute("errorMessage","create Product fail!");
+            return "redirect:/error/errorHandler";
+        }
 
     }
 
     @RequestMapping("ReturnBack")
-    public String jumpToLastLayer(HttpServletRequest request,Model model)
+    public String jumpToLastLayer(HttpServletRequest request, RedirectAttributes attributes)
     {
-        model.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
-        return "../ProductsManagement/ProductsManagementHandler";
+        attributes.addAttribute("SellerID",Integer.valueOf(request.getParameter("SellerID")));
+        return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
     }
 
-    @RequestMapping("Cancel")
-    public String cancel(HttpServletRequest request,Model model)
-    {
-        model.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
-        return "../ProductsManagement/ProductsManagementHandler";
-    }
 
-    //快捷导航部分
-    @RequestMapping("ModifySellerAdvertisement")
-    public String jumpToModifySellerAdvertisement(HttpServletRequest request,RedirectAttributes attributes)
-    {
-        attributes.addAttribute("sellerID",Long.valueOf(request.getParameter("sellerID")));
-        return "redirect:../ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
-    }
-
-    @RequestMapping("ModifySellerInformation")
-    public String jumpToModifySellerInformation(HttpServletRequest request,RedirectAttributes attributes)
-    {
-        attributes.addAttribute("sellerID",Long.valueOf(request.getParameter("sellerID")));
-        return "redirect:../ModifySellerInformation/ModifySellerInformationHandler";
-    }
-
-    @RequestMapping("ViewIncome")
-    public String jumpToViewIncome(HttpServletRequest request,RedirectAttributes attributes)
-    {
-        attributes.addAttribute("sellerID",Long.valueOf(request.getParameter("sellerID")));
-        return "redirect:../ViewIncome/ViewIncomeHandler";
-    }
-
-    @RequestMapping("ViewTranstion")
-    public String jumpToTranstion(HttpServletRequest request,RedirectAttributes attributes)
-    {
-        attributes.addAttribute("sellerID",Long.valueOf(request.getParameter("sellerID")));
-        return "redirect:../ViewTranstion/ViewTranstionHandler";
-    }
-
-    @RequestMapping("ProductsManagement")
-    public String jumpToProductsManagement(HttpServletRequest request,RedirectAttributes attributes)
-    {
-        attributes.addAttribute("sellerID",Long.valueOf(request.getParameter("sellerID")));
-        return "redirect:../ProductsManagement/ProductsManagementHandler";
-    }
 }

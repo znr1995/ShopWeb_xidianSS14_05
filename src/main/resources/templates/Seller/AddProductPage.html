@@ -1,0 +1,51 @@
+<!-- Seller Management Main page-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>AddProductPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>AddProductPage</h2>
+<br /> <br />
+
+
+
+<!--r返回表单-->
+<form th:action="@{/Seller/AddProduct/ReturnBack}" method="get">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <button type="submit">return Back</button>
+</form>
+
+<br />
+<!--主信息表单-->
+
+
+<form th:action="@{/Seller/AddProduct/AddProduct}">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <p />  <label>productName</label>  <input name="productName" th:text="*{productName}"></input>
+    <p />  <label>productStock</label>  <input name="productStock" th:text="*{productStock}"></input>
+    <p />  <label>brandName</label> <input name="brandName" th:text="*{brandName}"></input>
+    <p /> <label>isOnSale</label>  <input name="isOnSale" th:text="*{isOnSale}"></input>
+    <p />  <label>productPhoto</label>  <input name="productPhoto" th:text="*{productPhoto}"></input>
+    <p />  <label>productMarketPrice</label>  <input name="productMarketPrice" th:text="*{productMarketPrice}"></input>
+    <p />  <label>productBriefInfo</label>  <textarea name="productBriefInfo" th:text="*{productBriefInfo}"></textarea>
+    <p />  <button type="submit">ok</button>
+</form>
+
+
+<br />
+
+
+<form name="form1" th:action="@{/Seller/FastJump}" method="get">
+    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
+    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
+    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
+    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</form>
+</body>
+</html>

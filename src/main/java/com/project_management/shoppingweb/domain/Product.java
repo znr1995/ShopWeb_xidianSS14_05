@@ -16,8 +16,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "t_product")
 public class Product {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int productId;
+	private int sellerId;
 	private String brandName;
 	private int firstPageModule;
 	private Boolean isOnSale;
@@ -27,12 +29,43 @@ public class Product {
 	private String productPhoto;
 	private int productStock;
 	private double productTradePrice;
+
+
 	private String size;
-	private String type;
-	private List<ShoppingCart> shoppingcarts;
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	int type;
+
+	public int getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(int sellerId) {
+		this.sellerId = sellerId;
+	}
+
+
+
+
+
+	public Boolean getOnSale() {
+		return isOnSale;
+	}
+
+	public void setOnSale(Boolean onSale) {
+		isOnSale = onSale;
+	}
+
+	public void setSize(String size) {
+		this.size = size;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
+	}
+
 	public int getProductId() {
 		return productId;
 	}
@@ -96,39 +129,5 @@ public class Product {
 	public String getSize() {
 		return size;
 	}
-	public void setSize(String size) {
-		this.size = size;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
-	}
-	
-	@OneToMany(mappedBy="product")
-	@JsonIgnore
-	public List<ShoppingCart> getShoppingcarts() {
-		return this.shoppingcarts;
-	}
 
-	public void setShoppingcarts(List<ShoppingCart> shoppingcarts) {
-		this.shoppingcarts = shoppingcarts;
-	}
-
-	public ShoppingCart addShoppingcart(ShoppingCart shoppingcart) {
-		getShoppingcarts().add(shoppingcart);
-		shoppingcart.setProduct(this);
-
-		return shoppingcart;
-	}
-
-	public ShoppingCart removeShoppingcart(ShoppingCart shoppingcart) {
-		getShoppingcarts().remove(shoppingcart);
-		shoppingcart.setProduct(null);
-
-		return shoppingcart;
-	}
-	
-	
 }

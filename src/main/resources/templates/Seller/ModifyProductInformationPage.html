@@ -1,0 +1,51 @@
+<!-- Seller Management Main page-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ModifyProductInformationPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>ModifyProductInformationPage</h2>
+<br /> <br />
+
+
+<!--r返回表单-->
+<form th:action="@{/Seller/ModifyProduct/ReturnBack}" method="get">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <button type="submit">return Back</button>
+</form>
+
+<br />
+<!--主信息表单-->
+
+
+<form th:action="@{/Seller/ModifyProduct/ModifyInformation}">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <p />  <label>productName</label>  <textarea name="productName" th:text="*{productName}"></textarea>
+    <p />  <label>productStock</label>  <textarea name="productStock" th:text="*{productStock}"></textarea>
+    <p />  <label>brandName</label> <textarea name="brandName" th:text="*{brandName}"></textarea>
+    <p /> <label>isOnSale</label>  <textarea name="isOnSale" th:text="*{isOnSale}"></textarea>
+    <p />  <label>productPhoto</label>  <textarea name="productPhoto" th:text="*{productPhoto}"></textarea>
+    <p />  <label>productMarketPrice</label>  <textarea name="productMarketPrice" th:text="*{productMarketPrice}"></textarea>
+    <p />  <label>productBriefInfo</label>  <textarea name="productBriefInfo" th:text="*{productBriefInfo}"></textarea>
+    <p />  <button type="submit">ok</button>
+</form>
+
+
+<br />
+
+
+<form name="form1" th:action="@{/Seller/FastJump}" method="get">
+    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
+    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
+    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
+    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</form>
+</body>
+</html>

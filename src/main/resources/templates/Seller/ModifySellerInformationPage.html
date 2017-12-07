@@ -1,0 +1,51 @@
+<!-- Seller Management Main page-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ModifySellerInformationPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>ModifySellerInformationPage</h2>
+<br /> <br />
+
+<p>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</p>
+
+<!--r返回表单-->
+<form th:action="@{/Seller/ModifySellerInformation/ReturnBack}" method="get">
+    <button type="submit">return Back</button>
+</form>
+
+<br />
+<!--主信息表单-->
+
+
+<form th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" /> <p />
+    <label>UserName</label> <textarea name="Username" th:text="*{Username}"></textarea> <p />
+    <label>Address</label>  <textarea name="Address" th:text="*{Address}"></textarea> <p />
+    <label>Email</label>  <textarea name="Email" th:text="*{Email}"></textarea> <p />
+    <label>Passwd</label>  <textarea name="Passwd" th:text="*{Passwd}"></textarea> <p />
+    <label>PhoneNum</label>  <textarea name="PhoneNum" th:text="*{PhoneNum}"></textarea> <p />
+    <label>Sculpture</label>  <textarea name="Sculpture" th:text="*{Sculpture}"></textarea> <p />
+    <button type="submit">ok</button>
+</form>
+
+
+<br />
+
+
+<form name="form1" th:action="@{/Seller/FastJump}" method="get">
+    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
+    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
+    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
+    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</form>
+
+</body>
+</html>

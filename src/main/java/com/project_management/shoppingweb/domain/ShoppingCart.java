@@ -15,50 +15,51 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "t_shopping_cart")
 public class ShoppingCart {
-
-	private int shoppingcartId;
-	private int productAmount;
-	private Product product;
-	private Date createtime;
-	private User user;
-
-
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int shoppingcartId;
+	private int productAmount;
+	private int productId;
+	private Date createtime;
+	private int userId;
+
 	public int getShoppingcartId() {
 		return shoppingcartId;
 	}
+
 	public void setShoppingcartId(int shoppingcartId) {
 		this.shoppingcartId = shoppingcartId;
 	}
+
 	public int getProductAmount() {
 		return productAmount;
 	}
+
 	public void setProductAmount(int productAmount) {
 		this.productAmount = productAmount;
 	}
-	
-	@ManyToOne
-	@JoinColumn(name="pro_product_id")
-	public Product getProduct() {
-		return product;
+
+	public int getProductId() {
+		return productId;
 	}
-	public void setProduct(Product product) {
-		this.product = product;
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
-	@ManyToOne
-	@JoinColumn(name="use_user_id")
-	public User getUser() {
-		return user;
-	}
-	public void setUser(User user) {
-		this.user = user;
-	}
-	
+
 	public Date getCreatetime() {
 		return createtime;
 	}
+
 	public void setCreatetime(Date createtime) {
 		this.createtime = createtime;
+	}
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
 	}
 }
