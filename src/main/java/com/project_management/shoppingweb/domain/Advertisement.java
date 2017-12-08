@@ -7,24 +7,45 @@ import javax.persistence.*;
 public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int adId;
-    private  int sellerId;
+    private Long advertisementId;
+    private  Long sellerId;
+    private String pictureUrl;
+    private Double price;
 
-    public int getAdId() {
-        return adId;
-    }
+  
+	public Long getAdvertisementId() {
+		return advertisementId;
+	}
 
-    public void setAdId(int adId) {
-        this.adId = adId;
-    }
+	public void setAdvertisementId(Long advertisementId) {
+		this.advertisementId = advertisementId;
+	}
 
-    public int getSellerId() {
-        return sellerId;
-    }
+	public Long getSellerId() {
+		return sellerId;
+	}
 
-    public void setSellerId(int sellerId) {
-        this.sellerId = sellerId;
-    }
+	public void setSellerId(Long sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public String getPictureUrl() {
+		return pictureUrl;
+	}
+
+	public void setPictureUrl(String pictureUrl) {
+		this.pictureUrl = pictureUrl;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+    
+    
 
     //其余属性后期添加
 }

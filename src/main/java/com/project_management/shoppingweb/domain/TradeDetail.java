@@ -15,25 +15,25 @@ public class TradeDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int tradeDetailId;
-    private int tradeId;
+    private Long tradeDetailId;
+    private Long tradeId;
     private int productAmount;
     private int productId;
     private double productTradePrice;
 
-    public int getTradeDetailId() {
+    public Long getTradeDetailId() {
         return tradeDetailId;
     }
 
-    public void setTradeDetailId(int tradeDetailId) {
+    public void setTradeDetailId(Long tradeDetailId) {
         this.tradeDetailId = tradeDetailId;
     }
 
-    public int getTradeId() {
+    public Long getTradeId() {
         return tradeId;
     }
 
-    public void setTradeId(int tradeId) {
+    public void setTradeId(Long tradeId) {
         this.tradeId = tradeId;
     }
 

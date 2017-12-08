@@ -18,27 +18,27 @@ public class Product {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int productId;
-	private int sellerId;
-	private String brandName;
-	private int firstPageModule;
-	private Boolean isOnSale;
-	private String productBriefInfo;
-	private double productMarketPrice;
+	private Long productId;
+	private Long sellerId;
+	private String brandName;//种类
+	//private int firstPageModule;
+	//private Boolean isOnSale;
+	private String productBriefInfo;//简介
+	//private double productMarketPrice;
 	private String productName;
 	private String productPhoto;
-	private int productStock;
-	private double productTradePrice;
+	private int productStock;//存货
+	private double productPrice;//价格
 
 
 	private String size;
-	int type;
+	private String type;
 
-	public int getSellerId() {
+	public Long getSellerId() {
 		return sellerId;
 	}
 
-	public void setSellerId(int sellerId) {
+	public void setSellerId(Long sellerId) {
 		this.sellerId = sellerId;
 	}
 
@@ -46,30 +46,27 @@ public class Product {
 
 
 
-	public Boolean getOnSale() {
+/*	public Boolean getOnSale() {
 		return isOnSale;
 	}
 
 	public void setOnSale(Boolean onSale) {
 		isOnSale = onSale;
 	}
+*/
 
-	public void setSize(String size) {
-		this.size = size;
-	}
-
-	public int getType() {
+	public String getType() {
 		return type;
 	}
 
-	public void setType(int type) {
+	public void setType(String type) {
 		this.type = type;
 	}
 
-	public int getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
-	public void setProductId(int productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 	public String getBrandName() {
@@ -78,30 +75,30 @@ public class Product {
 	public void setBrandName(String brandName) {
 		this.brandName = brandName;
 	}
-	public int getFirstPageModule() {
+/*	public int getFirstPageModule() {
 		return firstPageModule;
 	}
 	public void setFirstPageModule(int firstPageModule) {
 		this.firstPageModule = firstPageModule;
-	}
-	public Boolean getIsOnSale() {
+	}*/
+/*	public Boolean getIsOnSale() {
 		return isOnSale;
 	}
 	public void setIsOnSale(Boolean isOnSale) {
 		this.isOnSale = isOnSale;
-	}
+	}*/
 	public String getProductBriefInfo() {
 		return productBriefInfo;
 	}
 	public void setProductBriefInfo(String productBriefInfo) {
 		this.productBriefInfo = productBriefInfo;
 	}
-	public double getProductMarketPrice() {
+	/*public double getProductMarketPrice() {
 		return productMarketPrice;
 	}
 	public void setProductMarketPrice(double productMarketPrice) {
 		this.productMarketPrice = productMarketPrice;
-	}
+	}*/
 	public String getProductName() {
 		return productName;
 	}
@@ -120,14 +117,24 @@ public class Product {
 	public void setProductStock(int productStock) {
 		this.productStock = productStock;
 	}
-	public double getProductTradePrice() {
-		return productTradePrice;
+	
+	public void setSize(String size) {
+		this.size = size;
 	}
-	public void setProductTradePrice(double productTradePrice) {
-		this.productTradePrice = productTradePrice;
-	}
+
+	
 	public String getSize() {
 		return size;
 	}
 
+	public double getProductPrice() {
+		return productPrice;
+	}
+
+	public void setProductPrice(double productPrice) {
+		this.productPrice = productPrice;
+	}
+
+	
+	
 }

@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int sellerId;
+    private Long sellerId;
     private String username;
     private String email;
     private String password;
@@ -18,11 +18,11 @@ public class Seller {
     private String address;
     private String sculpture;
 
-    public int getSellerId() {
+    public Long getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
 

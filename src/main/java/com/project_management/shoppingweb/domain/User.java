@@ -18,21 +18,21 @@ import javax.persistence.Table;
 public class User {
 
 	
-	private int userid;
+	private Long userid;
 	private String username;
 	private String password;
 	private String email;
 	private String tel;
 	private Date createtime;
-	private int status;
+	private int status;// 0 - 不可用 ，1 - 可用 ，2 - 黑名单 
 	private Integer sex;// 1 - 男， 2 - 女
 
 
-	public int getUserid() {
+	public Long getUserid() {
 		return userid;
 	}
 
-	public void setUserid(int userid) {
+	public void setUserid(Long userid) {
 		this.userid = userid;
 	}
 
