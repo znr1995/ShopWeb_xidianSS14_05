@@ -17,8 +17,9 @@ public class Seller {
     private String phoneNum;
     private String address;
     private String sculpture;
+    private Integer applyStatus;// 1 - 通过， 2 - 未通过
 
-    public Long getSellerId() {
+	public Long getSellerId() {
         return sellerId;
     }
 
@@ -73,4 +74,12 @@ public class Seller {
     public void setSculpture(String sculpture) {
         this.sculpture = sculpture;
     }
+    
+    public Integer getApplyStatus() {
+		return applyStatus;
+	}
+
+	public void setApplyStatus(Integer applyStatus) {
+		this.applyStatus = applyStatus;
+	}
 }

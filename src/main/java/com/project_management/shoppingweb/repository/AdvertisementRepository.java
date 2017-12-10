@@ -13,5 +13,6 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement,Lon
     //getAdInf
     List<Advertisement> findBySellerId( int sellerId);
     List<Advertisement> findAll();
+	Advertisement findByAdvertisementId(Long advertisementId);
 
 }

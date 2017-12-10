@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SellerController extends JpaRepository<Seller,Long>{
+public interface SellerRepository extends JpaRepository<Seller,Long>{
     //注册信息_商家
     //changeinf
     Seller save(Seller seller);
@@ -13,5 +13,5 @@ public interface SellerController extends JpaRepository<Seller,Long>{
     Seller findByEmailAndPassword(String email,String password);
     Seller findByUsernameAndPassword(String username,String password);
     //getSellerInf
-    Seller findBySellerId(String sellerId);
+    Seller findBySellerId(Long sellerId);
 }

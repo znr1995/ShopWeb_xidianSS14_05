@@ -17,7 +17,8 @@ import javax.persistence.Table;
 @Table(name = "t_user")
 public class User {
 
-	
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long userid;
 	private String username;
 	private String password;
@@ -59,9 +60,6 @@ public class User {
 	public void setSex(Integer sex) {
 		this.sex = sex;
 	}
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
 
 	public String getUsername() {
 		return username;

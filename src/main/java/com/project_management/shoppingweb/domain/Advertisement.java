@@ -8,11 +8,11 @@ public class Advertisement {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long advertisementId;
-    private  Long sellerId;
+    private Long sellerId;
     private String pictureUrl;
     private Double price;
+    private Integer Status;// 1 - 在主页， 2 - 未在主页
 
-  
 	public Long getAdvertisementId() {
 		return advertisementId;
 	}
@@ -45,7 +45,13 @@ public class Advertisement {
 		this.price = price;
 	}
     
-    
+	public Integer getStatus() {
+		return Status;
+	}
+
+	public void setStatus(Integer status) {
+		Status = status;
+	}
 
     //其余属性后期添加
 }
