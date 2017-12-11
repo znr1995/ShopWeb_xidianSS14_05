@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.project_management.shoppingweb.config.WebSecurityConfig;
 import com.project_management.shoppingweb.domain.Admin;
+import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.repository.AdminRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
@@ -41,6 +42,7 @@ public class AdminLoinController {
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
 	private PriceService priceService;
 	
 	@Resource
@@ -56,6 +58,8 @@ public class AdminLoinController {
     	//Sort sort = new Sort(Sort.Direction.DESC,"createTime"); 
     	//Pageable pageable = new PageRequest(0,5,sort);
     	List<Price> list = priceRepository.findAll();
+    	//List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		//model.addAttribute("shopFindAll", advertisementList);
     	model.addAttribute("adminId", list.get(0).getAdminId());
     	model.addAttribute("price", list.get(0));
         return "admin/adsManagement";  

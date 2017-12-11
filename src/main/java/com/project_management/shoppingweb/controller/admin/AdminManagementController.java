@@ -94,13 +94,13 @@ public class AdminManagementController {
 	}
 	
 	@PostMapping("/manageAdvertisement")
-	public String showAdvertisement(@RequestParam("advertisementId") Long advertisementId) {
+	public String showAdvertisement(@RequestParam("advertisementId") Long advertisementId,Model model) {
 		//Advertisement advertisement = advertisementService.findById(advertisementId);
 		//advertisement.setStatus(1);
 		//advertisementRepository.save(advertisement);
 		
 		List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		
+		model.addAttribute("shopFindAll", advertisementList);
 		return "/manageAdvertisement";
 	}
 }
