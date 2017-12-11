@@ -20,6 +20,7 @@ import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.repository.AdvertisementRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
+import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
 import com.project_management.shoppingweb.service.AdvertisementService;
 import com.project_management.shoppingweb.service.PriceService;
@@ -31,21 +32,21 @@ import com.project_management.shoppingweb.service.SellerService;
 public class AdminManagementController {
 	@Autowired
 	private PriceService priceService;
-	@Autowired
-	private SellerService sellerService;
+	
 	@Autowired
 	private AdvertisementService advertisementService;
+	@Resource
+	private ProductAdvertisementRepository productAdvertisementRepository;
 	
 	@Resource
 	private PriceRepository priceRepository;
 	@Resource
-
 	private SellerRepository sellerRepository;
 	@Resource
 	private AdvertisementRepository advertisementRepository;
-	
-	@Resource
+	@Autowired
 	private ProductAdvertisementService productAdvertisementService;
+	
 	
 	@GetMapping("/backUp")
 	public String backUp() {
@@ -81,19 +82,118 @@ public class AdminManagementController {
 		price.setAdvertisementLowPrice(Double.parseDouble(request.getParameter("advertisementLowPrice")));
 		price.setProductRate(Double.parseDouble(request.getParameter("productRate")));
 		priceService.updatePrice(price);
+		List<Price> list = priceRepository.findAll();
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
 		
-		model.addAttribute("price", price);
-		model.addAttribute("adminId",price.getAdminId());
-		return "admin/adsManagement";//返回页面 -- 
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
+		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
+		
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
+		return "redirect:/admin/adsManagement";//返回页面 -- 
 	}
 	
-	/*@PostMapping("/manageShopApply")
-	public String agreeApply(@RequestParam("sellerId") Long sellerId) {
-		Seller seller = sellerService.findById(sellerId);
-		seller.setApplyStatus(1);
-		sellerRepository.save(seller);
-		return "/manageShopApply";
+	@GetMapping("/agreeShopApply")
+	public String agreeApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+		
+		Advertisement advertisement = advertisementService.findById(advertisementId);
+		advertisement.setStatus(1);
+		advertisementRepository.save(advertisement);
+		List<Price> list = priceRepository.findAll();
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
+		
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
+		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
+		
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
+		return "redirect:/admin/adsManagement";
 	}
 	
-	@PostMapping()*/
+	@GetMapping("/rejectShopApply")
+	public String rejectApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+		
+		Advertisement advertisement = advertisementService.findById(advertisementId);
+		advertisementRepository.delete(advertisement);
+		List<Price> list = priceRepository.findAll();
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
+		
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
+		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
+		
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
+		return "redirect:/admin/adsManagement";
+	}
+	
+	@GetMapping("/rejectProductApply")
+	public String rejectProductApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+		
+//		Advertisement advertisement = advertisementService.findById(advertisementId);
+//		advertisementRepository.delete(advertisement);
+		ProductAdvertisement productAdvertisement = productAdvertisementService.findByAdvertisementId(advertisementId);
+		productAdvertisementRepository.delete(productAdvertisement);
+		
+		List<Price> list = priceRepository.findAll();
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
+		
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
+		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
+		
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
+		return "admin/adsManagement";
+	}
+	
+	@GetMapping("/agreeProductApply")
+	public String agreeProductApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+		ProductAdvertisement productAdvertisement = productAdvertisementService.findByAdvertisementId(advertisementId);
+		productAdvertisement.setStatus(1);
+		productAdvertisementRepository.save(productAdvertisement);
+		List<Price> list = priceRepository.findAll();
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
+		
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
+		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
+		
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
+		return "redirect:/admin/adsManagement";
+	}
+	
 }

@@ -75,8 +75,8 @@ public class AdminLoinController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(0).getAdminId());
-    	model.addAttribute("price", list.get(0));
+    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
+    	model.addAttribute("price", list.get(list.size()-1));
         return "admin/adsManagement";  
     }  
   

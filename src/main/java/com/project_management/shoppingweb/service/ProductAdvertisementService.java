@@ -16,4 +16,7 @@ public class ProductAdvertisementService {
 	public List<ProductAdvertisement> findAllByStatus(Integer status){
 		return productAdvertisementRepository.findAllByStatus(status);
 	}
+	public ProductAdvertisement findByAdvertisementId(Long advertisementId) {
+		return productAdvertisementRepository.findByAdvertisementId(advertisementId);
+	}
 }

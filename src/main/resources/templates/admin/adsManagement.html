@@ -99,8 +99,8 @@
                                    <td th:text="${p.sellerName}"></td>
 
                                    <td th:text="${p.price}">$50</td>
-                                   <td><button>✔</button></td>
-                                   <td><button>✖</button></td>
+                                   <td><button th:onclick="'shopagree('+${p.advertisementId}+')'">✔</button></td>
+                                   <td><button th:onclick="'shopreject('+${p.advertisementId}+')'">✖</button></td>
                                    
                                
                                </tr>
@@ -138,8 +138,8 @@
                                    <td th:text="${p.sellerName}">Anna</td>
                                 
                                    <td th:text="${p.price}">$50</td>
-                                   <td><button>✔</button></td>
-                                   <td><button>✖</button></td>
+                                   <td><button th:onclick="'productagree('+${p.advertisementId}+')'">✔</button></td>
+                                   <td><button th:onclick="'productreject('+${p.advertisementId}+')'">✖</button></td>
                                   
                                </tr>
                                 </th:block>
@@ -254,4 +254,18 @@
         </div>
     </nav>
 </body>
+<script>
+function shopagree(id){
+	window.location.href="/admin/agreeShopApply?advertisementId="+id;
+}
+function shopreject(id){
+	window.location.href="/admin/rejectShopApply?advertisementId="+id;
+}
+function productagree(id){
+	window.location.href="/admin/agreeProductApply?advertisementId="+id;
+}
+function productreject(id){
+	window.location.href="/admin/rejectProductApply?advertisementId="+id;
+}
+</script>
 </html>
