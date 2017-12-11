@@ -92,9 +92,9 @@
                                </tr>
                                </thead>
                                <tbody>
-                               
+                                <th:block th:each="p,index:${shopFindAll}">
                                <tr>
-                               <th:block th:each="p,index:${shopFindAll}">
+                              
                                    <td th:text="${p.advertisementId}">a001</td>
                                    <td th:text="${p.sellerName}"></td>
 
@@ -102,10 +102,10 @@
                                    <td><button>✔</button></td>
                                    <td><button>✖</button></td>
                                    
-                                </th:block>
+                               
                                </tr>
                               
-                      
+                       </th:block>
                                </tbody>
                               
                            </table>
@@ -130,8 +130,9 @@
                                </tr>
                                </thead>
                                <tbody>
-                               <tr>
                                 <th:block th:each="p,index:${productFindAll}">
+                               <tr>
+                               
                                    <td th:text="${p.advertisementId}">a001</td>
                                    <td th:text="${p.adsName}">iWatch</td>
                                    <td th:text="${p.sellerName}">Anna</td>
@@ -139,16 +140,16 @@
                                    <td th:text="${p.price}">$50</td>
                                    <td><button>✔</button></td>
                                    <td><button>✖</button></td>
-                                   </th:block>
+                                  
                                </tr>
-                               
+                                </th:block>
                                </tbody>
                            </table>
                        </div><!-- end of panel -->
                    </div>
                </div>
            </div>
-           <!-- <div class="panel panel-default">
+           <div class="panel panel-default">
                <div class="panel-heading" style="background: #6f42c1">
                    <h3 class="panel-title" >
                        Ads Show
@@ -160,21 +161,46 @@
                            <h3 class="panel-title" >Shop Ads</h3>
                        </div>
                        <table class="table">
-                           <th>Shop ID</th><th>Price </th>
-                           <tr><td>Shop 326534</td><td>10%</td></tr>
-                           <tr><td>Shop 362323</td><td>10%</td></tr>
+                       <thead>
+                           <th>Ads ID</th><th>Ads Name</th><th>Price </th>
+                           </thead>
+                           <tbody>
+                        <th:block th:each="p,index:${onShopFindAll}">
+                            
+                           <tr>
+                           <td th:text="${p.advertisementId}">a001</td>
+                           <td th:text="${p.sellerName}"></td>
+                           <td th:text="${p.price}"></td>
+                           
+                           </tr>
+                           </th:block>
+                           </tbody>
                        </table>
                    </div>
                    <div class="panel panel-default">
                        <div class="panel-heading" style="background: #dc3545">Produce Ads</div>
                        <table class="table">
-                           <th>Prodect ID</th><th>price </th>
-                           <tr><td>prod 6361232</td><td>2%</td></tr>
-                           <tr><td>prod 5123622</td><td>2%</td></tr>
+                       <thead>
+                           <th>Ads ID</th>
+                           <th>Ads Name</th>
+                           <th>Shop Owner</th>
+                           <th>Price</th>
+                           </thead>
+                           <tbody>
+                            <th:block th:each="p,index:${onProductFindAll}">
+                           <tr>
+                             <td th:text="${p.advertisementId}">a001</td>
+                             <td th:text="${p.adsName}">iWatch</td>
+                             <td th:text="${p.sellerName}">Anna</td>
+                             <td th:text="${p.price}">$50</td>
+   
+                           </tr>
+                         </th:block>
+                         </tbody>
                        </table>
                    </div>
                </div>
-           </div> -->
+           </div>
        </div>
            </div>
        <!--广告列表的请求处理-->

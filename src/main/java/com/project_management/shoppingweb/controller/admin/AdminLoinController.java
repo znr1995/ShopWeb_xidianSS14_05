@@ -69,8 +69,11 @@ public class AdminLoinController {
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
+    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onAdvertisementList);
 		
-		
+		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
     	model.addAttribute("adminId", list.get(0).getAdminId());
     	model.addAttribute("price", list.get(0));
