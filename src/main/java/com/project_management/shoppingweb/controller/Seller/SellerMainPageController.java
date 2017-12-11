@@ -17,15 +17,6 @@ public class SellerMainPageController {
     private int sellerID = -1;
 
 
-    @RequestMapping(value="Seller/hello", method= RequestMethod.GET)
-    public boolean Hai(HttpServletRequest request , Model model){
-        model.addAttribute("name",request.getParameter("oname"));
-        model.addAttribute("bname",request.getParameter("bname"));
-        return true;
-    }
-
-
-
     //启动主界面
     @RequestMapping("/Seller/Main")
     public String jumpToSellerMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
@@ -42,7 +33,7 @@ public class SellerMainPageController {
     @RequestMapping("/Seller/logout")
     public String logout()
     {
-        return "../index";
+        return "login";
     }
 
     @RequestMapping(value = "/Seller/FastJump")
@@ -61,7 +52,7 @@ public class SellerMainPageController {
         } else if (action.equals("ProductsManagement")) {
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         }
-        return "/error/page";
+        return "redirect:/error/errorHandler";
     }
 
 

@@ -15,8 +15,9 @@ import java.util.LinkedList;
 @RequestMapping("/Seller/ModifyProduct")
 public class ModifyProductInformationController {
 
+
     @RequestMapping("ModifyInformation")
-    public String addProductAndReturnBack(HttpServletRequest request, RedirectAttributes attributes)
+    public String addProductAndReturnBack(HttpServletRequest request,RedirectAttributes attributes)
     {
         Product newProduct = null;
         int productID = Integer.valueOf(request.getParameter("ProductID"));
@@ -36,7 +37,7 @@ public class ModifyProductInformationController {
         newProduct.setProductMarketPrice(Double.valueOf(request.getParameter("productMarketPrice")));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
-
+        newProduct.setFirstPageModule(Integer.valueOf(request.getParameter("firstPageModule")));
         attributes.addAttribute("SellerID",Integer.valueOf(request.getParameter("SellerID")));
         if(SellerSQLFunction.getInstance().changedProducts(newProduct))
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";

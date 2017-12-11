@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.LinkedList;
 
 @Controller
@@ -22,10 +23,26 @@ public class ProductsManagementController {
     public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
     {
         sellerID = sellerId;
-       products = SellerSQLFunction.getInstance().getAllProducts(sellerID);
-       model.addAttribute("products",products);
+        products = SellerSQLFunction.getInstance().getAllProducts(sellerID);
+        model.addAttribute("products",products);
         model.addAttribute("SellerID",sellerID);
         return "/Seller/ProductsManagementMainPage";
+    }
+
+
+    @RequestMapping(value = "ProductsHandler")
+    public String productHandler(HttpServletRequest request, Model model, RedirectAttributes attributes)
+    {
+        if(request.getParameter("delete") == null)
+        {
+            int productId = Integer.valueOf(request.getParameter("modify"));
+            return jumpToModifyProductPage(productId, model, attributes);
+        }
+        else
+        {
+            int productId = Integer.valueOf(request.getParameter("delete"));
+            return deleteProduct(productId, attributes);
+        }
     }
 
     @RequestMapping(value = "ProductsHandler",params = "action=delete")
@@ -48,7 +65,7 @@ public class ProductsManagementController {
     }
 
     @RequestMapping(value = "ProductsHandler", params = "action=modify")
-    public String jumpToModifyProductPage(@RequestParam("ProductID")int productId, Model model, RedirectAttributes attributes)
+    public String jumpToModifyProductPage(@RequestParam("ProductID")int productId, Model model,RedirectAttributes attributes)
     {
         for(Product curProduct : products)
         {
@@ -62,6 +79,7 @@ public class ProductsManagementController {
                 model.addAttribute("productMarketPrice",curProduct.getProductMarketPrice());
                 model.addAttribute("productBriefInfo",curProduct.getProductBriefInfo());
                 model.addAttribute("ProductID",productId);
+                model.addAttribute("firstPageModule",curProduct.getFirstPageModule());
                 model.addAttribute("SellerID",sellerID);
                 return "/Seller/ModifyProductInformationPage";
             }

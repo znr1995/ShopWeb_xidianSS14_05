@@ -14,14 +14,8 @@ import java.util.LinkedList;
 
 public  class    SellerSQLFunction implements SellSQLInterface{
 
-  private String sellerEmail;
-  private String sellerPasswd;
-  private String userEmail;
-  private String userPasswd;
-  private String AdminEmail;
-  private String AdminPasswd;
-  private int sellerID = 10001;
-  private int userID = 20001;
+  private int sellerID = 20001;
+  private int userID = 10001;
   private int  AdminID = 30001;
 
   LinkedList<String> advertisementPaths = new LinkedList<String>();
@@ -104,7 +98,7 @@ public  class    SellerSQLFunction implements SellSQLInterface{
       p1.setBrandName("book");
       p1.setIsOnSale(true);
       p1.setProductId(101);
-      p1.setProductBriefInfo("{auther:znr, publictime:2014}");
+      p1.setProductBriefInfo("{\"auther\":\"znr\", \"publictime\":2014}");
       p1.setProductMarketPrice(20.01);
       p1.setProductStock(100);
       p1.setSellerId(sellerID);
@@ -113,7 +107,7 @@ public  class    SellerSQLFunction implements SellSQLInterface{
       p2.setBrandName("computer");
       p2.setIsOnSale(true);
       p2.setProductId(111);
-      p2.setProductBriefInfo("{hello:ASUS, publictime:2017}");
+      p2.setProductBriefInfo("{\"name\":\"小明\",\"age\":14}");
       p2.setProductMarketPrice(5000);
       p2.setProductStock(20);
       p2.setSellerId(sellerID);
@@ -129,11 +123,18 @@ public  class    SellerSQLFunction implements SellSQLInterface{
 
       seller.setUsername("seller");
       seller.setPassword("passwd");
-      seller.setSculpture("hello.png");
-      seller.setPhoneNum("110");
-      seller.setEmail("xidian@edu.cn");
+      seller.setSculpture("defalut.png");
+      seller.setPhoneNum("123123123");
+      seller.setEmail("seller@edu.com");
       seller.setAddress("xidian_xian_china");
       seller.setSellerId(sellerID);
+
+      user = new User();
+      user.setUsername("user");
+      user.setPassword("passwd");
+      user.setEmail("user@edu.com");
+      user.setTel("123123123");
+      user.setId(Long.valueOf(userID));
 
   }
 
@@ -142,20 +143,16 @@ public  class    SellerSQLFunction implements SellSQLInterface{
   {
       switch (mark)
       {
-          case 1:
-              sellerEmail = email;
-              sellerPasswd = passwd;
-              seller = new Seller();
-              seller.setSellerId(sellerID);
-              break;
           case 2:
-              userEmail = email;
-              userPasswd = passwd;
+             seller.setEmail(email);
+             seller.setPassword(passwd);
+              break;
+          case 1:
               User user = new User();
+              user.setEmail(email);
+              user.setPassword(passwd);
               break;
           case 3:
-              AdminEmail = email;
-              AdminPasswd = passwd;
               break;
           default:
               return false;
@@ -163,18 +160,14 @@ public  class    SellerSQLFunction implements SellSQLInterface{
       return true;
   }
 
-  //mark：1-》商家 2-》用户  管理员是否需要注册方式，由设计人员考虑沟通
+  //mark：1-》商家 2-》用户
 //登录接口
   public int loginByEmail(String email, String passwd)
   {
       if(email == null || passwd == null)
           return -1;
-      if(email.equals(userEmail) && passwd.equals(userPasswd))
-          return userID;
-      if(email.equals(sellerEmail) && passwd.equals(sellerPasswd))
+      if(email.equals(seller.getEmail()) && passwd.equals(seller.getPassword()))
           return  sellerID;
-      if(email.equals(AdminEmail) && email.equals(AdminPasswd))
-          return AdminID;
       return  -2;
   }
    public int loginByUsername(String username, String passwd)

@@ -12,6 +12,8 @@
     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
 </p>
 
+<!--这里js做的工作如下:修复删除商品的bug,与界面效果无关-->
+
 <!--r返回表单-->
 <form th:action="@{/Seller/ProductsManagement/ReturnBack}" method="get">
     <button type="submit">return Back</button>
@@ -25,27 +27,32 @@
 <br />
 
 <!--当前商品表单-->
-<tr>
-    <td >Name</td>
-    <td >MarketPrice</td>
-    <td>Stock</td>
-    <td >isOnSale</td>
-    <td>delete</td>
-    <td >modify</td>
-</tr>
 
 <form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    <tr th:each="prod : ${products}">
-        <td th:text="${prod.productName}">productName</td><td />
-        <td th:text="${prod.productMarketPrice}">0.0</td><td />
-        <td th:text="${prod.productStock}">0</td><td />
-        <td th:text="${prod.isOnSale}">yes</td><td />
-        <button type="submit" name="action" value="delete">delete</button>
-        <button type="submit" name="action" value="modify">modify</button>
-        <input type="hidden" name="ProductID" th:value="${prod.productId}" />
-        <p />
-    </tr>
+    <table >
+        <tr>
+            <th >Name</th>
+            <th >MarketPrice</th>
+            <th>Stock</th>
+            <th >isOnSale</th>
+            <th>delete</th>
+            <th >modify</th>
+        </tr>
+        <tr th:each="prod : ${products}">
+            <td th:text="${prod.productName}">productName</td>
+            <td th:text="${prod.productMarketPrice}">0.0</td>
+            <td th:text="${prod.productStock}">0</td>
+            <td th:text="${prod.isOnSale}">yes</td>
+            <td>
+                <button type="submit" name="delete" th:value="${prod.productId}" >delete</button>
+            </td>
+            <td>
+                <button type="submit" name="modify" th:value="${prod.productId}" >modify</button>
+            </td>
+        </tr>
+    </table>
+
 </form>
 
 
