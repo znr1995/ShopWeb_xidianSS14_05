@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface CollectionRepository extends JpaRepository <Collection,Long> {
     Collection save(Collection collection);
-    List<Collection> findByUserId(int userID);
-    Collection findByCollectionId(int collectionId);
+    List<Collection> findByUserId(Long userID);
+    Collection findByCollectionId(Long collectionId);
 
 }

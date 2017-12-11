@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface TradeRepository extends JpaRepository<Trade,Long>{
     Trade save(Trade trade);
-    List<Trade> findBySellerIdAndTradeStatus(int sellerId, int tradeStatus);
-    List<Trade> findByUserIdAndTradeStatus(int userId,int tradeStatus);
-    List<Trade> findByTradeId(int TradeId);
+    List<Trade> findBySellerIdAndTradeStatus(Long sellerId, int tradeStatus);
+    List<Trade> findByUserIdAndTradeStatus(Long userId,int tradeStatus);
+    List<Trade> findByTradeId(Long TradeId);
 }

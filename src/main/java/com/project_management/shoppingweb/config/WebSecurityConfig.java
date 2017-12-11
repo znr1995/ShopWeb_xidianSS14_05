@@ -51,7 +51,6 @@ public class WebSecurityConfig extends WebMvcConfigurerAdapter{
 	            	return true;
 	            }
 	                
-	            System.out.println("dd");
 	            // 跳转登录
 	            String url = "/admin/login";
 	            response.sendRedirect(url);	      

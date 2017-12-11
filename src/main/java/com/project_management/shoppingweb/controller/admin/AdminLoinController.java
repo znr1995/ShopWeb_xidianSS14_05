@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.admin;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -12,7 +13,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.Source;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +26,11 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.project_management.shoppingweb.config.WebSecurityConfig;
 import com.project_management.shoppingweb.domain.Admin;
+import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.repository.AdminRepository;
+import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.service.AdminService;
+import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.util.MD5Util;
 
 @Controller
@@ -33,16 +41,24 @@ public class AdminLoinController {
 	
 	@Autowired
 	private AdminService adminService;
+	private PriceService priceService;
 	
 	@Resource
 	private AdminRepository adminRepository;
+	@Resource
+	private PriceRepository priceRepository;
 	
 	private Logger logger = Logger.getLogger(this.getClass());
 	
 	//index页面  
-    @GetMapping("/index")  
-    public String index(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {  
-        return "admin/index";  
+    @GetMapping("/adsManagement")  
+    public String adsManagement(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {  
+    	//Sort sort = new Sort(Sort.Direction.DESC,"createTime"); 
+    	//Pageable pageable = new PageRequest(0,5,sort);
+    	List<Price> list = priceRepository.findAll();
+    	model.addAttribute("adminId", list.get(0).getAdminId());
+    	model.addAttribute("price", list.get(0));
+        return "admin/adsManagement";  
     }  
   
     //注册页面  
@@ -58,7 +74,7 @@ public class AdminLoinController {
     }  
 	
 	@RequestMapping(value = "/addlogin", method = RequestMethod.POST)
-	public String addlogin(HttpServletRequest request,HttpSession session)  throws ServletException, IOException{
+	public String addlogin(HttpServletRequest request,HttpSession session,Model model)  throws ServletException, IOException{
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		 Map<String, Object> map = new HashMap<>();
@@ -72,7 +88,8 @@ public class AdminLoinController {
 		session.setAttribute(WebSecurityConfig.SESSION_KEY, username);
 //        map.put("success", true);
 //        map.put("message", "登录成功");
-        return "redirect:/admin/index";
+		model.addAttribute("adminId", admin.getAdminId());
+        return "redirect:/admin/adsManagement";
 		
 	}
 	

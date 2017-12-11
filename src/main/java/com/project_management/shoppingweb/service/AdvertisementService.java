@@ -1,5 +1,7 @@
 package com.project_management.shoppingweb.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -14,5 +16,9 @@ public class AdvertisementService {
 	
 	public Advertisement findById(Long advertisementId) {
 		return advertisementRepository.findByAdvertisementId(advertisementId);
+	}
+	
+	public List findAllByStatus(Integer status) {
+		return advertisementRepository.findAllByStatus(status);
 	}
 }

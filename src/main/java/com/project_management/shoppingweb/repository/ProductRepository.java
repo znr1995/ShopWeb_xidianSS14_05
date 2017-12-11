@@ -11,10 +11,10 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
     //createProduct
     Product save(Product product);
     //searchPro
-    Product findByProductId(int productId);
+    Product findByProductId(Long productId);
     List<Product> findByProductName(String productName);
-    List<Product> findByType(int type);
-    List<Product> findBySellerId(int sellerId);
+    List<Product> findByType(Long type);
+    List<Product> findBySellerId(Long sellerId);
     //deleteProduct
-    void delete(Product product);
+   // void delete(Product product);
 }

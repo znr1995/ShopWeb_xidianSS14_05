@@ -11,8 +11,8 @@ public interface AdvertisementRepository extends JpaRepository<Advertisement,Lon
     //publish
     Advertisement save(Advertisement advertisement);
     //getAdInf
-    List<Advertisement> findBySellerId( int sellerId);
-    List<Advertisement> findAll();
+    List<Advertisement> findBySellerId( Long sellerId);
+    List<Advertisement> findAllByStatus(Integer status);
 	Advertisement findByAdvertisementId(Long advertisementId);
 
 }

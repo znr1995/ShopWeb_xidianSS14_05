@@ -11,7 +11,7 @@ public class Advertisement {
     private Long sellerId;
     private String pictureUrl;
     private Double price;
-    private Integer Status;// 1 - 在主页， 2 - 未在主页
+    private Integer status;// 1 - 在主页， 0 - 未在主页
 
 	public Long getAdvertisementId() {
 		return advertisementId;
@@ -44,14 +44,16 @@ public class Advertisement {
 	public void setPrice(Double price) {
 		this.price = price;
 	}
-    
+
 	public Integer getStatus() {
-		return Status;
+		return status;
 	}
 
 	public void setStatus(Integer status) {
-		Status = status;
+		this.status = status;
 	}
+    
+	
 
     //其余属性后期添加
 }

@@ -1,5 +1,7 @@
 package com.project_management.shoppingweb.controller.admin;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,13 +29,47 @@ import com.project_management.shoppingweb.service.SellerService;
 public class AdminManagementController {
 	@Autowired
 	private PriceService priceService;
+	@Autowired
 	private SellerService sellerService;
+	@Autowired
 	private AdvertisementService advertisementService;
 	
 	@Resource
 	private PriceRepository priceRepository;
+	@Resource
+
 	private SellerRepository sellerRepository;
+	@Resource
+
 	private AdvertisementRepository advertisementRepository;
+	
+	
+	
+	@GetMapping("/backUp")
+	public String backUp() {
+		return "admin/backUp";
+	}
+	
+	@GetMapping("/commission")
+	public String commission() {
+		return "admin/commission";
+	}
+	
+	@GetMapping("/custommerManage")
+	public String custommerManage() {
+		return "admin/custommerManage";
+	}
+	
+	@GetMapping("/personalInformation")
+	public String personalInformation() {
+		return "admin/personalInformation";
+	}
+	
+	@GetMapping("/shopManage")
+	public String shopManage() {
+		return "admin/shopManage";
+	}
+	
 	
 	@RequestMapping(value = "/updatePrice", method = RequestMethod.POST)
 	public String updatePrice(HttpServletRequest request,Model model) {
@@ -45,7 +81,8 @@ public class AdminManagementController {
 		priceService.updatePrice(price);
 		
 		model.addAttribute("price", price);
-		return "";//返回页面 -- 
+		model.addAttribute("adminId",price.getAdminId());
+		return "admin/adsManagement";//返回页面 -- 
 	}
 	
 	@PostMapping("/manageShopApply")
@@ -58,9 +95,12 @@ public class AdminManagementController {
 	
 	@PostMapping("/manageAdvertisement")
 	public String showAdvertisement(@RequestParam("advertisementId") Long advertisementId) {
-		Advertisement advertisement = advertisementService.findById(advertisementId);
-		advertisement.setStatus(1);
-		advertisementRepository.save(advertisement);
+		//Advertisement advertisement = advertisementService.findById(advertisementId);
+		//advertisement.setStatus(1);
+		//advertisementRepository.save(advertisement);
+		
+		List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		
 		return "/manageAdvertisement";
 	}
 }
