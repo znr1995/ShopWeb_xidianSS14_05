@@ -28,10 +28,13 @@ import com.project_management.shoppingweb.config.WebSecurityConfig;
 import com.project_management.shoppingweb.domain.Admin;
 import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
+import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.repository.AdminRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.service.AdminService;
+import com.project_management.shoppingweb.service.AdvertisementService;
 import com.project_management.shoppingweb.service.PriceService;
+import com.project_management.shoppingweb.service.ProductAdvertisementService;
 import com.project_management.shoppingweb.util.MD5Util;
 
 @Controller
@@ -43,7 +46,9 @@ public class AdminLoinController {
 	@Autowired
 	private AdminService adminService;
 	@Autowired
-	private PriceService priceService;
+	private AdvertisementService advertisementService;
+	@Autowired
+	private ProductAdvertisementService productAdvertisementService;
 	
 	@Resource
 	private AdminRepository adminRepository;
@@ -58,8 +63,15 @@ public class AdminLoinController {
     	//Sort sort = new Sort(Sort.Direction.DESC,"createTime"); 
     	//Pageable pageable = new PageRequest(0,5,sort);
     	List<Price> list = priceRepository.findAll();
-    	//List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		//model.addAttribute("shopFindAll", advertisementList);
+    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", advertisementList);
+		
+		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
+		model.addAttribute("productFindAll", productAdvertisementList);
+		
+		
+		
+		
     	model.addAttribute("adminId", list.get(0).getAdminId());
     	model.addAttribute("price", list.get(0));
         return "admin/adsManagement";  

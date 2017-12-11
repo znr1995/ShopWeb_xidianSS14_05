@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
+import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.repository.AdvertisementRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
 import com.project_management.shoppingweb.service.AdvertisementService;
 import com.project_management.shoppingweb.service.PriceService;
+import com.project_management.shoppingweb.service.ProductAdvertisementService;
 import com.project_management.shoppingweb.service.SellerService;
 
 @Controller
@@ -40,10 +42,10 @@ public class AdminManagementController {
 
 	private SellerRepository sellerRepository;
 	@Resource
-
 	private AdvertisementRepository advertisementRepository;
 	
-	
+	@Resource
+	private ProductAdvertisementService productAdvertisementService;
 	
 	@GetMapping("/backUp")
 	public String backUp() {
@@ -85,7 +87,7 @@ public class AdminManagementController {
 		return "admin/adsManagement";//返回页面 -- 
 	}
 	
-	@PostMapping("/manageShopApply")
+	/*@PostMapping("/manageShopApply")
 	public String agreeApply(@RequestParam("sellerId") Long sellerId) {
 		Seller seller = sellerService.findById(sellerId);
 		seller.setApplyStatus(1);
@@ -93,14 +95,5 @@ public class AdminManagementController {
 		return "/manageShopApply";
 	}
 	
-	@PostMapping("/manageAdvertisement")
-	public String showAdvertisement(@RequestParam("advertisementId") Long advertisementId,Model model) {
-		//Advertisement advertisement = advertisementService.findById(advertisementId);
-		//advertisement.setStatus(1);
-		//advertisementRepository.save(advertisement);
-		
-		List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
-		return "/manageAdvertisement";
-	}
+	@PostMapping()*/
 }

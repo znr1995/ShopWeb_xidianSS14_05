@@ -18,7 +18,7 @@ public class AdvertisementService {
 		return advertisementRepository.findByAdvertisementId(advertisementId);
 	}
 	
-	public List findAllByStatus(Integer status) {
+	public List<Advertisement> findAllByStatus(Integer status) {
 		return advertisementRepository.findAllByStatus(status);
 	}
 }
