@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>ShopManage</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="./js/index.js"></script>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
 </head>
 <body>
 
@@ -20,20 +20,21 @@
 
                 </li>
                 <li>
-                    <a href="AdsManagement.html"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
-                </li>
-                <li class="active">
-                    <a href="#"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
-                </li>
-                <li>
-                    <a href="CustomerManage.html"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
-                </li>
-                <li>
-                    <a href="Commission.html"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
-                </li>
-                <li>
-                    <a href="BackUp.html"><i class="fa fa-fw fa-database"></i>Back Up</a>
-                </li>
+                        <a th:href="@{adsManagement}"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
+                    </li>
+                     <li class="active">
+                           <a href="#"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
+                       </li>
+                       <li>
+                           <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
+                       </li>
+                       <li>
+                           <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
+                       </li>
+                       
+                      <li >
+                           <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
+                       </li>
             </ul>
         </nav>
     </div>

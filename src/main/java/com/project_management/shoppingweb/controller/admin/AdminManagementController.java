@@ -58,9 +58,9 @@ public class AdminManagementController {
 		return "admin/commission";
 	}
 	
-	@GetMapping("/custommerManage")
+	@GetMapping("/customerManage")
 	public String custommerManage() {
-		return "admin/custommerManage";
+		return "admin/customerManage";
 	}
 	
 	@GetMapping("/personalInformation")
