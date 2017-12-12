@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +21,7 @@ import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
 import com.project_management.shoppingweb.repository.SellerAdvertisementRepository;
+import com.project_management.shoppingweb.repository.AdminRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
@@ -33,9 +35,10 @@ import com.project_management.shoppingweb.service.ProductAdvertisementService;
 public class AdminManagementController {
 	@Autowired
 	private PriceService priceService;
-	
 	@Autowired
 	private SellerAdvertisementService sellerAdvertisementService;
+	@Autowired
+	private ProductAdvertisementService productAdvertisementService;
 	@Resource
 	private ProductAdvertisementRepository productAdvertisementRepository;
 	@Autowired
@@ -46,8 +49,8 @@ public class AdminManagementController {
 	private SellerRepository sellerRepository;
 	@Resource
 	private SellerAdvertisementRepository sellerAdvertisementRepository;
-	@Autowired
-	private ProductAdvertisementService productAdvertisementService;
+	@Resource 
+	private AdminRepository adminRepository;
 	
 	
 	@GetMapping("/backUp")
@@ -66,7 +69,9 @@ public class AdminManagementController {
 	}
 	
 	@GetMapping("/personalInformation")
-	public String personalInformation() {
+	public String personalInformation(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("admin", admin);
 		return "admin/personalInformation";
 	}
 	
@@ -234,4 +239,15 @@ public class AdminManagementController {
 		return "redirect:/admin/adsManagement";
 	}
 	
+	
+	
+	@RequestMapping(value = "/updateAdmin", method = RequestMethod.POST)
+	public String updataAdmin(HttpServletRequest request,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
+		Admin admin = adminService.findByUsername(username);
+		admin.setTel(request.getParameter("tel"));
+		admin.setEmail(request.getParameter("email"));
+		adminRepository.save(admin);
+		model.addAttribute("admin", admin);
+		return "redirect:/admin/personalInformation";
+	}
 }

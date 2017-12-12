@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal Information</title>
-    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/style.css">
-    <script src="./js/index.js"></script>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
 </head>
 <body>
 <div class="header">header</div>
@@ -22,20 +22,20 @@
 
                     </li>
                     <li>
-                        <a href="AdsManagement.html"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
-                    </li>
-                    <li>
-                        <a href="ShopManage.html"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
-                    </li>
-                    <li>
-                        <a href="CustomerManage.html"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
-                    </li>
-                    <li>
-                        <a href="Commission.html"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
-                    </li>
-                    <li>
-                        <a href="BackUp.html"><i class="fa fa-fw fa-database"></i>Back Up</a>
-                    </li>
+                           <a th:href="@{adsManagement}"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
+                       </li>
+                       <li>
+                           <a th:href="@{shopManage}"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
+                       </li>
+                       <li>
+                           <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
+                       </li>
+                       <li>
+                           <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
+                       </li>
+                       <li>
+                           <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
+                       </li>
                 </ul>
             </nav>
         </div>
@@ -55,54 +55,40 @@
                 <div class="panel body" style="background: #d3d9df;height: 1200px">
                     <br><br><br>
                     <!--照片信息-->
-                    <div class="col-md-offset-3">
+                   <!--  <div class="col-md-offset-3">
                         photo:
                         <img src="./images/picture.jpg">
                         <div style="height: 10px; width: 350px; float: right">
                             <button type="submit"  onclick="window.location.href='#'">Change photo</button>
                         </div>
                         <br><br>
-                    </div>
+                    </div> -->
 
                     <!--用户名信息-->
                     <div class="col-md-offset-3">
                         User Name:
-                        <input type="text"  style="width: 410px" value="Anna" class="field-wrap"><br><br>
+                        <span  style="width: 410px" th:text="${admin.username}" class="field-wrap"></span><br><br>
                         User ID:
-                        <input type="text"  style="width: 435px" value="163172447534" class="field-wrap"><br><br>
+                        <span   style="width: 435px" th:text="${admin.adminId}" class="field-wrap"></span><br><br>
                     </div>
 
                     <!--地址信息-->
-                    <form class="form-inline col-md-offset-3">
+                    <form class="form-inline col-md-offset-3" action = "/admin/updateAdmin" method="post">
 
-                        <div data-toggle="distpicker">
-                            Address:
-                            <div class="form-group">
-                                <label class="sr-only" for="province2">Province</label>
-                                <select class="form-control" id="province2" data-province="---- 选择省 ----"></select>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="city2">City</label>
-                                <select class="form-control" id="city2" data-city="---- 选择市 ----"></select>
-                            </div>
-                            <div class="form-group">
-                                <label class="sr-only" for="district2">District</label>
-                                <select class="form-control" id="district2" data-district="---- 选择区 ----"></select>
-                            </div>
-                        </div>
-                        <br><br>
-                        Contact:<input type="text" style="width: 450px" value="137-1372-6422"><br><br>
-                        E-mail:<input type="text" style="width: 455px" value="anna@gmail.com"><br><br>
+                    
+                        Tel&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:<input id="tel" name="tel" type="text" style="width: 450px" th:value="${admin.tel}"><br><br>
+                        E-mail:<input type="text" style="width: 455px"id="email" name="email" th:value="${admin.email}"><br><br> 
+                        <input value = "submit" type="submit" />
                     </form>
 
                     <!--性别信息-->
-                    <div class="col-md-offset-3">
+                 <!--    <div class="col-md-offset-3">
                         Gender：
                         <input type="radio" name="radiobutton" value="radiobutton" checked> Male
                         <input type="radio" name="radiobutton" value="radiobutton" checked> Female
                         <br>
                         <br>
-                    </div>
+                    </div> -->
 
                 </div>
             </div>
@@ -121,7 +107,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Anna</a>
+            <span class="navbar-brand" th:text="${admin.username}"></span>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
