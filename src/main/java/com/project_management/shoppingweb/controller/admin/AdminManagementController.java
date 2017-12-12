@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,15 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
-import com.project_management.shoppingweb.domain.Seller;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.repository.AdvertisementRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
+import com.project_management.shoppingweb.repository.UserRepository;
 import com.project_management.shoppingweb.service.AdvertisementService;
 import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.service.ProductAdvertisementService;
-import com.project_management.shoppingweb.service.SellerService;
+import com.project_management.shoppingweb.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -47,6 +47,10 @@ public class AdminManagementController {
 	@Autowired
 	private ProductAdvertisementService productAdvertisementService;
 	
+	@Autowired
+	private UserService userService;
+	@Resource
+	private UserRepository userRepository;
 	
 	@GetMapping("/backUp")
 	public String backUp() {
@@ -196,4 +200,45 @@ public class AdminManagementController {
 		return "redirect:/admin/adsManagement";
 	}
 	
+	@GetMapping("/blackCustomer")
+	public String blackCustomer(@RequestParam("userid") Long userid,Model model) {
+		User user = userService.findByUserid(userid);
+		user.setStatus(2);
+		userRepository.save(user);
+		
+		List<User> availableUserList = userService.findAllByStatus(1);
+		model.addAttribute("availableFindAll", availableUserList);
+		List<User> blacklistUserList = userService.findAllByStatus(2);
+		model.addAttribute("blacklistUserList", availableUserList);
+		
+		return "redirect:/admin/customerManage";
+	}
+	
+	@GetMapping("/recoverCustomer")
+	public String recoverCustomer(@RequestParam("userid") Long userid,Model model) {
+		User user = userService.findByUserid(userid);
+		user.setStatus(1);
+		userRepository.save(user);
+		
+		List<User> availableUserList = userService.findAllByStatus(1);
+		model.addAttribute("availableFindAll", availableUserList);
+		List<User> blacklistUserList = userService.findAllByStatus(2);
+		model.addAttribute("blacklistUserList", availableUserList);
+		
+		return "redirect:/admin/customerManage";
+	}
+	
+	@GetMapping("/deleteCustomer")
+	public String deleteCustomer(@RequestParam("userid") Long userid,Model model) {
+		User user = userService.findByUserid(userid);
+		user.setStatus(0);
+		userRepository.save(user);
+		
+		List<User> availableUserList = userService.findAllByStatus(1);
+		model.addAttribute("availableFindAll", availableUserList);
+		List<User> blacklistUserList = userService.findAllByStatus(2);
+		model.addAttribute("blacklistUserList", availableUserList);
+		
+		return "redirect:/admin/customerManage";
+	}
 }
