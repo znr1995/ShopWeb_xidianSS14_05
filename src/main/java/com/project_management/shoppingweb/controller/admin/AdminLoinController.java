@@ -26,14 +26,13 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import com.project_management.shoppingweb.config.WebSecurityConfig;
 import com.project_management.shoppingweb.domain.Admin;
-import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
+import com.project_management.shoppingweb.domain.SellerAdvertisement;
 import com.project_management.shoppingweb.repository.AdminRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
+import com.project_management.shoppingweb.service.SellerAdvertisementService;
 import com.project_management.shoppingweb.service.AdminService;
-import com.project_management.shoppingweb.service.AdvertisementService;
-import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.service.ProductAdvertisementService;
 import com.project_management.shoppingweb.util.MD5Util;
 
@@ -46,7 +45,7 @@ public class AdminLoinController {
 	@Autowired
 	private AdminService adminService;
 	@Autowired
-	private AdvertisementService advertisementService;
+	private SellerAdvertisementService SellerAdvertisementService;
 	@Autowired
 	private ProductAdvertisementService productAdvertisementService;
 	
@@ -63,20 +62,31 @@ public class AdminLoinController {
     	//Sort sort = new Sort(Sort.Direction.DESC,"createTime"); 
     	//Pageable pageable = new PageRequest(0,5,sort);
     	List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+    	
+    	List<SellerAdvertisement> sellerAdvertisementList = SellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
-		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
-		model.addAttribute("onShopFindAll", onAdvertisementList);
+    	List<SellerAdvertisement> onSellerAdvertisementList = SellerAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onSellerAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-    	model.addAttribute("price", list.get(list.size()-1));
+	    
+	
+    	
         return "admin/adsManagement";  
     }  
   
@@ -101,13 +111,15 @@ public class AdminLoinController {
 			if(admin == null) {
 //				 map.put("success", false);
 //		            map.put("message", "密码错误");
-		            return "admin/login";
+		            return "redirect:/admin/login";
 			}
 			//设置session
 		session.setAttribute(WebSecurityConfig.SESSION_KEY, username);
 //        map.put("success", true);
 //        map.put("message", "登录成功");
-		model.addAttribute("adminId", admin.getAdminId());
+		
+		//model.addAttribute("adminUserName", username);
+		//model.addAttribute("adminId", admin.getAdminId());
         return "redirect:/admin/adsManagement";
 		
 	}
@@ -133,13 +145,13 @@ public class AdminLoinController {
 		 if(!password.equals(password2)) {
 			// map.put("success", false);
 	       //  map.put("message", "两次密码不相同");
-	         return "/admin/register";
+	         return "redirect:/admin/register";
 		 }
 		 
 		 if(admin != null) {
 			// map.put("success", false);
 	       //  map.put("message", "用户已存在");
-	         return "/admin/register";
+	         return "redirect:/admin/register";
 		 }
 		 
 		 admin = new Admin();
@@ -151,7 +163,7 @@ public class AdminLoinController {
 		 adminRepository.save(admin);
 //		 map.put("success", true);
 //	     map.put("message", "注册成功");
-	     return "/admin/login";
+	     return "redirect:/admin/login";
 	 }
 	 
 	 

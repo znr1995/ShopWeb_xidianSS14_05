@@ -63,7 +63,7 @@
             </tr>
             </thead>
             <tbody>
-                                <th:block th:each="u,index:${availableFindAll}">
+                                <th:block th:each="u,index:${availableUserList}">
                                <tr>
                               
                                    <td th:text="${u.userid}"></td>
@@ -94,7 +94,7 @@
             </tr>
             </thead>
             <tbody>
-                                <th:block th:each="u,index:${availableFindAll}">
+                                <th:block th:each="u,index:${blacklistUserList}">
                                <tr>
                               
                                    <td th:text="${u.userid}"></td>
@@ -122,11 +122,11 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Anna</a>
+            <span class="navbar-brand" th:text="${adminUserName}">Anna</span>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="PersonalInformation.html">Personal Information</a></li>
+                <li><a th:href="@{personalInformation}">Personal Information</a></li>
                 <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height:  50px">
                     Log out
                 </button>
@@ -147,9 +147,9 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Leave
                                 </button>
-                                <button type="button" class="btn btn-primary">
-                                    Sure
-                                </button>
+                                <a href="/admin/logout"><button type="button" class="btn btn-primary">
+                                        Sure
+                                    </button></a>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal -->

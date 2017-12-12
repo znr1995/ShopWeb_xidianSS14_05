@@ -51,11 +51,15 @@
            <div class="well">
            <form action="/admin/updatePrice" method="post">
            <input class="hidden" name="adminId" th:value="${adminId}"/>
-           Shop&nbsp;&nbsp;&nbsp;&nbsp; Ads &nbsp;&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-           <input id="advertisementHighPrice" name="advertisementHighPrice" type="text" th:value="${price.advertisementHighPrice}"><br><br>
-           Product &nbsp;&nbsp;&nbsp;&nbsp;Ads &nbsp;&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;&nbsp;
-           <input id="advertisementLowPrice" name="advertisementLowPrice" type="text" th:value="${price.advertisementLowPrice}"><br><br>
-               Product commission Price<input id="productRate" name="productRate" type="text" th:value="${price.productRate}"><br><br>
+              Product &nbsp;&nbsp;&nbsp;&nbsp;Ads &nbsp;&nbsp;&nbsp;&nbsp;HighPrice&nbsp;&nbsp;&nbsp;&nbsp;
+           <input id="productHighAdvertisementPrice" name="productHighAdvertisementPrice" type="text" th:value="${price.productHighAdvertisementPrice}"><br><br>
+            Product &nbsp;&nbsp;&nbsp;&nbsp;Ads &nbsp;&nbsp;&nbsp;&nbsp;LowPrice&nbsp;&nbsp;&nbsp;&nbsp;
+            
+           <input id="productLowAdvertisementPrice" name="productLowAdvertisementPrice" type="text" th:value="${price.productLowAdvertisementPrice}"><br><br>
+              Shop&nbsp;&nbsp;&nbsp;&nbsp; Ads &nbsp;&nbsp;&nbsp;&nbsp;Price&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+           <input id="sellerListAdvertisementPrice" name="sellerListAdvertisementPrice" type="text" th:value="${price.sellerListAdvertisementPrice}"><br><br>
+               Product commission Price
+               <input id="productRate" name="productRate" type="text" th:value="${price.productRate}"><br><br>
                <div style="width: 800px; float: right">
                    <input type="submit" value="submit" />
                </div>
@@ -85,8 +89,10 @@
                                <tr class="success">
                                    <th>Ads ID</th>                                   
                                    <th>Shop Owner</th>
-
+									<th>Description</th>
                                    <th>Price</th>
+                                    <th>Start Date</th>
+                                   <th>End Date</th>
                                    <th>Agree</th>
                                    <th>Reject</th> 
                                </tr>
@@ -96,9 +102,11 @@
                                <tr>
                               
                                    <td th:text="${p.advertisementId}">a001</td>
-                                   <td th:text="${p.sellerName}"></td>
-
+                                   <td th:text="${p.sellerName}">1</td>
+									<td th:text="${p.description}">1</td>
                                    <td th:text="${p.price}">$50</td>
+                                   <td th:text="${p.startDate}">1</tb>
+                                   <td th:text="${p.endDate}">1</tb>
                                    <td><button th:onclick="'shopagree('+${p.advertisementId}+')'">✔</button></td>
                                    <td><button th:onclick="'shopreject('+${p.advertisementId}+')'">✖</button></td>
                                    
@@ -121,10 +129,12 @@
                                <thead>
                                <tr class="success">
                                    <th>Ads ID</th>
-                                   <th>Ads Name</th>
-                                   <th>Shop Owner</th>
-                        
+                                   <th>Description</th>
+                                  <th>Shop Owner</th> 
+                        			<th>Type</th>
                                    <th>Price</th>
+                                   <th>Start Date</th>
+                                   <th>End Date</th>
                                    <th>Agree</th>
                                    <th>Reject</th>
                                </tr>
@@ -134,10 +144,12 @@
                                <tr>
                                
                                    <td th:text="${p.advertisementId}">a001</td>
-                                   <td th:text="${p.adsName}">iWatch</td>
-                                   <td th:text="${p.sellerName}">Anna</td>
-                                
+                                   <td th:text="${p.description}">iWatch</td>
+                                   <td th:text="${p.sellerName}">Anna</td> 
+                                <td th:text="${p.type}">1</td>
                                    <td th:text="${p.price}">$50</td>
+                                   <td th:text="${p.startDate}">1</td>
+                                   <td th:text="${p.endDate}">1</td>
                                    <td><button th:onclick="'productagree('+${p.advertisementId}+')'">✔</button></td>
                                    <td><button th:onclick="'productreject('+${p.advertisementId}+')'">✖</button></td>
                                   
@@ -162,15 +174,26 @@
                        </div>
                        <table class="table">
                        <thead>
-                           <th>Ads ID</th><th>Ads Name</th><th>Price </th>
+                           <th>Ads ID</th>
+							
+                         <th>Description</th>
+                           <th>Shop Owner</th>
+                           <th>Price </th>
+                             <th>Statr Date</th>
+                             <th>End Date</th>
+                           
                            </thead>
                            <tbody>
                         <th:block th:each="p,index:${onShopFindAll}">
                             
                            <tr>
                            <td th:text="${p.advertisementId}">a001</td>
-                           <td th:text="${p.sellerName}"></td>
-                           <td th:text="${p.price}"></td>
+                         
+                          <td th:text="${p.description}">iWatch</td>
+                             <td th:text="${p.sellerName}">Anna</td>
+                           <td th:text="${p.price}">1</td>
+                           <td th:text="${p.startDate}">1</td>
+                                   <td th:text="${p.endDate}">1</td>
                            
                            </tr>
                            </th:block>
@@ -182,18 +205,23 @@
                        <table class="table">
                        <thead>
                            <th>Ads ID</th>
-                           <th>Ads Name</th>
-                           <th>Shop Owner</th>
+                             <th>Description</th>
+                         <th>Shop Owner</th>
+                         <th>Type</th>
                            <th>Price</th>
+                            <th>Start Date</th>
+                                   <th>End Date</th>
                            </thead>
                            <tbody>
                             <th:block th:each="p,index:${onProductFindAll}">
                            <tr>
                              <td th:text="${p.advertisementId}">a001</td>
-                             <td th:text="${p.adsName}">iWatch</td>
+                             <td th:text="${p.description}">iWatch</td>
                              <td th:text="${p.sellerName}">Anna</td>
-                             <td th:text="${p.price}">$50</td>
-   
+                             <td th:text="${p.type}">1</td>
+                    <td th:text="${p.price}">$50</td>
+   								<td th:text="${p.startDate}">1</td>
+                                   <td th:text="${p.endDate}">1</td>
                            </tr>
                          </th:block>
                          </tbody>
@@ -216,11 +244,11 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <span class="navbar-brand" th:text="${adminId}"></span>
+                <span class="navbar-brand" th:text="${adminUserName}"></span>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="PersonalInformation.html">Personal Infomation</a></li>
+                    <li><a th:href="@{personalInformation}">Personal Infomation</a></li>
                    <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
                        Log out
                     </button>
