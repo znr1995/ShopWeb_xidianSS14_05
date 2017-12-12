@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>ShoppingCartByFFFF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<div style="width: 250px;height: 500px;float: left">
+<table>
+    <tr>
+        <td>productID</td>
+    </tr>
+    <tr th:each="ProductList : ${ProductList}" >
+        <td th:text="${ProductList}">Onions</td>　　
+    </tr>
+</table>
+</div>
+
+
+<div style="width: 250px;height: 500px;float: left">
+<table>
+    <tr>
+        <td>productNumber</td>
+    </tr>
+    <tr th:each="AmountList : ${AmountList}" >
+        <td th:text="${AmountList}">Onions</td>　　
+    </tr>
+</table>
+</div>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>createTime</td>
+        </tr>
+        <tr th:each="DateList : ${DateList}" >
+            <td th:text="${DateList}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+
+
+<form name="form1" th:action="@{/MyFavorite}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+</form>
+
+<form name="form2" th:action="@{/MyOrder}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myorder" th:value="我的订单">myorder</button>
+</form>
+
+
+
+</body>
+</html>

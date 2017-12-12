@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>Ordrebyffff</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>productID</td>
+        </tr>
+        <tr th:each="ProductList : ${ProductList}" >
+            <td th:text="${ProductList}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>price</td>
+        </tr>
+        <tr th:each="price : ${price}" >
+            <td th:text="${price}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>payway</td>
+        </tr>
+        <tr th:each="payway : ${payway}" >
+            <td th:text="${payway}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>createtime</td>
+        </tr>
+        <tr th:each="createtime : ${createtime}" >
+            <td th:text="${createtime}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>status</td>
+        </tr>
+        <tr th:each="status : ${status}" >
+            <td th:text="${status}">Onions</td>　　
+        </tr>
+    </table>
+</div>
+
+<form name="form1" th:action="@{/MyFavorite}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+</form>
+
+<form name="form2" th:action="@{/MyShoppingCart}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+</form>
+
+</body>
+</html>

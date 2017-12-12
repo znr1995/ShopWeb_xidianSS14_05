@@ -87,9 +87,9 @@
 
         reader.onload = function (e) {
             photo.src = e.target.result;
-            var fso = new ActiveXObject("Scripting.FileSystemObject");
-            var f = fso.GetFile(e.target.result);
-            f.Copy('C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static' + GetRandomNum() + file.name);
+          //  var fso = new ActiveXObject("Scripting.FileSystemObject");
+           // var f = fso.GetFile(e.target.result);
+            //f.Copy('C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static' + GetRandomNum() + file.name);
             reader.readAsDataURL(file);
         }
     });

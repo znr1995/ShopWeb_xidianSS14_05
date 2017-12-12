@@ -51,6 +51,8 @@ public class RegisterController {
             return "redirect:/error/errorHandler";
         }
     }
+
+
     @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=UserSignup")
     public String userRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
         String username = httpServletRequest.getParameter("username");

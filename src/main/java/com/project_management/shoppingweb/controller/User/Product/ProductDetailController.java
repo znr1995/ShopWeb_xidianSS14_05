@@ -1,16 +1,13 @@
-package com.project_management.shoppingweb.controller.Product;
+package com.project_management.shoppingweb.controller.User.Product;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.service.ProductService;
 import org.apache.log4j.Logger;
-import org.hibernate.annotations.Source;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.Resource;
 
 @Controller
 public class ProductDetailController {

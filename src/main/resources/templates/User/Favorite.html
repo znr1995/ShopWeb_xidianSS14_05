@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html  xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>FavoriteByFFFF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+
+
+<br/>
+<br/>
+<br/>
+<h3>最喜欢的商品</h3>
+<div style="width: 250px;height: 500px;float: left">
+<table>
+    <tr>
+        <td>ProductID</td>
+    </tr>
+    <tr th:each="ProductList : ${ProductList}" >
+        <td th:text="${ProductList}">Onions</td>　　
+    </tr>
+</table>
+</div>
+
+
+<!--<div style="width: 250px;height: 500px;float: left">
+    <table>
+        <tr>
+            <td>ShopID</td>
+        </tr>
+        <tr th:each="PShopList : ${PShopList}" >
+            <td th:text="${PShopList}">Onions</td>　　
+        </tr>
+    </table>
+</div>-->
+
+<form name="form1" th:action="@{/MyShoppingCart}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+</form>
+
+<form name="form2" th:action="@{/MyOrder}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myorder" th:value="我的订单">myorder</button>
+</form>
+
+
+</body>
+</html>

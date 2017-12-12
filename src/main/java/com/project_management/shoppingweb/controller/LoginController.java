@@ -77,7 +77,7 @@ public class LoginController {
             return "redirect:/error/errorMessage";
         }
 
-        attributes.addAttribute("SellerID",id);
+        attributes.addAttribute("UserID",id);
         return "redirect:/User/Main";
     }
 

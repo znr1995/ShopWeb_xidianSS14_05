@@ -11,6 +11,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -26,6 +27,13 @@ public class HomepageController {
     private ProductAdvertisementService productAdvertisementService;
 
     private Logger logger = Logger.getLogger(this.getClass());
+
+    @RequestMapping("/User/Main")
+    public String userMain(@ModelAttribute("UserID")long userId,Model model)
+    {
+        //登录逻辑处理
+        return "redirect:/homepage";
+    }
 
     @RequestMapping(value = "/homepage")
     public String homepage(Model model){
