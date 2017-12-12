@@ -22,7 +22,7 @@ public class Price {
 	private double sellerListAdvertisementPrice;//店铺列表广告
 	private double shopPrice;//开店价格
 	private double productRate;//商品汇率
-	 @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date createTime;//修改时间
 
 	public Long getPriceId() {

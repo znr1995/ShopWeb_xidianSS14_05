@@ -20,9 +20,9 @@ public class ProductAdvertisement {
     private String sellerName;
     private String description;
     private String pictureUrl;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date startDate;
-    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date endDate;//通过这个判断是否可以放在主页
 	private double price;
 	private Integer type;//广告再主页上的位置，1-滚动，2-列表广告

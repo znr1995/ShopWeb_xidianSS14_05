@@ -62,6 +62,17 @@ public class AdminLoinController {
     	//Sort sort = new Sort(Sort.Direction.DESC,"createTime"); 
     	//Pageable pageable = new PageRequest(0,5,sort);
     	List<Price> list = priceRepository.findAll();
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+    	
     	List<SellerAdvertisement> sellerAdvertisementList = SellerAdvertisementService.findAllByStatus(0);
 		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
@@ -72,9 +83,8 @@ public class AdminLoinController {
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
-
-			model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-	    	model.addAttribute("price", list.get(list.size()-1));
+		
+	    
 	
     	
         return "admin/adsManagement";  
@@ -101,13 +111,15 @@ public class AdminLoinController {
 			if(admin == null) {
 //				 map.put("success", false);
 //		            map.put("message", "密码错误");
-		            return "admin/login";
+		            return "redirect:/admin/login";
 			}
 			//设置session
 		session.setAttribute(WebSecurityConfig.SESSION_KEY, username);
 //        map.put("success", true);
 //        map.put("message", "登录成功");
-		model.addAttribute("adminId", admin.getAdminId());
+		
+		//model.addAttribute("adminUserName", username);
+		//model.addAttribute("adminId", admin.getAdminId());
         return "redirect:/admin/adsManagement";
 		
 	}
@@ -133,13 +145,13 @@ public class AdminLoinController {
 		 if(!password.equals(password2)) {
 			// map.put("success", false);
 	       //  map.put("message", "两次密码不相同");
-	         return "/admin/register";
+	         return "redirect:/admin/register";
 		 }
 		 
 		 if(admin != null) {
 			// map.put("success", false);
 	       //  map.put("message", "用户已存在");
-	         return "/admin/register";
+	         return "redirect:/admin/register";
 		 }
 		 
 		 admin = new Admin();
@@ -151,7 +163,7 @@ public class AdminLoinController {
 		 adminRepository.save(admin);
 //		 map.put("success", true);
 //	     map.put("message", "注册成功");
-	     return "/admin/login";
+	     return "redirect:/admin/login";
 	 }
 	 
 	 
