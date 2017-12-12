@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
+import com.project_management.shoppingweb.config.WebSecurityConfig;
+import com.project_management.shoppingweb.domain.Admin;
 import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
@@ -21,6 +24,7 @@ import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
 import com.project_management.shoppingweb.service.SellerAdvertisementService;
+import com.project_management.shoppingweb.service.AdminService;
 import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.service.ProductAdvertisementService;
 
@@ -34,7 +38,8 @@ public class AdminManagementController {
 	private SellerAdvertisementService sellerAdvertisementService;
 	@Resource
 	private ProductAdvertisementRepository productAdvertisementRepository;
-	
+	@Autowired
+	private AdminService adminService;
 	@Resource
 	private PriceRepository priceRepository;
 	@Resource
@@ -72,7 +77,7 @@ public class AdminManagementController {
 	
 	
 	@RequestMapping(value = "/updatePrice", method = RequestMethod.POST)
-	public String updatePrice(HttpServletRequest request,Model model) {
+	public String updatePrice(HttpServletRequest request,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 		Price price = new Price();
 		price.setAdminId(Long.parseLong(request.getParameter("adminId")));
 		price.setProductHighAdvertisementPrice(Double.parseDouble(request.getParameter("productHighAdvertisementPrice")));
@@ -80,7 +85,7 @@ public class AdminManagementController {
 		price.setSellerListAdvertisementPrice(Double.parseDouble(request.getParameter("sellerListAdvertisementPrice")));
 		price.setProductRate(Double.parseDouble(request.getParameter("productRate")));
 		priceService.updatePrice(price);
-		List<Price> list = priceRepository.findAll();
+		
     	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
 		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
@@ -93,13 +98,22 @@ public class AdminManagementController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-    	model.addAttribute("price", list.get(list.size()-1));
+		List<Price> list = priceRepository.findAll();
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
 		return "redirect:/admin/adsManagement";//返回页面 -- 
 	}
 	
 	@GetMapping("/agreeShopApply")
-	public String agreeApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+	public String agreeApply(@RequestParam("advertisementId") Long advertisementId,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 		
 		SellerAdvertisement sellerAdvertisement = sellerAdvertisementService.findById(advertisementId);
 		sellerAdvertisement.setStatus(1);
@@ -123,11 +137,21 @@ public class AdminManagementController {
 	}
 	
 	@GetMapping("/rejectShopApply")
-	public String rejectApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+	public String rejectApply(@RequestParam("advertisementId") Long advertisementId,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 		
 		SellerAdvertisement sellerAdvertisement = sellerAdvertisementService.findById(advertisementId);
 		sellerAdvertisementRepository.delete(sellerAdvertisement);
 		List<Price> list = priceRepository.findAll();
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
     	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
 		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
@@ -140,13 +164,12 @@ public class AdminManagementController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-    	model.addAttribute("price", list.get(list.size()-1));
+  
 		return "redirect:/admin/adsManagement";
 	}
 	
 	@GetMapping("/rejectProductApply")
-	public String rejectProductApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+	public String rejectProductApply(@RequestParam("advertisementId") Long advertisementId,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 		
 //		Advertisement advertisement = advertisementService.findById(advertisementId);
 //		advertisementRepository.delete(advertisement);
@@ -154,6 +177,16 @@ public class AdminManagementController {
 		productAdvertisementRepository.delete(productAdvertisement);
 		
 		List<Price> list = priceRepository.findAll();
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
     	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
 		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
@@ -166,17 +199,25 @@ public class AdminManagementController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-    	model.addAttribute("price", list.get(list.size()-1));
 		return "admin/adsManagement";
 	}
 	
 	@GetMapping("/agreeProductApply")
-	public String agreeProductApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
+	public String agreeProductApply(@RequestParam("advertisementId") Long advertisementId,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 		ProductAdvertisement productAdvertisement = productAdvertisementService.findByAdvertisementId(advertisementId);
 		productAdvertisement.setStatus(1);
 		productAdvertisementRepository.save(productAdvertisement);
 		List<Price> list = priceRepository.findAll();
+    	if(list.size() == 0) {
+    		model.addAttribute("price", new Price());
+    	}else {
+    		model.addAttribute("price", list.get(list.size()-1));
+    	}
+    	
+    	
+    	Admin admin = adminService.findByUsername(username);
+    	model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
     	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
 		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
@@ -189,8 +230,7 @@ public class AdminManagementController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-    	model.addAttribute("adminId", list.get(list.size()-1).getAdminId());
-    	model.addAttribute("price", list.get(list.size()-1));
+    	
 		return "redirect:/admin/adsManagement";
 	}
 	
