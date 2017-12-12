@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Commission</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
+</head>
+<body>
+<div class="col-lg-2">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Management Bar
+                    </a>
+                </li>
+               <li>
+                        <a th:href="@{adsManagement}"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
+                    </li>
+                     <li>
+                           <a th:href="@{shopManage}"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
+                       </li>
+                       <li>
+                           <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
+                       </li>
+                       <li class="active">
+                           <a href="#"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
+                       </li>
+                       <li>
+                           <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
+                       </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="col-lg-10">
+    <br>
+    <br>
+    <br>
+    <!--广告收入统计-->
+    <h1>Ads Commission</h1>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Ads ID</th>
+            <th>Ads Start/End</th>
+            <th>Ads Pay</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>001</td>
+            <td>Rammohan </td>
+            <td>Reddy</td>
+            <td>A+</td>
+        </tr>
+        <tr>
+            <td>002</td>
+            <td>Smita</td>
+            <td>Pallod</td>
+            <td>A</td>
+        </tr>
+        <tr>
+            <td>003</td>
+            <td>Rabindranath</td>
+            <td>Sen</td>
+            <td>A+</td>
+        </tr>
+        </tbody>
+    </table><br><br>
+
+    <h1>Catogery Commission</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Season commission
+            </h3>
+        </div>
+        <div class="panel-body">
+            <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+        </div>
+    </div>
+    <h1>Ananul</h1>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">
+                Catogery Commission
+            </h3>
+        </div>
+        <div class="panel-body">
+            <h3>Pie Chart</h3>
+            <p>
+            <canvas id="canvas_circle" width="500" height="300" style="border:2px solid #0026ff;" >
+            </canvas>
+        </p>
+        </div>
+    </div>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Anna</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="PersonalInformation.html">Personal Information</a></li>
+                    <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px">
+                        Log out
+                    </button>
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                        &times;
+                                    </button>
+                                    <h4 class="modal-title" id="myModalLabel">
+                                        Sure to Log Out
+                                    </h4>
+                                </div>
+                                <div class="modal-body" >
+                                    Log Out
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                    </button>
+                                    <button type="button" class="btn btn-primary">
+                                        Sure
+                                    </button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal -->
+                    </div>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div>
+    </nav>
+<script language="JavaScript">
+    $(document).ready(function() {
+        var title = {
+            text: 'Combination chart'
+        };
+        var xAxis = {
+            categories: ['Apples', 'Oranges', 'Pears', 'Bananas', 'Plums']
+        };
+        var labels = {
+            items: [{
+                html: '水果消费',
+                style: {
+                    left: '50px',
+                    top: '18px',
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                }
+            }]
+        };
+        var series= [{
+            type: 'column',
+            name: 'Jane',
+            data: [3, 2, 1, 3, 4]
+        }, {
+            type: 'column',
+            name: 'John',
+            data: [2, 3, 5, 7, 6]
+        }, {
+            type: 'column',
+            name: 'Joe',
+            data: [4, 3, 3, 9, 0]
+        }, {
+            type: 'spline',
+            name: 'Average',
+            data: [3, 2.67, 3, 6.33, 3.33],
+            marker: {
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[3],
+                fillColor: 'white'
+            }
+        }, {
+            type: 'pie',
+            name: '总消费',
+            data: [{
+                name: 'Jane',
+                y: 13,
+                color: Highcharts.getOptions().colors[0] // Jane 的颜色
+            }, {
+                name: 'John',
+                y: 23,
+                color: Highcharts.getOptions().colors[1] // John 的颜色
+            }, {
+                name: 'Joe',
+                y: 19,
+                color: Highcharts.getOptions().colors[2] // Joe 的颜色
+            }],
+            center: [100, 80],
+            size: 100,
+            showInLegend: false,
+            dataLabels: {
+                enabled: false
+            }
+        }
+        ];
+
+        var json = {};
+        json.title = title;
+        json.xAxis = xAxis;
+        json.labels = labels;
+        json.series = series;
+        $('#container').highcharts(json);
+    });
+</script>
+    <script>
+        //绘制饼图
+        function drawCircle(canvasId, data_arr, color_arr, text_arr)
+        {
+            var c = document.getElementById(canvasId);
+            var ctx = c.getContext("2d");
+
+            var radius = c.height / 2 - 20; //半径
+            var ox = radius + 20, oy = radius + 20; //圆心
+
+            var width = 30, height = 10; //图例宽和高
+            var posX = ox * 2 + 20, posY = 30;   //
+            var textX = posX + width + 5, textY = posY + 10;
+
+            var startAngle = 0; //起始弧度
+            var endAngle = 0;   //结束弧度
+            for (var i = 0; i < data_arr.length; i++)
+            {
+                //绘制饼图
+                endAngle = endAngle + data_arr[i] * Math.PI * 2; //结束弧度
+                ctx.fillStyle = color_arr[i];
+                ctx.beginPath();
+                ctx.moveTo(ox, oy); //移动到到圆心
+                ctx.arc(ox, oy, radius, startAngle, endAngle, false);
+                ctx.closePath();
+                ctx.fill();
+                startAngle = endAngle; //设置起始弧度
+
+                //绘制比例图及文字
+                ctx.fillStyle = color_arr[i];
+                ctx.fillRect(posX, posY + 20 * i, width, height);
+                ctx.moveTo(posX, posY + 20 * i);
+                ctx.font = 'bold 12px 微软雅黑';    //斜体 30像素 微软雅黑字体
+                ctx.fillStyle = color_arr[i]; //"#000000";
+                var percent = text_arr[i] + "：" + 100 * data_arr[i] + "%";
+                ctx.fillText(percent, textX, textY + 20 * i);
+            }
+        }
+
+        function init() {
+            //绘制饼图
+            //比例数据和颜色
+            var data_arr = [0.05, 0.25, 0.6, 0.1];
+            var color_arr = ["#00FF21", "#FFAA00", "#00AABB", "#FF4400"];
+            var text_arr = ["第一季度", "第二季度", "第三季度", "第四季度"];
+
+            drawCircle("canvas_circle", data_arr, color_arr, text_arr);
+        }
+
+        //页面加载时执行init()函数
+        window.onload = init;
+    </script>
+</div>
+</body>
+</html>
