@@ -3,39 +3,40 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.service.Seller.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.LinkedList;
 
 @Controller
 @RequestMapping("/Seller/ModifyProduct")
 public class ModifyProductInformationController {
 
+    @Autowired
+    private SellerService sellerService;
 
     @RequestMapping("ModifyInformation")
     public String addProductAndReturnBack(HttpServletRequest request,RedirectAttributes attributes)
     {
-        Product newProduct = null;
         long productID = Long.valueOf(request.getParameter("ProductID"));
-        LinkedList<Product> products = SellerSQLFunction.getInstance().getAllProducts(Long.valueOf(request.getParameter("SellerID")));
-        for(Product product : products)
+        Product newProduct = sellerService.getProduct(productID);
+        if(newProduct == null)
         {
-            if(product.getProductId() == productID)
-            {
-                newProduct = product;
-                break;
-            }
+            attributes.addAttribute("errorMessage","productId is wrong!");
+            return "redirect:/error/errorHandler";
         }
+
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setBrandName(request.getParameter("brandName"));
         newProduct.setProductPhoto(request.getParameter("productPhoto"));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
+        newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
         attributes.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
-        if(SellerSQLFunction.getInstance().changedProducts(newProduct))
+        if(sellerService.writeInProduct(newProduct))
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         else
         {

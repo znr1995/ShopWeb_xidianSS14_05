@@ -1,5 +1,9 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.domain.Seller;
+import com.project_management.shoppingweb.domain.User;
+import com.project_management.shoppingweb.service.RegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,17 +17,53 @@ import javax.servlet.http.HttpServletRequest;
  */
 @Controller
 public class RegisterController {
-    @RequestMapping(value = "/register",method = RequestMethod.GET)
-    public String register(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
+
+    @Autowired
+    private RegisterService registerService;
+
+    private String DEFATE_SCULPTURE = "./default.png";
+
+    @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=SellerSignup")
+    public String sellerRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
         String username = httpServletRequest.getParameter("username");
         String email = httpServletRequest.getParameter("email");
         String phone = httpServletRequest.getParameter("phone_number");
         String password = httpServletRequest.getParameter("password_register");
-        int type = Integer.valueOf(httpServletRequest.getParameter("register_type"));
-        SellerSQLFunction sellerSQLFunction = SellerSQLFunction.getInstance();
-        boolean result = sellerSQLFunction.registerAccount(email,password,type);
-        if (result){
+        String shopName = httpServletRequest.getParameter("Shopname");
+        String catogery = httpServletRequest.getParameter("Catogery");
 
+        if(registerService.sellerVaildEmail(email) && registerService.sellerVaildUsername(username))
+        {
+            Seller seller = new Seller();
+            seller.setCatogery(catogery);
+            seller.setShopname(shopName);
+            seller.setPassword(password);
+            seller.setPhoneNum(phone);
+            seller.setEmail(email);
+            seller.setUsername(username);
+            seller.setSculpture(DEFATE_SCULPTURE);
+            registerService.sellerRegister(seller);
+            return "/Login";
+        }
+        else
+        {
+            attributes.addAttribute("errorMessage","email or username has been rigister!");
+            return "redirect:/error/errorHandler";
+        }
+    }
+    @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=UserSignup")
+    public String userRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
+        String username = httpServletRequest.getParameter("username");
+        String email = httpServletRequest.getParameter("email");
+        String phone = httpServletRequest.getParameter("phone_number");
+        String password = httpServletRequest.getParameter("password_register");
+        if (registerService.userVaildEmail(email) && registerService.userVaildUsername(username)){
+            User user = new User();
+            user.setEmail(email);
+            user.setPassword(password);
+            user.setTel(phone);
+            user.setUsername(username);
+            registerService.userRegister(user);
             return "/Login";
         }else {
             attributes.addAttribute("errorMessage","fail to register!");

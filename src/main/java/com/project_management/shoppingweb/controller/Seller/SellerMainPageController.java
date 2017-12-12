@@ -1,11 +1,13 @@
 package com.project_management.shoppingweb.controller.Seller;
 
 
+import com.project_management.shoppingweb.domain.Seller;
+import com.project_management.shoppingweb.service.Seller.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,18 +16,35 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class SellerMainPageController {
 
-    private long sellerID = -1;
 
+
+    @Autowired
+    private SellerService sellerService;
+
+    private long sellerID = -1;
 
     //启动主界面
     @RequestMapping("/Seller/Main")
-    public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
+    public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId, Model model, RedirectAttributes attributes)
     {
         sellerID = sellerId;
-        System.out.println(sellerID);
-        model.addAttribute("SellerPath","path.png");
+        Seller seller = sellerService.getSellerById(sellerId);
+        if(seller == null)
+        {
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+
+        model.addAttribute("Sculpture",seller.getSculpture());
+        model.addAttribute("Address",seller.getAddress());
+        model.addAttribute("Email",seller.getEmail());
+        model.addAttribute("Passwd",seller.getPassword());
+        model.addAttribute("PhoneNum",seller.getPhoneNum());
+        model.addAttribute("Username",seller.getUsername());
         model.addAttribute("SellerID",sellerID);
-        model.addAttribute("SellerName","znr");
+        model.addAttribute("SellerName",seller.getUsername());
+        model.addAttribute("Catogery",seller.getCatogery());
+        model.addAttribute("Shopname",seller.getShopname());
         return "/Seller/SellerMainPage";
     }
 

@@ -1,5 +1,7 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,43 +15,85 @@ import java.util.regex.Pattern;
  */
 @Controller
 public class LoginController {
+
+    @Autowired
+    private LoginService loginService;
+
     @RequestMapping(value = "/")
     public String main(){
 
+        //return "redirect:/homepage";
         return "/Login";
     }
 
-    @RequestMapping(value = "/login",method = RequestMethod.GET)
+    //商家登录
+    @RequestMapping(value = "/login",method = RequestMethod.GET,params = "action=SellerLogin")
     public String login(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
         String pattern = ".*@*.com.*";
         long id;
         //TODO:有bug,用户名和邮箱一样呢
+
         //以邮箱方式登录
         if (Pattern.matches(pattern, account)) {
-            id = SellerSQLFunction.getInstance().loginByEmail(account, password);
+            id = loginService.sellerLoginByEmail(account,password);
         } else {
             //用户名方式登录
-            id = SellerSQLFunction.getInstance().loginByUsername(account, password);
+            id = loginService.sellerLoginByUsername(account, password);
         }
 
-        if (id <= 0) {
-            //error
-            attributes.addAttribute("errorMessage", "no such account");
-            return "redirect:/error/errorHandler";
-        } else if (id >= 10000 && id < 20000) {
-            //user id
-            attributes.addAttribute("UserID",id);
-            return "redirect:/User/Main";
-        } else if (id >= 20000 && id < 30000) {
-            //seller id
-            attributes.addAttribute("SellerID",id);
-            return "redirect:/Seller/Main";
+        if(id < 0)
+        {
+            attributes.addAttribute("errorMessage",getErrorMessage(id));
+           return "redirect:/error/errorMessage";
+        }
+
+        attributes.addAttribute("SellerID",id);
+        return "redirect:/Seller/Main";
+    }
+
+
+    //用户登录
+    @RequestMapping(value = "/login",method = RequestMethod.GET,params = "action=UserLogin")
+    public String userLogin(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
+        String account = httpServletRequest.getParameter("account_login");
+        String password = httpServletRequest.getParameter("password_login");
+        String pattern = ".*@*.com.*";
+        long id;
+        //TODO:有bug,用户名和邮箱一样呢
+
+        //以邮箱方式登录
+        if (Pattern.matches(pattern, account)) {
+            id = loginService.userLoginByEmail(account,password);
         } else {
-            //admin id
-            attributes.addAttribute("AdminID", id);
-            return "redirect:/Admin/Main";
+            //用户名方式登录
+            id = loginService.userLoginByUsername(account, password);
+        }
+
+        if(id < 0)
+        {
+            attributes.addAttribute("errorMessage",getErrorMessage(id));
+            return "redirect:/error/errorMessage";
+        }
+
+        attributes.addAttribute("SellerID",id);
+        return "redirect:/User/Main";
+    }
+
+    String getErrorMessage(long id)
+    {
+        switch ((int)id)
+        {
+            case -1:
+                return  "email or username not exist!";
+            case -2:
+                return  "password is wrong!";
+            default:
+                return "there are something wrong!";
         }
     }
 }
+
+
+

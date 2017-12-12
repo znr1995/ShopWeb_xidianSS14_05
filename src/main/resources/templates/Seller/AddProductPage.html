@@ -52,7 +52,7 @@
         </tr>
     </table>
     <div>
-        <img id="photo" src=""  style="display: block;" />
+        <img id="photo" src=""  style="display: block;"  onload="savePicture()" />
     </div>
     <p />  <button type="submit">ok</button>
 </form>
@@ -64,6 +64,7 @@
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById('photo');
 
+    var BASEPATH = 'C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static';
     fileInput.addEventListener('change', function () {
         photo.src = "";
         if(!fileInput.value)
@@ -86,10 +87,11 @@
 
         reader.onload = function (e) {
             photo.src = e.target.result;
+            var fso = new ActiveXObject("Scripting.FileSystemObject");
+            var f = fso.GetFile(e.target.result);
+            f.Copy('C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static' + GetRandomNum() + file.name);
+            reader.readAsDataURL(file);
         }
-
-        reader.readAsDataURL(file);
-
     });
 
     var index = 1;
@@ -166,6 +168,12 @@
     }
 
 
+    function GetRandomNum()
+    {
+        var Range = 999999999;
+        var Rand = Math.random();
+        return(Min + Math.round(Rand * Range));
+    }
 
 </script>
 

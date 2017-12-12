@@ -4,6 +4,8 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.service.Seller.SellerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -15,6 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 
 public class AddProductController {
 
+    @Autowired
+    private SellerService sellerService;
 
     Boolean judgeString(String str)
     {
@@ -44,7 +48,6 @@ public class AddProductController {
         }
 
         long productStock;
-        boolean isOnSale;
         double productMarkPrice;
         Product newProduct = new Product();
         try{
@@ -55,15 +58,7 @@ public class AddProductController {
             attributes.addAttribute("errorMessage","Stock format wrong :" +e.getMessage());
             return "redirect:/error/errorHandler";
         }
-        try
-        {
-            isOnSale = Boolean.valueOf(request.getParameter("isOnSale"));
-        }
-        catch (Exception e)
-        {
-            attributes.addAttribute("errorMessage","isOnSale format wrong :" +e.getMessage());
-            return "redirect:/error/errorHandler";
-        }
+
 
         try {
             productMarkPrice = Double.valueOf(request.getParameter("productMarketPrice"));
@@ -74,13 +69,13 @@ public class AddProductController {
             return "redirect:/error/errorHandler";
         }
 
+        //TODO:product 属性是否全
         newProduct.setBrandName(request.getParameter("brandName"));
         newProduct.setProductPhoto(request.getParameter("productPhoto"));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
 
-
-        if(SellerSQLFunction.getInstance().createProductInformation(sellerID,newProduct))
+        if(sellerService.writeInProduct(newProduct))
         {
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         }
