@@ -34,46 +34,48 @@ public class AddProductController {
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
         attributes.addAttribute("SellerID",sellerID);
 
-        if(!(judgeString(request.getParameter("productStock")) &&
-                judgeString(request.getParameter("brandName")) &&
-                judgeString(request.getParameter("isOnSale")) &&
-                judgeString(request.getParameter("productPhoto")) &&
-                judgeString(request.getParameter("productMarketPrice")) &&
-                judgeString(request.getParameter("productBriefInfo")) &&
-                judgeString(request.getParameter("productName"))
-        ))
-        {
-            attributes.addAttribute("errorMessage","every attribute must be add ! not allow empty or null");
-            return "redirect:/error/errorHandler";
-        }
+//        if(!(judgeString(request.getParameter("productStock")) &&
+//                judgeString(request.getParameter("brandName")) &&
+//                judgeString(request.getParameter("productPhoto")) &&
+//                judgeString(request.getParameter("productPrice")) &&
+//                judgeString(request.getParameter("productBriefInfo")) &&
+//                judgeString(request.getParameter("productName"))
+//        ))
+//        {
+//            attributes.addAttribute("errorMessage","every attribute must be add ! not allow empty or null");
+//            return "redirect:/error/errorHandler";
+//        }
 
         long productStock;
         double productMarkPrice;
         Product newProduct = new Product();
-        try{
-            productStock = Long.valueOf(request.getParameter("productStock"));
-        }
-        catch (Exception e)
-        {
-            attributes.addAttribute("errorMessage","Stock format wrong :" +e.getMessage());
-            return "redirect:/error/errorHandler";
-        }
-
-
-        try {
-            productMarkPrice = Double.valueOf(request.getParameter("productMarketPrice"));
-        }
-        catch (Exception e)
-        {
-            attributes.addAttribute("errorMessage","productMarkedPrice format wrong :" +e.getMessage());
-            return "redirect:/error/errorHandler";
-        }
+//        try{
+//            productStock = Long.valueOf(request.getParameter("productStock"));
+//        }
+//        catch (Exception e)
+//        {
+//            attributes.addAttribute("errorMessage","Stock format wrong :" +e.getMessage());
+//            return "redirect:/error/errorHandler";
+//        }
+//
+//
+//        try {
+//            productMarkPrice = Double.valueOf(request.getParameter("productPrice"));
+//        }
+//        catch (Exception e)
+//        {
+//            attributes.addAttribute("errorMessage","productPrice format wrong :" +e.getMessage());
+//            return "redirect:/error/errorHandler";
+//        }
 
         //TODO:product 属性是否全
         newProduct.setBrandName(request.getParameter("brandName"));
         newProduct.setProductPhoto(request.getParameter("productPhoto"));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
+        newProduct.setSellerId(Long.valueOf(request.getParameter("SellerID")));
+        newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
+        newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
 
         if(sellerService.writeInProduct(newProduct))
         {

@@ -74,7 +74,7 @@ public class LoginController {
         if(id < 0)
         {
             attributes.addAttribute("errorMessage",getErrorMessage(id));
-            return "redirect:/error/errorMessage";
+            return "redirect:/error/errorHandler";
         }
 
         attributes.addAttribute("UserID",id);

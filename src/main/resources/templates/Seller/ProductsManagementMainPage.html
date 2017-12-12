@@ -35,15 +35,13 @@
             <th >Name</th>
             <th >MarketPrice</th>
             <th>Stock</th>
-            <th >isOnSale</th>
             <th>delete</th>
             <th >modify</th>
         </tr>
         <tr th:each="prod : ${products}">
             <td th:text="${prod.productName}">productName</td>
-            <td th:text="${prod.productMarketPrice}">0.0</td>
+            <td th:text="${prod.productPrice}">0.0</td>
             <td th:text="${prod.productStock}">0</td>
-            <td th:text="${prod.isOnSale}">yes</td>
             <td>
                 <button type="submit" name="delete" th:value="${prod.productId}" >delete</button>
             </td>

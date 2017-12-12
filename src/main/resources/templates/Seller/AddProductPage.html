@@ -31,14 +31,10 @@
         <p />  <label>productName</label>           <input name="productName" th:value="*{productName}"></input>
         <p />  <label>productStock</label>          <input name="productStock" th:value="*{productStock}"></input>
         <p />  <label>brandName</label>             <input name="brandName" th:value="*{brandName}"></input>
-        <p />  <label>isOnSale</label>              <select name="isOnSale" th:value="*{isOnSale}">
-        <option value="true">true</option>
-        <option value="false">false</option>
-    </select>
         <p />  <label>productPhoto</label>          <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
-        <p />  <label>productMarketPrice</label>    <input name="productMarketPrice" th:value="*{productMarketPrice}"></input>
-        <p />  <label>proudctIsOnHomePage</label>   <input name="firstPageModule" th:value="*{firstPageModule}"></input>
-        <p />  <label>productBriefInfo</label>      <input type="hidden" id="productBriefInfo" name="productBriefInfo" th:value="*{productBriefInfo}"></input>
+        <p />  <label>productPrice</label>    <input name="ProductPrice" th:value="*{productPrice}"></input>
+        <p />  <label>productBriefInfo</label>      <input id="productBriefInfo" name="productBriefInfo" th:value="*{productBriefInfo}"></input>
+        <p />       <input type="hidden" id="sellerId" name="sellerId" th:value="*{sellerId}"></input>
     </tr>
     <table id="otherAttributes">
         <tr>
