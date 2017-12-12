@@ -22,6 +22,24 @@ public class ProductAdvertisement {
 	private Integer type;//广告再主页上的位置，1-滚动，2-列表广告
     private Integer status;// 1 - 未判断， 0 - 通过
 
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+
 	public Long getAdvertisementId() {
 		return advertisementId;
 	}

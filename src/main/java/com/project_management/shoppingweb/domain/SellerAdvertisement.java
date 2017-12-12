@@ -18,6 +18,25 @@ public class SellerAdvertisement {
 	private double price;
 	private Integer status;// 1 - 未判断， 0 - 通过
 
+
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+
 	public Long getAdvertisementId() {
 		return advertisementId;
 	}
@@ -60,6 +79,7 @@ public class SellerAdvertisement {
 	}
 
 
+
 	public String getSellerName() {
 		return sellerName;
 	}
@@ -75,4 +95,5 @@ public class SellerAdvertisement {
 	public void setSellerId(Long sellerId) {
 		this.sellerId = sellerId;
 	}
+
 }

@@ -11,4 +11,10 @@ import com.project_management.shoppingweb.domain.Price;
 
 @Repository
 public interface PriceRepository extends JpaRepository<Price, Long> {
+
+	Price save(Price price); 
+	
+	//@Query("select c from Price c where c.priceId=1")
+	List<Price> findAll();
+
 }

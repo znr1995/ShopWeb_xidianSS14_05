@@ -5,4 +5,7 @@ logs/
 *.class
 *.log
 .idea/
+
 *.iml
+/target/
+

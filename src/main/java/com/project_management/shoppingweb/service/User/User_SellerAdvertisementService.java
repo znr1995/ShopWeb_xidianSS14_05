@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public class User_SellerAdvertisementService {
+
     @Autowired
     SellerAdvertisementRepository sellerAdvertisementRepository;
 

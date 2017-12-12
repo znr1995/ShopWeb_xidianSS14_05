@@ -8,4 +8,9 @@ import java.util.List;
 
 @Repository
 public interface TradeDetailRepository extends JpaRepository<TradeDetail,Long>{
+
+    TradeDetail save(TradeDetail tradeDetail);
+    List<TradeDetail> findByTradeId(Long TradeId);
+    TradeDetail findByTradeDetailId(Long tradeDetailId);
+
 }

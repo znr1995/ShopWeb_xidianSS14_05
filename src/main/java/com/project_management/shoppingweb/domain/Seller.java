@@ -19,8 +19,10 @@ public class Seller {
     private String address;
     private String sculpture;//头像图片路径
     private String shopname;//商店名字
-    private String catogery; //商店类型
-    private Integer applyState;// 1 - 通过， 2 - 未通过
+
+    private String catogery;
+    private Integer applyState;// 1 - 通过， 2 - 未通过, 3-拉黑
+
 
 	public Long getSellerId() {
         return sellerId;
@@ -101,6 +103,7 @@ public class Seller {
 
     public void setCatogery(String catogery)
     {
+
         this.catogery = catogery;
     }
 }

@@ -1,3 +1,4 @@
+
 $('.form').find('input, textarea').on('keyup blur focus', function (e) {
   
   var $this = $(this),
@@ -41,3 +42,11 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
   
 });
+
+$(document).ready(function () {
+    var overlay = $('.overlay'),
+        isClosed = false;
+    overlay.show();
+    $('#wrapper').toggleClass('toggled');
+});
+
