@@ -66,11 +66,11 @@
                                 <th:block th:each="u,index:${availableUserList}">
                                <tr>
                               
-                                   <td th:text="${u.userid}"></td>
+                                   <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerblack('+${u.userid}+')'">✔</button></td>
-                                   <td><button th:onclick="'customerdelete('+${u.userid}+')'">✖</button></td>
+                                   <td><button th:onclick="'customerblack('+${u.userId}+')'">✔</button></td>
+                                   <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
                                    
                                
                                </tr>
@@ -97,11 +97,11 @@
                                 <th:block th:each="u,index:${blacklistUserList}">
                                <tr>
                               
-                                   <td th:text="${u.userid}"></td>
+                                   <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerrecover('+${u.userid}+')'">✔</button></td>
-                                   <td><button th:onclick="'customerdelete('+${u.userid}+')'">✖</button></td>
+                                   <td><button th:onclick="'customerrecover('+${u.userId}+')'">✔</button></td>
+                                   <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
                                    
                                
                                </tr>
@@ -161,13 +161,13 @@
 </body>
 <script>
 function customerblack(id){
-	window.location.href="/admin/blackCustomer?userid="+id;
+	window.location.href="/admin/blackCustomer?userId="+id;
 }
 function customerrecover(id){
-	window.location.href="/admin/recoverCustomer?userid="+id;
+	window.location.href="/admin/recoverCustomer?userId="+id;
 }
 function customerdelete(id){
-	window.location.href="/admin/deleteCustomer?userid="+id;
+	window.location.href="/admin/deleteCustomer?userId="+id;
 }
 </script>
 </html>

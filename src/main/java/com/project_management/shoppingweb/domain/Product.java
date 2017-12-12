@@ -27,7 +27,7 @@ public class Product {
 	//private double productMarketPrice;
 	private String productName;
 	private String productPhoto;
-	private int productStock;//存货
+	private Integer productStock;//存货
 	private double productPrice;//价格
 
 
@@ -117,12 +117,12 @@ public class Product {
 	public void setProductStock(int productStock) {
 		this.productStock = productStock;
 	}
-	
+
 	public void setSize(String size) {
 		this.size = size;
 	}
 
-	
+
 	public String getSize() {
 		return size;
 	}
@@ -135,6 +135,6 @@ public class Product {
 		this.productPrice = productPrice;
 	}
 
-	
-	
+
+
 }

@@ -74,8 +74,8 @@ public class AdminManagementController {
 	@GetMapping("/customerManage")
 	public String custommerManage(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
 		model.addAttribute("adminUserName", username);
-		List<User> availableUserList = userService.findAllByStatus(1);
-		List<User> blacklistUserList = userService.findAllByStatus(2);
+		List<User> availableUserList = userService.findAllByState(1);
+		List<User> blacklistUserList = userService.findAllByState(2);
 		model.addAttribute("availableUserList", availableUserList);
 		model.addAttribute("blacklistUserList", blacklistUserList);
 		return "admin/customerManage";
@@ -253,42 +253,42 @@ public class AdminManagementController {
 	}
 	
 	@GetMapping("/blackCustomer")
-	public String blackCustomer(@RequestParam("userid") Long userid,Model model) {
-		User user = userService.findByUserid(userid);
-		user.setStatus(2);
+	public String blackCustomer(@RequestParam("userId") Long userId,Model model) {
+		User user = userService.findByUserId(userId);
+		user.setState(2);
 		userRepository.save(user);
 		
-		List<User> availableUserList = userService.findAllByStatus(1);
+		List<User> availableUserList = userService.findAllByState(1);
 		model.addAttribute("availableFindAll", availableUserList);
-		List<User> blacklistUserList = userService.findAllByStatus(2);
+		List<User> blacklistUserList = userService.findAllByState(2);
 		model.addAttribute("blacklistUserList", blacklistUserList);
 		
 		return "redirect:/admin/customerManage";
 	}
 	
 	@GetMapping("/recoverCustomer")
-	public String recoverCustomer(@RequestParam("userid") Long userid,Model model) {
-		User user = userService.findByUserid(userid);
-		user.setStatus(1);
+	public String recoverCustomer(@RequestParam("userId") Long userId,Model model) {
+		User user = userService.findByUserId(userId);
+		user.setState(1);
 		userRepository.save(user);
 		
-		List<User> availableUserList = userService.findAllByStatus(1);
+		List<User> availableUserList = userService.findAllByState(1);
 		model.addAttribute("availableFindAll", availableUserList);
-		List<User> blacklistUserList = userService.findAllByStatus(2);
+		List<User> blacklistUserList = userService.findAllByState(2);
 		model.addAttribute("blacklistUserList", blacklistUserList);
 		
 		return "redirect:/admin/customerManage";
 	}
 	
 	@GetMapping("/deleteCustomer")
-	public String deleteCustomer(@RequestParam("userid") Long userid,Model model) {
-		User user = userService.findByUserid(userid);
-		user.setStatus(0);
+	public String deleteCustomer(@RequestParam("userId") Long userId,Model model) {
+		User user = userService.findByUserId(userId);
+		user.setState(0);
 		userRepository.save(user);
 		
-		List<User> availableUserList = userService.findAllByStatus(1);
+		List<User> availableUserList = userService.findAllByState(1);
 		model.addAttribute("availableFindAll", availableUserList);
-		List<User> blacklistUserList = userService.findAllByStatus(2);
+		List<User> blacklistUserList = userService.findAllByState(2);
 		model.addAttribute("blacklistUserList", blacklistUserList);
 		
 		return "redirect:/admin/customerManage";

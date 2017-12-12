@@ -14,11 +14,11 @@ public class UserService {
 	@Resource
 	UserRepository userRepository;
 	
-	public User findByUserid(Long userid) {
-		return userRepository.findByUserid(userid);
+	public User findByUserId(Long userId) {
+		return userRepository.findByUserId(userId);
 	}
 	
-	public List<User> findAllByStatus(int status) {
-		return userRepository.findAllByStatus(status);
+	public List<User> findAllByState(Integer state) {
+		return userRepository.findAllByState(state);
 	}
 }

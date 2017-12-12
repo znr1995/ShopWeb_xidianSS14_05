@@ -5,9 +5,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 @Entity
@@ -17,16 +14,29 @@ public class ProductAdvertisement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long advertisementId;
     private Long productId;
-    private String sellerName;
     private String description;
     private String pictureUrl;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date startDate;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date endDate;//通过这个判断是否可以放在主页
 	private double price;
 	private Integer type;//广告再主页上的位置，1-滚动，2-列表广告
     private Integer status;// 1 - 未判断， 0 - 通过
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public Long getAdvertisementId() {
 		return advertisementId;
@@ -84,29 +94,4 @@ public class ProductAdvertisement {
 		this.type = type;
 	}
 
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	public String getSellerName() {
-		return sellerName;
-	}
-
-	public void setSellerName(String sellerName) {
-		this.sellerName = sellerName;
-	}
-
-	
 }

@@ -1,9 +1,6 @@
 package com.project_management.shoppingweb.domain;
 
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import java.util.Date;
 
 @Entity
@@ -16,12 +13,42 @@ public class SellerAdvertisement {
 	private String sellerName;
 	private String description;
 	private String pictureUrl;
-	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date startDate;//*****************
-	 @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
 	private Date endDate;//通过这个判断是否可以放在主页*********
 	private double price;
 	private Integer status;// 1 - 未判断， 0 - 通过
+
+	public Long getSellerId() {
+		return sellerId;
+	}
+
+	public void setSellerId(Long sellerId) {
+		this.sellerId = sellerId;
+	}
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 
 	public Long getAdvertisementId() {
 		return advertisementId;
@@ -64,38 +91,5 @@ public class SellerAdvertisement {
 		this.endDate = endDate;
 	}
 
-	public Long getSellerId() {
-		return sellerId;
-	}
-
-	public void setSellerId(Long sellerId) {
-		this.sellerId = sellerId;
-	}
-
-	public String getSellerName() {
-		return sellerName;
-	}
-
-	public void setSellerName(String sellerName) {
-		this.sellerName = sellerName;
-	}
-
-	public double getPrice() {
-		return price;
-	}
-
-	public void setPrice(double price) {
-		this.price = price;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
-
-	
 
 }
