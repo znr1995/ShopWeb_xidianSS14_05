@@ -1,6 +1,6 @@
 ```java
 //注册接口
-bool registerAccount(String email, String passwd, int mark)
+bool registerAccount(String email, String passwd, long mark)
 	  //mark：1-》商家 2-》用户  管理员是否需要注册方式，由设计人员考虑沟通
 //登录接口
 long loginByEmail(String email, String passwd)
@@ -64,7 +64,7 @@ bool deleteProducts(long productID)
 bool changedProducts(ProductInformation newProduct)
 
 //获取订单信息
-List<Orderinfo> getTrade(long sellerID, int type)
+List<Orderinfo> getTrade(long sellerID, long type)
   //type : 0 :所有的
   		//1：完成的交易
   		//2：所有的交易

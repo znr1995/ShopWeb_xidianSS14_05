@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Table(name = "t_address")
 public class Address {
 
-	private int addressId;
+	private Long addressId;
 	private String addressName;
 	private String city;
 	private String detailAddress;
@@ -24,13 +24,13 @@ public class Address {
 	private String tel;
 	private int postcode;
 	private String province;
-	private int userId;
+	private Long userId;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int getAddressId() {
+	public Long getAddressId() {
 		return addressId;
 	}
-	public void setAddressId(int addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 	public String getAddressName() {
@@ -82,11 +82,11 @@ public class Address {
 		this.province = province;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 

@@ -1,14 +1,11 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.domain.User;
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
 
 /**

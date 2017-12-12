@@ -2,7 +2,6 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,10 +16,10 @@ import java.util.LinkedList;
 @RequestMapping("/Seller/ProductsManagement")
 public class ProductsManagementController {
     private LinkedList<Product> products;
-    private int sellerID = -1;
+    private long sellerID = -1;
 
     @RequestMapping("ProductsManagementHandler")
-    public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
         products = SellerSQLFunction.getInstance().getAllProducts(sellerID);
@@ -35,18 +34,18 @@ public class ProductsManagementController {
     {
         if(request.getParameter("delete") == null)
         {
-            int productId = Integer.valueOf(request.getParameter("modify"));
+            long productId = Long.valueOf(request.getParameter("modify"));
             return jumpToModifyProductPage(productId, model, attributes);
         }
         else
         {
-            int productId = Integer.valueOf(request.getParameter("delete"));
+            long productId = Long.valueOf(request.getParameter("delete"));
             return deleteProduct(productId, attributes);
         }
     }
 
     @RequestMapping(value = "ProductsHandler",params = "action=delete")
-    public String deleteProduct(@RequestParam("ProductID")int productId, RedirectAttributes attributes)
+    public String deleteProduct(@RequestParam("ProductID")long productId, RedirectAttributes attributes)
     {
         for(Product curProduct : products)
         {
@@ -65,7 +64,7 @@ public class ProductsManagementController {
     }
 
     @RequestMapping(value = "ProductsHandler", params = "action=modify")
-    public String jumpToModifyProductPage(@RequestParam("ProductID")int productId, Model model,RedirectAttributes attributes)
+    public String jumpToModifyProductPage(@RequestParam("ProductID")long productId, Model model,RedirectAttributes attributes)
     {
         for(Product curProduct : products)
         {
@@ -74,12 +73,9 @@ public class ProductsManagementController {
                 model.addAttribute("productName",curProduct.getProductName());
                 model.addAttribute("productStock",curProduct.getProductStock());
                 model.addAttribute("brandName",curProduct.getBrandName());
-                model.addAttribute("isOnSale",curProduct.getIsOnSale());
                 model.addAttribute("productPhoto",curProduct.getProductPhoto());
-                model.addAttribute("productMarketPrice",curProduct.getProductMarketPrice());
                 model.addAttribute("productBriefInfo",curProduct.getProductBriefInfo());
                 model.addAttribute("ProductID",productId);
-                model.addAttribute("firstPageModule",curProduct.getFirstPageModule());
                 model.addAttribute("SellerID",sellerID);
                 return "/Seller/ModifyProductInformationPage";
             }

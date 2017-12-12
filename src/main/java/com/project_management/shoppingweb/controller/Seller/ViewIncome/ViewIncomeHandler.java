@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewIncomeHandler {
 
     @RequestMapping("ViewIncomeHandler")
-    public String jumpToViewIncomeMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToViewIncomeMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         //TODO:增加此模块的主页信息
         return "ViewIncomeMainPage";

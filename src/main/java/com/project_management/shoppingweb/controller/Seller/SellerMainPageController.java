@@ -14,12 +14,12 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class SellerMainPageController {
 
-    private int sellerID = -1;
+    private long sellerID = -1;
 
 
     //启动主界面
     @RequestMapping("/Seller/Main")
-    public String jumpToSellerMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
         System.out.println(sellerID);

@@ -2,7 +2,6 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerInforma
 
 
 import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,10 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @RequestMapping("/Seller/ModifySellerInformation")
 public class ModifySellerInformationController {
 
-    private  int sellerID = -1;
+    private  long sellerID = -1;
 
     @RequestMapping("ModifySellerInformationHandler")
-    public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
         Seller seller = SellerSQLFunction.getInstance().getSellerInformation(sellerID);
@@ -32,7 +31,7 @@ public class ModifySellerInformationController {
     }
 
     @RequestMapping("ModifySellerInformation")
-    public String modifyFiveItem(@RequestParam(value = "SellerID",required = true)int userId,
+    public String modifyFiveItem(@RequestParam(value = "SellerID",required = true)long userId,
                                  @RequestParam(value = "Username",required = true)String userName,
                                  @RequestParam(value = "Email",required = true)String email,
                                  @RequestParam(value = "Passwd",required = true)String passwd,

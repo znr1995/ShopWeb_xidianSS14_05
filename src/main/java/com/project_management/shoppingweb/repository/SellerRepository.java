@@ -1,9 +1,10 @@
 package com.project_management.shoppingweb.repository;
 
-import com.project_management.shoppingweb.domain.User;
+import com.project_management.shoppingweb.domain.Seller;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User,Long> {
+public interface SellerRepository extends JpaRepository<Seller,Long>{
+
 }

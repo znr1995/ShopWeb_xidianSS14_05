@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/Seller/ViewTransaction")
 public class ViewTransactionController {
     @RequestMapping("ViewTransactionHandler")
-    public String jumpToViewTransaction(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToViewTransaction(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         //TODO:增加模块的主页所需信息
         return "ViewTransactionMainPage";

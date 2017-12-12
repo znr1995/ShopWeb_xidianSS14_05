@@ -21,40 +21,31 @@ import javax.persistence.Table;
 public class Trade {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int tradeId;
+    private Long tradeId;
     private String addressId;
     private String feedbackRemarks;
     private Date tradeCreateTime;
     private Date tradeFinishTime;
     private String tradePayWay;
-    private int tradeStatus;
+    private int tradeStatus;// 0 - 未完成，1 - 完成
     private double tradeTotalMoney;
-    private int userId;
-    private int sellerId;
+    private Long userId;
+    private Long sellerId;
 
-    public int getSellerId() {
+    public Long getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
 
-    public int getType() {
-        return type;
-    }
 
-    public void setType(int type) {
-        this.type = type;
-    }
-
-    private int type;
-
-    public int getTradeId() {
+    public Long getTradeId() {
         return tradeId;
     }
 
-    public void setTradeId(int tradeId) {
+    public void setTradeId(Long tradeId) {
         this.tradeId = tradeId;
     }
 
@@ -114,11 +105,11 @@ public class Trade {
         this.tradeTotalMoney = tradeTotalMoney;
     }
 
-    public int getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 }

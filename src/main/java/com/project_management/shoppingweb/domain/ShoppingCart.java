@@ -17,17 +17,17 @@ import javax.persistence.Table;
 public class ShoppingCart {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int shoppingcartId;
+	private Long shoppingcartId;
 	private int productAmount;
-	private int productId;
+	private Long productId;
 	private Date createtime;
-	private int userId;
+	private Long userId;
 
-	public int getShoppingcartId() {
+	public Long getShoppingcartId() {
 		return shoppingcartId;
 	}
 
-	public void setShoppingcartId(int shoppingcartId) {
+	public void setShoppingcartId(Long shoppingcartId) {
 		this.shoppingcartId = shoppingcartId;
 	}
 
@@ -39,11 +39,11 @@ public class ShoppingCart {
 		this.productAmount = productAmount;
 	}
 
-	public int getProductId() {
+	public Long getProductId() {
 		return productId;
 	}
 
-	public void setProductId(int productId) {
+	public void setProductId(Long productId) {
 		this.productId = productId;
 	}
 
@@ -55,11 +55,11 @@ public class ShoppingCart {
 		this.createtime = createtime;
 	}
 
-	public int getUserId() {
+	public Long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
 }

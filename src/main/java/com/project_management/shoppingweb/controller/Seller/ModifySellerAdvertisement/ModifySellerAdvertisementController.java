@@ -2,7 +2,6 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerAdverti
 
 
 
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -15,10 +14,10 @@ import java.util.LinkedList;
 @Controller
 @RequestMapping("/Seller/ModifySellerAdvertisement")
 public class ModifySellerAdvertisementController {
-    private int sellerID = -1;
+    private long sellerID = -1;
 
     @RequestMapping("ModifySellerAdvertisementHandler")
-    public String jumpToModifySellerAdvertisementMainPage(@ModelAttribute("SellerID")int sellerId, Model model)
+    public String jumpToModifySellerAdvertisementMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
         LinkedList<String> advertisements = SellerSQLFunction.getInstance().getSellerAdvertisement(sellerID);

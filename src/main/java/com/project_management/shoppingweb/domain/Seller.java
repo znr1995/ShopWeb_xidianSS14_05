@@ -4,25 +4,28 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "t_seller")
 public class Seller {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int sellerId;
+    private Long sellerId;
     private String username;
     private String email;
     private String password;
     private String phoneNum;
     private String address;
-    private String sculpture;
+    private String sculpture;//头像图片路径
+    private String shopname;//商店名字
+    private Integer applyState;// 1 - 通过， 2 - 未通过
 
-    public int getSellerId() {
+	public Long getSellerId() {
         return sellerId;
     }
 
-    public void setSellerId(int sellerId) {
+    public void setSellerId(Long sellerId) {
         this.sellerId = sellerId;
     }
 
@@ -72,5 +75,21 @@ public class Seller {
 
     public void setSculpture(String sculpture) {
         this.sculpture = sculpture;
+    }
+
+    public String getShopname() {
+        return shopname;
+    }
+
+    public void setShopname(String shopname) {
+        this.shopname = shopname;
+    }
+
+    public Integer getApplyState() {
+        return applyState;
+    }
+
+    public void setApplyState(Integer applyState) {
+        this.applyState = applyState;
     }
 }

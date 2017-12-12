@@ -1,6 +1,5 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,7 +24,7 @@ public class LoginController {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
         String pattern = ".*@*.com.*";
-        int id;
+        long id;
         //TODO:有bug,用户名和邮箱一样呢
         //以邮箱方式登录
         if (Pattern.matches(pattern, account)) {

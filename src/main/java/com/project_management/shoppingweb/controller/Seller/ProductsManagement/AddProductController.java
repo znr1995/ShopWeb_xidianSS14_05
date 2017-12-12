@@ -4,7 +4,6 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.Seller.SellerSQLFunction;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -28,7 +27,7 @@ public class AddProductController {
     public String addProductAndReturnBack(HttpServletRequest request, RedirectAttributes attributes)
     {
 
-        int sellerID = Integer.valueOf(request.getParameter("SellerID"));
+        long sellerID = Long.valueOf(request.getParameter("SellerID"));
         attributes.addAttribute("SellerID",sellerID);
 
         if(!(judgeString(request.getParameter("productStock")) &&
@@ -44,12 +43,12 @@ public class AddProductController {
             return "redirect:/error/errorHandler";
         }
 
-        int productStock;
+        long productStock;
         boolean isOnSale;
         double productMarkPrice;
         Product newProduct = new Product();
         try{
-            productStock = Integer.valueOf(request.getParameter("productStock"));
+            productStock = Long.valueOf(request.getParameter("productStock"));
         }
         catch (Exception e)
         {
@@ -75,11 +74,8 @@ public class AddProductController {
             return "redirect:/error/errorHandler";
         }
 
-        newProduct.setProductStock(productStock);
         newProduct.setBrandName(request.getParameter("brandName"));
-        newProduct.setIsOnSale( isOnSale);
         newProduct.setProductPhoto(request.getParameter("productPhoto"));
-        newProduct.setProductMarketPrice(productMarkPrice);
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
 
@@ -99,7 +95,7 @@ public class AddProductController {
     @RequestMapping("ReturnBack")
     public String jumpToLastLayer(HttpServletRequest request, RedirectAttributes attributes)
     {
-        attributes.addAttribute("SellerID",Integer.valueOf(request.getParameter("SellerID")));
+        attributes.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
         return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
     }
 
