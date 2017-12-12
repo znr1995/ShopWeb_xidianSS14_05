@@ -9,23 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.project_management.shoppingweb.domain.Advertisement;
 import com.project_management.shoppingweb.domain.Price;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
-import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.repository.AdvertisementRepository;
+import com.project_management.shoppingweb.domain.SellerAdvertisement;
+import com.project_management.shoppingweb.repository.SellerAdvertisementRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
-import com.project_management.shoppingweb.service.AdvertisementService;
+import com.project_management.shoppingweb.service.SellerAdvertisementService;
 import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.service.ProductAdvertisementService;
-import com.project_management.shoppingweb.service.SellerService;
 
 @Controller
 @RequestMapping("/admin")
@@ -34,7 +31,7 @@ public class AdminManagementController {
 	private PriceService priceService;
 	
 	@Autowired
-	private AdvertisementService advertisementService;
+	private SellerAdvertisementService sellerAdvertisementService;
 	@Resource
 	private ProductAdvertisementRepository productAdvertisementRepository;
 	
@@ -43,7 +40,7 @@ public class AdminManagementController {
 	@Resource
 	private SellerRepository sellerRepository;
 	@Resource
-	private AdvertisementRepository advertisementRepository;
+	private SellerAdvertisementRepository sellerAdvertisementRepository;
 	@Autowired
 	private ProductAdvertisementService productAdvertisementService;
 	
@@ -78,18 +75,19 @@ public class AdminManagementController {
 	public String updatePrice(HttpServletRequest request,Model model) {
 		Price price = new Price();
 		price.setAdminId(Long.parseLong(request.getParameter("adminId")));
-		price.setAdvertisementHighPrice(Double.parseDouble(request.getParameter("advertisementHighPrice")));
-		price.setAdvertisementLowPrice(Double.parseDouble(request.getParameter("advertisementLowPrice")));
+		price.setProductHighAdvertisementPrice(Double.parseDouble(request.getParameter("productHighAdvertisementPrice")));
+		price.setProductLowAdvertisementPrice(Double.parseDouble(request.getParameter("productLowAdvertisementPrice")));
+		price.setSellerListAdvertisementPrice(Double.parseDouble(request.getParameter("sellerListAdvertisementPrice")));
 		price.setProductRate(Double.parseDouble(request.getParameter("productRate")));
 		priceService.updatePrice(price);
 		List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+    	List<SellerAdvertisement> onAdvertisementList = sellerAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onShopFindAll", onAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
@@ -103,18 +101,18 @@ public class AdminManagementController {
 	@GetMapping("/agreeShopApply")
 	public String agreeApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
 		
-		Advertisement advertisement = advertisementService.findById(advertisementId);
-		advertisement.setStatus(1);
-		advertisementRepository.save(advertisement);
+		SellerAdvertisement sellerAdvertisement = sellerAdvertisementService.findById(advertisementId);
+		sellerAdvertisement.setStatus(1);
+		sellerAdvertisementRepository.save(sellerAdvertisement);
 		List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
-		model.addAttribute("onShopFindAll", onAdvertisementList);
+    	List<SellerAdvertisement> onSellerAdvertisementList = sellerAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onSellerAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
@@ -127,16 +125,16 @@ public class AdminManagementController {
 	@GetMapping("/rejectShopApply")
 	public String rejectApply(@RequestParam("advertisementId") Long advertisementId,Model model) {
 		
-		Advertisement advertisement = advertisementService.findById(advertisementId);
-		advertisementRepository.delete(advertisement);
+		SellerAdvertisement sellerAdvertisement = sellerAdvertisementService.findById(advertisementId);
+		sellerAdvertisementRepository.delete(sellerAdvertisement);
 		List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+    	List<SellerAdvertisement> onAdvertisementList = sellerAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onShopFindAll", onAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
@@ -156,14 +154,14 @@ public class AdminManagementController {
 		productAdvertisementRepository.delete(productAdvertisement);
 		
 		List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
-		model.addAttribute("onShopFindAll", onAdvertisementList);
+    	List<SellerAdvertisement> onSellerAdvertisementList = sellerAdvertisementService.findAllByStatus(1);
+		model.addAttribute("onShopFindAll", onSellerAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
@@ -179,13 +177,13 @@ public class AdminManagementController {
 		productAdvertisement.setStatus(1);
 		productAdvertisementRepository.save(productAdvertisement);
 		List<Price> list = priceRepository.findAll();
-    	List<Advertisement> advertisementList = advertisementService.findAllByStatus(0);
-		model.addAttribute("shopFindAll", advertisementList);
+    	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
+		model.addAttribute("shopFindAll", sellerAdvertisementList);
 		
 		List<ProductAdvertisement> productAdvertisementList = productAdvertisementService.findAllByStatus(0);
 		model.addAttribute("productFindAll", productAdvertisementList);
 		
-    	List<Advertisement> onAdvertisementList = advertisementService.findAllByStatus(1);
+    	List<SellerAdvertisement> onAdvertisementList = sellerAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onShopFindAll", onAdvertisementList);
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
