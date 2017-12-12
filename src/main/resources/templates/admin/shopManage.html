@@ -1,8 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
-    <title>ShopManage</title>
+    <title>shopManage</title>
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
@@ -10,6 +11,9 @@
     <script th:src="'/js/index.js'"></script>
 </head>
 <body>
+
+<br>
+<br>
 
 <div class="col-lg-2">
     <div id="wrapper">
@@ -20,21 +24,21 @@
 
                 </li>
                 <li>
-                        <a th:href="@{adsManagement}"><i class="fa fa-fw fa-map-signs"></i>AdsManagement</a>
-                    </li>
-                     <li class="active">
-                           <a href="#"><i class="fa fa-fw fa-folder"></i>ShopManage</a>
-                       </li>
-                       <li>
-                           <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
-                       </li>
-                       <li>
-                           <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
-                       </li>
-                       
-                      <li >
-                           <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
-                       </li>
+
+                    <a th:href="@{adsManagement}"><i class="fa fa-fw fa-folder"></i>AdsManagement</a>
+                </li>
+                <li class="active">
+                    <a href="#"><i class="fa fa-fw fa-map-signs"></i>ShopManage</a>
+                </li>
+                <li>
+                    <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
+                </li>
+                <li>
+                    <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
+                </li>
+                <li>
+                    <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
+                </li>
             </ul>
         </nav>
     </div>
@@ -48,115 +52,79 @@
         <div class="panel-heading">
             Shop Requests Management
         </div>
-        <div class="panel-body">
-            <div class="list-op" id="list_op">
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Agree
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>Reject
-                </button>
-                <button type="button" class="btn btn-default btn-sm">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>Delete
-                </button>
-            </div>
-        </div>
+
         <table class="table table-bordered table-hover">
             <thead>
             <tr class="success">
                 <th>Shop Name</th>
                 <th>Shop Owner</th>
-                <th>Prepaid Amount</th>
                 <th>Catogery</th>
-                <th>Description</th>
-                <th>Business License</th>
+                <th>address</th>
+                <th>Agree</th>
+                <th>Reject</th>
+
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>Ruier</td>
-                <td>Alexander</td>
-                <td>$50000</td>
-                <td>Computer & Tablets</td>
-                <td>This shop is through the Internet (Zhongguancun Online) to sell electronic products, mainly Samsung tablet phones, Lenovo notebooks and Apple mobile phones</td>
-                <td>No</td>
-            </tr>
-            <tr>
-                <td>Ruier</td>
-                <td>Alexander</td>
-                <td>$50000</td>
-                <td>Computer & Tablets</td>
-                <td>This shop is through the Internet (Zhongguancun Online) to sell electronic products, mainly Samsung tablet phones, Lenovo notebooks and Apple mobile phones</td>
-                <td>No</td>
-            </tr>
+            <th:block th:each="p,index:${sellerStatusNoList}">
+                <tr>
+                    <td th:text="${p.shopname}"></td>
+                    <td th:text="${p.username}"></td>
+                    <td th:text="${p.catogery}"></td>
+                    <td th:text="${p.address}"></td>
+                    <td><button th:onclick="'shopagreeOne('+${p.sellerId}+')'">✔</button></td>
+                    <td><button th:onclick="'shoprejectOne('+${p.sellerId}+')'">✖</button></td>
+                </tr>
+            </th:block>
             </tbody>
         </table>
-        <div class="panel-footer">
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li class="disabled">
-                        <a href="#" aria-label="Previous">
-                            <span aria-hidden="true">«</span>
-                        </a>
-                    </li>
-                    <li class="active"><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">»</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        </div><!-- end of panel-footer -->
     </div><!-- end of panel -->
     <div class="well">
-    <table class="table">
+        <table class="table">
 
-        <caption style="background: #bee5eb">Shop List</caption>
-        <thead>
-        <tr>
-            <th>Shop ID</th>
-            <th>Shop Owner</th>
-            <th>Shop Description</th>
-            <th>Product NUM</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>s001</td>
-            <td>David</td>
-            <td>Camare Shop</td>
-            <td>100</td>
-        </tr>
-        <tr>
-            <td>s002</td>
-            <td>Maria</td>
-            <td>Chicken tools</td>
-            <td>76</td>
-        </tr>
-        </tbody>
-    </table>
+            <caption style="background: #bee5eb">Shop List</caption>
+            <thead>
+            <tr>
+                <th>Shop Name</th>
+                <th>Shop Owner</th>
+                <th>Shop Description</th>
+                <th>Lock</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${sellerStatusList}">
+                <tr>
+
+                    <td th:text="${p.shopname}"></td>
+                    <td th:text="${p.username}"></td>
+                    <td th:text="${p.address}"></td>
+                    <td><button th:onclick="'black('+${p.sellerId}+')'">✔</button></td>
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
     </div>
 
     <div class="well">
         <table class="table">
-        <caption style="background: #007bff"> Blacklist</caption>
-        <thead>
-        <tr>
-            <th>Shop Name</th>
-            <th>State</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>Phone</td>
-            <td>Block</td>
-        </tr>
-        </tbody>
+            <caption style="background: #007bff"> Blacklist</caption>
+            <thead>
+            <tr>
+                <th>Shop Name</th>
+                <th>Unlock</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${sellerStatusBlackList}">
+                <tr>
+
+                    <td th:text="${p.shopname}"></td>
+                    <td><button th:onclick="'unblack('+${p.sellerId}+')'">✖</button></td>
+                </tr>
+
+            </th:block>
+            </tbody>
         </table>
     </div>
 </div>
@@ -207,4 +175,18 @@
     </div>
 </nav>
 </body>
+<script>
+    function shopagreeOne(id){
+        window.location.href="/admin/agreeSellerApply?sellerId="+id;
+    }
+    function shoprejectOne(id){
+        window.location.href="/admin/rejectSellerApply?sellerId="+id;
+    }
+    function black(id){
+        window.location.href="/admin/black?sellerId="+id;
+    }
+    function unblack(id){
+        window.location.href="/admin/unblack?sellerId="+id;
+    }
+</script>
 </html>

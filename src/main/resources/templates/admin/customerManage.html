@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
     <title>CustomerManagement</title>
@@ -35,7 +35,7 @@
                        <li>
                            <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
                        </li>
-                       
+
                       <li>
                            <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
                        </li>
@@ -65,16 +65,16 @@
             <tbody>
                                 <th:block th:each="u,index:${availableUserList}">
                                <tr>
-                              
+
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
                                    <td><button th:onclick="'customerblack('+${u.userId}+')'">✔</button></td>
                                    <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
-                                   
-                               
+
+
                                </tr>
-                              
+
                        </th:block>
                                </tbody>
         </table>
@@ -96,20 +96,21 @@
             <tbody>
                                 <th:block th:each="u,index:${blacklistUserList}">
                                <tr>
-                              
+
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
                                    <td><button th:onclick="'customerrecover('+${u.userId}+')'">✔</button></td>
                                    <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
-                                   
-                               
+
+
                                </tr>
-                              
+
                        </th:block>
                                </tbody>
         </table>
     </div>
+
 
 </div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -127,6 +128,7 @@
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
                 <li><a th:href="@{personalInformation}">Personal Information</a></li>
+
                 <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height:  50px">
                     Log out
                 </button>
@@ -150,6 +152,7 @@
                                 <a href="/admin/logout"><button type="button" class="btn btn-primary">
                                         Sure
                                     </button></a>
+
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal -->

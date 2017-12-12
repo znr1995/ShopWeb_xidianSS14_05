@@ -10,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.project_management.shoppingweb.domain.*;
+import com.project_management.shoppingweb.service.SellerService;
 import org.apache.log4j.Logger;
 import org.hibernate.annotations.Source;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,6 +50,9 @@ public class AdminLoinController {
 	private SellerAdvertisementService SellerAdvertisementService;
 	@Autowired
 	private ProductAdvertisementService productAdvertisementService;
+
+	@Autowired
+	private SellerService sellerService;
 	
 	@Resource
 	private AdminRepository adminRepository;
@@ -87,8 +92,22 @@ public class AdminLoinController {
 	    
 	
     	
-        return "admin/adsManagement";  
-    }  
+        return "admin/adsManagement";
+    }
+
+	@GetMapping("/shopManage")
+	public String shopManage(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+		List<Seller> statusList=sellerService.findAllByApplyState(1);
+		model.addAttribute("sellerStatusList", statusList);
+		//拉出未被拉黑的人
+		List<Seller> statusBlackList=sellerService.findAllByApplyState(3);
+		model.addAttribute("sellerStatusBlackList", statusBlackList);
+		//拉出被拉黑的人
+		List<Seller> statusNoList=sellerService.findAllByApplyState(2);
+		model.addAttribute("sellerStatusNoList", statusNoList);
+		//拉出未通过审核的商店
+		return "admin/shopManage";
+	}
   
     //注册页面  
     @GetMapping("/register")  
