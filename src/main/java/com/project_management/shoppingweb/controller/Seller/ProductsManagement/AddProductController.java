@@ -4,7 +4,7 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 public class AddProductController {
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     Boolean judgeString(String str)
     {
@@ -77,7 +77,7 @@ public class AddProductController {
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
 
-        if(sellerService.writeInProduct(newProduct))
+        if(sellerSellerService.writeInProduct(newProduct))
         {
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         }

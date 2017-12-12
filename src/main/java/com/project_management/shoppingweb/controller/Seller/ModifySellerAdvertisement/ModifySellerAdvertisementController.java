@@ -3,7 +3,7 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerAdverti
 
 
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +20,7 @@ import java.util.List;
 public class ModifySellerAdvertisementController {
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     private long sellerID = -1;
 
@@ -28,7 +28,7 @@ public class ModifySellerAdvertisementController {
     public String jumpToModifySellerAdvertisementMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
-        List<SellerAdvertisement> advertisements = sellerService.getSellerAdvertisements(sellerID);
+        List<SellerAdvertisement> advertisements = sellerSellerService.getSellerAdvertisements(sellerID);
         //TODO:获取到广告,需要修改广告界面
         model.addAttribute("Advertisements",advertisements);
         return "/Seller/ModifySellerAdverMainPage";
@@ -42,7 +42,7 @@ public class ModifySellerAdvertisementController {
         LinkedList<SellerAdvertisement> advertisements = new LinkedList<SellerAdvertisement>();
 
         attribute.addAttribute("SellerID",sellerID);
-        if(sellerService.writeInSellerAdvertisements(advertisements))
+        if(sellerSellerService.writeInSellerAdvertisements(advertisements))
             return "redirect:/Seller/Main";
         else
         {

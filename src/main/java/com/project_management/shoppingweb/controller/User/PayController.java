@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.Trade;
-import com.project_management.shoppingweb.service.User.TradeService;
+import com.project_management.shoppingweb.service.User.User_TradeService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.Date;
 @Controller
 public class PayController {
     @Autowired
-    private TradeService tradeService;
+    private User_TradeService userTradeService;
     @RequestMapping(value = "/Pay",method = RequestMethod.GET)
     public String Pay(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -55,7 +55,7 @@ public class PayController {
         newTrade.setSellerId(Long.parseLong(ShopID));
         newTrade.setTradePayWay(PayWay);
 
-        tradeService.save(newTrade);
+        userTradeService.save(newTrade);
 
 
         model.addAttribute("UserID", UserID);

@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerInforma
 
 
 import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class ModifySellerInformationController {
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     private  long sellerID = -1;
 
@@ -24,7 +24,7 @@ public class ModifySellerInformationController {
     public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")long sellerId, Model model,RedirectAttributes attributes)
     {
         sellerID = sellerId;
-        Seller seller = sellerService.getSellerById(sellerID);
+        Seller seller = sellerSellerService.getSellerById(sellerID);
         if(seller == null)
         {
             attributes.addAttribute("errorMessage","sellerId is wrong!");
@@ -58,7 +58,7 @@ public class ModifySellerInformationController {
 
     ){
 
-        Seller newSeller = sellerService.getSellerById(sellerID);
+        Seller newSeller = sellerSellerService.getSellerById(sellerID);
         newSeller.setAddress(address);
         newSeller.setEmail(email);
         newSeller.setPassword(passwd);
@@ -68,7 +68,7 @@ public class ModifySellerInformationController {
         newSeller.setShopname(shopname);
         newSeller.setCatogery(catogery);
         attributes.addAttribute("SellerID",sellerID);
-        if(sellerService.writeInInformation(newSeller))
+        if(sellerSellerService.writeInInformation(newSeller))
             return "redirect:/Seller/Main";
         else
         {

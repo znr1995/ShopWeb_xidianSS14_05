@@ -3,7 +3,7 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,13 +16,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ModifyProductInformationController {
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     @RequestMapping("ModifyInformation")
     public String addProductAndReturnBack(HttpServletRequest request,RedirectAttributes attributes)
     {
         long productID = Long.valueOf(request.getParameter("ProductID"));
-        Product newProduct = sellerService.getProduct(productID);
+        Product newProduct = sellerSellerService.getProduct(productID);
         if(newProduct == null)
         {
             attributes.addAttribute("errorMessage","productId is wrong!");
@@ -36,7 +36,7 @@ public class ModifyProductInformationController {
         newProduct.setProductName(request.getParameter("productName"));
         newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
         attributes.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
-        if(sellerService.writeInProduct(newProduct))
+        if(sellerSellerService.writeInProduct(newProduct))
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         else
         {

@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.ShoppingCart;
-import com.project_management.shoppingweb.service.User.ShoppingCartService;
+import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class AddIntoShoppingCartController {
     @Autowired
-    private ShoppingCartService shoppingCartService;
+    private User_ShoppingCartService userShoppingCartService;
     @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.GET)
 
     public String AddIntoShoppingCart(HttpServletRequest request, Model model){
@@ -36,7 +36,7 @@ public class AddIntoShoppingCartController {
         }
 
         List<ShoppingCart> GlobalShoppingCart = new ArrayList<ShoppingCart>();
-        GlobalShoppingCart = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
+        GlobalShoppingCart = userShoppingCartService.findAllByUserId(Long.parseLong(UserID));
         for(int i = 0; i < GlobalShoppingCart.size(); i++){
             if(GlobalShoppingCart.get(i).getProductId() == Long.parseLong(ProductID)){
                 model.addAttribute("UserID", UserID);
@@ -68,7 +68,7 @@ public class AddIntoShoppingCartController {
         shoppingCart.setProductId(Long.parseLong(ProductID));
         shoppingCart.setUserId(Long.parseLong(UserID));
 
-       shoppingCartService.save(shoppingCart);
+       userShoppingCartService.save(shoppingCart);
 
        System.out.println("ok");
         model.addAttribute("UserID", UserID);

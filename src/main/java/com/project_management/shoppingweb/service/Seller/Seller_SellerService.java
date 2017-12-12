@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class SellerService {
+public class Seller_SellerService {
 
     @Resource
     private SellerRepository sellerRepository;

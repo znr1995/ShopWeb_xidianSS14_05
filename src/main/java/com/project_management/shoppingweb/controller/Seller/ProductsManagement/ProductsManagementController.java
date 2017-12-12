@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.List;
 public class ProductsManagementController {
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     private List<Product> products;
     private long sellerID = -1;
@@ -28,7 +28,7 @@ public class ProductsManagementController {
     public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
-        products = sellerService.getSellerProducts(sellerID);
+        products = sellerSellerService.getSellerProducts(sellerID);
         model.addAttribute("products",products);
         model.addAttribute("SellerID",sellerID);
         return "/Seller/ProductsManagementMainPage";
@@ -57,7 +57,7 @@ public class ProductsManagementController {
         {
             if(curProduct.getProductId() == productId)
             {
-                    sellerService.deleteSellerAdvertisement(productId);
+                    sellerSellerService.deleteSellerAdvertisement(productId);
                     products.remove(curProduct);
                     attributes.addAttribute("SellerID",sellerID);
                     return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";

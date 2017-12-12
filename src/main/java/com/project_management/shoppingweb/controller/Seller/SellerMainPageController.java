@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.Seller;
 
 
 import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.service.Seller.SellerService;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ public class SellerMainPageController {
 
 
     @Autowired
-    private SellerService sellerService;
+    private Seller_SellerService sellerSellerService;
 
     private long sellerID = -1;
 
@@ -28,7 +28,7 @@ public class SellerMainPageController {
     public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId, Model model, RedirectAttributes attributes)
     {
         sellerID = sellerId;
-        Seller seller = sellerService.getSellerById(sellerId);
+        Seller seller = sellerSellerService.getSellerById(sellerId);
         if(seller == null)
         {
             attributes.addAttribute("errorMessage","sellerId is wrong!");

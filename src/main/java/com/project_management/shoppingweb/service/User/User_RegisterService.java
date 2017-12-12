@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.service;
+package com.project_management.shoppingweb.service.User;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class RegisterService {
+public class User_RegisterService {
 
     @Autowired
     private UserRepository userRepository;

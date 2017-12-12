@@ -1,7 +1,7 @@
 package com.project_management.shoppingweb.controller.User.Product;
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.service.ProductService;
+import com.project_management.shoppingweb.service.User.User_ProductService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +18,14 @@ import java.util.List;
 public class SearchController {
 
     @Autowired
-    private ProductService productService;
+    private User_ProductService userProductService;
 
     private Logger logger = Logger.getLogger(this.getClass());
     //通过商品名查询商品
     //eg: /search/name=pants 查询pants
     @RequestMapping(value = "/search/name", method = RequestMethod.GET)
     public String searchByName(Model model, HttpServletRequest str){
-        List<Product> products = productService.findAllByNameMatch(str.getParameter("productname"));
+        List<Product> products = userProductService.findAllByNameMatch(str.getParameter("productname"));
         boolean pro_isnull = false;
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);
@@ -37,7 +37,7 @@ public class SearchController {
     //eg: /search/type=TV  查询TV
     @RequestMapping(value = "/search/type",method = RequestMethod.GET)
     public String searchByType(Model model, HttpServletRequest str){
-        List<Product> products = productService.finAllByType(str.getParameter("producttype"));
+        List<Product> products = userProductService.finAllByType(str.getParameter("producttype"));
         boolean pro_isnull = false;
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);

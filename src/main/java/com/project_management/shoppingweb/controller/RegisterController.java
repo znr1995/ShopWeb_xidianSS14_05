@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
-import com.project_management.shoppingweb.service.RegisterService;
+import com.project_management.shoppingweb.service.User.User_RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 public class RegisterController {
 
     @Autowired
-    private RegisterService registerService;
+    private User_RegisterService userRegisterService;
 
     private String DEFATE_SCULPTURE = "./default.png";
 
@@ -32,7 +32,7 @@ public class RegisterController {
         String shopName = httpServletRequest.getParameter("Shopname");
         String catogery = httpServletRequest.getParameter("Catogery");
 
-        if(registerService.sellerVaildEmail(email) && registerService.sellerVaildUsername(username))
+        if(userRegisterService.sellerVaildEmail(email) && userRegisterService.sellerVaildUsername(username))
         {
             Seller seller = new Seller();
             seller.setCatogery(catogery);
@@ -42,7 +42,7 @@ public class RegisterController {
             seller.setEmail(email);
             seller.setUsername(username);
             seller.setSculpture(DEFATE_SCULPTURE);
-            registerService.sellerRegister(seller);
+            userRegisterService.sellerRegister(seller);
             return "/Login";
         }
         else
@@ -59,13 +59,13 @@ public class RegisterController {
         String email = httpServletRequest.getParameter("email");
         String phone = httpServletRequest.getParameter("phone_number");
         String password = httpServletRequest.getParameter("password_register");
-        if (registerService.userVaildEmail(email) && registerService.userVaildUsername(username)){
+        if (userRegisterService.userVaildEmail(email) && userRegisterService.userVaildUsername(username)){
             User user = new User();
             user.setEmail(email);
             user.setPassword(password);
             user.setTel(phone);
             user.setUsername(username);
-            registerService.userRegister(user);
+            userRegisterService.userRegister(user);
             return "/Login";
         }else {
             attributes.addAttribute("errorMessage","fail to register!");

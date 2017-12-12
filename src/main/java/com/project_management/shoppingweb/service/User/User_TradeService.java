@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class TradeService {
+public class User_TradeService {
     @Resource
     TradeRepository tradeRepository;
 

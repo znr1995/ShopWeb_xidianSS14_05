@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.service;
+package com.project_management.shoppingweb.service.User;
 
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductAdvertisementService {
+public class User_ProductAdvertisementService {
     @Autowired
     ProductAdvertisementRepository productAdvertisementRepository;
 

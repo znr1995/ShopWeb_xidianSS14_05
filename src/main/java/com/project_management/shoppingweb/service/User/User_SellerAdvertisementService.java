@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.service;
+package com.project_management.shoppingweb.service.User;
 
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
 import com.project_management.shoppingweb.repository.SellerAdvertisementRepository;
@@ -9,7 +9,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 
 @Service
-public class SellerAdvertisementService {
+public class User_SellerAdvertisementService {
     @Autowired
     SellerAdvertisementRepository sellerAdvertisementRepository;
 

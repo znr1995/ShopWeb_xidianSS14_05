@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.service;
+package com.project_management.shoppingweb.service.User;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
@@ -11,7 +11,7 @@ import java.util.List;
 
 
 @Service
-public class LoginService {
+public class User_LoginService {
 
     @Resource
     SellerRepository sellerRepository;

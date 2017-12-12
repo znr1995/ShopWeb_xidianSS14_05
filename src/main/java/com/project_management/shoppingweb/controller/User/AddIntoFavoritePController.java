@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.ProductCollection;
-import com.project_management.shoppingweb.service.User.ProductCollectionService;
+import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class AddIntoFavoritePController {
     @Autowired
-    private ProductCollectionService productCollectionService;
+    private User_ProductCollectionService userProductCollectionService;
     @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.GET)
     public String AddIntoFavoriteP(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -34,7 +34,7 @@ public class AddIntoFavoritePController {
         }
 
         List<ProductCollection> GlobalFavorites = new ArrayList<ProductCollection>();
-        GlobalFavorites = productCollectionService.findAllByUserId(Long.parseLong(UserID));
+        GlobalFavorites = userProductCollectionService.findAllByUserId(Long.parseLong(UserID));
         for(int i = 0; i < GlobalFavorites.size(); i++){
             if(GlobalFavorites.get(i).getUserId()== Long.parseLong(UserID)){
                 model.addAttribute("UserID", UserID);
@@ -51,7 +51,7 @@ public class AddIntoFavoritePController {
         //favorite.setCollectionId((long)1);
         favorite.setProductId(Long.parseLong(ProductID));
 
-        productCollectionService.save(favorite);
+        userProductCollectionService.save(favorite);
 
         System.out.println("ok");
         model.addAttribute("UserID", UserID);

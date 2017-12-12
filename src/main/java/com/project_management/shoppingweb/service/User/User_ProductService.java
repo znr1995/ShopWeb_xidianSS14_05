@@ -1,4 +1,4 @@
-package com.project_management.shoppingweb.service;
+package com.project_management.shoppingweb.service.User;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.repository.ProductRepository;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class ProductService {
+public class User_ProductService {
     @Autowired
     ProductRepository productRepository;
     /*public List<Product> findAllByNameMatch(String name){

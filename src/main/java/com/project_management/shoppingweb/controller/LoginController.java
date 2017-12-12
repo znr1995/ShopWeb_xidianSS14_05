@@ -1,6 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
-import com.project_management.shoppingweb.service.LoginService;
+import com.project_management.shoppingweb.service.User.User_LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +17,7 @@ import java.util.regex.Pattern;
 public class LoginController {
 
     @Autowired
-    private LoginService loginService;
+    private User_LoginService userLoginService;
 
     @RequestMapping(value = "/")
     public String main(){
@@ -37,10 +37,10 @@ public class LoginController {
 
         //以邮箱方式登录
         if (Pattern.matches(pattern, account)) {
-            id = loginService.sellerLoginByEmail(account,password);
+            id = userLoginService.sellerLoginByEmail(account,password);
         } else {
             //用户名方式登录
-            id = loginService.sellerLoginByUsername(account, password);
+            id = userLoginService.sellerLoginByUsername(account, password);
         }
 
         if(id < 0)
@@ -65,10 +65,10 @@ public class LoginController {
 
         //以邮箱方式登录
         if (Pattern.matches(pattern, account)) {
-            id = loginService.userLoginByEmail(account,password);
+            id = userLoginService.userLoginByEmail(account,password);
         } else {
             //用户名方式登录
-            id = loginService.userLoginByUsername(account, password);
+            id = userLoginService.userLoginByUsername(account, password);
         }
 
         if(id < 0)

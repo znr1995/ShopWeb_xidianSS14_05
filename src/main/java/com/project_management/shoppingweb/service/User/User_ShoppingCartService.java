@@ -8,7 +8,7 @@ import javax.annotation.Resource;
 import java.util.List;
 
 @Service
-public class ShoppingCartService {
+public class User_ShoppingCartService {
     @Resource
     ShoppingCartRepository shoppingCartRepository;
 
