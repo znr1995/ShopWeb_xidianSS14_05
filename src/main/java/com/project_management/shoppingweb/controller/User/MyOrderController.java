@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.Trade;
-import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.User.TradeService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +17,7 @@ import java.util.List;
 @Controller
 public class MyOrderController {
     @Autowired
-    private User_TradeService userTradeService;
+    private TradeService tradeService;
     @RequestMapping(value = "/MyOrder",method = RequestMethod.GET)
     public String MyOrder(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -31,39 +31,40 @@ public class MyOrderController {
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/Product";
+            return "/User/productdetial";
         }
 
         List<Trade> MyOrder = new ArrayList<Trade>();
-        MyOrder = userTradeService.findAllByUserId(Long.parseLong(UserID));
+        MyOrder = tradeService.findAllByUserId(Long.parseLong(UserID));
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
             return "/User/MyOrder";
         }
 
-        List<String> SellerList = new ArrayList<String>();
-        List<String> Price = new ArrayList<String>();
-        List<String> PayWay = new ArrayList<String>();
-        List<String> CreateTime = new ArrayList<String>();
-        List<String> Status = new ArrayList<String>();
-        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//        List<String> SellerList = new ArrayList<String>();
+//        List<String> Price = new ArrayList<String>();
+//        List<String> PayWay = new ArrayList<String>();
+//        List<String> CreateTime = new ArrayList<String>();
+//        List<String> Status = new ArrayList<String>();
+//        SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+//
+//        for(int i = 0; i < MyOrder.size(); i++){
+//            SellerList.add(String.valueOf(MyOrder.get(i).getSellerId()));
+//            Price.add(String.valueOf(MyOrder.get(i).getTradeTotalMoney()));
+//            PayWay.add(MyOrder.get(i).getTradePayWay());
+//            CreateTime.add(sdf.format(MyOrder.get(i).getTradeCreateTime()));
+//            if(MyOrder.get(i).getTradeStatus() == 0)
+//                Status.add("Unfinished");
+//        }
 
-        for(int i = 0; i < MyOrder.size(); i++){
-            SellerList.add(String.valueOf(MyOrder.get(i).getSellerId()));
-            Price.add(String.valueOf(MyOrder.get(i).getTradeTotalMoney()));
-            PayWay.add(MyOrder.get(i).getTradePayWay());
-            CreateTime.add(sdf.format(MyOrder.get(i).getTradeCreateTime()));
-            if(MyOrder.get(i).getTradeStatus() == 0)
-                Status.add("Unfinished");
-        }
-
+        model.addAttribute("MyOrder", MyOrder);
         model.addAttribute("UserID", UserID);
-        model.addAttribute("ProductList", SellerList);
-        model.addAttribute("price", Price);
-        model.addAttribute("payway",PayWay);
-        model.addAttribute("createtime", CreateTime);
-        model.addAttribute("status", Status);
+//        model.addAttribute("ProductList", SellerList);
+//        model.addAttribute("price", Price);
+//        model.addAttribute("payway",PayWay);
+//        model.addAttribute("createtime", CreateTime);
+//        model.addAttribute("status", Status);
 
         return "/User/MyOrder";
     }

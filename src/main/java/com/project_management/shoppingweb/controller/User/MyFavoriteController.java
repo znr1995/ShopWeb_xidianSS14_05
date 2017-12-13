@@ -1,7 +1,7 @@
 package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.ProductCollection;
-import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
+import com.project_management.shoppingweb.service.User.ProductCollectionService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +15,7 @@ import java.util.List;
 @Controller
 public class MyFavoriteController {
     @Autowired
-    private User_ProductCollectionService userProductCollectionService;
+    private ProductCollectionService productCollectionService;
     @RequestMapping(value = "/MyFavorite",method = RequestMethod.GET)
     public String MyFavorite(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -28,11 +28,11 @@ public class MyFavoriteController {
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);
             model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/Product";
+            return "/User/productdetial";
         }
 
         List<ProductCollection> FavoritelistP = new ArrayList<ProductCollection>();
-        FavoritelistP = userProductCollectionService.findAllByUserId(Long.parseLong(UserID));
+        FavoritelistP = productCollectionService.findAllByUserId(Long.parseLong(UserID));
 
 
         if(FavoritelistP.size() == 0){

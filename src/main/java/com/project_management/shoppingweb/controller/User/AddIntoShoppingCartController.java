@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.ShoppingCart;
-import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.User.ShoppingCartService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class AddIntoShoppingCartController {
     @Autowired
-    private User_ShoppingCartService userShoppingCartService;
+    private ShoppingCartService shoppingCartService;
     @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.GET)
 
     public String AddIntoShoppingCart(HttpServletRequest request, Model model){
@@ -32,11 +32,11 @@ public class AddIntoShoppingCartController {
             model.addAttribute("ShopID", ShopID);
             model.addAttribute("UnitPrice", UnitPrice);
             System.out.println("no");
-            return "/User/Product";
+            return "/User/productdetial";
         }
 
         List<ShoppingCart> GlobalShoppingCart = new ArrayList<ShoppingCart>();
-        GlobalShoppingCart = userShoppingCartService.findAllByUserId(Long.parseLong(UserID));
+        GlobalShoppingCart = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
         for(int i = 0; i < GlobalShoppingCart.size(); i++){
             if(GlobalShoppingCart.get(i).getProductId() == Long.parseLong(ProductID)){
                 model.addAttribute("UserID", UserID);
@@ -44,7 +44,7 @@ public class AddIntoShoppingCartController {
                 model.addAttribute("ShopID", ShopID);
                 System.out.println("no");
                 model.addAttribute("UnitPrice", UnitPrice);
-                return "/User/Product";
+                return "/User/productdetial";
             }
         }
 
@@ -56,7 +56,7 @@ public class AddIntoShoppingCartController {
             model.addAttribute("ShopID", ShopID);
             System.out.println("no");
             model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/Product";
+            return "/User/productdetial";
         }
 
 
@@ -68,14 +68,14 @@ public class AddIntoShoppingCartController {
         shoppingCart.setProductId(Long.parseLong(ProductID));
         shoppingCart.setUserId(Long.parseLong(UserID));
 
-       userShoppingCartService.save(shoppingCart);
+       shoppingCartService.save(shoppingCart);
 
        System.out.println("ok");
         model.addAttribute("UserID", UserID);
         model.addAttribute("ProductID", ProductID);
         model.addAttribute("ShopID", ShopID);
         model.addAttribute("UnitPrice", UnitPrice);
-        return "/User/Product";
+        return "/User/productdetial";
 
     }
 }
