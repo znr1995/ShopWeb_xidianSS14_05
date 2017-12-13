@@ -88,13 +88,17 @@ public class AdminLoinController {
 		
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
-		
 
         return "admin/adsManagement";
     }
 
 	@GetMapping("/shopManage")
 	public String shopManage(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+
 		List<Seller> statusList=sellerService.findAllByApplyState(1);
 		model.addAttribute("sellerStatusList", statusList);
 		//拉出未被拉黑的人

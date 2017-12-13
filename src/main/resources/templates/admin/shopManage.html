@@ -14,7 +14,11 @@
 
 <br>
 <br>
+<<<<<<< HEAD
+<br>
+=======
 
+>>>>>>> d48cea5c6fe0bb68a03766b44963a438ef394bc3
 <div class="col-lg-2">
     <div id="wrapper">
         <!-- Sidebar -->
@@ -128,6 +132,7 @@
         </table>
     </div>
 </div>
+<div class="footer"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -138,12 +143,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">Anna</a>
+            <span class="navbar-brand" th:text="${adminUserName}">Anna</span>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="PersonalInformation.html">Personal Information</a></li>
-                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px">
+                <li><a th:href="@{personalInformation}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
                     Log out
                 </button>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
@@ -163,9 +168,9 @@
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Leave
                                 </button>
-                                <button type="button" class="btn btn-primary">
+                                <a href="/admin/logout"><button type="button" class="btn btn-primary">
                                     Sure
-                                </button>
+                                </button></a>
                             </div>
                         </div><!-- /.modal-content -->
                     </div><!-- /.modal -->
