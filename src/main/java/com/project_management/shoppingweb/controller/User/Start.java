@@ -17,9 +17,10 @@ public class Start {
         String UnitPrice = request.getParameter("Price");
         String ShopID = request.getParameter("ShopID");*/
 
-        model.addAttribute("ProductID", "1112");
+        model.addAttribute("ProductID", "1001");
         model.addAttribute("UnitPrice", "100");
-        model.addAttribute("ShopID", "111");
+        model.addAttribute("ShopID", "100");
+
         return "/User/productdetial";
     }
 }
