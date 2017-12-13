@@ -4,7 +4,7 @@ package com.project_management.shoppingweb.controller.User;
 import com.project_management.shoppingweb.domain.Address;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.AddressService;
-import com.project_management.shoppingweb.service.User.TradeService;
+import com.project_management.shoppingweb.service.User.User_TradeService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,7 +19,7 @@ import java.util.List;
 @Controller
 public class PayController {
     @Autowired
-    private TradeService tradeService;
+    private User_TradeService tradeService;
     @Autowired
     private AddressService addressService;
     @RequestMapping(value = "/Pay",method = RequestMethod.GET)

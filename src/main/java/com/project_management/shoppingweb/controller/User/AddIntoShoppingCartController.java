@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.ShoppingCart;
-import com.project_management.shoppingweb.service.User.ShoppingCartService;
+import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,7 +18,7 @@ import java.util.List;
 @Controller
 public class AddIntoShoppingCartController {
     @Autowired
-    private ShoppingCartService shoppingCartService;
+    private User_ShoppingCartService shoppingCartService;
     @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.GET)
 
     public String AddIntoShoppingCart(HttpServletRequest request, Model model){

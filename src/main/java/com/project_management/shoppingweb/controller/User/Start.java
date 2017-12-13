@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Start {
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/User/Start", method = RequestMethod.GET)
     public String start(HttpServletRequest request, Model model){
         model.addAttribute("UserID", "1");
 
