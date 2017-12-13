@@ -28,14 +28,14 @@ public class ModifyProductInformationController {
             attributes.addAttribute("errorMessage","productId is wrong!");
             return "redirect:/error/errorHandler";
         }
-
+        long sellerID = Long.valueOf(request.getParameter("SellerID"));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setBrandName(request.getParameter("brandName"));
         newProduct.setProductPhoto(request.getParameter("productPhoto"));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
-        newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
-        attributes.addAttribute("SellerID",Long.valueOf(request.getParameter("SellerID")));
+        newProduct.setProductPrice(Double.valueOf(request.getParameter("productPrice")));
+        attributes.addAttribute("SellerID",sellerID);
         if(sellerSellerService.writeInProduct(newProduct))
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
         else

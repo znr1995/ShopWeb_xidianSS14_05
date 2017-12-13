@@ -96,11 +96,11 @@ public class Seller_SellerService {
 
     public void deleteProduct(Product product)
     {
-       deleteProduct(product.getProductId());
+       productRepository.delete(product);
     }
 
     public void deleteProduct(long productId)
     {
-        productRepository.deleteByProductId(productId);
+        productRepository.delete(productRepository.getByProductId(productId));
     }
 }

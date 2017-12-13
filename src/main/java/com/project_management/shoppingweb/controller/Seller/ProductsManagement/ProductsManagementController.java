@@ -57,7 +57,7 @@ public class ProductsManagementController {
         {
             if(curProduct.getProductId() == productId)
             {
-                    sellerSellerService.deleteSellerAdvertisement(productId);
+                    sellerSellerService.deleteProduct(productId);
                     products.remove(curProduct);
                     attributes.addAttribute("SellerID",sellerID);
                     return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";

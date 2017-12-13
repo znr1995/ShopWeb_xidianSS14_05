@@ -77,9 +77,9 @@
                     <td th:text="${prod.productName}">productName</td>
                     <td th:text="${prod.productPrice}">0.0</td>
                     <td th:text="${prod.productStock}">0</td>
-                    <td><button type="submit" class="btn-default" name="action" value="delete">delete</button></td>
+                    <td><button type="submit" class="btn-default" name="delete"  th:value="${prod.productId}">delete</button></td>
                     <td>
-                    <button type="submit" class="btn-default" name="action" value="modify">modify</button>
+                    <button type="submit" class="btn-default" name="modify"  th:value="${prod.productId}">modify</button>
                     </td>
                     <input type="hidden" name="ProductID" th:value="${prod.productId}" />
                 </tr>

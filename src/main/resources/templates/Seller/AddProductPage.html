@@ -50,7 +50,7 @@
     <div class="row">
         <div class="col-lg-6 col-md-2">
 
-            <form th:action="@{/Seller/ProductsManagement/ReturnBack}" method="get">
+            <form th:action="@{/Seller/AddProduct/ReturnBack}" method="get">
                 <button type="submit" class="btn-default">return Back</button>
 
             </form>
@@ -70,74 +70,75 @@
     </div>
 <br>
     <br>
-<div class="row">
-    <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}">
-        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-        <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <div class="row col-lg-8" >
+        <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}">
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+            <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
-        <div class="form-group">
-            <label class="col-lg-5 text-right">productName:</label>
-            <div class="col-lg-3">
-            <input type="text" class="form-control" name="productName" th:text="*{productName}"></input>
-        </div>
-        </div>
-
-        <div class="form-group ">
-        <label class="col-lg-5 text-right">productStock:</label>
-            <div class="col-lg-3">
-            <input type="text" class="form-control" name="productStock" th:text="*{productStock}"></input></p>
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productName:</label>
+                <div class="col-lg-3">
+                <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
             </div>
             </div>
 
-        <div class="from-group">
-        <label class="col-lg-5 text-right">brandName:</label>
-            <div class="col-lg-3">
-            <input type="text" class="form-control" name="brandName" th:text="*{brandName}"></input>
-            </div>
-        </div>
-<br>
-        <br>
+            <div class="form-group ">
+            <label class="col-lg-5 text-right">productStock:</label>
+                <div class="col-lg-3">
+                <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
+                </div>
+                </div>
 
-        <div class="form-group">
-          <label class="col-lg-5 text-right">productPhoto:</label>
-            <div class="col-lg-3">
-                <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
+            <div class="from-group">
+            <label class="col-lg-5 text-right">brandName:</label>
+                <div class="col-lg-3">
+                <input type="text" class="form-control" name="brandName" th:value="*{brandName}"></input>
+                </div>
             </div>
-        </div>
+    <br>
+            <br>
 
-        <div class="form-group">
-            <label class="col-lg-5 text-right">productMarketPrice:</label>
-            <div class="col-lg-3">
-            <input type="text" class="form-control" name="productPrice" th:text="*{productPrice}"></input>
+            <div class="form-group">
+              <label class="col-lg-5 text-right">productPhoto:</label>
+                <div class="col-lg-3">
+                    <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
+                </div>
             </div>
-        </div>
-        <div class="form-group">
 
-          <label class="col-lg-5 text-right">productBriefInfo:</label>
-            <div class="col-lg-3">
-            <textarea class="form-control" rows="3" name="productBriefInfo" th:text="*{productBriefInfo}"></textarea>
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productMarketPrice:</label>
+                <div class="col-lg-3">
+                <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"></input>
+                </div>
             </div>
+            <div class="form-group">
+
+              <label class="col-lg-5 text-right">productBriefInfo:</label>
+                <div class="col-lg-3">
+                <textarea class="form-control" rows="3" id="productBriefInfo" name="productBriefInfo" th:value="*{productBriefInfo}"></textarea>
+                </div>
+                </div>
+            <br>
+            <table class="table table-striped" id="otherAttributes">
+                <tr>
+                    <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
+                </tr>
+                <tr>
+                    <th>attrName</th>
+                    <th>attrValue</th>
+                    <th>modify</th>
+                    <th>delete</th>
+                </tr>
+            </table>
+
+            <div class="row text-center">
+                <button type="submit" class="btn-default" >OK</button>
             </div>
-        <br>
-        <table class="table table-striped" id="otherAttributes">
-            <tr>
-                <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
-            </tr>
-            <tr>
-                <th>attrName</th>
-                <th>attrValue</th>
-                <th>modify</th>
-                <th>delete</th>
-            </tr>
-        </table>
-        <div>
-            <img id="photo" src=""  style="display: block;" />
-        </div>
-        <div class="row text-center">
-            <button type="submit" class="btn-default" >OK</button>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
+    <div class="col-lg-4 text-left">
+        <img id="photo" src=""  style="display: block;" />
+    </div>
 </div>
 
 <br />
