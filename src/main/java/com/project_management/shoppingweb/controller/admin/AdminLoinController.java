@@ -89,9 +89,7 @@ public class AdminLoinController {
 		List<ProductAdvertisement> onProductAdvertisementList = productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("onProductFindAll", onProductAdvertisementList);
 		
-	    
-	
-    	
+
         return "admin/adsManagement";
     }
 

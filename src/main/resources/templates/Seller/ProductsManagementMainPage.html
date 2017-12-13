@@ -1,69 +1,120 @@
-<!-- Seller Management Main page-->
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
 <head>
-    <title>ProductManagementMainPage</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>ProductManager</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/component.css" />
+    <script src="/js/modernizr.custom.js"></script>
 </head>
-<body>
-<h2>ProductManagementMainPage</h2>
-<br /> <br />
+<body class="cbp-spmenu-push-toleft">
+
+</br>
 <p>
     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
 </p>
+<div class="container">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <h3>导航</h3>
+        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
+            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
+            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+            <button  name="action" value="ViewIncome" >ViewIncome</button>
+            <button  name="action" value="ViewTransaction">ViewTransaction</button>
+            <button  name="action" value="ProductsManagement">ProductsManagement</button>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+        </form>
 
-<!--这里js做的工作如下:修复删除商品的bug,与界面效果无关-->
+    </nav>
+    </br>
+<div class="row">
+    <div class="col-lg-4 col-md-2">
 
-<!--r返回表单-->
-<form th:action="@{/Seller/ProductsManagement/ReturnBack}" method="get">
-    <button type="submit">return Back</button>
-</form>
-<br />
+        <form th:action="@{/Seller/ProductsManagement/ReturnBack}" method="get">
+            <button type="submit" class="btn-default">return Back</button>
+        </form>
+    </div>
+    <div class="col-lg-4 col-md-2">
+        <form th:action="@{/Seller/ProductsManagement/AddProduct}" method="get">
+            <button type="submit" class="btn-default">Add New Product</button>
+        </form>
+    </div>
+    <div>
 
-<form th:action="@{/Seller/ProductsManagement/AddProduct}" method="get">
-    <button type="submit">Add New Product</button>
-</form>
+        <section >
 
-<br />
+            <button id="showLeftPush" class="btn-default">快捷导航</button>
 
-<!--当前商品表单-->
+        </section>
+    </div>
 
-<form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    <table >
-        <tr>
-            <th >Name</th>
-            <th >MarketPrice</th>
-            <th>Stock</th>
-            <th>delete</th>
-            <th >modify</th>
-        </tr>
-        <tr th:each="prod : ${products}">
-            <td th:text="${prod.productName}">productName</td>
-            <td th:text="${prod.productPrice}">0.0</td>
-            <td th:text="${prod.productStock}">0</td>
-            <td>
-                <button type="submit" name="delete" th:value="${prod.productId}" >delete</button>
-            </td>
-            <td>
-                <button type="submit" name="modify" th:value="${prod.productId}" >modify</button>
-            </td>
-        </tr>
-    </table>
-
-</form>
-
-
-<br />
+</br>
+    <div class="row">
+        <form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
+        <table class="table table-striped">
+            <caption>商品条目</caption>
+            <thead>
 
 
-<form name="form1" th:action="@{/Seller/FastJump}" method="get">
-    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
-    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
-    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
-    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
-    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-</form>
+                <th>商品名称</th>
+                <th>价格</th>
+                <th>数量</th>
+                <th class="text-center">操作</th>
+
+            </thead>
+            <tbody>
+
+                <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+
+                <tr th:each="prod : ${products}">
+                    <td th:text="${prod.productName}">productName</td>
+                    <td th:text="${prod.productPrice}">0.0</td>
+                    <td th:text="${prod.productStock}">0</td>
+                    <td><button type="submit" class="btn-default" name="action" value="delete">delete</button></td>
+                    <td>
+                    <button type="submit" class="btn-default" name="action" value="modify">modify</button>
+                    </td>
+                    <input type="hidden" name="ProductID" th:value="${prod.productId}" />
+                </tr>
+
+            </tbody>
+        </table>
+        </form>
+    </div>
+</div>
+</div>
+<script src="/js/classie.js"></script>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+
+        showLeftPush = document.getElementById( 'showLeftPush' ),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+
+
+    function disableOther( button ) {
+
+        if( button !== 'showLeftPush' ) {
+            classie.toggle( showLeftPush, 'disabled' );
+        }
+
+    }
+</script>
+
 </body>
 </html>

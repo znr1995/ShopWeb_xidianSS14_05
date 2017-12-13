@@ -75,7 +75,7 @@ public class AddProductController {
         newProduct.setProductName(request.getParameter("productName"));
         newProduct.setSellerId(Long.valueOf(request.getParameter("SellerID")));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
-        newProduct.setProductPrice(Double.valueOf(request.getParameter("ProductPrice")));
+        newProduct.setProductPrice(Double.valueOf(request.getParameter("productPrice")));
 
         if(sellerSellerService.writeInProduct(newProduct))
         {
