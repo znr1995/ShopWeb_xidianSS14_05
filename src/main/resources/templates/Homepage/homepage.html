@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>HomePage</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
+    <style type="text/css">
+        .ex {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .fsbanner {
+            margin-top: 10px;
+        }
+        .carousel {
+            height: 500px;
+        }
+        .carousel .item {
+            height: 500px;
+        }
+        .carousel .item img {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<br>
+</br>
+<div class="content">
+    <div class="row">
+
+        <div class="col-lg-6">
+            <a href="/homepage">
+                <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
+            </a>
+        </div>
+
+        <!-- 搜索按钮-->
+        <div class="col-lg-6">
+            <div class="input-group">
+                <form role='form' class = "bs-example bs-example-form" th:action="@{/search/name}" method = "GET">
+                    <div class="input-group">
+                        <input type="text" name="productname" class="form-control"/>
+                        <span class="input-group-btn">
+                        <button  class="btn btn-default" type="submit" name="save">search</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!--导航-->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            TV, Home Theater<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=TV">TV</a></li>
+                            <li><a href="/search/type?type=HomeTheater">Home Theater</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Computers, Tables<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=Computers">Computers</a></li>
+                            <li><a href="/search/type?type=Tables">Tables</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="/search/type?type=CellPhones">Cell Phones</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Cameras, Camcorders<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=Cameras">Cameras</a></li>
+                            <li><a href="/search/type?type=Camcorders">Camcorders</a></li>
+                        </ul>
+                    </li>
+
+                    <li><a href="/search/type?type=Audio">Audio</a></li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Car Electronics, GPS<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=CarElectronics">Car Electronics</a></li>
+                            <li><a href="/search/type?type=GPS">GPS</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Video, Games, Movies, Music<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=Video">Video</a></li>
+                            <li><a href="/search/type?type=Games">Games</a></li>
+                            <li><a href="/search/type?type=Movies">Movies</a></li>
+                            <li><a href="/search/type?type=Music">Music</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Health,Fitness, Sports<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=Health">Health</a></li>
+                            <li><a href="/search/type?type=Fitness">Fitness</a></li>
+                            <li><a href="/search/type?type=Sports">Sports</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Home, Office<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/search/type?type=Home">Home</a></li>
+                            <li><a href="/search/type?type=Office">Office</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 轮播广告 -->
+    <div id="LBbox" class="carousel slide" data-ride="carousel">
+        <!-- 圆点按钮 -->
+        <ol class="carousel-indicators">
+            <li data-target="#LBbox" data-slide-to="0" class="active"></li>
+            <li data-target="#LBbox" data-slide-to="1"></li>
+        </ol>
+        <!-- 轮播内容 -->
+        <div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
+            <tr th:each="ProductAdvertisement,ads1:${pro_ads_roll}">
+                <div class="item active" th:if="${ads1.first}" >
+                    <a target="_blank" th:href="@{'/product/'+${ads1.current.getProductId()}}">
+                        <img th:src="${ads1.current.getPictureUrl()}" alt="1 slide"/>
+                    </a>
+                    <div class="carousel-caption">
+                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                        <p th:text="${ads1.current.getDescription()}">description</p>
+                    </div>
+                </div>
+                <div class="item" th:if="${not ads1.first}" >
+                    <a target="_blank" th:href="@{'/product/'+${ads1.current.getProductId()}}">
+                        <img th:src="${ads1.current.getPictureUrl()}" alt="2 slide"/>
+                    </a>
+                    <div class="carousel-caption">
+                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                        <p th:text="${ads1.current.getDescription()}">description</p>
+                    </div>
+                </div>
+            </tr>
+        </div>
+
+        <!-- 左按钮 -->
+        <a href="#LBbox" class="left carousel-control" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">上一页</span>
+        </a>
+        <!-- 右按钮 -->
+        <a href="#LBbox" class="right carousel-control" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">下一页</span>
+        </a>
+    </div>
+
+    <br>
+    </br>
+
+    <!-- 商铺广告区 -->
+    <div class="container" th:if="${not pro_rollad_isnull}">
+        <tr th:each="ads : ${shop_ads}">
+            <div class="col-lg-2">
+                <a target="_blank" th:href="@{'/shop/'+${ads.getsellerId()}}">
+                    <img th:src="@{${ads.getpictureUrl()}}" alt="fail pics" width="200" height="300"/>
+                </a>
+            </div>
+        </tr>
+    </div>
+
+    <br>
+    </br>
+
+    <!-- 商品广告展示-->
+
+    <div class="container" th:if="${not pro_listad_isnull}">
+        <tr th:each="adv2 : ${pro_ads}">
+            <div class="col-md-2">
+                <div class="img">
+                    <a target="_blank" th:href="@{'/product/'+${adv2.getproductId()}}">
+                        <img th:src="${adv2.getpictureUrl()}" alt="Ballade" width="160" height="160"/>
+                    </a>
+                </div>
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Product </th>
+                        <th>Price</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <td th:text="${adv2.getdescription()}">Info</td>
+                    <td th:text="${adv2.getprice()}">Price</td>
+                    </tbody>
+                </table>
+            </div>
+        </tr>
+    </div>
+
+    <!--网页眉头 -->
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">User name</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/cart">cart</a></li>
+                    <li><a href="/favorite">favorite</a></li>
+                    <li><a href="/history">history</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+
+<!--网页注脚-->
+<div class="footer">
+    <div>
+        <div style="float: left"> About us:</div>
+        <div> 029-1342535</div>
+    </div>
+
+    <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
+</div>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+<script src="js/ajaxGoodsType.js"></script>
+<script type="text/javascript" src="./js/fsbanner.js"></script>
+<script type="text/javascript">
+    //<![CDATA[
+    $(function () {
+        $('.ex[name=3] .fsbanner').fsBanner({
+            trigger: 'mouse'
+        });
+    });
+    //]]>
+</script>
+</body>
+</html>
+</html>

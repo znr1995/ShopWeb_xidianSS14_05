@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>PayByFFFF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<form name="form1" th:action="@{/Pay}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  readonly="readonly" /><br/>
+    <input type="text" name="ShopID" th:value="${ShopID}" readonly="readonly" />ShopID<br/>
+    <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" />ProductID<br/>
+    <input type="text" name="ProductAmount" th:value="${ProductAmount}"  readonly="readonly" />ProductAmount<br/>
+    $<input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly"  />UnitPrice<br/>
+    $<input type="text" name="Total" th:value="${Total}" readonly="readonly" />TotalPay<br/>
+    <br/>
+    <br/>
+    <input type="text" name="account" th:value="${account}"/>account<br/>
+    <input type="password" name="password" th:value="${password}"/>password<br/>
+    <input type="text" name="address" th:value="${address}"/>address<br/>
+    <select name="PayWay">
+        <option th:value="AliPay">AliPay</option>
+        <option th:value="WeChatPay">WePay</option>
+    </select>
+    <button type="submit" name="Pay" th:value="支付">pay</button>
+</form>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>SuccessByFFFF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+
+<h3>Pay Success</h3>
+<br/>
+<form name="form1" th:action="@{/MyFavorite}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+</form>
+
+<form name="form2" th:action="@{/MyShoppingCart}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+</form>
+
+<form name="form3" th:action="@{/MyOrder}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+    <button type="submit" name="myorder" th:value="我的订单">myorder</button>
+</form>
+
+
+
+</body>
+</html>

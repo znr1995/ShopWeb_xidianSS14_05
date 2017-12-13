@@ -1,0 +1,107 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <title>ProductByFFFF</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<form name="form1" th:action="@{/Buy}" method="get">
+    <input type="hidden" name="UserID" id="txt19" th:value="${UserID}" onkeyup="KeyP1(this);" /><br/>
+    <input type="text" name="ShopID" th:value="${ShopID}" readonly="readonly" onkeyup="KeyP3(this);" />ShopID<br/>
+    <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" onkeyup="KeyP2(this);" />ProductID<br/>
+    <input type="text" name="ProductAmount" th:value="0" onkeyup="KeyP4(this);" id="txt11" />ProductAmount<br/>
+    $<input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" />UnitPrice<br/>
+    <button type="submit" name="buy" th:value="立即购买">buy</button>
+</form>
+<br/>
+<form name="form5" th:action="@{/AddIntoShoppingCart}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}" id="txt12" /><br/>
+    <input type="hidden" name="ShopID" th:value="${ShopID}" id="txt13" /><br/>
+    <input type="hidden" name="ProductID" th:value="${ProductID}" id="txt14" /><br/>
+    <input type="hidden" name="ProductAmount" th:value="0"  id="txt15" /><br/>
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+    <button type="submit" name="addintoshoppingcart" th:value="加入购物车">addintoshoppingcart</button>
+</form>
+
+
+
+<br/>
+<form name="form2" th:action="@{/AddIntoFavoriteP}" method="get">
+    <button type="submit" name="addintofavorite" th:value="加入收藏夹">addintofavorite</button>
+    <input type="hidden" name="UserID" th:value="${UserID}" id="txt1" /><br/>
+    <input type="hidden" name="ProductID" th:value="${ProductID}" id="txt2" /><br/>
+    <input type="hidden" name="ShopID" th:value="${ShopID}" id="txt3"  /><br/>
+    <input type="hidden" name="ProductAmount" th:value="0" id="txt4" /><br/>
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+
+</form>
+
+<form name="form3" th:action="@{/MyShoppingCart}" method="get">
+    <input type="hidden" name="UserID" th:value="${UserID}" id="txt4" /><br/>
+    <input type="hidden" name="ProductID" th:value="${ProductID}" id="txt5" /><br/>
+    <input type="hidden" name="ShopID" th:value="${ShopID}" id="txt6" /><br/>
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+    <button type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+</form>
+<br/>
+<form name="form4" th:action="@{/MyFavorite}" method="get">
+    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+    <input type="hidden" name="UserID" th:value="${UserID}" id="txt7" /><br/>
+    <input type="hidden" name="ProductID" th:value="${ProductID}" id="txt8" /><br/>
+    <input type="hidden" name="ShopID" th:value="${ShopID}" id="txt9" /><br/>
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+
+</form>
+
+<form name="form6" th:action="@{/MyOrder}" method="get">
+    <button type="submit" name="myorder" th:value="我的订单">myorder</button>
+    <input type="hidden" name="UserID" th:value="${UserID}" id="txt16" /><br/>
+    <input type="hidden" name="ProductID" th:value="${ProductID}" id="txt17" /><br/>
+    <input type="hidden" name="ShopID" th:value="${ShopID}" id="txt18" /><br/>
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+
+</form>
+
+
+
+
+</body>
+</html>
+<script>
+    function KeyP1(v){
+        document.getElementById("txt1").value = v.value;
+        document.getElementById("txt4").value = v.value;
+        document.getElementById("txt7").value = v.value;
+        document.getElementById("txt12").value = v.value;
+        document.getElementById("txt16").value = v.value;
+    }
+</script>
+<script>
+    function KeyP2(v){
+        document.getElementById("txt2").value = v.value;
+        document.getElementById("txt5").value = v.value;
+        document.getElementById("txt8").value = v.value;
+        document.getElementById("txt14").value = v.value;
+        document.getElementById("txt17").value = v.value;
+    }
+</script>
+<script>
+    function KeyP3(v){
+        document.getElementById("txt3").value = v.value;
+        document.getElementById("txt6").value = v.value;
+        document.getElementById("txt9").value = v.value;
+        document.getElementById("txt13").value = v.value;
+        document.getElementById("txt18").value = v.value;
+    }
+</script>
+<script>
+    function KeyP4(v){
+        document.getElementById("txt4").value = v.value;
+        document.getElementById("txt15").value = v.value;
+    }
+</script>
+
+
+

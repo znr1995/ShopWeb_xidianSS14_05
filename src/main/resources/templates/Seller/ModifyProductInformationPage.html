@@ -1,0 +1,201 @@
+<!-- Seller Management Main page-->
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>ModifyProductInformationPage</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+
+<h2>ModifyProductInformationPage</h2>
+<br /> <br />
+
+<!--这里js做的工作如下:1.可以预览照片,2.可以让商家为商品动态修改\删除\添加"属性-值"-->
+
+<!--r返回表单-->
+<form th:action="@{/Seller/ModifyProduct/ReturnBack}" method="get">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <button type="submit">return Back</button>
+</form>
+
+<br />
+<!--主信息表单-->
+
+
+<form name="form" th:action="@{/Seller/ModifyProduct/ModifyInformation}">
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+    <tr>
+        <p />  <label>productName</label>           <input name="productName" th:value="*{productName}"></input>
+        <p />  <label>productStock</label>          <input name="productStock" th:value="*{productStock}"></input>
+        <p />  <label>brandName</label>             <input name="brandName" th:value="*{brandName}"></input>
+        <p />  <label>productPhoto</label>          <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
+        <p />  <label>ProductPrice</label>          <input name="ProductPrice" th:value="*{productPrice}"></input>
+        <p />  <label>productBriefInfo</label>      <input name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
+        <input type="hidden" name="isOnSaleValue" th:value="*{isOnSale}"></input>
+    </tr>
+    <table id="otherAttributes">
+        <tr>
+            <button type="button" onclick="addNewAttr()">addNewAttr</button>
+        </tr>
+        <tr>
+            <th>attrName</th>
+            <th>attrValue</th>
+            <th>modify</th>
+            <th>delete</th>
+        </tr>
+    </table>
+
+    <div>
+        <img id="photo" src=""  style="display: block;" />
+    </div>
+    <div>
+        <button type="submit">ok</button>
+    </div>
+</form>
+
+
+<br />
+<script>
+    var selectbox = document.form.isOnSale;
+    selectbox.value = document.form.isOnSaleValue.value;
+
+    var fileInput = document.getElementById('productPhoto'),
+        photo = document.getElementById("photo");
+    // 监听change事件:
+    fileInput.addEventListener('change', function () {
+        // 检查文件是否选择:
+        if (!fileInput.value) {
+            info.innerHTML = '没有选择文件';
+            return;
+        }
+        // 获取File引用:
+        var file = fileInput.files[0];
+
+        if(file.type != "image/jpeg")
+            if( file.type != "image/png")
+                if(file.type != "image/gif")
+                {
+                    alert("不是有效的图片文件!");
+                    return;
+                }
+
+        // 读取文件:
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+            photo.src = data;
+        };
+
+        // 以DataURL的形式读取文件:
+        reader.readAsDataURL(file);
+
+    });
+
+    var index = 1;
+
+    var updateBriefInfo = function () {
+        var obj = {};
+        var attrs = document.getElementById('otherAttributes');
+        var len = attrs.rows.length;
+        if(len > index)
+        {
+            index = len;
+        }
+        else
+            len = index;
+
+        console.log(attrs);
+        for(var i =1; len>i; i++)
+        {
+            var attrName = document.getElementById('attribute'+i),
+                attrValue = document.getElementById('value'+i);
+            if(attrName != null )
+                if(attrValue != null)
+                {
+                    if(attrValue.value == "" || attrName.value == "")
+                    {
+                        alert("value not be empty");
+                        return;
+                    }
+                    obj[attrName.value] = attrValue.value;
+                }
+
+        }
+        console.log(obj);
+        var briefInfo = document.getElementById('productBriefInfo');
+        briefInfo.value = JSON.stringify(obj);
+    }
+
+    var deleteBtn =  function(name) {
+
+        var tr = document.getElementById('otherAttributes'+name);
+        tr.remove();
+        updateBriefInfo();
+        return false;
+
+    }
+
+    var modify = function (name) {
+        updateBriefInfo();
+        return false;
+    }
+
+    var addNewAttr = function () {
+        var tr = attrs.insertRow();
+        tr.id = "otherAttributes" + index;
+        var td1 = tr.insertCell(0),
+            td2 = tr.insertCell(1),
+            td3 = tr.insertCell(2),
+            td4 = tr.insertCell(3);
+        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "input attribute" ></input></td>';
+        td2.innerHTML = '<td><input id = "value' +index  + '" value= "input value"></input></td>';
+        td3.innerHTML = '<td>' + '<button id="addNewAttr'+ index  + '" name="'+ index +'" onclick="addNewAttrOk(id,name)"  type="button">add</button></td>';
+        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
+        index++;
+    }
+
+    var addNewAttrOk = function (id, name) {
+        var btn = document.getElementById(id);
+        console.log(btn);
+        btn.innerText = "modify";
+        btn.onclick = modify;
+        updateBriefInfo();
+    }
+
+    var attrs = document.getElementById('otherAttributes'),
+        info = document.getElementById('productBriefInfo');
+    var obj = JSON.parse(info.value);
+    console.log(obj);
+
+
+    for(var i in obj)
+    {
+        var tr = attrs.insertRow();
+        tr.id = "otherAttributes" + index;
+        var td1 = tr.insertCell(0),
+            td2 = tr.insertCell(1),
+            td3 = tr.insertCell(2),
+            td4 = tr.insertCell(3);
+        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "' + i + '" ></input></td>';
+        td2.innerHTML = '<td><input id = "value' +index  + '" value= "' + obj[i] + ' "></input></td>';
+        td3.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="modify(name)"  type="button">modify</button></td>';
+        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
+        index++;
+    }
+
+
+</script>
+
+<form name="form1" th:action="@{/Seller/FastJump}" method="get">
+    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
+    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
+    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
+    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</form>
+</body>
+</html>
