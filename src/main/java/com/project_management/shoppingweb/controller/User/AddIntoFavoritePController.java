@@ -2,7 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.ProductCollection;
-import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
+import com.project_management.shoppingweb.service.User.ProductCollectionService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,7 +16,7 @@ import java.util.List;
 @Controller
 public class AddIntoFavoritePController {
     @Autowired
-    private User_ProductCollectionService userProductCollectionService;
+    private ProductCollectionService productCollectionService;
     @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.GET)
     public String AddIntoFavoriteP(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -30,19 +30,19 @@ public class AddIntoFavoritePController {
             model.addAttribute("ProductID", ProductID);
             System.out.println("no");
             model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/Product";
+            return "/User/productdetial";
         }
 
         List<ProductCollection> GlobalFavorites = new ArrayList<ProductCollection>();
-        GlobalFavorites = userProductCollectionService.findAllByUserId(Long.parseLong(UserID));
+        GlobalFavorites = productCollectionService.findAllByUserId(Long.parseLong(UserID));
         for(int i = 0; i < GlobalFavorites.size(); i++){
-            if(GlobalFavorites.get(i).getUserId()== Long.parseLong(UserID)){
+            if(GlobalFavorites.get(i).getProductId()==Long.parseLong(ProductID)){
                 model.addAttribute("UserID", UserID);
                 model.addAttribute("ShopID", ShopID);
                 model.addAttribute("ProductID", ProductID);
                 System.out.println("no");
                 model.addAttribute("UnitPrice", UnitPrice);
-                return "/User/Product";
+                return "/User/productdetial";
             }
         }
 
@@ -51,13 +51,13 @@ public class AddIntoFavoritePController {
         //favorite.setCollectionId((long)1);
         favorite.setProductId(Long.parseLong(ProductID));
 
-        userProductCollectionService.save(favorite);
+        productCollectionService.save(favorite);
 
         System.out.println("ok");
         model.addAttribute("UserID", UserID);
         model.addAttribute("ProductID", ProductID);
         model.addAttribute("ShopID", ShopID);
         model.addAttribute("UnitPrice", UnitPrice);
-        return "/User/Product";
+        return "/User/productdetial";
     }
 }

@@ -4,16 +4,94 @@
 
     <title>Ordrebyffff</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <style type="text/css">
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #head{
+            height: 60px;
+            background-color:cornflowerblue;
+        }
+        #myfavorite{
+            width:120px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: lightskyblue;
+        }
+        #myshoppingcart{
+            width:120px;
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+
+        #siderBar {
+            margin: 0px 0px ;
+            background-color: cornflowerblue ;
+            float: right;
+
+        }
+        #siderBar ul {
+            margin: 0px 0px 0px 0px;
+            height: 60px;
+
+
+        }
+        #siderBar ul li{
+            width: 150px;
+            height: 30px;
+            float: right;
+            background-color: cornflowerblue ;
+            list-style: none;
+            margin: 0px 10px;
+            text-align: center;
+        }
+        #table{
+            border-collapse:collapse;
+            border-spacing:0;
+        }
+        tr td{
+            text-align: center;
+        }
+
+    </style>
 </head>
+
 <body>
 
-<div style="width: 250px;height: 500px;float: left">
+<div id="head">
+    <img src="./Resource/parknshop_logo.jpg " alt="140x140"/>
+    <div id="siderBar">
+        <ul>
+            <li>
+                <form name="form2" th:action="@{/MyShoppingCart}" method="get">
+                    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                    <button id="myshoppingcart" type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+                </form>
+            </li>
+            <li>
+                <form name="form1" th:action="@{/MyFavorite}" method="get">
+                    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                    <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</div>
+
+<!--<div style="width: 250px;height: 500px;float: left">
     <table>
         <tr>
-            <td>productID</td>
+            <td>sellerID</td>
         </tr>
         <tr th:each="ProductList : ${ProductList}" >
-            <td th:text="${ProductList}">Onions</td>　　
+            <td th:text="${ProductList}" >Onions</td>　　
         </tr>
     </table>
 </div>
@@ -60,17 +138,25 @@
             <td th:text="${status}">Onions</td>　　
         </tr>
     </table>
-</div>
+</div>-->
 
-<form name="form1" th:action="@{/MyFavorite}" method="get">
-    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
-</form>
+<table id="table" >
+    <tr  style="margin: 0 auto">
+        <td width="250px" height="60px"><strong>sellerID</strong></td>
+        <td width="250px" height="60px"><strong>TotalMoney</strong></td>
+        <td width="250px" height="60px"><strong>PayWay</strong></td>
+        <td width="250px" height="60px"><strong>CreateTime</strong></td>
+        <td width="250px" height="60px"><strong>Status</strong></td>
+    </tr>
+    <tr th:each="MyOrder : ${MyOrder}"style="border-bottom: 1px lightgray solid"  style="text-align: center">
+        <td width="250px" height="60px" th:text="*{MyOrder.sellerId}" style="border-bottom: 1px lightgray solid;">Onions</td>
+        <td width="250px" height="60px" th:text="*{MyOrder.tradeTotalMoney}" style="border-bottom: 1px lightgray solid">Onions</td>
+        <td width="250px" height="60px" th:text="*{MyOrder.tradePayWay}" style="border-bottom: 1px lightgray solid">Onions</td>
+        <td width="250px" height="60px" th:text="*{MyOrder.tradeCreateTime}" style="border-bottom: 1px lightgray solid">Oinons</td>
+        <td width="250px" height="60px" th:text="*{MyOrder.tradeStatus}" style="border-bottom: 1px lightgray solid">Onions</td>
+    </tr>
+</table>
 
-<form name="form2" th:action="@{/MyShoppingCart}" method="get">
-    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-    <button type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
-</form>
 
 </body>
 </html>
