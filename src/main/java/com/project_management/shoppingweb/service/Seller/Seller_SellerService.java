@@ -1,16 +1,14 @@
 package com.project_management.shoppingweb.service.Seller;
 
-import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.domain.SellerAdvertisement;
-import com.project_management.shoppingweb.repository.ProductRepository;
-import com.project_management.shoppingweb.repository.SellerAdvertisementRepository;
-import com.project_management.shoppingweb.repository.SellerRepository;
+import com.project_management.shoppingweb.domain.*;
+import com.project_management.shoppingweb.repository.*;
 import org.dom4j.io.STAXEventReader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 
 @Service
@@ -24,6 +22,12 @@ public class Seller_SellerService {
 
     @Resource
     private ProductRepository productRepository;
+
+    @Resource
+    private TradeRepository tradeRepository;
+
+    @Resource
+    private TradeDetailRepository tradeDetailRepository;
 
     public Seller getSellerById(long sellerId)
     {
@@ -102,5 +106,38 @@ public class Seller_SellerService {
     public void deleteProduct(long productId)
     {
         productRepository.delete(productRepository.getByProductId(productId));
+    }
+
+    public List<Trade> getTradeList(long sellerID, int statue)
+    {
+        return tradeRepository.findBySellerIdAndTradeStatus(sellerID,statue);
+    }
+
+    public List<Trade> getTradeListByTime(long sellerID, int statue, Date startDate, Date endDate)
+    {
+        List<Trade> reTrade = new LinkedList<Trade>();
+        for(Trade trade : getTradeList(sellerID, statue))
+        {
+            if(endDate.after(trade.getTradeFinishTime()) && startDate.before(trade.getTradeFinishTime()))
+            {
+                reTrade.add(trade);
+            }
+        }
+        return reTrade;
+    }
+
+    public double getTradeSum(List<Trade> trades)
+    {
+        double sum = 0.0;
+        for(Trade trade : trades)
+        {
+            sum += trade.getTradeTotalMoney();
+        }
+        return sum;
+    }
+
+    public List<TradeDetail> getTradeList(long tradeID)
+    {
+        return tradeDetailRepository.findByTradeId(tradeID);
     }
 }

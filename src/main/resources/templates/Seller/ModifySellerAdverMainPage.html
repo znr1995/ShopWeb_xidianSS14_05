@@ -1,60 +1,250 @@
-<!-- Seller Management Main page-->
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
 <head>
-    <title>ModifySellerAdvertisement</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>ModifySellerAdverMainPage</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/component.css" />
+    <script src="/js/modernizr.custom.js"></script>
 </head>
-<body>
+<body class="cbp-spmenu-push-toleft">
 
-<h2>ModifySellerAdvertisementPage</h2>
-<br /> <br />
-
+</br>
 <p>
     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
 </p>
+<div class="container">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <h3>导航</h3>
+        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
 
-<!--r返回表单-->
-<form th:action="@{/Seller/ModifySellerAdvertisement/ReturnBack}" method="get">
-    <button type="submit">return Back</button>
-</form>
+            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
+            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+            <button  name="action" value="ViewIncome" >ViewIncome</button>
+            <button  name="action" value="ViewTransaction">ViewTransaction</button>
+            <button  name="action" value="ProductsManagement">ProductsManagement</button>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
 
-<br />
-<!--主信息表单-->
+        </form>
 
+    </nav>
 
-<form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
-    <!-- 这里需要一个列表-->
-    <table>
-        <tr>
-            <th>choose picture</th>
-            <th>yulan</th>
-        </tr>
-        <tr th:each="adv : ${Advertisements}">
-            <td>
-                <input type="file" th:value="${adv}"></input>
-            </td>
-            <td>
-                <image src="" th:id="${adv}"></image>
-            </td>
-            <p />
-        </tr>
-    </table>
-    <button type="submit" name="action" value="OkButton">OK</button>
-    <button type="submit" name="action" value="CancelButton">Cancel</button>
-</form>
+    <div class="text-center">
 
 
-<br />
+        <h1>ModifySellerAdverMainPage</h1>
 
 
-<form name="form1" th:action="@{/Seller/FastJump}" method="get">
-    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
-    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
-    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
-    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
-    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-</form>
+    </div>
+    </br>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-2">
+
+            <form th:action="@{/Seller/ModifySellerAdvertisement/ReturnBack}" method="get">
+                <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                <button type="submit" class="btn-default">return Back</button>
+
+            </form>
+        </div>
+
+        <div class="col-lg-6 col-md-2 text-right">
+
+            <section >
+
+                <button type="submit" id="showLeftPush" class="btn-default">快捷导航</button>
+
+            </section>
+        </div>
+
+        </br></br></br></br>
+
+    </div>
+
+    <div class="row">
+        <button class="btn-default text-right" data-toggle="modal" data-target="#myModal">Add</button>
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"
+                                aria-hidden="true">×
+                        </button>
+                        <h4 class="modal-title text-center" id="myModalLabel">
+                            添加广告信息
+                        </h4>
+                    </div>
+                    <div class="modal-body">
+                       <form class="form-group form-horizontal" role="form">
+
+                           <div class="form-group">
+                               <label class="col-lg-5 text-right">description:</label>
+                               <div class="col-lg-3">
+                                   <input type="text" class="form-control" ></input>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-5 text-right">startDate:</label>
+                               <div class="col-lg-3">
+                                   <input type="text" class="form-control" ></input>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-5 text-right">endDate:</label>
+                               <div class="col-lg-3">
+                                   <input type="text" class="form-control" ></input>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-5 text-right">type:</label>
+                               <div class="col-lg-3">
+                                   <input type="text" class="form-control" ></input>
+                               </div>
+                           </div>
+
+                           <div class="form-group">
+                               <label class="col-lg-5 text-right">status:</label>
+                               <div class="col-lg-3">
+                                   <input type="text" class="form-control" ></input>
+                               </div>
+                           </div>
+                       </form>
+
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default"
+                                data-dismiss="modal">确定
+                        </button>
+
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+
+        <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
+            <!-- 这里需要一个列表-->
+            <table class="table table-striped">
+                <caption>Product Advertisements</caption>
+
+
+                <thead>
+                    <th>description</th>
+                    <th>startDate</th>
+                    <th>endDate</th>
+                    <th>type</th>
+                    <th>status</th>
+                </thead>
+
+                <tr th:each="adv : ${Advertisements}">
+                    <td>
+                        <label th:value="*{adv.description}"></label>
+                    </td>
+                    <td>
+                        <data th:value="*{adv.startDate}"></data>
+                    </td>
+                    <td>
+                        <data th:value="*{adv.endDate}"></data>
+                    </td>
+
+                    <td>
+                        <label th:value="*{adv.type}"></label>
+                    </td>
+                    <td>
+                        <label th:value="*{adv.status}"></label>
+                    </td>
+
+                    <td>
+                        <button type="button" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+
+<div class="row">
+    <button class="btn-default text-right" data-toggle="modal" data-target="#myModal">Add</button>
+    <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
+        <!-- 这里需要一个列表-->
+        <table class="table table-striped">
+            <caption>Seller Advertisements</caption>
+
+
+            <thead>
+            <th>description</th>
+            <th>startDate</th>
+            <th>endDate</th>
+            <th>type</th>
+            <th>status</th>
+            </thead>
+
+            <tr th:each="adv : ${Advertisements}">
+                <td>
+                    <label th:value="*{adv.description}"></label>
+                </td>
+                <td>
+                    <data th:value="*{adv.startDate}"></data>
+                </td>
+                <td>
+                    <data th:value="*{adv.endDate}"></data>
+                </td>
+
+                <td>
+                    <label th:value="*{adv.type}"></label>
+                </td>
+                <td>
+                    <label th:value="*{adv.status}"></label>
+                </td>
+
+                <td>
+                    <button type="button" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+
+
+</div>
+<script src="./js/classie.js"></script>
+
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+
+        showLeftPush = document.getElementById( 'showLeftPush' ),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+
+
+    function disableOther( button ) {
+
+        if( button !== 'showLeftPush' ) {
+            classie.toggle( showLeftPush, 'disabled' );
+        }
+
+    }
+</script>
+
 </body>
 </html>
