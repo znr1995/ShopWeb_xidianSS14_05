@@ -78,11 +78,6 @@ public class AdminManagementController {
 	public String backUp() {
 		return "admin/backUp";
 	}
-
-	@GetMapping("/commission")
-	public String commission() {
-		return "admin/commission";
-	}
 	
 	@GetMapping("/customerManage")
 	public String custommerManage(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
@@ -383,4 +378,12 @@ public class AdminManagementController {
 		return "redirect:/admin/shopManage";
 	}
 
+	@GetMapping("/commission")
+	public String commission(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+		model.addAttribute("adminUserName", username);
+		List<ProductAdvertisement> advertisementList =  productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("advertisementList", advertisementList);
+		
+		return "admin/commission";
+	}
 }

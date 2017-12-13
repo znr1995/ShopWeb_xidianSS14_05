@@ -54,25 +54,14 @@
             <th></th>
         </tr>
         </thead>
-        <tbody>
-        <tr>
-            <td>001</td>
-            <td>Rammohan </td>
-            <td>Reddy</td>
-            <td>A+</td>
-        </tr>
-        <tr>
-            <td>002</td>
-            <td>Smita</td>
-            <td>Pallod</td>
-            <td>A</td>
-        </tr>
-        <tr>
-            <td>003</td>
-            <td>Rabindranath</td>
-            <td>Sen</td>
-            <td>A+</td>
-        </tr>
+        <tbody>  
+        <th:block th:each="u,index:${advertisementList}">
+                               <tr>
+                                   <td th:text="${u.advertisementId}"></td>
+                                   <td th:text="${u.sellerName}"></td>
+                                   <td th:text="${u.price}"></td>                           
+     			</tr>
+     	</th:block>		
         </tbody>
     </table><br><br>
 
@@ -112,14 +101,14 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Anna</a>
+             <span class="navbar-brand" th:text="${adminUserName}">Anna</span>
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a href="PersonalInformation.html">Personal Information</a></li>
-                    <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px">
-                        Log out
-                    </button>
+                   <li><a th:href="@{personalInformation}">Personal Information</a></li>
+                     <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height:  50px">
+                    Log out
+                </button>
                     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
                         <div class="modal-dialog">
                             <div class="modal-content">
@@ -136,10 +125,10 @@
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Leave
-                                    </button>
-                                    <button type="button" class="btn btn-primary">
+                                </button>
+                                <a href="/admin/logout"><button type="button" class="btn btn-primary">
                                         Sure
-                                    </button>
+                                    </button></a>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal -->
