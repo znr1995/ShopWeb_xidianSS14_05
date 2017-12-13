@@ -21,7 +21,7 @@ public class ProductAdvertisement {
 	private double price;
 	private Integer type;//广告再主页上的位置，1-滚动，2-列表广告
     private Integer status;// 1 - 未判断， 0 - 通过
-
+    private String sellerName;
 
 	public double getPrice() {
 		return price;
@@ -95,5 +95,14 @@ public class ProductAdvertisement {
 	public void setType(Integer type) {
 		this.type = type;
 	}
+
+	public String getSellerName() {
+		return sellerName;
+	}
+
+	public void setSellerName(String sellerName) {
+		this.sellerName = sellerName;
+	}
+	
 
 }
