@@ -104,7 +104,7 @@ public class ProductsManagementController {
     public String jumpToLastLayer(RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
-        return "redirect:/Seller/Main";
+        return "redirect:/Seller/logout";
     }
 
 

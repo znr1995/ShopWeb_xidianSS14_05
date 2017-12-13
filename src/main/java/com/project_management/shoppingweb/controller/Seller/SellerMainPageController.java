@@ -34,18 +34,19 @@ public class SellerMainPageController {
             attributes.addAttribute("errorMessage","sellerId is wrong!");
             return "redirect:/error/errorHandler";
         }
-
-        model.addAttribute("Sculpture",seller.getSculpture());
-        model.addAttribute("Address",seller.getAddress());
-        model.addAttribute("Email",seller.getEmail());
-        model.addAttribute("Passwd",seller.getPassword());
-        model.addAttribute("PhoneNum",seller.getPhoneNum());
-        model.addAttribute("Username",seller.getUsername());
-        model.addAttribute("SellerID",sellerID);
-        model.addAttribute("SellerName",seller.getUsername());
-        model.addAttribute("Catogery",seller.getCatogery());
-        model.addAttribute("Shopname",seller.getShopname());
-        return "/Seller/SellerMainPage";
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
+//        model.addAttribute("Sculpture",seller.getSculpture());
+//        model.addAttribute("Address",seller.getAddress());
+//        model.addAttribute("Email",seller.getEmail());
+//        model.addAttribute("Passwd",seller.getPassword());
+//        model.addAttribute("PhoneNum",seller.getPhoneNum());
+//        model.addAttribute("Username",seller.getUsername());
+//        model.addAttribute("SellerID",sellerID);
+//        model.addAttribute("SellerName",seller.getUsername());
+//        model.addAttribute("Catogery",seller.getCatogery());
+//        model.addAttribute("Shopname",seller.getShopname());
+//        return "/Seller/SellerMainPage";
     }
 
     //退出跳转
