@@ -73,7 +73,7 @@
     <br>
     <br>
     <div class="row col-lg-8">
-        <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}">
+        <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
             <input type="hidden" name="SellerID" th:value="*{SellerID}" />
             <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
@@ -100,13 +100,7 @@
             <br>
             <br>
 
-            <div class="form-group">
-                <label class="col-lg-5 text-right">productPhoto:</label>
-                <div class="col-lg-3">
-                    <input type="file" id="productPhoto"  th:value="*{productPhoto}"></input>
-                    <input type="hidden" id="productPhotoPath" name="productPhoto" ></input>
-                </div>
-            </div>
+
 
             <div class="form-group">
                 <label class="col-lg-5 text-right">productMarketPrice:</label>
@@ -119,6 +113,13 @@
                 <label class="col-lg-5 text-right">productBriefInfo:</label>
                 <div class="col-lg-3">
                     <input class="form-control" name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productPhoto:</label>
+                <div class="col-lg-3">
+                    <input type="file" id="productPhoto" name="productPhoto"></input>
                 </div>
             </div>
             <br>
@@ -134,12 +135,13 @@
                 </tr>
             </table>
             <div class="row text-center">
-                <button type="submit" class="btn-default" >OK</button>
+                <button type="submit" class="btn-default">OK</button>
             </div>
         </form>
     </div>
     <div class="col-lg-4 text-left">
-        <img id="photo"   style="display: block;" />
+        <input type="hidden" id="srcPath" th:value="${productPhoto}"></input>
+        <img id="photo"  style="display: block;"  height="200" width="300" alt="default" />
     </div>
 </div>
 
@@ -174,8 +176,9 @@
 <script>
 
     var fileInput = document.getElementById('productPhoto'),
-        photo = document.getElementById("photo");
-    // 监听change事件:
+        photo = document.getElementById("photo"),
+        srcPath = document.getElementById("srcPath");
+        photo.src = '/' + srcPath.value;
     fileInput.addEventListener('change', function () {
         // 检查文件是否选择:
         if (!fileInput.value) {
@@ -193,6 +196,14 @@
                     return;
                 }
 
+
+        var strSourFile = file.value;
+        var strDestFile = BASEPATH + file.name;
+        var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+        objFSO.MoveFile(strSourFile, strDestFile);
+
+
+        console.log(fileInput.value);
         // 读取文件:
         var reader = new FileReader();
 
@@ -200,6 +211,8 @@
             var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
             photo.src = data;
         };
+
+
 
         // 以DataURL的形式读取文件:
         reader.readAsDataURL(file);

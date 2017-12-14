@@ -71,7 +71,7 @@
 <br>
     <br>
     <div class="row col-lg-8" >
-        <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}">
+        <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}" method="POST" enctype="multipart/form-data">
             <input type="hidden" name="SellerID" th:value="*{SellerID}" />
             <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
@@ -101,7 +101,7 @@
             <div class="form-group">
               <label class="col-lg-5 text-right">productPhoto:</label>
                 <div class="col-lg-3">
-                    <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
+                    <input type="file" id="productPhoto" name="productPhotoFile" ></input>
                 </div>
             </div>
 
@@ -137,7 +137,7 @@
         </form>
     </div>
     <div class="col-lg-4 text-left">
-        <img id="photo" src=""  style="display: block;" />
+        <img id="photo" th:src="${productPhoto}" alt="nothing here" height="300" width="500" style="display: block;" />
     </div>
 </div>
 

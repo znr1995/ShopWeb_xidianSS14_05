@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+
 @Controller
 @RequestMapping("/Seller/ModifySellerInformation")
 public class ModifySellerInformationController {
@@ -19,6 +25,7 @@ public class ModifySellerInformationController {
     private Seller_SellerService sellerSellerService;
 
     private  long sellerID = -1;
+
 
     @RequestMapping("ModifySellerInformationHandler")
     public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")long sellerId, Model model,RedirectAttributes attributes)
@@ -77,10 +84,15 @@ public class ModifySellerInformationController {
         }
     }
 
+
+
+
     @RequestMapping("ReturnBack")
     public String jumpToLastLayer(RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
         return "redirect:/Seller/Main";
     }
+
+
 }
