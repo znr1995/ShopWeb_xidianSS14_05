@@ -24,24 +24,17 @@
     <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
         <h3>导航</h3>
         <form name="form1" th:action="@{/Seller/FastJump}" method="get">
-
             <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
             <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
             <button  name="action" value="ViewIncome" >ViewIncome</button>
             <button  name="action" value="ViewTransaction">ViewTransaction</button>
             <button  name="action" value="ProductsManagement">ProductsManagement</button>
             <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-
         </form>
-
     </nav>
 
     <div class="text-center">
-
-
         <h1>ModifySellerAdverMainPage</h1>
-
-
     </div>
     </br>
 
@@ -58,9 +51,7 @@
         <div class="col-lg-6 col-md-2 text-right">
 
             <section >
-
-                <button type="submit" id="showLeftPush" class="btn-default">快捷导航</button>
-
+                <button type="button" id="showLeftPush" class="btn-default">快捷导航</button>
             </section>
         </div>
 
@@ -68,159 +59,112 @@
 
     </div>
 
+    <div>
+        <form th:action="@{/Seller/ModifySellerAdvertisement/AddNewAdvertisement}">
+            <button type="submit">add new advertisement</button>
+        </form>
+    </div>
+    <div>
+        <h2>product advertisments</h2>
+    </div>
+
     <div class="row">
-        <button class="btn-default text-right" data-toggle="modal" data-target="#myModal">Add</button>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"
-                                aria-hidden="true">×
-                        </button>
-                        <h4 class="modal-title text-center" id="myModalLabel">
-                            添加广告信息
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                       <form class="form-group form-horizontal" role="form">
+        <form th:action="@{/Seller/ModifySellerAdvertisement/ModifyProductAdvertisement}">
 
-                           <div class="form-group">
-                               <label class="col-lg-5 text-right">description:</label>
-                               <div class="col-lg-3">
-                                   <input type="text" class="form-control" ></input>
-                               </div>
-                           </div>
-
-                           <div class="form-group">
-                               <label class="col-lg-5 text-right">startDate:</label>
-                               <div class="col-lg-3">
-                                   <input type="text" class="form-control" ></input>
-                               </div>
-                           </div>
-
-                           <div class="form-group">
-                               <label class="col-lg-5 text-right">endDate:</label>
-                               <div class="col-lg-3">
-                                   <input type="text" class="form-control" ></input>
-                               </div>
-                           </div>
-
-                           <div class="form-group">
-                               <label class="col-lg-5 text-right">type:</label>
-                               <div class="col-lg-3">
-                                   <input type="text" class="form-control" ></input>
-                               </div>
-                           </div>
-
-                           <div class="form-group">
-                               <label class="col-lg-5 text-right">status:</label>
-                               <div class="col-lg-3">
-                                   <input type="text" class="form-control" ></input>
-                               </div>
-                           </div>
-                       </form>
-
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default"
-                                data-dismiss="modal">确定
-                        </button>
-
-                    </div>
-                </div><!-- /.modal-content -->
-            </div><!-- /.modal-dialog -->
-        </div><!-- /.modal -->
-
-
-        <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
-            <!-- 这里需要一个列表-->
-            <table class="table table-striped">
-                <caption>Product Advertisements</caption>
-
-
+            <table class="table table-striped" id="seller_table">
+                <caption>Seller Advertisements</caption>
                 <thead>
-                    <th>description</th>
-                    <th>startDate</th>
-                    <th>endDate</th>
-                    <th>type</th>
-                    <th>status</th>
+                <th>description</th>
+                <th>startDate</th>
+                <th>endDate</th>
+                <th>type</th>
+                <th>status</th>
                 </thead>
 
-                <tr th:each="adv : ${Advertisements}">
+                <tr th:each="adv : ${productAdvertisements}">
                     <td>
-                        <label th:value="*{adv.description}"></label>
+                        <label th:text="*{adv.description}"></label>
                     </td>
                     <td>
-                        <data th:value="*{adv.startDate}"></data>
+                        <data th:text="*{adv.startDate}"></data>
                     </td>
                     <td>
-                        <data th:value="*{adv.endDate}"></data>
-                    </td>
-
-                    <td>
-                        <label th:value="*{adv.type}"></label>
-                    </td>
-                    <td>
-                        <label th:value="*{adv.status}"></label>
+                        <data th:text="*{adv.endDate}"></data>
                     </td>
 
                     <td>
-                        <button type="button" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
+                        <label th:text="*{adv.typeString}" onclick="changeTypeText(this.value)"></label>
+                    </td>
+                    <td>
+                        <label th:text="*{adv.statusString}" onclick="changeStatusText(this.value)"></label>
+                    </td>
+
+                    <td>
+                        <button type="submit" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
                     </td>
                 </tr>
             </table>
         </form>
-
     </div>
 
-<div class="row">
-    <button class="btn-default text-right" data-toggle="modal" data-target="#myModal">Add</button>
-    <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
-        <!-- 这里需要一个列表-->
-        <table class="table table-striped">
-            <caption>Seller Advertisements</caption>
+    <h2>
+        seller advertisement
+    </h2>
 
+    <div class="row">
+        <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
+            <!-- 这里需要一个列表-->
+            <table  class="table table-striped" id="seller_table">
+                <caption>Seller Advertisements</caption>
 
-            <thead>
-            <th>description</th>
-            <th>startDate</th>
-            <th>endDate</th>
-            <th>type</th>
-            <th>status</th>
-            </thead>
+                <thead>
+                <th>description</th>
+                <th>startDate</th>
+                <th>endDate</th>
+                <th>status</th>
+                </thead>
 
-            <tr th:each="adv : ${Advertisements}">
-                <td>
-                    <label th:value="*{adv.description}"></label>
-                </td>
-                <td>
-                    <data th:value="*{adv.startDate}"></data>
-                </td>
-                <td>
-                    <data th:value="*{adv.endDate}"></data>
-                </td>
+                <tr th:each="adv : ${sellerAdvertisements}">
+                    <td>
+                        <label th:text="*{adv.description}"></label>
+                    </td>
+                    <td>
+                        <data th:text="*{adv.startDate}"></data>
+                    </td>
+                    <td>
+                        <data th:text="*{adv.endDate}"></data>
+                    </td>
+                    <td>
+                        <label th:text="*{adv.statusString}" ></label>
+                    </td>
 
-                <td>
-                    <label th:value="*{adv.type}"></label>
-                </td>
-                <td>
-                    <label th:value="*{adv.status}"></label>
-                </td>
-
-                <td>
-                    <button type="button" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
-                </td>
-            </tr>
-        </table>
-    </form>
-</div>
+                    <td>
+                        <button type="submit" class="btn-default" data-toggle="modal" data-target="#myModal" name="modify" th:value="${adv.advertisementId}">modify</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
 
 
 
 </div>
 <script src="./js/classie.js"></script>
+<script>
+    function changeStatusText(value) {
+        if(value == 1)
+            this.innerText = 'not passed!';
+        else
+            this.innerText = 'passed';
+    }
 
+    function changeTypeText(value) {
+        if(value == 1)
+            this.innerText = 'roll advertisement';
+        else
+            this.innerText = 'list advertisement';
+    }
+</script>
 <script>
     var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 
@@ -244,6 +188,7 @@
         }
 
     }
+
 </script>
 
 </body>

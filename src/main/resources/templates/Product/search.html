@@ -43,9 +43,6 @@
             <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
         </a>
     </div>
-
-    <br>
-    </br>
     <!-- 搜索按钮-->
     <div class="col-lg-6">
         <div class="input-group">
@@ -60,36 +57,34 @@
         </div>
     </div>
 
-    <br>
-    </br>
 
     <div>
         <div class="row">
             <!-- 点击图片跳入产品介绍页面 -->
-            <div th:if="${not pro_isnull}">
-                <div th:each="adv : ${products}" class="col-lg-2">
-                    <div class="img">
-                        <a target="_blank" th:href="@{'/product/'+${adv.getproductId()}}">
-                            <img th:src="'/'+${adv.getproductPhoto()}" alt="fail load pics" width="160" height="160"/>
-                        </a>
-                    </div>
-                    <table>
-                        <thead>
-                        <th>Product </th>
-                        <th>Price</th>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td><p th:text="${adv.getproductName()}">ProductName</p></td>
-                            <td><p th:text="'$'+${adv.getproductPrice()}">Price</p></td>
-                        </tr>
-                        </tbody>
-                    </table>
+            <div th:if="${not pro_isnull}" th:each="adv : ${products}" class="col-lg-2">
+                <div class="img">
+                    <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
+                        <img th:src="'/'+${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
+                    </a>
                 </div>
+                <table>
+                    <thead>
+                    <th>Product </th>
+                    <th>Price</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><p th:text="${adv.productName}">ProductName</p></td>
+                        <td><p th:text="'$'+${adv.productPrice}">Price</p></td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+
 </div>
+
 </body>
 </html>
 </html>

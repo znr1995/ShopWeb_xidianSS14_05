@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>AddProduct</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/component.css" />
+    <script src="/js/modernizr.custom.js"></script>
+</head>
+<body class="cbp-spmenu-push-toleft " >
+
+
+<p>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</p>
+
+
+<div class="container">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <h3>导航</h3>
+        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
+
+            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
+            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+            <button  name="action" value="ViewIncome" >ViewIncome</button>
+            <button  name="action" value="ViewTransaction">ViewTransaction</button>
+            <button  name="action" value="ProductsManagement">ProductsManagement</button>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+
+        </form>
+
+    </nav>
+
+    <div class="text-center">
+
+
+        <h1>AddProductPage</h1>
+
+
+    </div>
+    </br>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-2">
+
+            <form th:action="@{/Seller/ModifySellerAdvertisement/ReturnBack1}" method="get">
+                <button type="submit" class="btn-default">return Back</button>
+
+            </form>
+        </div>
+
+        <div class="col-lg-6 col-md-2 text-right">
+
+            <section >
+
+                <button id="showLeftPush" class="btn-default">快捷导航</button>
+
+            </section>
+        </div>
+
+        </br></br></br></br>
+
+    </div>
+    <br>
+    <br>
+    <div class="row col-lg-8" >
+        <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+            <input type="hidden" name="ProductID" th:value="*{ProdcutID}"/>
+            <input type="hidden" name="ProductAdvertisement" th:value="*{ProductAdvertisement}"/>
+            <input type="hidden" name="SellerAdvertisement" th:value="*{SellerAdvertisement}"/>
+            <input type="hidden" name="AddOrModify" id="AddOrModify" th:value="*{AddOrModify}"/>
+            <input type="hidden" name="IsProductAdvertisement" id="IsProductAdvertisement" th:value="*{IsProductAdvertisement}"/>
+
+            <input type="hidden" name="status" id="status" th:value="${status}" />
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">advertisement type:</label>
+                <div class="col-lg-3" id="advertisementTypeDiv">
+                    <select name="advertisementType" id="advertisementType" onchange="selectAdverType(this.value)">
+                        <option value="1">product advertisement</option>
+                        <option value="2">shop advertisement</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="productIDDiv">
+                <label class="col-lg-5 text-right">productID:</label>
+                <div class="col-lg-3"  id="productIDSelectDiv">
+                    <select name="productIDs" id="productIDSelect">
+                        <div th:each="product : ${Products}">
+                            <option  th:value="*{product.productId}" th:text="*{product.productName}"></option>
+                        </div>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group" id="locationDiv">
+                <label class="col-lg-5 text-right" >location type:</label>
+                <div class="col-lg-3" id="typeSelectDiv">
+                    <select name="type"  id="typeSelect">
+                        <option value="1">roll advertisement</option>
+                        <option value="2">list advertisement</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="from-group">
+                <label class="col-lg-5 text-right">startDate:</label>
+                <div class="col-lg-3" id="startDateDiv">
+                    <input type="date" class="form-control" id="startDate" name="startDate" th:value="*{startDate}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">endDate:</label>
+                <div class="col-lg-3" id="endDateDiv">
+                    <input type="date" class="form-control" id="endDate" name="endDate" th:value="*{endDate}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">pictureUrl:</label>
+                <div class="col-lg-3">
+                    <input type="file" id="pictureUrl" name="pictureUrl" ></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">description:</label>
+                <div class="col-lg-3">
+                    <textarea class="form-control" rows="3" id="description" name="description" th:text="*{description}"></textarea>
+                </div>
+            </div>
+            <br>
+
+
+            <div class="row text-center">
+                <button type="submit" id="submitBtn" class="btn-default" >add</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 text-left">
+        <img id="photo" th:src="${pictureUrl}" alt="nothing here" height="300" width="500" style="display: block;" />
+    </div>
+</div>
+
+<br />
+
+<script>
+
+    var fileInput = document.getElementById('pictureUrl'),
+        photo = document.getElementById('photo'),
+        selectAdverType = document.getElementById('advertisementType'),
+        locationDiv = document.getElementById('locationDiv'),
+        productIDDiv = document.getElementById('productIDDiv');
+
+
+   var selectAdverType = function (value) {
+      if(value == 2)
+      {
+          locationDiv.hidden = true;
+          productIDDiv.hidden = true;
+      }
+      else
+      {
+          productIDDiv.hidden =false;
+          locationDiv.hidden = false;
+      }
+   };
+
+    fileInput.addEventListener('change', function () {
+        photo.src = "";
+        if(!fileInput.value)
+        {
+            alert("not input image!");
+            return;
+        }
+
+        var file = fileInput.files[0];
+
+        if(file.type != "image/jpeg")
+            if( file.type != "image/png")
+                if(file.type != "image/gif")
+                {
+                    alert("不是有效的图片文件!");
+                    return;
+                }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            photo.src = e.target.result;
+        }
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+
+</script>
+
+<script src="/js/classie.js"></script>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+
+        showLeftPush = document.getElementById( 'showLeftPush' ),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+
+
+    function disableOther( button ) {
+
+        if( button !== 'showLeftPush' ) {
+            classie.toggle( showLeftPush, 'disabled' );
+        }
+
+    }
+</script>
+</body>
+</html>

@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.repository;
 
 import java.util.List;
 
+import com.project_management.shoppingweb.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -12,5 +13,7 @@ public interface ProductAdvertisementRepository extends JpaRepository<ProductAdv
     List<ProductAdvertisement> findAllByType(Integer type);
 	List<ProductAdvertisement> findAllByStatus(Integer status);
 	ProductAdvertisement findByAdvertisementId(Long advertisementId);
+	ProductAdvertisement save(ProductAdvertisement productAdvertisement);
+	List<ProductAdvertisement> findAllByProductId(long productId);
 
 }

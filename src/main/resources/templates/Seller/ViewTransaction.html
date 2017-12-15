@@ -48,20 +48,47 @@
             </div>
 
             </br>
+            <div>
+                <form th:action="@{/Seller/ViewTransaction/Search}">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                        <label>startDate</label>
+                        <input name="StartDate" type="date"/>
+                        <label>endDate</label>
+                        <input name="EndDate" type="date"/>
+                        <label>status</label>
+                            <select name="type">
+                                <option value="3">all</option>
+                                <option value="1">finished Trade</option>
+                                <option value="0">unfinished Trade</option>
+                            </select>
+                    <div>
+                        <button type="submit">Search</button>
+                    </div>
+                </form>
+            </div>
 
             <div class="row">
-                <form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
+                <form th:action="@{/Seller/ViewTransaction/Detail}">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                     <table class="table table-striped">
                         <caption>Recently Trades</caption>
                         <thead>
                             <th>TrandId</th>
-                            <th>Totle Price</th>
+                            <th>TotlePrice</th>
                             <th>Status</th>
                             <th>UserName</th>
                             <th class="text-center">detailed</th>
                         </thead>
-                        <tbody id="tradesTable">
-                            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                        <tbody id="tradesTable" >
+                            <tr th:each="detail:${details}">
+                                <td th:text="*{detail.trandId}"></td>
+                                <td th:text="*{detail.totlePrice}" ></td>
+                                <td th:text="*{detail.status}"></td>
+                                <td th:text="*{detail.userName}"></td>
+                                <td>
+                                    <button th:value="*{detail.trandId}" name="detail">detail</button>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </form>

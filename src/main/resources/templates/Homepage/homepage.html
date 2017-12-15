@@ -5,13 +5,16 @@
     <meta charset="UTF-8"/>
     <title>HomePage</title>
 
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
     <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
-    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
-    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
-    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/fsbanner.css"/>
-    <link rel="stylesheet" href="/css/zySearch.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
     <style type="text/css">
         .ex {
             width: 800px;
@@ -46,7 +49,7 @@
         </div>
 
         <!-- 搜索按钮-->
-      <!--  <div class="col-lg-6">
+        <div class="col-lg-6">
             <div class="input-group">
                 <form role='form' class = "bs-example bs-example-form" th:action="@{/search/name}" method = "GET">
                     <div class="input-group">
@@ -57,9 +60,8 @@
                     </div>
                 </form>
             </div>
-        </div>-->
-        <div class="zySearch" id="zySearch" style="text-align:center;"></div><br>
-    </div><br>
+        </div>
+    </div>
 
 
     <!--导航-->
@@ -167,50 +169,27 @@
             <li data-target="#LBbox" data-slide-to="1"></li>
         </ol>
         <!-- 轮播内容 -->
-        <!--<div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
+        <div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
             <tr th:each="ProductAdvertisement,ads1:${pro_ads_roll}">
                 <div class="item active" th:if="${ads1.first}" >
-                    <a target="_blank" th:href="@{'/product/'+${ads1.current.getProductId()}}">
-                        <img th:src="${ads1.current.getPictureUrl()} alt="1 slide"/>
+                    <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
+                        <img th:src="${ads1.current.PictureUrl}" alt="1 slide"/>
                     </a>
                     <div class="carousel-caption">
-                        &lt;!&ndash;<h1 th:text="'$'+${ads1.current.getType()}">type</h1>&ndash;&gt;
-                        <p th:text="${ads1.current.getDescription()}">description</p>
+                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                        <p th:text="${ads1.current.Description}">description</p>
                     </div>
                 </div>
                 <div class="item" th:if="${not ads1.first}" >
-                    <a target="_blank" th:href="@{'/product/'+${ads1.current.getProductId()}}">
-                        <img th:src="${ads1.current.getPictureUrl()}" alt="2 slide"/>
+                    <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
+                        <img th:src="${ads1.current.PictureUrl}" alt="2 slide"/>
                     </a>
                     <div class="carousel-caption">
-                        &lt;!&ndash;<h1 th:text="'$'+${ads1.current.getType()}">type</h1>&ndash;&gt;
-                        <p th:text="${ads1.current.getDescription()}">description</p>
+                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                        <p th:text="${ads1.current.Description}">description</p>
                     </div>
                 </div>
             </tr>
-        </div>-->
-
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <img src="/Resource/conon.jpg" alt="1 slide">
-                <div class="carousel-caption">
-                    <h1>第四代 Intel Core 处理器</h1>
-                    <p>无论是什么任务，配备 Intel HD Graphics 5000 图形处理器的第四代 Intel Core 处理器都能应对自如。</p>
-                    <p>
-                        <a href="#" class="btn btn-lg btn-primary" role="button">点我下载</a>
-                    </p>
-                </div>
-            </div>
-            <div class="item">
-                <img src="/Resource/macbook.jpg" alt="2 slide">
-                <div class="carousel-caption">
-                    <h1>MacBook Air</h1>
-                    <p>有了新一代 802.11ac 技术，MacBook Air 令 Wi-Fi 速度超越极限。</p>
-                    <p>
-                        <a href="#" class="btn btn-lg btn-primary" role="button">点我下载</a>
-                    </p>
-                </div>
-            </div>
         </div>
 
         <!-- 左按钮 -->
@@ -228,19 +207,15 @@
     <br>
     </br>
 
-
-
     <!-- 商铺广告区 -->
     <div class="container" th:if="${not pro_rollad_isnull}">
         <tr th:each="ads : ${shop_ads}">
             <div class="col-lg-2">
-                <a target="_blank" th:href="@{'/shop/'+${ads.getsellerId()}}">
-                    <img th:src="@{${ads.getpictureUrl()}}" alt="fail pics" width="200" height="300"/>
+                <a target="_blank" th:href="@{'/shop/'+${ads.sellerId}}">
+                    <img th:src="@{${ads.pictureUrl}}" alt="fail pics" width="200" height="300"/>
                 </a>
             </div>
         </tr>
-
-
     </div>
 
     <br>
@@ -252,8 +227,8 @@
         <tr th:each="adv2 : ${pro_ads}">
             <div class="col-md-2">
                 <div class="img">
-                    <a target="_blank" th:href="@{'/product/'+${adv2.getproductId()}}">
-                        <img th:src="${adv2.getpictureUrl()}" alt="Ballade" width="160" height="160"/>
+                    <a target="_blank" th:href="@{'/product/'+${adv2.productId}}">
+                        <img th:src="${adv2.pictureUrl}" alt="Ballade" width="160" height="160"/>
                     </a>
                 </div>
                 <table>
@@ -264,15 +239,13 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <td th:text="${adv2.getdescription()}">Info</td>
-                    <td th:text="${adv2.getprice()}">Price</td>
+                    <td th:text="${adv2.description}">Info</td>
+                    <td th:text="${adv2.price}">Price</td>
                     </tbody>
                 </table>
             </div>
         </tr>
     </div>
-
-
 
     <!--网页眉头 -->
 
@@ -290,331 +263,14 @@
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li><a th:href="@{ShoppingCart}">cart</a></li>
-                    <li><a th:href="@{Favorite}">favorite</a></li>
-                    <li><a th:href="@{MyOrder}">history</a></li>
+                    <li><a href="/cart">cart</a></li>
+                    <li><a href="/favorite">favorite</a></li>
+                    <li><a href="/history">history</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
-</div>
-
-<div class="container">
-    <div class="col-lg-4">
-        <img src="/Resource/Present.jpg">
-    </div>
-    <div class="col-lg-8">
-        <article class="htmleaf-container">
-            <div class='ex' name='3'>
-                <div class='fsbanner'>
-                    <div style='background-image:url(/Resource/server.jpg)'>
-                        <span class='name'>BLACK</span>
-                    </div>
-                    <div style='background-image:url(/Resource/conon.jpg)'>
-                        <span class='name'>BROWN</span>
-                    </div>
-                    <div style='background-image:url(/Resource/speaker.jpg)'>
-                        <span class='name'>PANDA</span>
-                    </div>
-                    <div style='background-image:url(/Resource/macbook.jpg)'>
-                        <span class='name'>POLAR</span>
-                    </div>
-                    <div style='background-image:url(/Resource/teethbrush.jpg)'>
-                        <span class='name'>POLAR</span>
-                    </div>
-                    <div style='background-image:url(/Resource/server.jpg)'>
-                        <span class='name'>POLAR</span>
-                    </div>
-                    <div style='background-image:url(/Resource/polar.jpg)'>
-                        <span class='name'>POLAR</span>
-                    </div>
-                </div>
-            </div>
-        </article>
-        <div class="col-lg-0">
-            <b>
-                如果你还在犹豫要不要用电子发票，<br>
-
-                恭喜亲啦，<br>
-
-                马上参加感恩节大放“价”活动吧！！！<br>
-
-                在阿里发票平台上订购百望电票服务：点我订购 <br>
-
-                立享买一送一，真金白银省省省哦~ <br></b>
-        </div>
-    </div>
-
-</div>
-<div class="panel panel-default" style="height: 1000px">
-    <div class="panel-body">
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/conon.jpg">
-                    <img src="/Resource/conon.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/macbook.jpg">
-                    <img src="/Resource/macbook.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/server.jpg">
-                    <img src="/Resource/server.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="col-md-2">
-            <div class="img">
-                <a target="_blank" href="/Resource/speaker.jpg">
-                    <img src="/Resource/speaker.jpg" alt="Ballade" width="160" height="160">
-                </a>
-                <div class="desc">server</div>
-            </div>
-
-
-            <table>
-                <thead>
-                <tr>
-                    <th>Product</th>
-                    <th>Price</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>conon</td>
-                    <td>$900</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-    </div>
 </div>
 
 
@@ -628,10 +284,10 @@
     <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
 </div>
 
-<!--<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>-->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 
 <script src="js/ajaxGoodsType.js"></script>
-<script type="text/javascript" src="/js/fsbanner.js"></script>
+<script type="text/javascript" src="./js/fsbanner.js"></script>
 <script type="text/javascript">
     //<![CDATA[
     $(function () {
@@ -640,18 +296,6 @@
         });
     });
     //]]>
-</script>
-<script type="text/javascript" src="/js/zySearch.js"></script>
-<script type="text/javascript">
-    $("#zySearch").zySearch({
-        "width":"355",
-        "height":"33",
-        "parentClass":"pageTitle",
-        "callback":function(keyword){
-            console.info("搜索的关键字");
-            console.info(keyword);
-        }
-    });
 </script>
 </body>
 </html>

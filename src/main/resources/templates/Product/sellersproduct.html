@@ -54,8 +54,8 @@
         <div th:if="${not pro_isnull}">
             <div th:each="adv : ${products}" class="col-lg-2">
                 <div class="img">
-                    <a target="_blank" th:href="@{'/product/'+${adv.getproductId()}}">
-                        <img th:src="'/'+${adv.getproductPhoto()}" alt="fail load pics" width="160" height="160"/>
+                    <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
+                        <img th:src="'/'+${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
                     </a>
                 </div>
                 <table>
@@ -65,8 +65,8 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td><p th:text="${adv.getproductName()}">ProductName</p></td>
-                        <td><p th:text="'$'+${adv.getproductTradePrice()}">Price</p></td>
+                        <td><p th:text="${adv.productName}">ProductName</p></td>
+                        <td><p th:text="'$'+${adv.productTradePrice}">Price</p></td>
                     </tr>
                     </tbody>
                 </table>

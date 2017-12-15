@@ -21,6 +21,9 @@ public class Seller_SellerService {
     private SellerAdvertisementRepository sellerAdvertisementRepository;
 
     @Resource
+    private ProductAdvertisementRepository productAdvertisementRepository;
+
+    @Resource
     private ProductRepository productRepository;
 
     @Resource
@@ -28,6 +31,9 @@ public class Seller_SellerService {
 
     @Resource
     private TradeDetailRepository tradeDetailRepository;
+
+    @Resource
+    private UserRepository userRepository;
 
     public Seller getSellerById(long sellerId)
     {
@@ -110,9 +116,21 @@ public class Seller_SellerService {
 
     public List<Trade> getTradeList(long sellerID, int statue)
     {
+
+        if(statue == 3)
+        {
+            LinkedList<Trade> retTrades = new LinkedList<Trade>();
+            retTrades.addAll(getTradeList(sellerID,1));
+            retTrades.addAll(getTradeList(sellerID,0));
+            return retTrades;
+        }
         return tradeRepository.findBySellerIdAndTradeStatus(sellerID,statue);
     }
 
+    public Trade getTrade(long trade)
+    {
+        return tradeRepository.findByTradeId(trade);
+    }
     public List<Trade> getTradeListByTime(long sellerID, int statue, Date startDate, Date endDate)
     {
         List<Trade> reTrade = new LinkedList<Trade>();
@@ -139,5 +157,46 @@ public class Seller_SellerService {
     public List<TradeDetail> getTradeList(long tradeID)
     {
         return tradeDetailRepository.findByTradeId(tradeID);
+    }
+
+    public User getUser(long userID)
+    {
+        return userRepository.findByUserId(userID);
+    }
+
+    public ProductAdvertisement getProductAdvertisementByProductAdvertisementId(long productAdvertismentId)
+    {
+        return productAdvertisementRepository.findByAdvertisementId(productAdvertismentId);
+    }
+
+    public List<ProductAdvertisement> getProductAdvertisementBySellerID(long sellerID)
+    {
+     List<Product> products = productRepository.findAllBySellerId(sellerID);
+     LinkedList<ProductAdvertisement> retlist = new LinkedList<ProductAdvertisement>();
+     for(Product product : products)
+     {
+         retlist.addAll(productAdvertisementRepository.findAllByProductId(product.getProductId()));
+     }
+     return retlist;
+    }
+
+    public void writeInProductAdvertisement(ProductAdvertisement productAdvertisement)
+    {
+        productAdvertisementRepository.save(productAdvertisement);
+    }
+
+    public List<SellerAdvertisement> getSellerAdvertisementBySellerId(long sellerID)
+    {
+        return sellerAdvertisementRepository.getAllBySellerId(sellerID);
+    }
+
+    public SellerAdvertisement getSellerAdvertisemetBySellerAdvertisementId(long advertisementId)
+    {
+        return sellerAdvertisementRepository.getByAdvertisementId(advertisementId);
+    }
+
+    public void writeInSellerAdvertisement(SellerAdvertisement sellerAdvertisement)
+    {
+        sellerAdvertisementRepository.save(sellerAdvertisement);
     }
 }
