@@ -28,8 +28,8 @@ public class ModifyProductInformationController {
 
 
     @RequestMapping(value = "ModifyInformation", method = RequestMethod.POST)
-    @ResponseBody
-    public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile")MultipartFile file, HttpServletRequest request, RedirectAttributes attributes)
+    public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile", required = false)MultipartFile file,
+                                          HttpServletRequest request, RedirectAttributes attributes)
     {
         long productID = Long.valueOf(request.getParameter("ProductID"));
         Product newProduct = sellerSellerService.getProduct(productID);
@@ -39,15 +39,17 @@ public class ModifyProductInformationController {
             return "redirect:/error/errorHandler";
         }
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
-        //TODO:
+        //TODO:保证每一个值都不能为空,并且合法
         if(file != null)
             newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setBrandName(request.getParameter("brandName"));
-
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
         newProduct.setProductName(request.getParameter("productName"));
         newProduct.setProductPrice(Double.valueOf(request.getParameter("productPrice")));
+
+
+        //product sellerId 不需要修改
         attributes.addAttribute("SellerID",sellerID);
         if(sellerSellerService.writeInProduct(newProduct))
             return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";

@@ -33,10 +33,12 @@ public class LoginController {
         String password = httpServletRequest.getParameter("password_login");
         String pattern = ".*@*.com.*";
         long id;
-        //TODO:有bug,用户名和邮箱一样呢
 
-        //以邮箱方式登录
+
+        //有bug,用户名和邮箱一样呢
+
         if (Pattern.matches(pattern, account)) {
+            //以邮箱方式登录
             id = userLoginService.sellerLoginByEmail(account,password);
         } else {
             //用户名方式登录
@@ -46,7 +48,7 @@ public class LoginController {
         if(id < 0)
         {
             attributes.addAttribute("errorMessage",getErrorMessage(id));
-           return "redirect:/error/errorMessage";
+           return "redirect:/error/errorHandler";
         }
 
         attributes.addAttribute("SellerID",id);

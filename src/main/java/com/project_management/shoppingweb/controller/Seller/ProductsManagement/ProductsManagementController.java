@@ -25,9 +25,16 @@ public class ProductsManagementController {
     private List<Product> products;
     private long sellerID = -1;
 
+    //跳转商品管理主界面前
     @RequestMapping("ProductsManagementHandler")
-    public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")long sellerId, Model model)
+    public String jumpToProductManagementMainPage(@ModelAttribute("SellerID")long sellerId, Model model,RedirectAttributes attributes)
     {
+        if(sellerId < 0)
+        {
+            attributes.addAttribute("errorMessage","shopowner id  is not valid!");
+            return "redirect:/error/errorHandler";
+        }
+
         sellerID = sellerId;
         products = sellerSellerService.getSellerProducts(sellerID);
         model.addAttribute("products",products);
@@ -41,13 +48,27 @@ public class ProductsManagementController {
     {
         if(request.getParameter("delete") == null)
         {
-            long productId = Long.valueOf(request.getParameter("modify"));
-            return jumpToModifyProductPage(productId, model, attributes);
+           try {
+               long productId = Long.valueOf(request.getParameter("modify"));
+               return jumpToModifyProductPage(productId, model, attributes);
+           }
+           catch (Exception e)
+           {
+               attributes.addAttribute("errorMessage",e.getMessage());
+               return "redirect:/error/errorHandler";
+           }
+
         }
         else
         {
-            long productId = Long.valueOf(request.getParameter("delete"));
-            return deleteProduct(productId, attributes);
+           try {
+               long productId = Long.valueOf(request.getParameter("delete"));
+               return deleteProduct(productId, attributes);
+           }catch (Exception e)
+           {
+               attributes.addAttribute("errorMessage",e.getMessage());
+               return "redirect:/error/errorHandler";
+           }
         }
     }
 
@@ -76,6 +97,7 @@ public class ProductsManagementController {
         {
             if(curProduct.getProductId() == productId)
             {
+                //TODO:如果需要修改 修改商品界面 的信息,从这里开始
                 //type, size 没加
                 model.addAttribute("productName",curProduct.getProductName());
                 model.addAttribute("productStock",curProduct.getProductStock());

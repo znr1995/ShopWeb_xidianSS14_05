@@ -1,3 +1,4 @@
+<!--修改广告的界面,商家广告和产品广告-->
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en" class="no-js">
 <head>
@@ -79,12 +80,12 @@
             <input type="hidden" name="AddOrModify" id="AddOrModify" th:value="*{AddOrModify}"/>
             <input type="hidden" name="IsProductAdvertisement" id="IsProductAdvertisement" th:value="*{IsProductAdvertisement}"/>
 
-            <input type="hidden" name="status" id="status" th:value="${status}" />
+            <input type="hidden" name="status" id="status" th:value="*{status}" />
 
             <div class="form-group">
                 <label class="col-lg-5 text-right">advertisement type:</label>
                 <div id="advertisementTypeLabelDiv">
-                    <label id="advertisementTypeLabel" th:text="*{advertisementType}"></label>
+                    <label id="advertisementTypeLabel"  th:text="*{advertisementType}"></label>
                 </div>
             </div>
 
@@ -143,8 +144,8 @@
         </form>
     </div>
     <div class="col-lg-4 text-left">
-        <input type="hidden" id="srcPath" th:value="${pictureUrl}"/>
-        <img id="photo" th:src="" alt="nothing here" height="300" width="500" style="display: block;" />
+
+        <img id="photo" th:src="@{'/'+*{pictureUrl}}" alt="nothing here" height="300" width="500" style="display: block;" />
     </div>
 </div>
 
@@ -153,14 +154,11 @@
 <script>
 
     var fileInput = document.getElementById('pictureUrl'),
-        photo = document.getElementById('photo'),
         IsProductAdvertisement = document.getElementById('IsProductAdvertisement'),
         locationDiv = document.getElementById('locationDiv'),
-        productIDDiv = document.getElementById('productIDDiv'),
-        srcPath = document.getElementById('srcPath');
+        productIDDiv = document.getElementById('productIDDiv');
 
-    photo.src = '/' + srcPath.value;
-    if(IsProductAdvertisement.value == 'false')
+    if(IsProductAdvertisement.value == "false")
     {
         locationDiv.hidden = true;
         productIDDiv.hidden = true;

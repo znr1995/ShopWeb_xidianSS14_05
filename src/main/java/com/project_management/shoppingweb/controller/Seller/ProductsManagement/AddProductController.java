@@ -36,11 +36,13 @@ public class AddProductController {
     }
 
     @RequestMapping(value = "AddProduct")
-    public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile")MultipartFile file, HttpServletRequest request, RedirectAttributes attributes)
+    public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile", required = false)MultipartFile file,
+                                          HttpServletRequest request, RedirectAttributes attributes)
     {
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
         attributes.addAttribute("SellerID",sellerID);
 
+        //TODO:保证添加商品时候每一个商品的属性都不为空
 
 //        if(!(judgeString(request.getParameter("productStock")) &&
 //                judgeString(request.getParameter("brandName")) &&
@@ -57,25 +59,6 @@ public class AddProductController {
         long productStock;
         double productMarkPrice;
         Product newProduct = new Product();
-//        try{
-//            productStock = Long.valueOf(request.getParameter("productStock"));
-//        }
-//        catch (Exception e)
-//        {
-//            attributes.addAttribute("errorMessage","Stock format wrong :" +e.getMessage());
-//            return "redirect:/error/errorHandler";
-//        }
-//
-//
-//        try {
-//            productMarkPrice = Double.valueOf(request.getParameter("productPrice"));
-//        }
-//        catch (Exception e)
-//        {
-//            attributes.addAttribute("errorMessage","productPrice format wrong :" +e.getMessage());
-//            return "redirect:/error/errorHandler";
-//        }
-
         //TODO:product 属性是否全
         newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setBrandName(request.getParameter("brandName"));

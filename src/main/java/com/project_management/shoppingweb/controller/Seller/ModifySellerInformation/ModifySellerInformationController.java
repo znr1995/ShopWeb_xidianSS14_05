@@ -27,8 +27,10 @@ public class ModifySellerInformationController {
     private  long sellerID = -1;
 
 
+    //进入修改商家个人信息前
     @RequestMapping("ModifySellerInformationHandler")
-    public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")long sellerId, Model model,RedirectAttributes attributes)
+    public String jumpToModifySellerInformationPage(@ModelAttribute("SellerID")long sellerId,
+                                                    Model model,RedirectAttributes attributes)
     {
         sellerID = sellerId;
         Seller seller = sellerSellerService.getSellerById(sellerID);
@@ -51,6 +53,7 @@ public class ModifySellerInformationController {
         return "/Seller/ModifySellerInformationPage";
     }
 
+    //修改后的处理controller
     @RequestMapping("ModifySellerInformation")
     public String modifyFiveItem(@RequestParam(value = "SellerID",required = true)long userId,
                                  @RequestParam(value = "Username",required = true)String userName,

@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.util.List;
 
-
+/**
+ * 错误处理,用户名/邮箱/密码错误可以提醒
+ */
 @Service
 public class User_LoginService {
 

@@ -35,11 +35,17 @@ public class Seller_SellerService {
     @Resource
     private UserRepository userRepository;
 
+
+
     public Seller getSellerById(long sellerId)
     {
         return sellerRepository.findBySellerId(sellerId);
     }
 
+    public User getUser(long userID)
+    {
+        return userRepository.findByUserId(userID);
+    }
 
 
     public boolean writeInInformation(Seller seller)
@@ -50,37 +56,11 @@ public class Seller_SellerService {
         return false;
     }
 
-    public List<SellerAdvertisement> getSellerAdvertisements(long sellerId)
-    {
-        return sellerAdvertisementRepository.getAllBySellerId(sellerId);
-    }
-    
-    public  boolean writeInSellerAdvertisements(List<SellerAdvertisement> advertisements)
-    {
-        for(SellerAdvertisement sellerAdvertisement : advertisements)
-            sellerAdvertisementRepository.save(sellerAdvertisement);
-        return true;
-    }
-
-    public SellerAdvertisement getSellerAdvertisement(long advertisementId)
-    {
-        return sellerAdvertisementRepository.getByAdvertisementId(advertisementId);
-    }
-    
-    public void deleteSellerAdvertisement(SellerAdvertisement advertisement)
-    {
-        deleteSellerAdvertisement(advertisement.getAdvertisementId());
-    }
-
-    public void deleteSellerAdvertisement(long advertisementId)
-    {
-        sellerAdvertisementRepository.deleteByAdvertisementId(advertisementId);
-    }
 
 
 
 
-
+    //产品相关
     public List<Product> getSellerProducts(long sellerId)
     {
         return productRepository.getAllBySellerId(sellerId);
@@ -114,6 +94,10 @@ public class Seller_SellerService {
         productRepository.delete(productRepository.getByProductId(productId));
     }
 
+
+
+
+    //交易相关
     public List<Trade> getTradeList(long sellerID, int statue)
     {
 
@@ -131,6 +115,7 @@ public class Seller_SellerService {
     {
         return tradeRepository.findByTradeId(trade);
     }
+
     public List<Trade> getTradeListByTime(long sellerID, int statue, Date startDate, Date endDate)
     {
         List<Trade> reTrade = new LinkedList<Trade>();
@@ -159,9 +144,35 @@ public class Seller_SellerService {
         return tradeDetailRepository.findByTradeId(tradeID);
     }
 
-    public User getUser(long userID)
+
+
+
+    //广告相关的接口
+    public List<SellerAdvertisement> getSellerAdvertisements(long sellerId)
     {
-        return userRepository.findByUserId(userID);
+        return sellerAdvertisementRepository.getAllBySellerId(sellerId);
+    }
+
+    public  boolean writeInSellerAdvertisements(List<SellerAdvertisement> advertisements)
+    {
+        for(SellerAdvertisement sellerAdvertisement : advertisements)
+            sellerAdvertisementRepository.save(sellerAdvertisement);
+        return true;
+    }
+
+    public SellerAdvertisement getSellerAdvertisement(long advertisementId)
+    {
+        return sellerAdvertisementRepository.getByAdvertisementId(advertisementId);
+    }
+
+    public void deleteSellerAdvertisement(SellerAdvertisement advertisement)
+    {
+        deleteSellerAdvertisement(advertisement.getAdvertisementId());
+    }
+
+    public void deleteSellerAdvertisement(long advertisementId)
+    {
+        sellerAdvertisementRepository.deleteByAdvertisementId(advertisementId);
     }
 
     public ProductAdvertisement getProductAdvertisementByProductAdvertisementId(long productAdvertismentId)

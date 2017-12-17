@@ -26,6 +26,7 @@ public class ViewTransactionController {
     private Seller_SellerService seller_sellerService;
 
     private long sellerID = -1;
+
     class PageDetail{
         private long trandId;
         private double totlePrice;
@@ -133,7 +134,8 @@ public class ViewTransactionController {
     public String getTradesByDate(@RequestParam("StartDate")String startDate,
                                   @RequestParam("EndDate")String endDate,
                                   @RequestParam("type")int status,
-                                  Model model)
+                                  Model model,
+                                  RedirectAttributes attributes)
     {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date start= new Date();
@@ -143,8 +145,10 @@ public class ViewTransactionController {
             end = sdf.parse(endDate);
         }catch (Exception e)
         {
-
+            attributes.addAttribute("errorMessage",e.getMessage());
+            return "redirect:/error/errorHandler";
         }
+
         List<Trade> trades = seller_sellerService.getTradeListByTime(sellerID,status,start,end);
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
         for(Trade trade : trades)
@@ -162,10 +166,16 @@ public class ViewTransactionController {
 
     //查看详细
     @RequestMapping("Detail")
-    public String viewDetail(HttpServletRequest request,Model model)
+    public String viewDetail(HttpServletRequest request,Model model,RedirectAttributes attributes)
     {
         long tradeId = Long.valueOf(request.getParameter("detail"));
         Trade trade = seller_sellerService.getTrade(tradeId);
+        if(trade == null)
+        {
+            attributes.addAttribute("errorMessage","trade id is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         model.addAttribute("userName",seller_sellerService.getSellerById(trade.getSellerId()).getUsername());
         model.addAttribute("tradePayWay",trade.getTradePayWay());
@@ -189,7 +199,6 @@ public class ViewTransactionController {
         }
 
         model.addAttribute("details",pageTradeDetails);
-
         return "/Seller/ViewTradeDetail";
     }
 
