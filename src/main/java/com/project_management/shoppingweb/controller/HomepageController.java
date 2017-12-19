@@ -24,6 +24,11 @@ public class HomepageController {
 
     private Logger logger = Logger.getLogger(this.getClass());
 
+    @RequestMapping("/User/login")
+    public String login(){return "/User/login";}
+    @RequestMapping("/User/register")
+    public String register(){return "/User/register";}
+
     @RequestMapping("/User/Main")
     public String userMain(@ModelAttribute("UserID")long userId,Model model)
     {

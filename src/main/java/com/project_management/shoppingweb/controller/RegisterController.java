@@ -50,7 +50,7 @@ public class RegisterController {
         return "/Login";
     }
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=SellerSignup")
+    @RequestMapping(value = "sellerRegister",method = RequestMethod.POST)
     public String sellerRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
         String username = httpServletRequest.getParameter("username");
         String email = httpServletRequest.getParameter("email");
@@ -70,7 +70,8 @@ public class RegisterController {
             seller.setUsername(username);
             seller.setSculpture(DEFATE_SCULPTURE);
             userRegisterService.sellerRegister(seller);
-            return "/Login";
+            return "redirect:/Seller/login";
+
         }
         else
         {

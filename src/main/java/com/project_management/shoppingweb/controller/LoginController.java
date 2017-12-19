@@ -22,12 +22,14 @@ public class LoginController {
     @RequestMapping(value = "/")
     public String main(){
 
-        //return "redirect:/homepage";
-        return "/Login";
+        return "redirect:/homepage";
+        //return "/homepage";
     }
 
+
+
     //商家登录
-    @RequestMapping(value = "/login",method = RequestMethod.GET,params = "action=SellerLogin")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");

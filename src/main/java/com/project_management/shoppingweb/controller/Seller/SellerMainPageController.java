@@ -22,6 +22,11 @@ public class SellerMainPageController {
     private Seller_SellerService sellerSellerService;
 
     private long sellerID = -1;
+    @RequestMapping("/Seller/login")
+    public String login(){ return "/Seller/login"; }
+    @RequestMapping("/Seller/register")
+    public String register() { return "/Seller/register";}
+
 
     //启动主界面
     @RequestMapping("/Seller/Main")
