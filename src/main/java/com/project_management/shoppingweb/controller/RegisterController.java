@@ -34,21 +34,6 @@ public class RegisterController {
     //默认头像
     private String DEFATE_SCULPTURE = "/default.png";
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=getNum")
-    public String emailCheck(HttpServletRequest httpServletRequest, Model model)
-    {
-        String num = generateRandomNum();
-        sendStr(num,httpServletRequest.getParameter("email"));
-        model.addAttribute("num",num);
-        model.addAttribute("username",httpServletRequest.getParameter("username"));
-        model.addAttribute("email",httpServletRequest.getParameter("email"));
-        model.addAttribute("phone_number",httpServletRequest.getParameter("phone_number"));
-        model.addAttribute("password_register",httpServletRequest.getParameter("password_register"));
-        model.addAttribute("Shopname",httpServletRequest.getParameter("Shopname"));
-        model.addAttribute("Catogery",httpServletRequest.getParameter("Catogery"));
-
-        return "/Login";
-    }
 
     @RequestMapping(value = "sellerRegister",method = RequestMethod.POST)
     public String sellerRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
@@ -81,7 +66,7 @@ public class RegisterController {
     }
 
 
-    @RequestMapping(value = "/register",method = RequestMethod.GET, params = "action=UserSignup")
+    @RequestMapping(value = "userRegister",method = RequestMethod.POST)
     public String userRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
         String username = httpServletRequest.getParameter("username");
         String email = httpServletRequest.getParameter("email");
@@ -94,7 +79,7 @@ public class RegisterController {
             user.setTel(phone);
             user.setUsername(username);
             userRegisterService.userRegister(user);
-            return "/Login";
+            return "/User/login";
         }else {
             attributes.addAttribute("errorMessage","fail to register!");
             return "redirect:/error/errorHandler";
@@ -108,7 +93,7 @@ public class RegisterController {
         Random r = new Random(10);
         for(int i=0;i<6;i++)
         {
-            str += String.valueOf(r.nextInt());
+            str += String.valueOf(r.nextInt()%10);
         }
         return str;
     }
@@ -146,7 +131,7 @@ public class RegisterController {
            message.addRecipients(MimeMessage.RecipientType.CC, InternetAddress.parse(properties.getProperty("userName")));
            message.setSentDate(new Date());
            //设置邮件正文  第二个参数是邮件发送的类型
-           message.setContent("验证信息为如下字符串:" + text+"/r/rn请在3分钟内完成验证","text/html;charset=UTF-8");
+           message.setContent("验证信息为如下字符串:" + text+"\r\n请在3分钟内完成验证","text/html;charset=UTF-8");
            //发送一封邮件
            Transport.send(message);
        }

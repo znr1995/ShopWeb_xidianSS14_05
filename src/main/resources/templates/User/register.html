@@ -11,9 +11,9 @@
 <body>
 <div class="form">
 
-    <input id="num" type="hidden" th:value="*{num}"/>
+
             <h2 style="color: #0f0f0f">Customer Register</h2>
-            <form action="/register" method="get">
+            <form action="/userRegister" method="post">
                 <div class="field-wrap">
                     <div style="color: #0f0f0f">User Name</div>
                     <input name="username"  type="text" th:required="required" autocomplete="off" />
@@ -30,11 +30,11 @@
                     <div style="color: #0f0f0f">Email Address</div>
                     <input name="email" type="email" th:required="required" autocomplete="off"/>
                 </div>
-                <div class="field-wrap">
+              <!--  <div class="field-wrap">
                     <input style="" id="authentication"/><br>
-                    <button type="submit" class="button button-block" name="action" value="getNum">Send code</button>
-                </div>
-                <button type="submit" class="button button-block" name="action" value="UserSignup"  onclick="checkNum()"/>Submit</button
+                    <input type="submit" class="button button-block" value="getNum">Send code</input>
+                </div>-->
+                <button type="submit" class="button button-block"  onclick="checkNum()"/>Submit</button
             </form>
 </div>
 <script>
