@@ -3,9 +3,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Login</title>
+    <title>Admin Log up</title>
     <!-- Bootstrap 核心 CSS 文件 -->
-        <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <style>
         /*web background*/
@@ -39,33 +39,31 @@
                 <ul class="reg_form" id="reg-ul">
                     <div id="userCue" class="cue"><h2>Admin Log up</h2></div>
                     <li>
-                        <label for="username"  class="input-tips2">User Name：</label>
+                        <label for="username" class="input-tips2">User Name：</label>
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" id="username" name="username" maxlength="16" class="inputstyle2"/>
+                            <input type="username" class="form-control" id="username" name="username" maxlength="16" calss="inputstyle2"/>
                         </div>
                     </li>
                     <li>
                         <label for="password" class="input-tips2">Password：</label>
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
-                            <input type="password" class="form-control" id="password"  name="password" maxlength="16" class="inputstyle2"/>
+                            <input type="password" class="form-control" id="password" name="password" maxlength="16" calss="inputstyle2"/>
                         </div>
                     </li>
                     <li>
                         <label for="password2" class="input-tips2">Again password：</label>
                         <div class="input-group input-group-md">
-                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-check" aria-hidden="true"></i></span>
-
-                            <input type="password" class="form-control" id="password2" name="password2" maxlength="16" class="inputstyle2" />
+                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" id="password2" name="password2" maxlength="16" calss="inputstyle2"/>
                         </div>
                     </li>
                     <li>
                         <label for="tel" class="input-tips2">Phone Num：</label>
                         <div class="input-group input-group-md">
                             <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-phone" aria-hidden="true"></i></span>
-
-                            <input type="password" class="form-control" id="tel"  name="tel" maxlength="16" class="inputstyle2"/>
+                            <input type="tel" class="form-control" id="tel" name="tel" maxlength="16" calss="inputstyle2"/>
                         </div>
                     </li>
 

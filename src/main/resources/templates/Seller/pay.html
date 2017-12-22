@@ -39,19 +39,37 @@
     </div>
 
 
+
     <div class="col-lg-8">
         <br><br><br><br>
 
-        <form role="form" class="col-lg-4">
+        <div  class="col-lg-4">
            <img src="/alipay.JPG">
             <br><br><br>
-            <button onclick="">Pay Success</button>
-        </form>
-        <form role="form" class="col-lg-4">
+            <button onclick="setPayTypeAl()">Pay Success</button>
+        </div>
+        <div  class="col-lg-4">
             <img src="/wechatpay.JPG">
             <br><br><br>
-            <button onclick="">Pay Success</button>
+            <button onclick="setPayTypeWe()">Pay Success</button>
+        </div>
+        <form id="subForm" th:action="@{/Seller/ModifySellerAdvertisement/pay}" role="form" class="col-lg-4">
+            <input type="hidden" id="payType" name="payType" />
+            <input type="hidden"  name="type"  th:value="${type}" />
+            <input type="hidden"  name="AdvertisementId"  th:value="${AdvertisementId}" />
+            <input type="hidden" id="minPrice" name="minPrice"  th:value="${minPrice}" />
+            <input type="hidden" id="payStatue" name="payStatue" />
+            <br><br><br>
+            <div>
+                <label th:text="@{'you must pay at least ' + *{minPrice}}"></label>
+            </div>
+            <input type="text" id="payPrice" name="payPrice" />
         </form>
+        <button onclick="setPayStatueFail()">pay fail/Cancel</button>
+    </div>
+
+    <div>
+
     </div>
 </div>
 </div>
@@ -103,5 +121,45 @@
     </div>
     </div>
 </nav>
+
+<script>
+    var payType = document.getElementById("payType");
+    var payStatue = document.getElementById("payStatue");
+    var minPrice = document.getElementById("minPrice");
+    var subForm = document.getElementById("subForm");
+    var payPrice = document.getElementById("payPrice");
+
+    function setPayTypeAl() {
+        if(parseFloat(payPrice.value)< parseFloat(minPrice.value))
+        {
+            alert("pay to little!need more!");
+        }
+       else
+        {
+            payStatue.value = "success";
+            payType.value = "AlPay";
+            subForm.submit();
+        }
+
+    }
+    function setPayTypeWe() {
+        if(parseFloat(payPrice.value)< parseFloat(minPrice.value))
+        {
+            alert("pay to little!need more!");
+        }
+        else
+        {
+            payStatue.value = "success";
+            payType.value = "WePay";
+            subForm.submit();
+        }
+    }
+
+    function setPayStatueFail() {
+        payStatue.value = "fail";
+        payType.value = "AlPay";
+        subForm.submit();
+    }
+</script>
 </body>
 </html>

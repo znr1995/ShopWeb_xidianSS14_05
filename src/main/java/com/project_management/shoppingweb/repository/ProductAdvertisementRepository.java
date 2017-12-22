@@ -15,5 +15,6 @@ public interface ProductAdvertisementRepository extends JpaRepository<ProductAdv
 	ProductAdvertisement findByAdvertisementId(Long advertisementId);
 	ProductAdvertisement save(ProductAdvertisement productAdvertisement);
 	List<ProductAdvertisement> findAllByProductId(long productId);
+	void delete(ProductAdvertisement productAdvertisement);
 
 }

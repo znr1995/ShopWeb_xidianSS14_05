@@ -35,6 +35,9 @@ public class Seller_SellerService {
     @Resource
     private UserRepository userRepository;
 
+    @Resource
+    private PriceRepository priceRepository;
+
 
 
     public Seller getSellerById(long sellerId)
@@ -165,14 +168,10 @@ public class Seller_SellerService {
         return sellerAdvertisementRepository.getByAdvertisementId(advertisementId);
     }
 
-    public void deleteSellerAdvertisement(SellerAdvertisement advertisement)
-    {
-        deleteSellerAdvertisement(advertisement.getAdvertisementId());
-    }
 
     public void deleteSellerAdvertisement(long advertisementId)
     {
-        sellerAdvertisementRepository.deleteByAdvertisementId(advertisementId);
+        sellerAdvertisementRepository.delete(sellerAdvertisementRepository.getByAdvertisementId(advertisementId));
     }
 
     public ProductAdvertisement getProductAdvertisementByProductAdvertisementId(long productAdvertismentId)
@@ -201,6 +200,11 @@ public class Seller_SellerService {
         return sellerAdvertisementRepository.getAllBySellerId(sellerID);
     }
 
+    public void deleteProductAdvertisement(long advertisement)
+    {
+        productAdvertisementRepository.delete(productAdvertisementRepository.findByAdvertisementId(advertisement));
+    }
+
     public SellerAdvertisement getSellerAdvertisemetBySellerAdvertisementId(long advertisementId)
     {
         return sellerAdvertisementRepository.getByAdvertisementId(advertisementId);
@@ -209,5 +213,20 @@ public class Seller_SellerService {
     public void writeInSellerAdvertisement(SellerAdvertisement sellerAdvertisement)
     {
         sellerAdvertisementRepository.save(sellerAdvertisement);
+    }
+
+    public double getProductListAdvertisementPrice()
+    {
+        return priceRepository.findAll().get(0).getProductHighAdvertisementPrice();
+    }
+
+    public double getProductRollAdvertisementPrice()
+    {
+        return priceRepository.findAll().get(0).getProductLowAdvertisementPrice();
+    }
+
+    public double getSellerListAdvertisementPrice()
+    {
+        return priceRepository.findAll().get(0).getSellerListAdvertisementPrice();
     }
 }
