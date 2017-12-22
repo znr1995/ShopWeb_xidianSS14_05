@@ -70,13 +70,26 @@
                     </div>
 
                     <div class="from-group">
-                        <label class="col-lg-4 text-right">Brand Name:</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="brandName" th:value="*{brandName}"/>
+                        <label class="col-lg-4 text-right">Catogery: </label>
+                        <div class="col-lg-4">
+                       <form role="form">
+                                <div class="form-group">
+                                    <select class="form-control" name="brandName">
+                                        <option value="TV & Home Theater">TV & Home Theater</option>
+                                        <option value="Computers & Tablets">Computers & Tablets</option>
+                                        <option value="Cell Phones">Cell Phones</option>
+                                        <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="Car Electronics & GPS">Car Electronics & GPS</option>
+                                        <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+                                        <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
+                                        <option value="Home & Office">Home & Office</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                    <br>
-                    <br>
+                    <br><br><br><br>
 
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Product Photo:</label>
@@ -88,9 +101,10 @@
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Product Market Price:</label>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                            HK$<input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
                         </div>
                     </div>
+
                     <div class="form-group">
 
                         <label class="col-lg-4 text-right">Product Brief Information:</label>

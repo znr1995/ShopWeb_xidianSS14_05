@@ -12,7 +12,7 @@ import java.util.Random;
 
 public class Seller_CopyFile {
 
-    private String BASEPATH = "C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static\\";
+    private String BASEPATH = "D:\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static\\";
 
     private static Seller_CopyFile seller_copyFile = null;
 
