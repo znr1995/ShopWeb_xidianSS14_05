@@ -113,11 +113,6 @@
                 </div>
                 <br>
 
-                <hr />
-                <form th:action="@{/Seller/pay}" >
-                    <input type="button" style="background: #e18808 " action="" value="Pay"/>
-                </form>
-
                 <div>
                     <button type="submit" style="background: #e18808 " id="submitBtn" class="btn-default" >Submit</button>
                 </div>
@@ -231,30 +226,6 @@
 
 
 
-</script>
-<script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-
-        showLeftPush = document.getElementById( 'showLeftPush' ),
-
-        body = document.body;
-
-
-    showLeftPush.onclick = function() {
-        classie.toggle( this, 'active' );
-        classie.toggle( body, 'cbp-spmenu-push-toright' );
-        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-        disableOther( 'showLeftPush' );
-    };
-
-
-    function disableOther( button ) {
-
-        if( button !== 'showLeftPush' ) {
-            classie.toggle( showLeftPush, 'disabled' );
-        }
-
-    }
 </script>
 </body>
 </html>

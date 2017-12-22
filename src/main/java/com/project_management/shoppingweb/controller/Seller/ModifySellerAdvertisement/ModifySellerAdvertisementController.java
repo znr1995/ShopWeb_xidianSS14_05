@@ -271,9 +271,19 @@ public class ModifySellerAdvertisementController {
     @RequestMapping(value = "ModifyAdvertisement",method = RequestMethod.POST)
     public String advertisementHandler(@RequestParam(value = "pictureUrl",required = false)MultipartFile file,
                                        HttpServletRequest request,
+                                       Model model,
                                        RedirectAttributes attributes)
     {
-        int option = (request.getParameter("IsProductAdvertisement")).equals("true") ? 1 : 2;
+        int option = -1;
+        try {
+            String str = request.getParameter("advertisementType");
+            option = Integer.valueOf(request.getParameter("advertisementType"));
+        }catch (Exception e)
+        {
+            String str = request.getParameter("IsProductAdvertisement");
+            option  = (request.getParameter("IsProductAdvertisement")).equals("true") ? 1 : 2;
+        }
+
         Date start = new Date();Date end= new Date();
         String pictureUrl = null;
 
@@ -293,7 +303,7 @@ public class ModifySellerAdvertisementController {
                 return "redirect:/error/errorHandler";
             }
 
-            if(! (file.getSize() > 0))
+            if(file == null)
             {
                 attributes.addAttribute("errorMessage","picture do not allow null when add advertisement !");
                 return "redirect:/error/errorHandler";
@@ -335,18 +345,18 @@ public class ModifySellerAdvertisementController {
 
         if(1 == option)
         {
-            return modifyProductAdvertisement(pictureUrl,start,end,request,attributes);
+            return modifyProductAdvertisement(pictureUrl,start,end,request,model,attributes);
             //product advertisement
         }
         else
         {
-            return modifySellerAdvertisement(pictureUrl,start,end,request,attributes);
+            return modifySellerAdvertisement(pictureUrl,start,end,request,model, attributes);
             //shopadvertisement
         }
     }
 
     //增加或修改商品广告信息
-    public String modifyProductAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request, RedirectAttributes attributes)
+    public String modifyProductAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
         //TODO:全部每一个修改选项有效,不能为空
         ProductAdvertisement productAdvertisement = null;
@@ -354,11 +364,19 @@ public class ModifySellerAdvertisementController {
         if(addOrModify.equals("Add"))
         {
             //新建商品广告
-            //TODO:广告价格没有设置
             productAdvertisement = new ProductAdvertisement();
-            productAdvertisement.setStatus(1);
+
+            int dayNum = getDateDifference(startDate,endDate);
+            if(dayNum <= 0)
+            {
+                attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
+                return "redirect:/error/errorHandler";
+            }
+
+            productAdvertisement.setStatus(2);  // 1 - 未判断， 0 - 通过 2 - 未付款
             long productId = Long.valueOf(request.getParameter("productIDs"));
-            int locationId = Integer.valueOf(request.getParameter("type"));
+            int locationId = Integer.valueOf(request.getParameter("type"));  // 1-滚动，2-列表广告
+            productAdvertisement.setPrice(dayNum *(locationId == 1 ? sellerSellerService.getProductRollAdvertisementPrice() :sellerSellerService.getSellerListAdvertisementPrice()));
             productAdvertisement.setProductId(productId);
             productAdvertisement.setType(locationId);
             productAdvertisement.setStartDate(startDate);
@@ -382,14 +400,21 @@ public class ModifySellerAdvertisementController {
         sellerSellerService.writeInProductAdvertisement(productAdvertisement);
 
 
-
+        if(productAdvertisement.getStatus() == 2)
+        {
+            //跳到支付页面
+            model.addAttribute("type","ProductAdvertisement");
+            model.addAttribute("minPrice",productAdvertisement.getPrice());
+            model.addAttribute("AdvertisementId",productAdvertisement.getAdvertisementId());
+            return "/Seller/pay";
+        }
         attributes.addAttribute("SellerID",sellerID);
         return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
     }
 
 
     //增加或修改商家广告信息
-    public String modifySellerAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request, RedirectAttributes attributes)
+    public String modifySellerAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
         //TODO:全部每一个修改选项有效,不能为空
         SellerAdvertisement sellerAdvertisement = null;
@@ -397,13 +422,20 @@ public class ModifySellerAdvertisementController {
         if(addOrModify.equals("Add"))
         {
             //新建商家广告
-            //TODO:广告价格没有设置
             sellerAdvertisement = new SellerAdvertisement();
+
+            int dayNum = getDateDifference(startDate, endDate);
+            if(dayNum <= 0)
+            {
+                attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
+                return "redirect:/error/errorHandler";
+            }
+            sellerAdvertisement.setPrice(dayNum * sellerSellerService.getSellerListAdvertisementPrice());
             sellerAdvertisement.setStartDate(startDate);
             sellerAdvertisement.setEndDate(endDate);
             sellerAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
             sellerAdvertisement.setSellerId(sellerID);
-            sellerAdvertisement.setStatus(1);
+            sellerAdvertisement.setStatus(2);
         }
         else
         {
@@ -420,18 +452,73 @@ public class ModifySellerAdvertisementController {
 
         sellerSellerService.writeInSellerAdvertisement(sellerAdvertisement);
 
+        if(sellerAdvertisement.getStatus() == 2)
+        {
+            //未付款
+            model.addAttribute("type","SellerAdvertisement");
+            model.addAttribute("minPrice",sellerAdvertisement.getPrice());
+            model.addAttribute("AdvertisementId",sellerAdvertisement.getAdvertisementId());
+            return "/Seller/pay";
+        }
+
         attributes.addAttribute("SellerID",sellerID);
         return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
     }
 
-    //辅助int转string的方法
+    @RequestMapping("pay")
+    public String payFinishHandler(HttpServletRequest request,Model model,RedirectAttributes attributes)
+    {
+        long advertisementId = Long.valueOf(request.getParameter("AdvertisementId"));
+        String type = request.getParameter("type");
+        if("success".equals(request.getParameter("payStatue")))
+        {
+
+            double payPrice = Double.valueOf(request.getParameter("payPrice"));
+            //支付成功
+            if(type.equals("ProductAdvertisement"))
+            {
+              ProductAdvertisement productAdvertisement =  sellerSellerService.getProductAdvertisementByProductAdvertisementId(advertisementId);
+                productAdvertisement.setStatus(1);
+                productAdvertisement.setPrice(payPrice);
+                sellerSellerService.writeInProductAdvertisement(productAdvertisement);
+            }
+            else
+            {
+                SellerAdvertisement productAdvertisement =  sellerSellerService.getSellerAdvertisement(advertisementId);
+                productAdvertisement.setStatus(1);
+                productAdvertisement.setPrice(payPrice);
+                sellerSellerService.writeInSellerAdvertisement(productAdvertisement);
+            }
+        }
+        else
+        {
+            //支付失败、取消
+            if(type.equals("ProductAdvertisement"))
+            {
+                sellerSellerService.deleteProductAdvertisement(advertisementId);
+            }
+            else
+                sellerSellerService.deleteSellerAdvertisement(advertisementId);
+        }
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
+    }
+
+    //辅助int转string的方法 // 1 - 未判断， 0 - 通过 2 - 未付款
     private String getStatusString(int i)
     {
         if(i == 1)
         {
             return "not passed!";
         }
-        return "passed! Displaying!";
+        if(i == 2)
+        {
+            return "not pay!";
+        }
+
+        if(i == 0)
+            return "passed! Displaying!";
+        return "unknow code";
     }
 
     private String getTypeString(int i)
@@ -448,6 +535,11 @@ public class ModifySellerAdvertisementController {
         if("roll advertisement".equals(type))
             return 1;
         return 2;
+    }
+
+    private int getDateDifference(Date startDate, Date endDate)
+    {
+        return  (int)(endDate.getTime()-startDate.getTime())/(1000*60*60*24);
     }
 }
 

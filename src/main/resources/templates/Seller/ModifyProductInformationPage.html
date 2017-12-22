@@ -73,8 +73,6 @@
                     <br>
                     <br>
 
-
-
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Product Market Price:</label>
                         <div class="col-lg-3">
@@ -175,28 +173,28 @@
     </div>
 </nav>
 <script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-
-        showLeftPush = document.getElementById( 'showLeftPush' ),
-
-        body = document.body;
-
-
-    showLeftPush.onclick = function() {
-        classie.toggle( this, 'active' );
-        classie.toggle( body, 'cbp-spmenu-push-toright' );
-        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-        disableOther( 'showLeftPush' );
-    };
-
-
-    function disableOther( button ) {
-
-        if( button !== 'showLeftPush' ) {
-            classie.toggle( showLeftPush, 'disabled' );
-        }
-
-    }
+//    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+//
+//        showLeftPush = document.getElementById( 'showLeftPush' ),
+//
+//        body = document.body;
+//
+//
+//    showLeftPush.onclick = function() {
+//        classie.toggle( this, 'active' );
+//        classie.toggle( body, 'cbp-spmenu-push-toright' );
+//        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+//        disableOther( 'showLeftPush' );
+//    };
+//
+//
+//    function disableOther( button ) {
+//
+//        if( button !== 'showLeftPush' ) {
+//            classie.toggle( showLeftPush, 'disabled' );
+//        }
+//
+//    }
 </script>
 <script>
 
@@ -228,8 +226,6 @@
             var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
             photo.src = data;
         };
-
-
 
         // 以DataURL的形式读取文件:
         reader.readAsDataURL(file);
