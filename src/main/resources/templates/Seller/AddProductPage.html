@@ -208,7 +208,6 @@
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById('photo');
 
-    var BASEPATH = 'C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static';
     fileInput.addEventListener('change', function () {
         photo.src = "";
         if(!fileInput.value)
@@ -231,11 +230,8 @@
 
         reader.onload = function (e) {
             photo.src = e.target.result;
-            //  var fso = new ActiveXObject("Scripting.FileSystemObject");
-            // var f = fso.GetFile(e.target.result);
-            //f.Copy('C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static' + GetRandomNum() + file.name);
-            reader.readAsDataURL(file);
         }
+        reader.readAsDataURL(file);
     });
 
     var index = 1;
