@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
-    <title>Order Management</title>
+    <title>AdsManagement</title>
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
@@ -13,10 +13,7 @@
 <div class="header">header</div>
 <div class="content">
 
-    <p>
-        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    </p>
-    <div class="col-lg-2">
+    <div class="col-lg-4">
         <div id="wrapper">
             <!-- Sidebar -->
             <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
@@ -33,8 +30,8 @@
                     <li>
                         <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
                     </li>
                 </ul>
             </nav>
@@ -42,68 +39,19 @@
     </div>
 
 
-    <div class="col-lg-10">
-        <div class="container" style="col-lg-10">
-            <div>
-                <div>
-                    <label>userName</label>
-                    <label th:text="*{userName}"></label>
-                </div>
-                <div>
-                    <label>tradePayWay</label>
-                    <label th:text="*{tradePayWay}"></label>
-                </div>
-                <div>
-                    <label>tradeTotalMoney</label>
-                    <label th:text="*{tradeTotalMoney}"></label>
-                </div>
-                <div>
-                    <label>address</label>
-                    <label th:text="*{address}"></label>
-                </div>
-                <div>
-                    <label>feedbackRemarks</label>
-                    <label th:text="*{feedbackRemarks}"></label>
-                </div>
-                <div>
-                    <label>tradeCreateTime</label>
-                    <label th:text="*{tradeCreateTime}"></label>
-                </div>
-                <div>
-                    <label>tradeFinishTime</label>
-                    <label th:text="*{tradeFinishTime}"></label>
-                </div>
-                <div>
-                    <label>tradeStatus</label>
-                    <label th:text="*{tradeStatus}"></label>
-                </div>
-            </div>
+    <div class="col-lg-8">
+        <br><br><br><br>
 
-            <div class="row">
-                <form th:action="@{/Seller/ViewTransaction/Detail}">
-                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-                    <table class="table table-striped">
-                        <caption>Recently Trades</caption>
-                        <thead>
-                        <th>product</th>
-                        <th>productAmount</th>
-                        <th>productTradePrice</th>
-                        <th>productTotlePrice</th>
-                        </thead>
-                        <tbody id="tradesTable" >
-                        <tr th:each="detail:${details}">
-                            <td th:text="*{detail.productName}"></td>
-                            <td th:text="*{detail.amount}" ></td>
-                            <td th:text="*{detail.productPrice}"></td>
-                            <td th:text="*{detail.totalPrice}"></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </form>
-            </div>
-
-        </div>
-
+        <form role="form" class="col-lg-4">
+           <img src="/alipay.JPG">
+            <br><br><br>
+            <button onclick="">Pay Success</button>
+        </form>
+        <form role="form" class="col-lg-4">
+            <img src="/wechatpay.JPG">
+            <br><br><br>
+            <button onclick="">Pay Success</button>
+        </form>
     </div>
 </div>
 </div>

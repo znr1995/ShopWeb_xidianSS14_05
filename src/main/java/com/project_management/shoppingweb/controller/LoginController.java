@@ -23,7 +23,7 @@ public class LoginController {
     public String main(){
 
         return "redirect:/homepage";
-        //return "/homepage";
+
     }
 
 

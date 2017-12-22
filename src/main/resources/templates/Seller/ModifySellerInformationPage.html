@@ -1,150 +1,197 @@
-<!--修改商家信息界面-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en" class="no-js">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-    <title>ProductManager</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/component.css" />
-    <script src="/js/modernizr.custom.js"></script>
+    <meta charset="UTF-8">
+    <title>Seller Information</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
 </head>
-<body class="cbp-spmenu-push-toleft">
+<body style="background: #84c1be">
+<div class="header">header</div>
+<div class="content">
 
-</br>
-<p>
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-</p>
-<div class="container">
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-        <h3>导航</h3>
-        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
-
-            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
-            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
-            <button  name="action" value="ViewIncome" >ViewIncome</button>
-            <button  name="action" value="ViewTransaction">ViewTransaction</button>
-            <button  name="action" value="ProductsManagement">ProductsManagement</button>
-            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-
-        </form>
-
-    </nav>
-    </br>
-    <div class="text-center">
-
-
-        <h1>ModifySellerInformationPage</h1>
-
-
-    </div>
-    </br>
     <p>
         <input type="hidden" name="SellerID" th:value="*{SellerID}" />
     </p>
-    <div class="row">
-        <div class="col-lg-6 col-md-2">
+    <div class="col-lg-2">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
 
-            <form th:action="@{/Seller/ModifySellerInformation/ReturnBack}" method="get">
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="col-lg-10">
+        <div class="row">
+            <br><br>
+            <p>
                 <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-                <button type="submit" class="btn-default">return Back</button>
+            </p>
 
-            </form>
+            <div class="row col-lg-8 text-right">
+                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Shopname:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Shopname" th:value="*{Shopname}"></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Catogery:</label>
+                        <div class="col-lg-6">
+<!--
+                            <input type="text" class="form-control" name="Catogery" th:value="*{Catogery}"></input>
+-->
+                                    <form role="form">
+
+                                            <select class="form-control" name="Catogery">
+                                                <option value="TV & Home Theater">TV & Home Theater</option>
+                                                <option value="Computers & Tablets">Computers & Tablets</option>
+                                                <option value="Cell Phones">Cell Phones</option>
+                                                <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                                <option value="Audio">Audio</option>
+                                                <option value="Car Electronics & GPS">Car Electronics & GPS</option>
+                                                <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+                                                <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
+                                                <option value="Home & Office">Home & Office</option>
+                                            </select>
+                                    </form>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">UserName:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Username" th:value="*{Username}"></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Address:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Address" th:value="*{Address}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Email:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Email" th:value="*{Email}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">PassWord:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Passwd" th:value="*{Passwd}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">PhoneNum:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="PhoneNum" th:value="*{PhoneNum}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Sculpture:</label>
+                        <div class="col-lg-6">
+                            <input type="file" class="form-control" name="Sculpture" th:value="*{Sculpture}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <button type="submit" class="btn-default" >OK</button>
+                    </div>
+
+
+                </form>
+            </div>
+
+
+            <div class="row col-lg-4">
+
+                <img src="./bootstrap/picture/015062.png" th:src="*{Sculpture}" class="img-rounded">
+
+            </div>
         </div>
 
-        <div class="col-lg-6 col-md-2 text-right">
-
-            <section >
-
-                <button id="showLeftPush" class="btn-default">快捷导航</button>
-
-            </section>
-        </div>
-
-        </br></br></br></br>
-
     </div>
-
-    <div class="row col-lg-10 text-right">
-        <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}">
-            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-
-            <div class="form-group">
-                <label class="col-lg-5 text-right">Shopname:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Shopname" th:value="*{Shopname}"></input>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-5 text-right">Catogery:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Catogery" th:value="*{Catogery}"></input>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-5 text-right">UserName:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Username" th:value="*{Username}"></input>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label class="col-lg-5 text-right">Address:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Address" th:value="*{Address}"></input></p>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label class="col-lg-5 text-right">Email:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Email" th:value="*{Email}"></input></p>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label class="col-lg-5 text-right">PassWord:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="Passwd" th:value="*{Passwd}"></input></p>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label class="col-lg-5 text-right">PhoneNum:</label>
-                <div class="col-lg-3">
-                    <input type="text" class="form-control" name="PhoneNum" th:value="*{PhoneNum}"></input></p>
-                </div>
-            </div>
-
-            <div class="form-group ">
-                <label class="col-lg-5 text-right">Sculpture:</label>
-                <div class="col-lg-3">
-                    <input type="file" class="form-control" name="Sculpture" th:value="*{Sculpture}"></input></p>
-                </div>
-            </div>
-
-            <div class="row text-center">
-                <button type="submit" class="btn-default" >OK</button>
-            </div>
-
-
-        </form>
-    </div>
-    <div class="row col-lg-2">
-
-        <img src="./bootstrap/picture/015062.png" th:src="*{Sculpture}" class="img-rounded">
-
     </div>
 </div>
-<script src="./js/classie.js"></script>
+
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body" >
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login"><button type="button" class="btn btn-primary">
+                                    Sure
+                                </button></a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </div>
+</nav>
+
 <script>
     var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
 
@@ -169,6 +216,5 @@
 
     }
 </script>
-
 </body>
 </html>
