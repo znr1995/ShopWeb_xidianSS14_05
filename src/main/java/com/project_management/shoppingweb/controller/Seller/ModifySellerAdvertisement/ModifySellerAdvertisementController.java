@@ -353,6 +353,7 @@ public class ModifySellerAdvertisementController {
             return modifySellerAdvertisement(pictureUrl,start,end,request,model, attributes);
             //shopadvertisement
         }
+
     }
 
     //增加或修改商品广告信息

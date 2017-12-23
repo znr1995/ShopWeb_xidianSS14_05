@@ -8,6 +8,30 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
 </head>
 <body>
 <div class="header">header</div>
@@ -29,14 +53,14 @@
                             Management</a>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                        <a href="#"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income
                             Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order
                             Management</a>
                     </li>
                 </ul>
@@ -46,27 +70,33 @@
 
 
     <div class="col-lg-10">
-        <div class="container" style="col-lg-10">
             <br><br>
 
             <div>
                 <form th:action="@{/Seller/ModifySellerAdvertisement/AddNewAdvertisement}">
-                    <button type="submit" style="background: #258ecd">add new advertisement</button>
+                    <button class="button">Add New Ads</button>
                 </form>
             </div>
 
-            <h2>&nbsp;&nbsp;Shop advertisments</h2>
-            <div class="row">
+            <br><br>
+
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                    <h2><b>Product Advertisements</b></h2>
+                </h1>
+            </div>
+            <div class="panel-body">
                 <form th:action="@{/Seller/ModifySellerAdvertisement/ModifyProductAdvertisement}">
 
                     <table class="table table-striped" id="seller_table">
 
                         <thead>
-                        <th>description</th>
-                        <th>startDate</th>
-                        <th>endDate</th>
-                        <th>type</th>
-                        <th>status</th>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
                         </thead>
 
                         <tr th:each="adv : ${productAdvertisements}">
@@ -88,7 +118,7 @@
                             </td>
 
                             <td>
-                                <button type="submit" class="btn-default" style="background: #258ecd" data-toggle="modal" data-target="#myModal"
+                                <button type="submit" class="btn-default" style="background: #258ecd;border-radius: 8px;" data-toggle="modal" data-target="#myModal"
                                         name="modify" th:value="${adv.advertisementId}">modify
                                 </button>
                             </td>
@@ -96,46 +126,51 @@
                     </table>
                 </form>
             </div>
-
-            <h2>&nbsp;&nbsp;Product advertisement</h2>
-            <div class="row">
-                <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
-                    <!-- 这里需要一个列表-->
-                    <table class="table table-striped" id="seller_table">
-
-                        <thead>
-                        <th>description</th>
-                        <th>startDate</th>
-                        <th>endDate</th>
-                        <th>status</th>
-                        </thead>
-
-                        <tr th:each="adv : ${sellerAdvertisements}">
-                            <td>
-                                <label th:text="*{adv.description}"></label>
-                            </td>
-                            <td>
-                                <data th:text="*{adv.startDate}"></data>
-                            </td>
-                            <td>
-                                <data th:text="*{adv.endDate}"></data>
-                            </td>
-                            <td>
-                                <label th:text="*{adv.statusString}"></label>
-                            </td>
-
-                            <td>
-                                <button type="submit" class="btn-default" style="background: #258ecd" data-toggle="modal" data-target="#myModal"
-                                        name="modify" th:value="${adv.advertisementId}">modify
-                                </button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
-            </div>
-
         </div>
+            <br><br>
 
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <h2><b>Shop Advertisement</b></h2>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
+                        <!-- 这里需要一个列表-->
+                        <table class="table table-striped" id="seller_table">
+
+                            <thead>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            </thead>
+
+                            <tr th:each="adv : ${sellerAdvertisements}">
+                                <td>
+                                    <label th:text="*{adv.description}"></label>
+                                </td>
+                                <td>
+                                    <data th:text="*{adv.startDate}"></data>
+                                </td>
+                                <td>
+                                    <data th:text="*{adv.endDate}"></data>
+                                </td>
+                                <td>
+                                    <label th:text="*{adv.statusString}"></label>
+                                </td>
+
+                                <td>
+                                    <button type="submit"  style="background: #258ecd;border-radius: 8px;" data-toggle="modal" data-target="#myModal"
+                                            name="modify" th:value="${adv.advertisementId}">modify
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+        </div>
     </div>
 </div>
 </div>

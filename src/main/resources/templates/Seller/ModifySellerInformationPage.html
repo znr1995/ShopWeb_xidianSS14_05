@@ -8,10 +8,33 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background: #3c3c3c;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px #999;
+        }
+
+        .button:active {
+            box-shadow: 0 1px #666;
+            transform: translateY(2px);
+        }
+    </style>
 </head>
 <body style="background: #84c1be">
 <div class="header">header</div>
 <div class="content">
+
+
 
     <p>
         <input type="hidden" name="SellerID" th:value="*{SellerID}" />
@@ -28,13 +51,13 @@
                         <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
                     </li>
                 </ul>
             </nav>
@@ -47,11 +70,12 @@
             <p>
                 <input type="hidden" name="SellerID" th:value="*{SellerID}" />
             </p>
-
-            <div class="row col-lg-8 text-right">
                 <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}"  method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-
+                    <div class="col-lg-4 text-right">
+                    <img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">
+                    </div>
+                    <br><br><br><br><br><br><br><br><br>
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Shopname:</label>
                         <div class="col-lg-3">
@@ -121,19 +145,15 @@
                     </div>
 
                     <div class="row text-center">
-                        <button type="submit" class="btn-default" >OK</button>
+                        <button class="button">OK</button>
                     </div>
 
 
                 </form>
-            </div>
 
 
-            <div class="row col-lg-4">
 
-                <img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">
 
-            </div>
         </div>
 
     </div>

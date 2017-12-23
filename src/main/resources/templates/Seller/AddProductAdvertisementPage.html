@@ -8,6 +8,27 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: none;
+            color: white;
+            width: 250px;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+        }
+
+        .button1 {
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+    </style>
 </head>
 <body>
 <div class="header">header</div>
@@ -25,13 +46,13 @@
                         <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
                     </li>
                 </ul>
             </nav>
@@ -41,7 +62,7 @@
 
     <div class="col-lg-10">
         <br><br><br><br>
-        <div class="row col-lg-8" >
+        <div class="row col-lg-8">
             <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                 <input type="hidden" name="ProductID" th:value="*{ProdcutID}"/>
@@ -53,17 +74,17 @@
                 <input type="hidden" name="status" id="status" th:value="${status}" />
 
                 <div class="form-group">
-                    <label class="col-lg-5 text-right">advertisement type:</label>
+                    <label class="col-lg-5 text-right">Advertisement Type:</label>
                     <div class="col-lg-3" id="advertisementTypeDiv">
                         <select name="advertisementType" id="advertisementType" onchange="selectAdverType(this.value)">
-                            <option value="1">product advertisement</option>
-                            <option value="2">shop advertisement</option>
+                            <option value="1">Product Advertisement</option>
+                            <option value="2">Shop Advertisement</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="form-group" id="productIDDiv">
-                    <label class="col-lg-5 text-right">productID:</label>
+                    <label class="col-lg-5 text-right">Product ID:</label>
                     <div class="col-lg-3"  id="productIDSelectDiv">
                         <select name="productIDs" id="productIDSelect">
                             <div th:each="product : ${Products}">
@@ -74,17 +95,17 @@
                 </div>
 
                 <div class="form-group" id="locationDiv">
-                    <label class="col-lg-5 text-right" >location type:</label>
+                    <label class="col-lg-5 text-right" >Location Type:</label>
                     <div class="col-lg-3" id="typeSelectDiv">
                         <select name="type"  id="typeSelect">
-                            <option value="1">roll advertisement</option>
-                            <option value="2">list advertisement</option>
+                            <option value="1">Roll advertisement</option>
+                            <option value="2">List advertisement</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="from-group">
-                    <label class="col-lg-5 text-right">startDate:</label>
+                    <label class="col-lg-5 text-right">Start Date:</label>
                     <div class="col-lg-3" id="startDateDiv">
                         <input type="date" class="form-control" id="startDate" name="startDate" th:value="*{startDate}"></input>
                     </div>
@@ -92,29 +113,29 @@
                 <br>
 
                 <div class="form-group">
-                    <label class="col-lg-5 text-right">endDate:</label>
+                    <label class="col-lg-5 text-right">End Date:</label>
                     <div class="col-lg-3" id="endDateDiv">
                         <input type="date" class="form-control" id="endDate" name="endDate" th:value="*{endDate}"></input>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-lg-5 text-right">pictureUrl:</label>
+                    <label class="col-lg-5 text-right">Picture Url:</label>
                     <div class="col-lg-3">
                         <input type="file" id="pictureUrl" name="pictureUrl" ></input>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-lg-5 text-right">description:</label>
+                    <label class="col-lg-5 text-right">Description:</label>
                     <div class="col-lg-3">
                         <textarea class="form-control" rows="3" id="description" name="description" th:text="*{description}"></textarea>
                     </div>
                 </div>
                 <br>
 
-                <div>
-                    <button type="submit" style="background: #e18808 " id="submitBtn" class="btn-default" >Submit</button>
+                <div class="row text-center">
+                    <button class="button button1" id="submitBtn">Submit</button>
                 </div>
             </form>
         </div>

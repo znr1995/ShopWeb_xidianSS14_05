@@ -32,10 +32,11 @@ public class SellerMainPageController {
 
     //启动主界面
     @RequestMapping("/Seller/Main")
-    public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId, Model model, RedirectAttributes attributes)
+    public String jumpToSellerMainPage(@ModelAttribute("SellerID")long sellerId,Model model, RedirectAttributes attributes)
     {
         sellerID = sellerId;
         Seller seller = sellerSellerService.getSellerById(sellerId);
+
         if(seller == null)
         {
             attributes.addAttribute("errorMessage","sellerId is wrong!");
