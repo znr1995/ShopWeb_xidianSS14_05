@@ -47,8 +47,10 @@
 <form name="form1" th:action="@{/Pay}" method="get">
     <div id="infor">
         <input type="hidden" name="UserID" th:value="${UserID}"  readonly="readonly" /><br/>
-        <strong style="margin-left: 65px">ShopID</strong>: <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" /><br/>
-        <strong style="margin-left: 33px">ProductID</strong>: <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" /><br/>
+        <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" style="display: none" /><br/>
+        <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" style="display: none" /><br/>
+        <strong style="margin-left: 65px">ShopName</strong>: <input type="text" name="SellerName"  th:value="${SellerName}" readonly="readonly" /><br/>
+        <strong style="margin-left: 33px">ProductName</strong>: <input type="text" name="ProductName" th:value="${ProductName}" readonly="readonly" /><br/>
         <strong >ProductAmount</strong>:<input type="text" name="ProductAmount" th:value="${ProductAmount}"  readonly="readonly" /><br/>
         <strong style="margin-left: 33px">UnitPrice</strong>:$<input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly"  /><br/>
         <strong style="margin-left: 43px">TotalPay</strong>:$<input type="text" name="Total" th:value="${Total}" readonly="readonly" /><br/>
@@ -64,76 +66,7 @@
         <option th:value="AliPay" style="color: white">AliPay</option>
         <option th:value="WeChatPay" style="color: white">WePay</option>
     </select><br/>
-    <!--<div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>CityList</td>
-            </tr>
-            <tr th:each="CityList : ${CityList}" >
-                <td th:text="${CityList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>DetailAddressList</td>
-            </tr>
-            <tr th:each="DetailAddressList : ${DetailAddressList}" >
-                <td th:text="${DetailAddressList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>District</td>
-            </tr>
-            <tr th:each="District : ${District}" >
-                <td th:text="${District}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>IsDefaultAddressList</td>
-            </tr>
-            <tr th:each="IsDefaultAddressList : ${IsDefaultAddressList}" >
-                <td th:text="${IsDefaultAddressList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>TelList</td>
-            </tr>
-            <tr th:each="TelList : ${TelList}" >
-                <td th:text="${TelList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>PostCodeList</td>
-            </tr>
-            <tr th:each="PostCodeList : ${PostCodeList}" >
-                <td th:text="${PostCodeList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>
-    <div style="width: 200px;height: 500px;float: left">
-        <table>
-            <tr>
-                <td>ProvinceList</td>
-            </tr>
-            <tr th:each="ProvinceList : ${ProvinceList}" >
-                <td th:text="${ProvinceList}">Onions</td>　　
-            </tr>
-        </table>
-    </div>-->
+
     <table id="table" >
         <tr  style="margin: 0 auto;text-align: center">
             <td width="250px" height="60px"><strong>City</strong></td>
