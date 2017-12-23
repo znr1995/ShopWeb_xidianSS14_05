@@ -52,11 +52,7 @@ public class SellerMainPageController {
         return "login";
     }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> origin/dev
     @RequestMapping(value = "/Seller/FastJump/ModifySellerAdvertisementHandler")
     public String jumpToModifySellerAdvertisementHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
@@ -67,34 +63,15 @@ public class SellerMainPageController {
     public String jumpToModifySellerInformationHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
-<<<<<<< HEAD
-        return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerInformationHandler";
-=======
         return "redirect:/Seller/ModifySellerInformation/ModifySellerInformationHandler";
->>>>>>> origin/dev
     }
     @RequestMapping(value = "/Seller/FastJump/ViewIncomeHandler")
     public String jumpToViewIncomeHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
-<<<<<<< HEAD
         return "redirect:/Seller/ModifySellerAdvertisement/ViewIncomeHandler";
     }
-    @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
-    public String jumpToViewTransactionHandler(HttpServletRequest request, RedirectAttributes attributes)
-    {
-        attributes.addAttribute("SellerID",sellerID);
-        return "redirect:/Seller/ModifySellerAdvertisement/ViewTransactionHandler";
-    }
-    @RequestMapping(value = "/Seller/FastJump/ProductsManagementHandler")
-    public String jumpToProductsManagementHandler(HttpServletRequest request, RedirectAttributes attributes)
-    {
-        attributes.addAttribute("SellerID",sellerID);
-        return "redirect:/Seller/ModifySellerAdvertisement/ProductsManagementHandler";
-    }
-=======
-        return "redirect:/Seller/ViewIncome/ViewIncomeHandler";
-    }
+
     @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
     public String jumpToViewTransactionHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
@@ -110,6 +87,5 @@ public class SellerMainPageController {
 
 
 
->>>>>>> origin/dev
 
 }

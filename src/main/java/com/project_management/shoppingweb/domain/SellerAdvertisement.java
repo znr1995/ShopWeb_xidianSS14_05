@@ -16,11 +16,9 @@ public class SellerAdvertisement {
 	private Date startDate;//*****************
 	private Date endDate;//通过这个判断是否可以放在主页*********
 	private double price;
-<<<<<<< HEAD
-	private Integer status;// 0 - 未判断， 1 - 通过
-=======
-	private Integer status;// 1 - 未判断， 0 - 通过 2 - 未付款
->>>>>>> origin/dev
+
+	private Integer status;// 0 - 未判断， 1 - 通过 2 - 未付款
+
 
 
 

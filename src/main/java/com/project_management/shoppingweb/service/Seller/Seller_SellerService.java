@@ -215,6 +215,20 @@ public class Seller_SellerService {
         sellerAdvertisementRepository.save(sellerAdvertisement);
     }
 
+    public boolean hasCorrentPrice()
+    {
+        try{
+            List<Price> prices = priceRepository.findAll();
+            if(prices.isEmpty())
+                return false;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public double getProductListAdvertisementPrice()
     {
         return priceRepository.findAll().get(0).getProductHighAdvertisementPrice();
