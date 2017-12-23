@@ -54,7 +54,6 @@ public class SellerMainPageController {
     }
 
 
-
     @RequestMapping(value = "/Seller/FastJump/ModifySellerAdvertisementHandler")
     public String jumpToModifySellerAdvertisementHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
@@ -71,8 +70,9 @@ public class SellerMainPageController {
     public String jumpToViewIncomeHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
-        return "redirect:/Seller/ViewIncome/ViewIncomeHandler";
+        return "redirect:/Seller/ModifySellerAdvertisement/ViewIncomeHandler";
     }
+
     @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
     public String jumpToViewTransactionHandler(HttpServletRequest request, RedirectAttributes attributes)
     {

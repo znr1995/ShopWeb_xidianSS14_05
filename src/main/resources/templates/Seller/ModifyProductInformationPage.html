@@ -1,3 +1,323 @@
+<<<<<<< HEAD
+<!--修改产品信息界面-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>AddProduct</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
+    <script src="/bootstrap/js/bootstrap.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/default.css" />
+    <link rel="stylesheet" type="text/css" href="/css/component.css" />
+    <script src="/js/modernizr.custom.js"></script>
+</head>
+<body class="cbp-spmenu-push-toleft " >
+
+
+<p>
+    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+</p>
+
+
+<div class="container">
+    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+        <h3>导航</h3>
+        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
+
+            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
+            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
+            <button  name="action" value="ViewIncome" >ViewIncome</button>
+            <button  name="action" value="ViewTransaction">ViewTransaction</button>
+            <button  name="action" value="ProductsManagement">ProductsManagement</button>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+
+        </form>
+
+    </nav>
+
+    <div class="text-center">
+
+
+        <h1>ModifyProduct</h1>
+
+
+    </div>
+    </br>
+
+    <div class="row">
+        <div class="col-lg-6 col-md-2">
+
+            <form th:action="@{/Seller/ModifyProduct/ReturnBack}" method="get">
+                <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                <button type="submit" class="btn-default">return Back</button>
+
+            </form>
+        </div>
+
+        <div class="col-lg-6 col-md-2 text-right">
+
+            <section >
+
+                <button id="showLeftPush" class="btn-default">快捷导航</button>
+
+            </section>
+        </div>
+
+        </br></br></br></br>
+
+    </div>
+    <br>
+    <br>
+    <div class="row col-lg-8">
+        <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+            <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productName:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
+                </div>
+            </div>
+
+            <div class="form-group ">
+                <label class="col-lg-5 text-right">productStock:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
+                </div>
+            </div>
+
+            <div class="from-group">
+                <label class="col-lg-5 text-right">brandName:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" name="brandName" th:value="*{brandName}"></input>
+                </div>
+            </div>
+            <br>
+            <br>
+
+
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productMarketPrice:</label>
+                <div class="col-lg-3">
+                    <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"></input>
+                </div>
+            </div>
+            <div class="form-group">
+
+                <label class="col-lg-5 text-right">productBriefInfo:</label>
+                <div class="col-lg-3">
+                    <input class="form-control" name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-lg-5 text-right">productPhoto:</label>
+                <div class="col-lg-3">
+                    <input type="file" id="productPhoto" name="productPhoto"></input>
+                </div>
+            </div>
+            <br>
+            <table class="table table-striped" id="otherAttributes">
+                <tr>
+                    <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
+                </tr>
+                <tr>
+                    <th>attrName</th>
+                    <th>attrValue</th>
+                    <th>modify</th>
+                    <th>delete</th>
+                </tr>
+            </table>
+            <div class="row text-center">
+                <button type="submit" class="btn-default">OK</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-lg-4 text-left">
+        <input type="hidden" id="srcPath" th:value="${productPhoto}"></input>
+        <img id="photo" th:src="${productPhoto}"  style="display: block;"  height="200" width="300" alt="default" />
+    </div>
+</div>
+
+<br />
+
+
+<script src="/js/classie.js"></script>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+
+        showLeftPush = document.getElementById( 'showLeftPush' ),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+
+
+    function disableOther( button ) {
+
+        if( button !== 'showLeftPush' ) {
+            classie.toggle( showLeftPush, 'disabled' );
+        }
+
+    }
+</script>
+<script>
+
+    var fileInput = document.getElementById('productPhoto'),
+        photo = document.getElementById("photo"),
+        srcPath = document.getElementById("srcPath");
+    fileInput.addEventListener('change', function () {
+        // 检查文件是否选择:
+        if (!fileInput.value) {
+            info.innerHTML = '没有选择文件';
+            return;
+        }
+        // 获取File引用:
+        var file = fileInput.files[0];
+
+        if(file.type != "image/jpeg")
+            if( file.type != "image/png")
+                if(file.type != "image/gif")
+                {
+                    alert("不是有效的图片文件!");
+                    return;
+                }
+
+
+        var strSourFile = file.value;
+        var strDestFile = BASEPATH + file.name;
+        var objFSO = new ActiveXObject("Scripting.FileSystemObject");
+        objFSO.MoveFile(strSourFile, strDestFile);
+
+
+        console.log(fileInput.value);
+        // 读取文件:
+        var reader = new FileReader();
+
+        reader.onload = function(e) {
+            var data = e.target.result; // 'data:image/jpeg;base64,/9j/4AAQSk...(base64编码)...'
+            photo.src = data;
+        };
+
+
+
+        // 以DataURL的形式读取文件:
+        reader.readAsDataURL(file);
+
+    });
+
+    var index = 1;
+
+    var updateBriefInfo = function () {
+        var obj = {};
+        var attrs = document.getElementById('otherAttributes');
+        var len = attrs.rows.length;
+        if(len > index)
+        {
+            index = len;
+        }
+        else
+            len = index;
+
+        console.log(attrs);
+        for(var i =1; len>i; i++)
+        {
+            var attrName = document.getElementById('attribute'+i),
+                attrValue = document.getElementById('value'+i);
+            if(attrName != null )
+                if(attrValue != null)
+                {
+                    if(attrValue.value == "" || attrName.value == "")
+                    {
+                        alert("value not be empty");
+                        return;
+                    }
+                    obj[attrName.value] = attrValue.value;
+                }
+
+        }
+        console.log(obj);
+        var briefInfo = document.getElementById('productBriefInfo');
+        briefInfo.value = JSON.stringify(obj);
+    }
+
+    var deleteBtn =  function(name) {
+
+        var tr = document.getElementById('otherAttributes'+name);
+        tr.remove();
+        updateBriefInfo();
+        return false;
+
+    }
+
+    var modify = function (name) {
+        updateBriefInfo();
+        return false;
+    }
+
+    var addNewAttr = function () {
+        var tr = attrs.insertRow();
+        tr.id = "otherAttributes" + index;
+        var td1 = tr.insertCell(0),
+            td2 = tr.insertCell(1),
+            td3 = tr.insertCell(2),
+            td4 = tr.insertCell(3);
+        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "input attribute" ></input></td>';
+        td2.innerHTML = '<td><input id = "value' +index  + '" value= "input value"></input></td>';
+        td3.innerHTML = '<td>' + '<button id="addNewAttr'+ index  + '" name="'+ index +'" onclick="addNewAttrOk(id,name)"  type="button">add</button></td>';
+        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
+        index++;
+    }
+
+    var addNewAttrOk = function (id, name) {
+        var btn = document.getElementById(id);
+        console.log(btn);
+        btn.innerText = "modify";
+        btn.onclick = modify;
+        updateBriefInfo();
+    }
+
+    var attrs = document.getElementById('otherAttributes'),
+        info = document.getElementById('productBriefInfo');
+    console.log(info.value);
+    var obj = JSON.parse(info.value);
+    console.log(obj);
+
+
+    for(var i in obj)
+    {
+        var tr = attrs.insertRow();
+        tr.id = "otherAttributes" + index;
+        var td1 = tr.insertCell(0),
+            td2 = tr.insertCell(1),
+            td3 = tr.insertCell(2),
+            td4 = tr.insertCell(3);
+        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "' + i + '" ></input></td>';
+        td2.innerHTML = '<td><input id = "value' +index  + '" value= "' + obj[i] + ' "></input></td>';
+        td3.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="modify(name)"  type="button">modify</button></td>';
+        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
+        index++;
+    }
+
+
+</script>
+
+
+</body>
+=======
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
@@ -342,4 +662,5 @@
 
 </script>
 </body>
+>>>>>>> origin/dev
 </html>

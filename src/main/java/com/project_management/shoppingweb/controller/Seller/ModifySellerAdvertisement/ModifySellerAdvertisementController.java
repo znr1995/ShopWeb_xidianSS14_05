@@ -33,6 +33,9 @@ public class ModifySellerAdvertisementController {
     private Seller_SellerService sellerSellerService;
 
     private long sellerID = -1;
+    private int notPassStatus = 0;
+    private int passStatus = 1;
+    private int notPayStatus = 2;
 
     //界面显示的类
     class ProductAdvertisementPlus {
@@ -374,9 +377,14 @@ public class ModifySellerAdvertisementController {
                 return "redirect:/error/errorHandler";
             }
 
-            productAdvertisement.setStatus(2);  // 1 - 未判断， 0 - 通过 2 - 未付款
+            productAdvertisement.setStatus(notPayStatus);  // 1 - 未判断， 0 - 通过 2 - 未付款
             long productId = Long.valueOf(request.getParameter("productIDs"));
             int locationId = Integer.valueOf(request.getParameter("type"));  // 1-滚动，2-列表广告
+            //判断数据库是否有price相关的数据
+            if(!sellerSellerService.hasCorrentPrice()) {
+                attributes.addAttribute("errorMessage","not find price file,the admin is too lazy!");
+                return "redirect:/error/errorHandler";
+            }
             productAdvertisement.setPrice(dayNum *(locationId == 1 ? sellerSellerService.getProductRollAdvertisementPrice() :sellerSellerService.getSellerListAdvertisementPrice()));
             productAdvertisement.setProductId(productId);
             productAdvertisement.setType(locationId);
@@ -431,12 +439,18 @@ public class ModifySellerAdvertisementController {
                 attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
                 return "redirect:/error/errorHandler";
             }
+            //判断数据库是否有price相关的数据
+            if(!sellerSellerService.hasCorrentPrice()) {
+                attributes.addAttribute("errorMessage","not find price file,the admin is too lazy!");
+                return "redirect:/error/errorHandler";
+            }
             sellerAdvertisement.setPrice(dayNum * sellerSellerService.getSellerListAdvertisementPrice());
             sellerAdvertisement.setStartDate(startDate);
             sellerAdvertisement.setEndDate(endDate);
             sellerAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
             sellerAdvertisement.setSellerId(sellerID);
-            sellerAdvertisement.setStatus(2);
+            sellerAdvertisement.setStatus(notPassStatus);
+
         }
         else
         {
@@ -479,14 +493,14 @@ public class ModifySellerAdvertisementController {
             if(type.equals("ProductAdvertisement"))
             {
               ProductAdvertisement productAdvertisement =  sellerSellerService.getProductAdvertisementByProductAdvertisementId(advertisementId);
-                productAdvertisement.setStatus(1);
+                productAdvertisement.setStatus(notPassStatus);
                 productAdvertisement.setPrice(payPrice);
                 sellerSellerService.writeInProductAdvertisement(productAdvertisement);
             }
             else
             {
                 SellerAdvertisement productAdvertisement =  sellerSellerService.getSellerAdvertisement(advertisementId);
-                productAdvertisement.setStatus(1);
+                productAdvertisement.setStatus(notPassStatus);
                 productAdvertisement.setPrice(payPrice);
                 sellerSellerService.writeInSellerAdvertisement(productAdvertisement);
             }
@@ -505,10 +519,10 @@ public class ModifySellerAdvertisementController {
         return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
     }
 
-    //辅助int转string的方法 // 1 - 未判断， 0 - 通过 2 - 未付款
+    //辅助int转string的方法 // 0 - 未判断， 1 - 通过 2 - 未付款
     private String getStatusString(int i)
     {
-        if(i == 1)
+        if(i == notPassStatus)
         {
             return "not passed!";
         }
