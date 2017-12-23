@@ -1,148 +1,183 @@
-<!--添加产品的界面-->
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html" lang="en" class="no-js">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-
-    <title>AddProduct</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap -->
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.css">
-    <script src="/bootstrap/js/jquery-3.2.1.min.js"></script>
-    <script src="/bootstrap/js/bootstrap.js"></script>
-    <link rel="stylesheet" type="text/css" href="/css/default.css" />
-    <link rel="stylesheet" type="text/css" href="/css/component.css" />
-    <script src="/js/modernizr.custom.js"></script>
+    <meta charset="UTF-8">
+    <title>Add product</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
 </head>
-<body class="cbp-spmenu-push-toleft " >
+<body style="background: #bee5eb">
+<div class="header">header</div>
+<div class="content">
 
+    <p>
+        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    </p>
+    <div class="col-lg-2">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
 
-<p>
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-</p>
-
-
-<div class="container">
-    <nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-        <h3>导航</h3>
-        <form name="form1" th:action="@{/Seller/FastJump}" method="get">
-
-            <button  name="action" value="ModifySellerAdvertisement" >ModifyAdvertisement</button>
-            <button  name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
-            <button  name="action" value="ViewIncome" >ViewIncome</button>
-            <button  name="action" value="ViewTransaction">ViewTransaction</button>
-            <button  name="action" value="ProductsManagement">ProductsManagement</button>
-            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-
-        </form>
-
-    </nav>
-
-    <div class="text-center">
-
-
-        <h1>AddProductPage</h1>
-
-
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </div>
-    </br>
 
-    <div class="row">
-        <div class="col-lg-6 col-md-2">
 
-            <form th:action="@{/Seller/AddProduct/ReturnBack}" method="get">
-                <button type="submit" class="btn-default">return Back</button>
+    <div class="col-lg-10">
+        <div class="row">
+            <br><br>
 
-            </form>
+            <p>
+                <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+            </p>
+
+            <div class="row col-lg-8">
+                <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Product Name:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="productName" th:value="*{productName}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Product Stock:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="productStock" th:value="*{productStock}"/></p>
+                        </div>
+                    </div>
+
+                    <div class="from-group">
+                        <label class="col-lg-4 text-right">Brand Name:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="brandName" th:value="*{brandName}"/>
+                        </div>
+                    </div>
+                    <br>
+                    <br>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Product Photo:</label>
+                        <div class="col-lg-3">
+                            <input type="file" id="productPhoto" name="productPhotoFile" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Product Market Price:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+
+                        <label class="col-lg-4 text-right">Product Brief Information:</label>
+                        <div class="col-lg-3">
+                            <textarea class="form-control" rows="3" id="productBriefInfo" name="productBriefInfo" th:value="*{productBriefInfo}"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Product Attribute:</label>
+                        <div class="col-lg-8">
+                    <table class="table table-striped" id="otherAttributes" style="width: auto">
+                        <tr>
+                            <button type="button" class="btn-default" style="background:#9acfea" onclick="addNewAttr()">addNewAttr</button>
+                        </tr>
+                        <tr>
+                            <th>Attribute Name</th>
+                            <th>AttributeValue</th>
+                            <th>Modify</th>
+                            <th>Delete</th>
+                        </tr>
+                    </table>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <button type="submit" style="background:#9acfea" class="btn-default" >Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 text-left">
+                <img id="photo" th:src="${productPhoto}" alt="nothing here" height="300" width="500" style="display: block;" />
+            </div>
+
         </div>
 
-        <div class="col-lg-6 col-md-2 text-right">
-
-            <section >
-
-                <button id="showLeftPush" class="btn-default">快捷导航</button>
-
-            </section>
-        </div>
-
-        </br></br></br></br>
-
-    </div>
-<br>
-    <br>
-    <div class="row col-lg-8" >
-        <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-            <input type="hidden" name="ProductID" th:value="*{ProductID}" />
-
-            <div class="form-group">
-                <label class="col-lg-5 text-right">productName:</label>
-                <div class="col-lg-3">
-                <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
-            </div>
-            </div>
-
-            <div class="form-group ">
-            <label class="col-lg-5 text-right">productStock:</label>
-                <div class="col-lg-3">
-                <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
-                </div>
-                </div>
-
-            <div class="from-group">
-            <label class="col-lg-5 text-right">brandName:</label>
-                <div class="col-lg-3">
-                <input type="text" class="form-control" name="brandName" th:value="*{brandName}"></input>
-                </div>
-            </div>
-    <br>
-            <br>
-
-            <div class="form-group">
-              <label class="col-lg-5 text-right">productPhoto:</label>
-                <div class="col-lg-3">
-                    <input type="file" id="productPhoto" name="productPhotoFile" ></input>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-lg-5 text-right">productMarketPrice:</label>
-                <div class="col-lg-3">
-                <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"></input>
-                </div>
-            </div>
-            <div class="form-group">
-
-              <label class="col-lg-5 text-right">productBriefInfo:</label>
-                <div class="col-lg-3">
-                <textarea class="form-control" rows="3" id="productBriefInfo" name="productBriefInfo" th:value="*{productBriefInfo}"></textarea>
-                </div>
-                </div>
-            <br>
-            <table class="table table-striped" id="otherAttributes">
-                <tr>
-                    <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
-                </tr>
-                <tr>
-                    <th>attrName</th>
-                    <th>attrValue</th>
-                    <th>modify</th>
-                    <th>delete</th>
-                </tr>
-            </table>
-
-            <div class="row text-center">
-                <button type="submit" class="btn-default" >OK</button>
-            </div>
-        </form>
-    </div>
-    <div class="col-lg-4 text-left">
-        <img id="photo" th:src="${productPhoto}" alt="nothing here" height="300" width="500" style="display: block;" />
     </div>
 </div>
-
-<br />
+</div>
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body" >
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login"><button type="button" class="btn btn-primary">
+                                    Sure
+                                </button></a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </div>
+</nav>
 
 <script>
 
@@ -163,7 +198,7 @@
             if( file.type != "image/png")
                 if(file.type != "image/gif")
                 {
-                    alert("不是有效的图片文件!");
+                    alert("Not a valid image file!");
                     return;
                 }
 
@@ -172,151 +207,7 @@
         reader.onload = function (e) {
             photo.src = e.target.result;
         }
-
         reader.readAsDataURL(file);
-
-    });
-
-    var index = 1;
-    var attrs = document.getElementById('otherAttributes')
-    info = document.getElementById('productBriefInfo');
-
-    var updateBriefInfo = function () {
-        var obj = {};
-        var attrs = document.getElementById('otherAttributes');
-        var len = attrs.rows.length;
-        if(len > index)
-        {
-            index = len;
-        }
-        else
-            len = index;
-
-        console.log(attrs);
-        for(var i =1; len>i; i++)
-        {
-            var attrName = document.getElementById('attribute'+i),
-                attrValue = document.getElementById('value'+i);
-            if(attrName != null )
-                if(attrValue != null)
-                {
-                    if(attrValue.value == "" || attrName.value == "")
-                    {
-                        alert("value not be empty");
-                        return;
-                    }
-                    obj[attrName.value] = attrValue.value;
-                }
-
-        }
-        console.log(obj);
-        var briefInfo = document.getElementById('productBriefInfo');
-        briefInfo.value = JSON.stringify(obj);
-    }
-
-    var deleteBtn =  function(name) {
-
-        var tr = document.getElementById('otherAttributes'+name);
-        tr.remove();
-        updateBriefInfo();
-        return false;
-
-    }
-
-    var modify = function (name) {
-        updateBriefInfo();
-        return false;
-    }
-
-    var addNewAttr = function () {
-        var tr = attrs.insertRow();
-        tr.id = "otherAttributes" + index;
-        var td1 = tr.insertCell(0),
-            td2 = tr.insertCell(1),
-            td3 = tr.insertCell(2),
-            td4 = tr.insertCell(3);
-        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "input attribute" ></input></td>';
-        td2.innerHTML = '<td><input id = "value' +index  + '" value= "input value"></input></td>';
-        td3.innerHTML = '<td>' + '<button id="addNewAttr'+ index  + '" name="'+ index +'" onclick="addNewAttrOk(id,name)"  type="button">add</button></td>';
-        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
-        index++;
-    }
-
-    var addNewAttrOk = function (id, name) {
-        var btn = document.getElementById(id);
-        console.log(btn);
-        btn.innerText = "modify";
-        btn.onclick = modify;
-        updateBriefInfo();
-    }
-
-
-
-</script>
-
-
-
-
-
-
-<script src="/js/classie.js"></script>
-<script>
-    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-
-        showLeftPush = document.getElementById( 'showLeftPush' ),
-
-        body = document.body;
-
-
-    showLeftPush.onclick = function() {
-        classie.toggle( this, 'active' );
-        classie.toggle( body, 'cbp-spmenu-push-toright' );
-        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-        disableOther( 'showLeftPush' );
-    };
-
-
-    function disableOther( button ) {
-
-        if( button !== 'showLeftPush' ) {
-            classie.toggle( showLeftPush, 'disabled' );
-        }
-
-    }
-</script>
-<script>
-
-    var fileInput = document.getElementById('productPhoto'),
-        photo = document.getElementById('photo');
-
-    var BASEPATH = 'C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static';
-    fileInput.addEventListener('change', function () {
-        photo.src = "";
-        if(!fileInput.value)
-        {
-            alert("not input image!");
-            return;
-        }
-
-        var file = fileInput.files[0];
-
-        if(file.type != "image/jpeg")
-            if( file.type != "image/png")
-                if(file.type != "image/gif")
-                {
-                    alert("不是有效的图片文件!");
-                    return;
-                }
-
-        var reader = new FileReader();
-
-        reader.onload = function (e) {
-            photo.src = e.target.result;
-          //  var fso = new ActiveXObject("Scripting.FileSystemObject");
-           // var f = fso.GetFile(e.target.result);
-            //f.Copy('C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static' + GetRandomNum() + file.name);
-            reader.readAsDataURL(file);
-        }
     });
 
     var index = 1;
@@ -401,7 +292,6 @@
     }
 
 </script>
-
 
 </body>
 </html>

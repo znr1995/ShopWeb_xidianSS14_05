@@ -28,7 +28,7 @@ public class ModifyProductInformationController {
 
 
     @RequestMapping(value = "ModifyInformation", method = RequestMethod.POST)
-    public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile", required = false)MultipartFile file,
+    public String addProductAndReturnBack(@RequestParam(value = "productPhoto", required = false)MultipartFile file,
                                           HttpServletRequest request, RedirectAttributes attributes)
     {
         long productID = Long.valueOf(request.getParameter("ProductID"));
@@ -40,7 +40,7 @@ public class ModifyProductInformationController {
         }
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
         //TODO:保证每一个值都不能为空,并且合法
-        if(file != null)
+        if(file != null && file.getSize() > 0)
             newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setBrandName(request.getParameter("brandName"));

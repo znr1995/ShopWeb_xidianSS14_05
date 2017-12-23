@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerInforma
 
 
 import com.project_management.shoppingweb.domain.Seller;
+import com.project_management.shoppingweb.service.Seller.Seller_CopyFile;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +25,7 @@ public class ModifySellerInformationController {
 
     @Autowired
     private Seller_SellerService sellerSellerService;
+
 
     private  long sellerID = -1;
 
@@ -61,7 +64,7 @@ public class ModifySellerInformationController {
                                  @RequestParam(value = "Passwd",required = true)String passwd,
                                  @RequestParam(value = "PhoneNum",required = true)String phoneNum,
                                  @RequestParam(value = "Address",required = true)String address,
-                                 @RequestParam(value = "Sculpture",required = true)String sculpture,
+                                 @RequestParam(value = "Sculpture",required = false)MultipartFile file,
                                  @RequestParam(value = "Shopname",required = true)String shopname,
                                  @RequestParam(value = "Catogery")String catogery,
                                  RedirectAttributes attributes
@@ -73,7 +76,12 @@ public class ModifySellerInformationController {
         newSeller.setEmail(email);
         newSeller.setPassword(passwd);
         newSeller.setPhoneNum(phoneNum);
-        newSeller.setSculpture(sculpture);
+        if(file != null && (! "".equals(file.getOriginalFilename())) )
+        {
+            System.out.println(file.getOriginalFilename());
+            newSeller.setSculpture(Seller_CopyFile.getInstance().copyFile(file));
+        }
+
         newSeller.setUsername(userName);
         newSeller.setShopname(shopname);
         newSeller.setCatogery(catogery);
