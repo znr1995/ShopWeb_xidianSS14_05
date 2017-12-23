@@ -12,14 +12,16 @@ public class Start {
     public String start(HttpServletRequest request, Model model){
         model.addAttribute("UserID", "1");
 
-        /*String ProductID = request.getParameter("ProductID");
-        System.out.println(ProductID);
+        String ProductID = request.getParameter("ProductID");
+        //System.out.println(ProductID);
         String UnitPrice = request.getParameter("Price");
-        String ShopID = request.getParameter("ShopID");*/
+        String ShopID = request.getParameter("ShopID");
+        String ProductName = request.getParameter("ProductName");
 
-        model.addAttribute("ProductID", "1001");
-        model.addAttribute("UnitPrice", "100");
-        model.addAttribute("ShopID", "100");
+        model.addAttribute("ProductID", ProductID);
+        model.addAttribute("UnitPrice", UnitPrice);
+        model.addAttribute("ShopID", ShopID);
+        model.addAttribute("ProductName", ProductName);
 
         return "/User/productdetial";
     }

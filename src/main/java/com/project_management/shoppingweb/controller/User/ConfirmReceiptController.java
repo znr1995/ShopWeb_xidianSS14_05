@@ -1,50 +1,43 @@
 package com.project_management.shoppingweb.controller.User;
 
 
-import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.SellerService;
-import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
-public class MyOrderController {
+public class ConfirmReceiptController {
     @Autowired
     private User_TradeService tradeService;
     @Autowired
-    private User_ProductService productService;
-    @Autowired
     private SellerService sellerService;
-    @RequestMapping(value = "/MyOrder",method = RequestMethod.GET)
-    public String MyOrder(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/ConfirmReceipt", method = RequestMethod.GET)
+    public String ConfirmReceipt(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
+        String TradeID = request.getParameter("TradeID");
+        System.out.println(UserID);
+        System.out.println(TradeID);
 
-        if(UserID.equals("")){
-            String ProductID = request.getParameter("ProductID");
-            String ShopID = request.getParameter("ShopID");
-            String UnitPrice = request.getParameter("UnitPrice");
-            Product product = productService.findProductByProductID(Long.parseLong(ProductID));
-            Seller seller = sellerService.findBySellerId(Long.parseLong(ShopID));
-            String ProductName = product.getProductName();
-            String SellerName = seller.getShopname();
-
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+        List<Trade> TradeList = new ArrayList<Trade>();
+        TradeList = tradeService.findByTradeId(Long.parseLong(TradeID));
+        if(TradeList.size() != 0){
+            Date now = new Date();
+            TradeList.get(0).setTradeFinishTime(now);
+            TradeList.get(0).setTradeStatus(3);
+            tradeService.save(TradeList.get(0));
         }
+
 
         List<Trade> MyOrder = new ArrayList<Trade>();
         MyOrder = tradeService.findAllByUserId(Long.parseLong(UserID));
@@ -111,9 +104,4 @@ public class MyOrderController {
 
         return "/User/MyOrder";
     }
-}
-
-class TradeToShow{
-    public Trade trade;
-    public String SellerName;
 }

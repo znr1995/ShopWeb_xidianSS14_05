@@ -2,9 +2,9 @@
 <html  xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>Favorite</title>
+    <title>FavoriteByFFFF</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <style type="text/css">a
+    <style type="text/css">
         *{
             margin: 0px;
             padding: 0px;
@@ -66,7 +66,7 @@
 </head>
 <body>
 <div id="head">
-    <img src="/Resource/parknshop_logo.jpg " alt="140x140"/>
+    <img src="./Resource/parknshop_logo.jpg " alt="140x140"/>
     <div id="siderBar">
         <ul>
             <li>
@@ -93,28 +93,16 @@
 <br/>
 <h3>最喜欢的商品</h3>
 <div style="width: 250px;height: 500px;float: left">
-<table id="table" style="margin: 0 auto">
-    <tr>
-        <td width="250px" height="60px"><strong>ProductID</strong></td>
-    </tr>
-    <tr th:each="ProductList : ${ProductList}">
-        <td width="250px" height="60px" th:text="${ProductList}" style="border-bottom: 1px lightgray solid" >Onions</td>　　
-    </tr>
-</table>
-</div>
-
-
-<!--<div style="width: 250px;height: 500px;float: left">
-    <table>
+    <table id="table" style="margin: 0 auto">
         <tr>
-            <td>ShopID</td>
+            <td width="250px" height="60px"><strong>ProductName</strong></td>
         </tr>
-        <tr th:each="PShopList : ${PShopList}" >
-            <td th:text="${PShopList}">Onions</td>　　
+        <tr th:each="ProductList : ${ProductList}">
+            <td width="250px" height="60px" th:text="*{ProductList.ID}" style="display: none" >Onions</td>　
+            <td width="250px" height="60px" th:text="*{ProductList.Name}" style="border-bottom: 1px lightgray solid" >Onions</td>　
         </tr>
     </table>
-</div>-->
-
+</div>
 
 
 </body>

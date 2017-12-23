@@ -1,7 +1,9 @@
 package com.project_management.shoppingweb.controller.User;
 
 
+import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
+import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ import java.util.List;
 public class AddIntoShoppingCartController {
     @Autowired
     private User_ShoppingCartService shoppingCartService;
+    @Autowired
+    private User_ProductService productService;
     @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.GET)
 
     public String AddIntoShoppingCart(HttpServletRequest request, Model model){
@@ -26,12 +30,16 @@ public class AddIntoShoppingCartController {
         String ProductID = request.getParameter("ProductID");
         String ShopID = request.getParameter("ShopID");
         String UnitPrice = request.getParameter("UnitPrice");
+        Product product = productService.findProductByProductID(Long.parseLong(ProductID));
+        String ProductName = product.getProductName();
+
         if(UserID.equals("")){
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);
             model.addAttribute("UnitPrice", UnitPrice);
             System.out.println("no");
+            model.addAttribute("ProductName", ProductName);
             return "/User/productdetial";
         }
 
@@ -44,18 +52,42 @@ public class AddIntoShoppingCartController {
                 model.addAttribute("ShopID", ShopID);
                 System.out.println("no");
                 model.addAttribute("UnitPrice", UnitPrice);
+                model.addAttribute("ProductName", ProductName);
                 return "/User/productdetial";
             }
         }
 
         String ProductAmount = request.getParameter("ProductAmount");
-        int ProductNumber = Integer.parseInt(ProductAmount);
+        if(ProductAmount.equals("")){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("ProductID", ProductID);
+            model.addAttribute("ShopID", ShopID);
+            System.out.println("no");
+            model.addAttribute("UnitPrice", UnitPrice);
+            model.addAttribute("ProductName", ProductName);
+            return "/User/productdetial";
+        }
+        int ProductNumber;
+        try{
+            ProductNumber = Integer.parseInt(ProductAmount);
+        }
+        catch (Exception e){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("ProductID", ProductID);
+            model.addAttribute("ShopID", ShopID);
+            System.out.println("no");
+            model.addAttribute("UnitPrice", UnitPrice);
+            model.addAttribute("ProductName", ProductName);
+            return "/User/productdetial";
+        }
+
         if(ProductNumber <= 0){
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);
             System.out.println("no");
             model.addAttribute("UnitPrice", UnitPrice);
+            model.addAttribute("ProductName", ProductName);
             return "/User/productdetial";
         }
 
@@ -75,6 +107,7 @@ public class AddIntoShoppingCartController {
         model.addAttribute("ProductID", ProductID);
         model.addAttribute("ShopID", ShopID);
         model.addAttribute("UnitPrice", UnitPrice);
+        model.addAttribute("ProductName", ProductName);
         return "/User/productdetial";
 
     }

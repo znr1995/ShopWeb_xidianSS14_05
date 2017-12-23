@@ -58,6 +58,45 @@
         tr td{
             text-align: center;
         }
+        .list{
+            margin: 10px;
+        }
+        .list>table{
+            border: solid deepskyblue 1px;/*给表格添加边框*/
+            border-radius: 6px;/*设置表格圆角*/
+            box-shadow: 0 1px 1px deepskyblue;/*表格阴影设置*/
+
+            border-spacing: 0;
+            padding: 5px;
+        }
+        tr{
+            margin: 1px;
+        }
+
+        tr:nth-of-type(n+2):hover{
+            background: #a6e1ec;
+        }
+        td{
+            border-bottom: 1px solid lightgray;
+            border-collapse: collapse;
+
+        }
+        button{
+            background: dodgerblue;
+            font-size: 20px;
+            border: none;
+            height: 35px;
+
+            text-align: center;
+            color: white;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgray;
+        }
+        table tr:last-of-type td{
+            border-bottom: none;
+        }
 
     </style>
 </head>
@@ -85,78 +124,91 @@
     </div>
 </div>
 
-<!--<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>sellerID</td>
-        </tr>
-        <tr th:each="ProductList : ${ProductList}" >
-            <td th:text="${ProductList}" >Onions</td>　　
-        </tr>
-    </table>
+<div  id="main_content">
+    <div class="list">
+        <h2><strong>Processing Order</strong></h2>
+        <table>
+            <tr style="border-bottom: 1px solid lightgray">
+                <td width="250px" height="60px"><strong>sellerName</strong></td>
+                <td width="250px" height="60px"><strong>TotalMoney</strong></td>
+                <td width="250px" height="60px"><strong>PayWay</strong></td>
+                <td width="250px" height="60px"><strong>CreateTime</strong></td>
+            </tr>
+            <tr  th:each="MyOrderS0 : ${MyOrderS0}">
+                <form th:action="@{/TradeDetail}" method="get">
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS0.trade.tradeId}" readonly="readonly" ></td>
+                    <td style="display: none" width="250px" height="60px" name="SellerID" th:text="*{MyOrderS0.trade.sellerId}">Onions</td>
+                    <td width="250px" height="60px" name="SellerName" th:text="*{MyOrderS0.SellerName}">Onions</td>
+                    <td width="250px" height="60px" name="TotalMoney" th:text="*{MyOrderS0.trade.tradeTotalMoney}">Onions</td>
+                    <td width="250px" height="60px" name="PayWay" th:text="*{MyOrderS0.trade.tradePayWay}" >Onions</td>
+                    <td width="250px" height="60px" name="CreateTime" th:text="*{MyOrderS0.trade.tradeCreateTime}">Oinons</td>
+                    <td><button type="submit" name="TradeDetail" th:value="订单详情" >TradeDetail</button></td>
+                </form>
+            </tr>
+        </table>
+        <br/>
+    </div>
+    <div class="list">
+        <h2><strong>To be received</strong></h2>
+        <table>
+            <tr>
+                <td width="250px" height="60px"><strong>sellerName</strong></td>
+                <td width="250px" height="60px"><strong>TotalMoney</strong></td>
+                <td width="250px" height="60px"><strong>PayWay</strong></td>
+                <td width="250px" height="60px"><strong>CreateTime</strong></td>
+            </tr>
+            <tr th:each="MyOrderS12 : ${MyOrderS12}">
+                <td style="display: none" width="250px" height="60px" name="SellerID" th:text="*{MyOrderS12.trade.sellerId}">Onions</td>
+                <td width="250px" height="60px" name="SellerName" th:text="*{MyOrderS12.SellerName}">Onions</td>
+                <td width="250px" height="60px" name="TotalMoney" th:text="*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
+                <td width="250px" height="60px" name="PayWay" th:text="*{MyOrderS12.trade.tradePayWay}" >Onions</td>
+                <td width="250px" height="60px" name="CreateTime" th:text="*{MyOrderS12.trade.tradeCreateTime}">Oinons</td>
+                <form th:action="@{/TradeDetail}" method="get">
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly" ></td>
+                    <td><button type="submit" name="TradeDetail" th:value="订单详情" >TradeDetail</button></td>
+                </form>
+                <form th:action="@{/ConfirmReceipt}" method="get">
+                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly" ></td>
+                    <td><button type="submit" name="ConfirmReceipt" th:value="确认收货" >ConfirmReceipt</button></td>
+                </form>
+            </tr>
+        </table>
+        <br/>
+    </div>
+    <div class="list">
+        <h2><strong>Finished</strong></h2>
+        <table>
+            <tr>
+                <td width="250px" height="60px"><strong>sellerName</strong></td>
+                <td width="250px" height="60px"><strong>TotalMoney</strong></td>
+                <td width="250px" height="60px"><strong>PayWay</strong></td>
+                <td width="250px" height="60px"><strong>CreateTime</strong></td>
+                <td width="250px" height="60px"><strong>FinishTime</strong></td>
+            </tr>
+            <tr th:each="MyOrderS3 : ${MyOrderS3}">
+                <td style="display: none" width="250px" height="60px" name="SellerID" th:text="*{MyOrderS3.trade.sellerId}">Onions</td>
+                <td width="250px" height="60px" name="SellerName" th:text="*{MyOrderS3.SellerName}">Onions</td>
+                <td width="250px" height="60px" name="TotalMoney" th:text="*{MyOrderS3.trade.tradeTotalMoney}">Onions</td>
+                <td width="250px" height="60px" name="PayWay" th:text="*{MyOrderS3.trade.tradePayWay}" >Onions</td>
+                <td width="250px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeCreateTime}">Oinons</td>
+                <td width="250px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeFinishTime}">Oinons</td>
+                <form th:action="@{/TradeDetail}" method="get">
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly" ></td>
+                    <td><button type="submit" name="TradeDetail" th:value="订单详情" >TradeDetail</button></td>
+                </form>
+                <form th:action="@{/feedbackRemarks}" method="get">
+                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly" ></td>
+                    <td><button type="submit" name="feedbackRemarks" th:value="评论" >feedbackRemarks</button></td>
+                </form>
+            </tr>
+        </table>
+    </div>
 </div>
 
-<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>price</td>
-        </tr>
-        <tr th:each="price : ${price}" >
-            <td th:text="${price}">Onions</td>　　
-        </tr>
-    </table>
-</div>
-
-<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>payway</td>
-        </tr>
-        <tr th:each="payway : ${payway}" >
-            <td th:text="${payway}">Onions</td>　　
-        </tr>
-    </table>
-</div>
-
-<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>createtime</td>
-        </tr>
-        <tr th:each="createtime : ${createtime}" >
-            <td th:text="${createtime}">Onions</td>　　
-        </tr>
-    </table>
-</div>
-
-<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>status</td>
-        </tr>
-        <tr th:each="status : ${status}" >
-            <td th:text="${status}">Onions</td>　　
-        </tr>
-    </table>
-</div>-->
-
-<table id="table" >
-    <tr  style="margin: 0 auto">
-        <td width="250px" height="60px"><strong>sellerID</strong></td>
-        <td width="250px" height="60px"><strong>TotalMoney</strong></td>
-        <td width="250px" height="60px"><strong>PayWay</strong></td>
-        <td width="250px" height="60px"><strong>CreateTime</strong></td>
-        <td width="250px" height="60px"><strong>Status</strong></td>
-    </tr>
-    <tr th:each="MyOrder : ${MyOrder}"style="border-bottom: 1px lightgray solid"  style="text-align: center">
-        <td width="250px" height="60px" th:text="*{MyOrder.sellerId}" style="border-bottom: 1px lightgray solid;">Onions</td>
-        <td width="250px" height="60px" th:text="*{MyOrder.tradeTotalMoney}" style="border-bottom: 1px lightgray solid">Onions</td>
-        <td width="250px" height="60px" th:text="*{MyOrder.tradePayWay}" style="border-bottom: 1px lightgray solid">Onions</td>
-        <td width="250px" height="60px" th:text="*{MyOrder.tradeCreateTime}" style="border-bottom: 1px lightgray solid">Oinons</td>
-        <td width="250px" height="60px" th:text="*{MyOrder.tradeStatus}" style="border-bottom: 1px lightgray solid">Onions</td>
-    </tr>
-</table>
-
+<!--style="margin: 0 auto"-->
+<!--style="border-bottom: 1px lightgray solid"  style="text-align: center"-->
 
 </body>
 </html>

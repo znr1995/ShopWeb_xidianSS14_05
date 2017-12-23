@@ -1,46 +1,62 @@
 package com.project_management.shoppingweb.controller.User;
 
-
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class MyShoppingCartController {
+public class UploadSCAmountController {
     @Autowired
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
-    @RequestMapping(value = "/MyShoppingCart", method = RequestMethod.GET)
-    public String MyShoppingCart(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/uploadAmount", method = RequestMethod.GET)
+
+    public String UploadSCAmount(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
+        String ShoppingCartID = request.getParameter("ShoppingCartID");
+        String Amount = request.getParameter("Amount");
 
+        List<ShoppingCart> ShoppingCartList = new ArrayList<ShoppingCart>();
+        ShoppingCartList = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
 
-        if(UserID.equals("")){
-            String ProductID = request.getParameter("ProductID");
-            String ShopID = request.getParameter("ShopID");
-            String UnitPrice = request.getParameter("UnitPrice");
-            Product product = productService.findProductByProductID(Long.parseLong(ProductID));
-            String ProductName = product.getProductName();
+        if(ShoppingCartList.size() != 0){
+            if(Amount.equals("")){
+                model.addAttribute("UserID", UserID);
+                model.addAttribute("ShoppingCartID", ShoppingCartID);
+                model.addAttribute("Amount", Amount);
+                return "/User/ShoppingCartAmount";
+            }
+            int hehe;
+            try{
+                hehe = Integer.parseInt(Amount);
+            }
+            catch (Exception e){
+                model.addAttribute("UserID", UserID);
+                model.addAttribute("ShoppingCartID", ShoppingCartID);
+                model.addAttribute("Amount", Amount);
+                return "/User/ShoppingCartAmount";
+            }
+            if(hehe <= 0){
+                model.addAttribute("UserID", UserID);
+                model.addAttribute("ShoppingCartID", ShoppingCartID);
+                model.addAttribute("Amount", Amount);
+                return "/User/ShoppingCartAmount";
+            }
 
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+            ShoppingCartList.get(0).setProductAmount(hehe);
+            shoppingCartService.save(ShoppingCartList.get(0));
         }
-
 
         List<ShoppingCart> GlobalShoppingCart = new ArrayList<ShoppingCart>();
         GlobalShoppingCart = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
@@ -64,12 +80,5 @@ public class MyShoppingCartController {
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
 
         return "/User/ShoppingCart";
-
-
     }
-}
-
-class ShoppingCartToShow{
-    public ShoppingCart shoppingCart;
-    public String Name;
 }

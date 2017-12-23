@@ -18,4 +18,6 @@ public class User_TradeService {
     public List<Trade> findAllByUserId(Long UserID){
         return tradeRepository.findAllByUserId(UserID);
     }
+
+    public List<Trade> findByTradeId(Long TradeID) {return tradeRepository.findByTradeId(TradeID);}
 }

@@ -8,7 +8,7 @@
         *{
             margin: 0px;
             padding: 0px;
-            
+
         }
 
 
@@ -150,63 +150,78 @@
             border-radius: 5px;
             background-color: lightskyblue;
         }
+
+        #infor{
+            font-size: 20px;
+        }
+        #infor input{
+            border: none;
+
+            margin: 5px 0px;
+            font-size: 20px;
+            outline: none;
+        }
     </style>
 </head>
 <body>
-    <div id="product_detial">
-        <div id="head">
-            <img alt="140x140" src="/Resource/parknshop_logo.jpg" class="img-rounded"/>
-            <div id="siderBar">
-                <ul>
-                    <li>
-                        <form name="form3" th:action="@{/MyShoppingCart}" method="get">
-                            <div style="display: none">
-                                <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                                <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
-                                <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
-                                <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
-                            </div>
-                            <button id="myshoppingcart" type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="form4" th:action="@{/MyFavorite}" method="get">
-                            <div style="display: none">
-                                <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                                <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
-                                <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
-                                <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
-                            </div>
-                            <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
-                        </form>
-                    </li>
-                    <li>
-                        <form name="form6" th:action="@{/MyOrder}" method="get">
-                            <button id="myorder" type="submit" name="myorder" th:value="我的订单">myorder</button>
-                            <div style="display: none">
-                                <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                                <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
-                                <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
-                                <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
-                            </div>
-                        </form>
-                    </li>
-                </ul>
-            </div>
+<div id="product_detial">
+    <div id="head">
+        <img alt="140x140" src="/Resource/parknshop_logo.jpg" class="img-rounded"/>
+        <div id="siderBar">
+            <ul>
+                <li>
+                    <form name="form3" th:action="@{/MyShoppingCart}" method="get">
+                        <div style="display: none">
+                            <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                            <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
+                            <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
+                            <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+                        </div>
+                        <button id="myshoppingcart" type="submit" name="myshoppingcart" th:value="我的购物车">myshoppingcart</button>
+                    </form>
+                </li>
+                <li>
+                    <form name="form4" th:action="@{/MyFavorite}" method="get">
+                        <div style="display: none">
+                            <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                            <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
+                            <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
+                            <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+                        </div>
+                        <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+                    </form>
+                </li>
+                <li>
+                    <form name="form6" th:action="@{/MyOrder}" method="get">
+                        <button id="myorder" type="submit" name="myorder" th:value="我的订单">myorder</button>
+                        <div style="display: none">
+                            <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                            <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
+                            <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
+                            <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+                        </div>
+                    </form>
+                </li>
+            </ul>
         </div>
-        <div id="navigation"></div>
-        <div id="content">
-            <div id="main">
+    </div>
+    <div id="navigation"></div>
+    <div id="content">
+        <div id="main">
             <div id="picture">
                 <img alt="140x140" src="/Resource/speaker.jpg" class="img-rounded"/>
             </div>
 
             <div id="information">
-                <div id="name">Name
+                <!--<div id="name">Name
                     <input type="text" value="Name" style="height: auto;border: 0px">
-                </div>
+                </div>-->
                 <div id="detail" >
-
+                    <div id="infor">
+                        <form>
+                            <input type="text" name="ProductName" th:value="${ProductName}" readonly="readonly" />
+                        </form>
+                    </div>
                 </div>
 
                 <div id="price">
@@ -219,11 +234,11 @@
 
                 <form name="form1" th:action="@{/Buy}" method="get">
                     <div  style="display: none">
-                    <input type="hidden" name="UserID" id="txt19" th:value="${UserID}"  /><br/>
-                    <input type="text" name="ShopID" th:value="${ShopID}" readonly="readonly" />ShopID<br/>
-                    <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly"  />ProductID<br/>
-                    <input type="text" name="ProductAmount" th:value="0"  id="txt11" />ProductAmount<br/>
-                    $<input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" />UnitPrice<br/>
+                        <input type="hidden" name="UserID" id="txt19" th:value="${UserID}"  /><br/>
+                        <input type="text" name="ShopID" th:value="${ShopID}" readonly="readonly" />ShopID<br/>
+                        <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly"  />ProductID<br/>
+                        <input type="text" name="ProductAmount" th:value="0"  id="txt11" />ProductAmount<br/>
+                        $<input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" />UnitPrice<br/>
                     </div>
                     <button id="buy" type="submit" name="buy" th:value="立即购买">buy</button>
                 </form>
@@ -231,41 +246,41 @@
                 <form name="form2" th:action="@{/AddIntoFavoriteP}" method="get">
                     <button id="addfavorite" type="submit" name="addintofavorite" th:value="加入收藏夹">addintofavorite</button>
                     <div style="display:none">
-                    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                    <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
-                    <input type="hidden" name="ShopID" th:value="${ShopID}"   /><br/>
+                        <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                        <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
+                        <input type="hidden" name="ShopID" th:value="${ShopID}"   /><br/>
 
-                    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+                        <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
                     </div>
                 </form>
 
                 <form name="form5" th:action="@{/AddIntoShoppingCart}" method="get">
                     <div style="display: none">
-                    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                    <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
-                    <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
-                    <input type="hidden" name="ProductAmount" th:value="0"  id="txt15" /><br/>
-                    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
+                        <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
+                        <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>
+                        <input type="hidden" name="ProductID" th:value="${ProductID}"  /><br/>
+                        <input type="hidden" name="ProductAmount" th:value="0"  id="txt15" /><br/>
+                        <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly" /><br/>
                     </div>
                     <button id="addshoppingcart" type="submit" name="addintoshoppingcart" th:value="加入购物车">addintoshoppingcart</button>
                 </form>
 
-                </div>
             </div>
-
         </div>
 
-
-
-
-
-
-
-
-
-
-
     </div>
+
+
+
+
+
+
+
+
+
+
+
+</div>
 
 </body>
 </html>

@@ -1,44 +1,38 @@
 package com.project_management.shoppingweb.controller.User;
 
-
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
-import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class MyShoppingCartController {
+public class DeleteShoppingCartController {
     @Autowired
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
-    @RequestMapping(value = "/MyShoppingCart", method = RequestMethod.GET)
-    public String MyShoppingCart(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/DeleteShoppingCart", method = RequestMethod.GET)
+
+    public String DeleteShoppingCart(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
+        String ShoppingCartID = request.getParameter("ShoppingCartID");
+        System.out.println(UserID);
+        System.out.println(ShoppingCartID);
 
 
-        if(UserID.equals("")){
-            String ProductID = request.getParameter("ProductID");
-            String ShopID = request.getParameter("ShopID");
-            String UnitPrice = request.getParameter("UnitPrice");
-            Product product = productService.findProductByProductID(Long.parseLong(ProductID));
-            String ProductName = product.getProductName();
-
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+        List<ShoppingCart> ShoppingCartList = new ArrayList<ShoppingCart>();
+        ShoppingCartList = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
+        if(ShoppingCartList.size() != 0){
+            shoppingCartService.delete(ShoppingCartList.get(0));
         }
 
 
@@ -64,12 +58,5 @@ public class MyShoppingCartController {
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
 
         return "/User/ShoppingCart";
-
-
     }
-}
-
-class ShoppingCartToShow{
-    public ShoppingCart shoppingCart;
-    public String Name;
 }
