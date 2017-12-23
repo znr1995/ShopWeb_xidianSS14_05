@@ -50,25 +50,35 @@ public class SellerMainPageController {
         return "login";
     }
 
-    @RequestMapping(value = "/Seller/FastJump")
-    public String jumpToOtherPage(HttpServletRequest request, RedirectAttributes attributes)
+    @RequestMapping(value = "/Seller/FastJump/ModifySellerAdvertisementHandler")
+    public String jumpToModifySellerAdvertisementHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
-        String action = request.getParameter("action");
         attributes.addAttribute("SellerID",sellerID);
-        if (action.equals("ModifySellerAdvertisement")) {
-            return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
-        } else if (action.equals("ModifySellerInformation")) {
-            return "redirect:/Seller/ModifySellerInformation/ModifySellerInformationHandler";
-        } else if (action.equals("ViewIncome")) {
-            return "redirect:/Seller/ViewIncome/ViewIncomeHandler";
-        } else if (action.equals("ViewTransaction")) {
-            return "redirect:/Seller/ViewTransaction/ViewTransactionHandler";
-        } else if (action.equals("ProductsManagement")) {
-            return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
-        }
-        return "redirect:/error/errorHandler";
+        return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
     }
-
-
+    @RequestMapping(value = "/Seller/FastJump/ModifySellerInformationHandler")
+    public String jumpToModifySellerInformationHandler(HttpServletRequest request, RedirectAttributes attributes)
+    {
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerInformationHandler";
+    }
+    @RequestMapping(value = "/Seller/FastJump/ViewIncomeHandler")
+    public String jumpToViewIncomeHandler(HttpServletRequest request, RedirectAttributes attributes)
+    {
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ModifySellerAdvertisement/ViewIncomeHandler";
+    }
+    @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
+    public String jumpToViewTransactionHandler(HttpServletRequest request, RedirectAttributes attributes)
+    {
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ModifySellerAdvertisement/ViewTransactionHandler";
+    }
+    @RequestMapping(value = "/Seller/FastJump/ProductsManagementHandler")
+    public String jumpToProductsManagementHandler(HttpServletRequest request, RedirectAttributes attributes)
+    {
+        attributes.addAttribute("SellerID",sellerID);
+        return "redirect:/Seller/ModifySellerAdvertisement/ProductsManagementHandler";
+    }
 
 }

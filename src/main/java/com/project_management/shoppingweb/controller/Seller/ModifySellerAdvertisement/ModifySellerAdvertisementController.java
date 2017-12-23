@@ -33,6 +33,8 @@ public class ModifySellerAdvertisementController {
     private Seller_SellerService sellerSellerService;
 
     private long sellerID = -1;
+    private int notPassStatus = 0;
+    private int passStatus = 1;
 
     //界面显示的类
     class ProductAdvertisementPlus {
@@ -403,7 +405,7 @@ public class ModifySellerAdvertisementController {
             sellerAdvertisement.setEndDate(endDate);
             sellerAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
             sellerAdvertisement.setSellerId(sellerID);
-            sellerAdvertisement.setStatus(1);
+            sellerAdvertisement.setStatus(notPassStatus);
         }
         else
         {
@@ -427,7 +429,7 @@ public class ModifySellerAdvertisementController {
     //辅助int转string的方法
     private String getStatusString(int i)
     {
-        if(i == 1)
+        if(i == notPassStatus)
         {
             return "not passed!";
         }

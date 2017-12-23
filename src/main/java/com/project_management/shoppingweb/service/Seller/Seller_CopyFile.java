@@ -12,6 +12,9 @@ import java.util.Random;
 
 public class Seller_CopyFile {
 
+    private String FINDPATH = "http://localhost:8888/images/";
+
+    //将此路径改为你项目静态文件所在的路径,注意,要与niginx配置文件中alise的路径一致
     private String BASEPATH = "C:\\Users\\87095\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static\\";
 
     private static Seller_CopyFile seller_copyFile = null;
@@ -38,7 +41,7 @@ public class Seller_CopyFile {
         {
             System.out.println(e.getMessage());
         }
-        return newPath;
+        return FINDPATH + newPath;
     }
 
 

@@ -141,7 +141,7 @@
     </div>
     <div class="col-lg-4 text-left">
         <input type="hidden" id="srcPath" th:value="${productPhoto}"></input>
-        <img id="photo"  style="display: block;"  height="200" width="300" alt="default" />
+        <img id="photo" th:src="${productPhoto}"  style="display: block;"  height="200" width="300" alt="default" />
     </div>
 </div>
 
@@ -178,7 +178,6 @@
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById("photo"),
         srcPath = document.getElementById("srcPath");
-        photo.src = '/' + srcPath.value;
     fileInput.addEventListener('change', function () {
         // 检查文件是否选择:
         if (!fileInput.value) {

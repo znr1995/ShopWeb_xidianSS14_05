@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 public class MyWebAppConfigurer extends WebMvcConfigurerAdapter{
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/src/main/webapp/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/src/main/resources/static/**").addResourceLocations("/");
         super.addResourceHandlers(registry);
     }
 }
