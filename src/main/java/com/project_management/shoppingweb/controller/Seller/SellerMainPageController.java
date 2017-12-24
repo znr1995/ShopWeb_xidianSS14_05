@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.controller.Seller;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
+import org.hibernate.boot.model.relational.AuxiliaryDatabaseObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -57,32 +58,66 @@ public class SellerMainPageController {
     @RequestMapping(value = "/Seller/FastJump/ModifySellerAdvertisementHandler")
     public String jumpToModifySellerAdvertisementHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
-        attributes.addAttribute("SellerID",sellerID);
+        long sellerId = -1;
+        try {
+            sellerId=Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        attributes.addAttribute("SellerID",sellerId);
         return "redirect:/Seller/ModifySellerAdvertisement/ModifySellerAdvertisementHandler";
     }
     @RequestMapping(value = "/Seller/FastJump/ModifySellerInformationHandler")
     public String jumpToModifySellerInformationHandler(HttpServletRequest request, RedirectAttributes attributes)
-    {
-        attributes.addAttribute("SellerID",sellerID);
+    { long sellerId = -1;
+        try {
+            sellerId=Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        attributes.addAttribute("SellerID",sellerId);
         return "redirect:/Seller/ModifySellerInformation/ModifySellerInformationHandler";
     }
     @RequestMapping(value = "/Seller/FastJump/ViewIncomeHandler")
     public String jumpToViewIncomeHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
-        attributes.addAttribute("SellerID",sellerID);
+        long sellerId = -1;
+        try {
+            sellerId=Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        attributes.addAttribute("SellerID",sellerId);
         return "redirect:/Seller/ViewIncome/ViewIncomeHandler";
     }
 
     @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
     public String jumpToViewTransactionHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
-        attributes.addAttribute("SellerID",sellerID);
+        long sellerId = -1;
+        try {
+            sellerId=Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        attributes.addAttribute("SellerID",sellerId);
         return "redirect:/Seller/ViewTransaction/ViewTransactionHandler";
     }
     @RequestMapping(value = "/Seller/FastJump/ProductsManagementHandler")
     public String jumpToProductsManagementHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
-        attributes.addAttribute("SellerID",sellerID);
+        long sellerId = -1;
+        try {
+            sellerId=Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","sellerId is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        attributes.addAttribute("SellerID",sellerId);
         return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
     }
 

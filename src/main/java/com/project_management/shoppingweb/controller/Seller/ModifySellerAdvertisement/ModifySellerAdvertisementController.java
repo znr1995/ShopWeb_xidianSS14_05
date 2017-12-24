@@ -156,27 +156,44 @@ public class ModifySellerAdvertisementController {
         LinkedList<ProductAdvertisementPlus> productAdvertisementPluses = new LinkedList<ProductAdvertisementPlus>();
         LinkedList<SellerAdvertisementPlus> sellerAdvertisementPluses = new LinkedList<SellerAdvertisementPlus>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
         for(ProductAdvertisement productAdvertisement : productAdvertisements)
         {
+            String startDate = "NULL",endDate = "NULL";
             ProductAdvertisementPlus productAdvertisementPlus = new ProductAdvertisementPlus();
             productAdvertisementPlus.setAdvertisementId(productAdvertisement.getAdvertisementId());
             productAdvertisementPlus.setDescription(productAdvertisement.getDescription());
-            productAdvertisementPlus.setStartDate(sdf.format(productAdvertisement.getStartDate()));
-            productAdvertisementPlus.setEndDate(sdf.format(productAdvertisement.getEndDate()));
+            try {
+                startDate=sdf.format(productAdvertisement.getStartDate());
+            }catch (Exception e) { }
+            productAdvertisementPlus.setStartDate(startDate);
+            try {
+                endDate=sdf.format(productAdvertisement.getEndDate());
+            }catch (Exception e) { }
+            productAdvertisementPlus.setEndDate(endDate);
             productAdvertisementPlus.setStatusString(getStatusString(productAdvertisement.getStatus()));
             productAdvertisementPlus.setTypeString(getTypeString(productAdvertisement.getType()));
             productAdvertisementPluses.add(productAdvertisementPlus);
         }
         for(SellerAdvertisement productAdvertisement : sellerAdvertisements)
         {
+            String startDate = "NULL",endDate = "NULL";
             SellerAdvertisementPlus productAdvertisementPlus = new SellerAdvertisementPlus();
             productAdvertisementPlus.setAdvertisementId(productAdvertisement.getAdvertisementId());
             productAdvertisementPlus.setDescription(productAdvertisement.getDescription());
-            productAdvertisementPlus.setStartDate(sdf.format(productAdvertisement.getStartDate()));
-            productAdvertisementPlus.setEndDate(sdf.format(productAdvertisement.getEndDate()));
+            try {
+                startDate=sdf.format(productAdvertisement.getStartDate());
+            }catch (Exception e) { }
+            productAdvertisementPlus.setStartDate(startDate);
+            try {
+                endDate=sdf.format(productAdvertisement.getEndDate());
+            }catch (Exception e) { }
+            productAdvertisementPlus.setEndDate(endDate);
             productAdvertisementPlus.setStatusString(getStatusString(productAdvertisement.getStatus()));
             sellerAdvertisementPluses.add(productAdvertisementPlus);
         }
+
+        model.addAttribute("SellerID",sellerID);
         model.addAttribute("productAdvertisements",productAdvertisementPluses);
         model.addAttribute("sellerAdvertisements",sellerAdvertisementPluses);
         return "/Seller/ModifySellerAdverMainPage";
@@ -362,6 +379,8 @@ public class ModifySellerAdvertisementController {
     //增加或修改商品广告信息
     public String modifyProductAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
+        model.addAttribute("SellerID",sellerID);
+        attributes.addAttribute("SellerID",sellerID);
         //TODO:全部每一个修改选项有效,不能为空
         ProductAdvertisement productAdvertisement = null;
         String addOrModify = request.getParameter("AddOrModify");
@@ -412,6 +431,7 @@ public class ModifySellerAdvertisementController {
         if(productAdvertisement.getStatus() == 2)
         {
             //跳到支付页面
+
             model.addAttribute("type","ProductAdvertisement");
             model.addAttribute("minPrice",productAdvertisement.getPrice());
             model.addAttribute("AdvertisementId",productAdvertisement.getAdvertisementId());
@@ -425,6 +445,8 @@ public class ModifySellerAdvertisementController {
     //增加或修改商家广告信息
     public String modifySellerAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
+        model.addAttribute("SellerID",sellerID);
+        attributes.addAttribute("SellerID",sellerID);
         //TODO:全部每一个修改选项有效,不能为空
         SellerAdvertisement sellerAdvertisement = null;
         String addOrModify = request.getParameter("AddOrModify");

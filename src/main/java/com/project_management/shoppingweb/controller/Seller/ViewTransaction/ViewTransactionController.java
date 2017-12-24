@@ -126,6 +126,7 @@ public class ViewTransactionController {
             details.add(pageDetail);
         }
         model.addAttribute("details",details);
+        model.addAttribute("SellerID",sellerID);
         return "/Seller/ViewTransaction";
     }
 
@@ -161,6 +162,7 @@ public class ViewTransactionController {
             details.add(pageDetail);
         }
         model.addAttribute("details",details);
+        model.addAttribute("SellerID",sellerID);
         return "/Seller/ViewTransaction";
     }
 
@@ -199,6 +201,7 @@ public class ViewTransactionController {
         }
 
         model.addAttribute("details",pageTradeDetails);
+        model.addAttribute("SellerID",sellerID);
         return "/Seller/ViewTradeDetail";
     }
 

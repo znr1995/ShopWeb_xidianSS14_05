@@ -12,8 +12,8 @@
     <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
-    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
+    <link rel="stylesheet" href="/css/GoodsTypeStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/fsbanner.css"/>
     <style type="text/css">
         .ex {
             width: 800px;
@@ -64,7 +64,7 @@
             <div th:if="${not pro_isnull}" th:each="adv : ${products}" class="col-lg-2">
                 <div class="img">
                     <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
-                        <img th:src="'/'+${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
+                        <img th:src="${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
                     </a>
                 </div>
                 <table>

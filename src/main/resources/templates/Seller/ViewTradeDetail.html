@@ -25,16 +25,16 @@
 
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                        <a th:href="@{'/Seller/FastJump/ProductsManagementHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                        <a th:href="@{'/Seller/FastJump/ModifySellerAdvertisementHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
+                        <a th:href="@{'/Seller/FastJump/ViewIncomeHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
+                    <li>
+                        <a th:href="@{'/Seller/FastJump/ViewTransactionHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
                     </li>
                 </ul>
             </nav>

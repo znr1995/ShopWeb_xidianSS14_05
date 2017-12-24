@@ -80,6 +80,8 @@ public class RegisterController {
             user.setPassword(password);
             user.setTel(phone);
             user.setUsername(username);
+            user.setCreatetime(new Date());
+            user.setSex(1);  // 1 - 男， 2 - 女
             user.setState(1); // 1 - 可用 ，2 - 黑名单
             userRegisterService.userRegister(user);
             return "/User/login";
