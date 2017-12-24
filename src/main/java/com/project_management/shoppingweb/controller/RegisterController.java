@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
+
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_RegisterService;
@@ -54,6 +55,7 @@ public class RegisterController {
             seller.setEmail(email);
             seller.setUsername(username);
             seller.setSculpture(DEFATE_SCULPTURE);
+            seller.setApplyState(2);// 1 - 通过， 2 - 未通过, 3-拉黑
             userRegisterService.sellerRegister(seller);
             return "redirect:/Seller/login";
 
@@ -78,6 +80,7 @@ public class RegisterController {
             user.setPassword(password);
             user.setTel(phone);
             user.setUsername(username);
+            user.setState(1); // 1 - 可用 ，2 - 黑名单
             userRegisterService.userRegister(user);
             return "/User/login";
         }else {

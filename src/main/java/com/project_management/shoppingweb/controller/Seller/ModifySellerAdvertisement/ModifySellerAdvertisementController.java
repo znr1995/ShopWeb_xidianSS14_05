@@ -525,12 +525,12 @@ public class ModifySellerAdvertisementController {
         {
             return "not passed!";
         }
-        if(i == 2)
+        if(i == notPayStatus)
         {
             return "not pay!";
         }
 
-        if(i == 0)
+        if(i == passStatus)
             return "passed! Displaying!";
         return "unknow code";
     }
