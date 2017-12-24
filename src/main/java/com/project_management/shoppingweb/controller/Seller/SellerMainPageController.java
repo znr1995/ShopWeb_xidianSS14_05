@@ -70,7 +70,7 @@ public class SellerMainPageController {
     public String jumpToViewIncomeHandler(HttpServletRequest request, RedirectAttributes attributes)
     {
         attributes.addAttribute("SellerID",sellerID);
-        return "redirect:/Seller/ModifySellerAdvertisement/ViewIncomeHandler";
+        return "redirect:/Seller/ViewIncome/ViewIncomeHandler";
     }
 
     @RequestMapping(value = "/Seller/FastJump/ViewTransactionHandler")
