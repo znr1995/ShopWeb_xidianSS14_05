@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class HomepageController {
@@ -22,7 +23,10 @@ public class HomepageController {
     @Autowired
     private User_ProductAdvertisementService userProductAdvertisementService;
 
+    private long userID = -1;
+
     private Logger logger = Logger.getLogger(this.getClass());
+
 
     @RequestMapping("/User/login")
     public String login(){return "/User/login";}
@@ -30,9 +34,10 @@ public class HomepageController {
     public String register(){return "/User/register";}
 
     @RequestMapping("/User/Main")
-    public String userMain(@ModelAttribute("UserID")long userId,Model model)
+    public String userMain(@ModelAttribute("UserID")long userId, Model model, RedirectAttributes attributes)
     {
         //登录逻辑处理
+        userID = userId;
         return "redirect:/homepage";
     }
 
@@ -55,6 +60,7 @@ public class HomepageController {
         if(pro_ads_list == null || pro_ads_list.isEmpty())  pro_listad_isnull=true;//如果为空设为true
         model.addAttribute("pro_ads", pro_ads_list);//商品广告
         model.addAttribute("pro_listad_isnull", pro_listad_isnull);
+        model.addAttribute("UserID",userID);
         return "/Homepage/homepage";
     }
 }
