@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import com.project_management.shoppingweb.service.User.User_LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,9 @@ public class LoginController {
 
     @Autowired
     private User_LoginService userLoginService;
+
+    @Autowired
+    private Seller_SellerService seller_sellerService;
 
     @RequestMapping(value = "/")
     public String main(){
@@ -53,6 +57,18 @@ public class LoginController {
            return "redirect:/error/errorHandler";
         }
 
+        switch (seller_sellerService.getSellerById(id).getApplyState()) // 1 - 通过， 2 - 未通过, 3-拉黑
+        {
+            case 2:
+                attributes.addAttribute("errorMessage","your apply not be passed, try login later!");
+                return "redirect:/error/errorHandler";
+            case 3:
+                attributes.addAttribute("errorMessage","your account is in the black list!");
+                return "redirect:/error/errorHandler";
+            default:
+                break;
+        }
+
         attributes.addAttribute("SellerID",id);
         return "redirect:/Seller/Main";
     }
@@ -78,6 +94,13 @@ public class LoginController {
         if(id < 0)
         {
             attributes.addAttribute("errorMessage",getErrorMessage(id));
+            return "redirect:/error/errorHandler";
+        }
+
+        // 1 - 可用 ，2 - 黑名单
+        if(seller_sellerService.getUser(id).getState() == 2)
+        {
+            attributes.addAttribute("errorMessage","Sorry,you are in the black list!");
             return "redirect:/error/errorHandler";
         }
 

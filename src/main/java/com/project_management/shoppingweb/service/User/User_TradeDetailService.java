@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.service.User;
 
+
 import com.project_management.shoppingweb.domain.TradeDetail;
 import com.project_management.shoppingweb.repository.TradeDetailRepository;
 import org.springframework.stereotype.Service;
