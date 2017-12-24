@@ -15,7 +15,7 @@ public class Seller_CopyFile {
     private String BASEPATH = "D:\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static\\";
 
     private String FINDPATH = "http://localhost:8888/images/";
-    
+
     private static Seller_CopyFile seller_copyFile = null;
 
     public  static Seller_CopyFile getInstance()

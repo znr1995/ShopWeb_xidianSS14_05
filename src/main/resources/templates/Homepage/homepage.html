@@ -7,9 +7,6 @@
 
     <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
-<!--
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
--->
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
@@ -172,27 +169,27 @@
         </ol>
         <!-- 轮播内容 -->
         <div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
-            <tr th:each="ProductAdvertisement,ads1:${pro_ads_roll}">
-                <div class="item active" th:if="${ads1.first}">
-                    <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
-                        <img th:src="${ads1.current.PictureUrl}" alt="1 slide"/>
-                    </a>
-                    <div class="carousel-caption">
-                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
-                        <p th:text="${ads1.current.Description}">description</p>
-                    </div>
+        <tr th:each="ProductAdvertisement,ads1:${pro_ads_roll}">
+            <div class="item active" th:if="${ads1.first}">
+                <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
+                    <img th:src="${ads1.current.PictureUrl}" alt="1 slide"/>
+                </a>
+                <div class="carousel-caption">
+                    <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                    <p th:text="${ads1.current.Description}">description</p>
                 </div>
-                <div class="item" th:if="${not ads1.first}">
-                    <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
-                        <img th:src="${ads1.current.PictureUrl}" alt="2 slide"/>
-                    </a>
-                    <div class="carousel-caption">
-                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
-                        <p th:text="${ads1.current.Description}">description</p>
-                    </div>
+            </div>
+            <div class="item" th:if="${not ads1.first}">
+                <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
+                    <img th:src="${ads1.current.PictureUrl}" alt="2 slide"/>
+                </a>
+                <div class="carousel-caption">
+                    <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                    <p th:text="${ads1.current.Description}">description</p>
                 </div>
-            </tr>
-        </div>
+            </div>
+        </tr>
+    </div>
 
         <!-- 左按钮 -->
         <a href="#LBbox" class="left carousel-control" role="button" data-slide="prev">
