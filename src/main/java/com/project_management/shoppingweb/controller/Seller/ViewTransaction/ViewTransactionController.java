@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.controller.Seller.ViewTransaction;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.domain.TradeDetail;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
+import org.hibernate.boot.spi.InFlightMetadataCollector;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import sun.reflect.annotation.ExceptionProxy;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.servlet.http.HttpServletRequest;
@@ -135,6 +137,7 @@ public class ViewTransactionController {
     public String getTradesByDate(@RequestParam("StartDate")String startDate,
                                   @RequestParam("EndDate")String endDate,
                                   @RequestParam("type")int status,
+                                  HttpServletRequest request,
                                   Model model,
                                   RedirectAttributes attributes)
     {
@@ -143,14 +146,29 @@ public class ViewTransactionController {
         Date end = new Date();
         try {
             start = sdf.parse(startDate);
+        }catch (Exception e)
+        {
+            start = null;
+        }
+        try {
             end = sdf.parse(endDate);
         }catch (Exception e)
         {
-            attributes.addAttribute("errorMessage",e.getMessage());
+            end = null;
+        }
+
+        long sellerId = sellerID;
+        try {
+            sellerId = Long.valueOf(request.getParameter("SellerID"));
+        }catch (Exception e) { }
+
+        if(sellerId == -1)
+        {
+            attributes.addAttribute("errorMessage","seller id not vail ,please try login to sovle this problem");
             return "redirect:/error/errorHandler";
         }
 
-        List<Trade> trades = seller_sellerService.getTradeListByTime(sellerID,status,start,end);
+        List<Trade> trades = seller_sellerService.getTradeListByTime(sellerId,status,start,end);
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
         for(Trade trade : trades)
         {
@@ -179,14 +197,25 @@ public class ViewTransactionController {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String startDate = "NULL", endDate = "NULL";
         model.addAttribute("userName",seller_sellerService.getSellerById(trade.getSellerId()).getUsername());
         model.addAttribute("tradePayWay",trade.getTradePayWay());
         model.addAttribute("tradeTotalMoney",trade.getTradeTotalMoney());
         model.addAttribute("address",trade.getAddressId());
         model.addAttribute("feedbackRemarks",trade.getFeedbackRemarks());
-        model.addAttribute("tradeCreateTime",sdf.format(trade.getTradeCreateTime()));
-        model.addAttribute("tradeFinishTime",sdf.format(trade.getTradeFinishTime()));
-        model.addAttribute("tradeStatus",trade.getTradeStatus() == 0 ? "unFinished" : "Finished");
+        model.addAttribute("tradeID",trade.getTradeId());
+        try {
+            startDate =sdf.format(trade.getTradeCreateTime());
+        }catch (Exception e){}
+
+        try {
+            endDate =sdf.format(trade.getTradeFinishTime());
+        }catch (Exception e){}
+
+        model.addAttribute("tradeCreateTime",startDate);
+        model.addAttribute("tradeFinishTime",endDate);
+        model.addAttribute("tradeStatus",getTradeStatus(trade.getTradeStatus()));
+        model.addAttribute("status",trade.getTradeStatus());
 
         LinkedList<PageTradeDetail> pageTradeDetails = new LinkedList<PageTradeDetail>();
         List<TradeDetail> details = seller_sellerService.getTradeList(tradeId);
@@ -205,14 +234,42 @@ public class ViewTransactionController {
         return "/Seller/ViewTradeDetail";
     }
 
+    @RequestMapping("dispose")
+    public String disposeTrade(HttpServletRequest request,RedirectAttributes attributes)
+    {
+       long tradeId = Long.valueOf(request.getParameter("tradeID"));
+       long sellerId = Long.valueOf(request.getParameter("SellerID"));
+       int status = Integer.valueOf(request.getParameter("status"));
+       Trade trade = seller_sellerService.getTrade(tradeId);
+       if(trade == null)
+       {
+           attributes.addAttribute("error","trade id not valid!");
+           return "redirect:/error/errorHandler";
+       }
+
+       trade.setTradeStatus(status+1);
+       seller_sellerService.writeInTrade(trade);
+       attributes.addAttribute("SellerID",sellerId);
+       return "redirect:/Seller/ViewTransaction/ViewTransactionHandler";
+    }
+
     private String getTradeStatus(int id)
     {
-        if(id == 1)
+        switch (id)
         {
-            return "finished";
+            case 0:
+                return "untreated trade";
+            case 1:
+                return "wait for deliver Trade";
+            case 2:
+                return "wait for receive Trade";
+            case 3:
+                return "Finished Trade";
+
         }
-        return "not finish";
+        return "unknow status";
     }
+
 
     @RequestMapping("ReturnBack")
     public String jumpToLastLayer(RedirectAttributes attributes)

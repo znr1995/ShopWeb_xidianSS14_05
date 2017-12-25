@@ -101,6 +101,16 @@
                     </table>
                 </form>
             </div>
+            <div>
+                <form th:action="@{/Seller/ViewTransaction/dispose}" >
+                    <input type="hidden" name="tradeID" th:value="*{tradeID}" />
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                    <input id="satuse" type="hidden" name="status" th:value="*{status}" />
+                   <div id="buttonDiv">
+                       <button id="disposeDose" type="submit" onclick="dosubmit()" ></button>
+                   </div>
+                </form>
+            </div>
 
         </div>
 
@@ -156,4 +166,26 @@
     </div>
 </nav>
 </body>
+<script>
+    var bttonDiv = document.getElementById("buttonDiv");
+    var satuse = document.getElementById("satuse");
+    var disposeDose = document.getElementById("disposeDose");
+    switch (parseInt(satuse.value))
+    {
+        case 0:
+            disposeDose.innerHTML = "dispose Trade";
+            break;
+        case 1:
+            disposeDose.innerHTML = "deliver goods";
+            break;
+        case 2:
+            buttonDiv.hidden = true;
+            break;
+        case 3:
+            buttonDiv.hidden = true;
+            break;
+    }
+
+
+</script>
 </html>
