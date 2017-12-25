@@ -29,7 +29,7 @@ public class ShopsProductsController {
         model.addAttribute("products",products);
         model.addAttribute("ShopID", sellerid);
         model.addAttribute("pro_isnull", pro_isnull);
-        return "/Product/sellersproduct";
+        return "/User/sellersproduct";
     }
 
 }

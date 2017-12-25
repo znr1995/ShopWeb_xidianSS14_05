@@ -25,6 +25,6 @@ public class ProductDetailController {
         if(product == null) isnull = true;
         model.addAttribute("productdetail", product);
         model.addAttribute("proisnull", isnull);
-        return "/Product/ProductDetail";
+        return "/User/ProductDetail";
     }
 }

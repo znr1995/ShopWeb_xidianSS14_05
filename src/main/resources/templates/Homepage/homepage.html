@@ -15,27 +15,32 @@
         .carousel .item {
             height: 500px;
         }
+
         .carousel .item img {
             width: 100%;
         }
-        *{
+
+        * {
             margin: 0px;
             padding: 0px;
         }
-        #head{
+
+        #head {
             height: 60px;
-            background-color:cornflowerblue;
+            background-color: cornflowerblue;
         }
-        #favorite{
-            width:120px;
+
+        #favorite {
+            width: 120px;
             height: 30px;
             font-size: 15px;
             text-align: center;
             border-radius: 5px;
             background-color: lightskyblue;
         }
-        #cart{
-            width:120px;
+
+        #cart {
+            width: 120px;
             height: 30px;
             font-size: 15px;
             border-radius: 5px;
@@ -44,50 +49,51 @@
         }
 
         #siderBar {
-            margin: 0px 0px ;
-            background-color: cornflowerblue ;
+            margin: 0px 0px;
+            background-color: cornflowerblue;
             float: right;
-
         }
-        #siderBar ul li{
+
+        #siderBar ul li {
             width: 150px;
             height: 30px;
             float: right;
-            background-color: cornflowerblue ;
+            background-color: cornflowerblue;
             list-style: none;
             margin: 0px 10px;
             text-align: center;
         }
-        tr td{
+
+        tr td {
             text-align: center;
         }
 
-        .list>table{
-            border: solid deepskyblue 1px;/*给表格添加边框*/
-            border-radius: 6px;/*设置表格圆角*/
-            box-shadow: 0 1px 1px deepskyblue;/*表格阴影设置*/
-
+        .list > table {
+            border: solid deepskyblue 1px; /*给表格添加边框*/
+            border-radius: 6px; /*设置表格圆角*/
+            box-shadow: 0 1px 1px deepskyblue; /*表格阴影设置*/
             border-spacing: 0;
             padding: 5px;
         }
-        tr{
+
+        tr {
             margin: 1px;
         }
 
-        tr:nth-of-type(n+2):hover{
+        tr:nth-of-type(n+2):hover {
             background: #a6e1ec;
         }
-        td{
+
+        td {
             border-bottom: 1px solid lightgray;
             border-collapse: collapse;
-
         }
-        button{
+
+        button {
             background: dodgerblue;
             font-size: 20px;
             border: none;
             height: 35px;
-
             text-align: center;
             color: white;
             margin: 5px;
@@ -95,8 +101,138 @@
             border-radius: 5px;
             box-shadow: 1px 1px lightgray;
         }
-        table tr:last-of-type td{
+
+        table tr:last-of-type td {
             border-bottom: none;
+        }
+
+        input,
+        button {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .searchdiv {
+            margin: 1px auto 5px auto;
+            width: 800px;
+            text-align: center;
+        }
+
+        a {
+            color: #4183c4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h3 {
+            color: #666;
+        }
+
+        ul {
+            list-style: none;
+            padding: 25px 0;
+        }
+
+        li {
+            display: inline;
+            margin: 10px 50px 10px 0px;
+        }
+
+        input[type=text],
+        input[type=password] {
+            font-size: 13px;
+            min-height: 32px;
+            margin: 0;
+            padding: 7px 8px;
+            outline: none;
+            color: #333;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: right center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            transition: all 0.15s ease-in;
+            -webkit-transition: all 0.15s ease-in 0;
+            vertical-align: middle;
+        }
+
+        .button {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+            background-color: #eaeaea;
+            background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+            background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+            background-image: linear-gradient(#fafafa, #eaeaea);
+            background-repeat: repeat-x;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            border-bottom-color: #c5c5c5;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+            vertical-align: middle;
+            cursor: pointer;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+
+        .button:hover,
+        .button:active {
+            background-position: 0 -15px;
+            border-color: #ccc #ccc #b5b5b5;
+        }
+
+        .button:active {
+            background-color: #dadada;
+            border-color: #b5b5b5;
+            background-image: none;
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .15);
+        }
+
+        .button:focus,
+        input[type=text]:focus,
+        input[type=password]:focus {
+            outline: none;
+            border-color: #51a7e8;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5);
+        }
+
+        label[for=search] {
+            display: block;
+            text-align: left;
+        }
+
+        #search label {
+            font-weight: 200;
+            padding: 5px 0;
+        }
+
+        #search input[type=text] {
+            font-size: 18px;
+            width: 705px;
+        }
+
+        #search .button {
+            padding: 10px;
+            width: 90px;
         }
 
     </style>
@@ -109,21 +245,21 @@
             <li><a th:href="@{/User/login.html}">login</a></li>
             <li><a th:href="@{/User/register.html}">register</a></li>
             <li>
-                <form th:action="@{/ShoppingCartInHome}", method="get">
-                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                    <button type="submit", name="cart", th:value="购物车">Cart</button>
+                <form th:action="@{/ShoppingCartInHome}" , method="get">
+                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
+                    <button type="submit" , name="cart" , th:value="购物车">Cart</button>
                 </form>
             </li>
             <li>
-                <form th:action="@{/FavoriteInHome}", method="get">
-                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                    <button type="submit", name="favorite", th:value="收藏夹">Favorite</button>
+                <form th:action="@{/FavoriteInHome}" , method="get">
+                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
+                    <button type="submit" , name="favorite" , th:value="收藏夹">Favorite</button>
                 </form>
             </li>
             <li>
-                <form th:action="@{/History}", method="get">
-                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                    <button type="submit", name="history", th:value="购买记录">Order</button>
+                <form th:action="@{/History}" , method="get">
+                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
+                    <button type="submit" , name="history" , th:value="购买记录">Order</button>
                 </form>
             </li>
 
@@ -131,16 +267,12 @@
     </div>
 </div>
 <div class="content">
-    <div class="row">
-        <!-- 搜索按钮-->
-        <div class="input-group">
-            <form role='form' class="col-lg-6" th:action="@{/search/name}" method="GET">
-                <div class="input-group">
-                    <input type="text" name="productname" style="width: 600px" class="form-control"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" name="save">Search</button>
-                        </span>
-                </div>
+
+    <div class="searchdiv">
+        <div id="search">
+            <form th:action="@{/search/name}" method="GET">
+                <input type="text" name="productname">
+                <input class="button" type="submit" value="Search" name="save">
             </form>
         </div>
     </div>
