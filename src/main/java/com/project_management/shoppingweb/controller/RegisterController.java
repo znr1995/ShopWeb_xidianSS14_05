@@ -33,7 +33,7 @@ public class RegisterController {
     private String emailString;
 
     //默认头像
-    private String DEFATE_SCULPTURE = "/1.jpg";
+    private String DEFATE_SCULPTURE = "/head.jpg";
 
 
     @RequestMapping(value = "sellerRegister",method = RequestMethod.POST)
