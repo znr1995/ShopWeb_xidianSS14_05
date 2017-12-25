@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>productDetail</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/star-rating-svg.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/GoodsTypeStyle.css">
+    <link href="http://www.jq22.com/jquery/bootstrap-3.3.4.css" rel="stylesheet">
+    <!--[if IE]>
+    <script src="http://libs.baidu.com/html5shiv/3.7/html5shiv.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="header">
+    <img alt="140x140" src="./Resource/parknshop_logo.jpg" class="img-rounded"/>
+</div>
+<div class="content">
+<div class="container">
+
+    <div class="col-md-6">
+        <img alt="140x140" src="./Resource/speaker.jpg" class="img-rounded"/>
+        <div class="container">
+            <div class="col-md-2">
+                <div>ProdID: 11111</div>
+            </div>
+            <div class="col-md-10">
+                <div class="my-rating jq-stars"> Rate：</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt>
+                Rolex
+            </dt>
+            <dd>
+                劳力士创始人为汉斯.威尔斯多夫，1908年他在瑞士将劳力士注册为商标。
+            </dd>
+            <dt>
+                Vacheron Constantin
+            </dt>
+            <dd>
+                始创于1775年的江诗丹顿已有250年历史，
+            </dd>
+            <dd>
+                是世界上历史最悠久、延续时间最长的名表之一。
+            </dd>
+            <dt>
+                IWC
+            </dt>
+            <dd>
+                创立于1868年的万国表有“机械表专家”之称。
+            </dd>
+            <dt>
+                Cartier
+            </dt>
+            <dd>
+                卡地亚拥有150多年历史，是法国珠宝金银首饰的制造名家。
+            </dd>
+
+        </dl>
+        <div class="container" style="background: #1c7430">
+            <div class="col-lg-1">
+        <th th:text="#{msgs.headers.name}"><b>Quatity</b>
+            <form action="/demo/demo_form.asp">
+                <select name="cars">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
+                <br><br>
+
+            </form>
+        </th>
+            </div>
+            <div class="col-lg-1">
+        <table>
+            <thead>
+            <tr>
+
+                <th th:text="#{msgs.headers.price}">Pay</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+
+
+        </table>
+            </div>
+
+
+        <div class="col-lg-1">
+        <p>
+            <img src="./Resource/favorite.png" align="left">
+        </p>
+            <h2></h2>
+            <!-- 按钮触发模态框 -->
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                Submmit
+            </button>
+            <!-- 模态框（Modal） -->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                &times;
+                            </button>
+                            <h4 class="modal-title" id="myModalLabel">
+                                模态框（Modal）标题
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            在这里添加一些文本
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+                            </button>
+                            <button type="button" class="btn btn-primary">
+                                提交更改
+                            </button>
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal -->
+            </div>
+        </div>
+
+         </div>
+      </div>
+
+    <div>
+        <div>
+            Notice：
+            <textarea rows="3" cols="70">Request
+        </textarea></div>
+
+
+
+
+        <b>Dilever:</b>
+        <div >ShangHai</div>
+        <div>TO</div>
+        <form class="form-inline">
+            <div data-toggle="distpicker">
+                <div class="form-group">
+                    <label class="sr-only" for="province2">Province</label>
+                    <select class="form-control" id="province2" data-province="---- 选择省 ----"></select>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="city2">City</label>
+                    <select class="form-control" id="city2" data-city="---- 选择市 ----"></select>
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="district2">District</label>
+                    <select class="form-control" id="district2" data-district="---- 选择区 ----"></select>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+    <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
+<script>window.jQuery || document.write('<script src="./js/jquery-2.1.1.min.js"><\/script>')</script>
+<script src="./dist/jquery.star-rating-svg.js"></script>
+<script>
+    $(function () {
+
+        // basic use comes with defaults values
+        $(".my-rating").starRating({
+            initialRating: 4,
+            starSize: 25
+        });
+
+        // example grabing rating from markup, and custom colors
+        $(".my-rating-2").starRating({
+            totalStars: 5,
+            starSize: 40,
+            emptyColor: 'lightgray',
+            hoverColor: 'salmon',
+            activeColor: 'crimson',
+            useGradient: false
+        });
+
+        // specify the gradient start and end for the selected stars
+        $(".my-rating-3").starRating({
+            starSize: 80,
+            strokeWidth: 9,
+            strokeColor: 'black',
+            initialRating: 2,
+            starGradient: {
+                start: '#93BFE2',
+                end: '#105694'
+            },
+        });
+
+        $(".my-rating-4").starRating({
+            totalStars: 5,
+            emptyColor: 'lightgray',
+            hoverColor: 'salmon',
+            activeColor: 'cornflowerblue',
+            initialRating: 4,
+            strokeWidth: 0,
+            useGradient: false,
+            callback: function (currentRating, $el) {
+                alert('rated ' + currentRating);
+                console.log('DOM Element ', $el);
+            }
+        });
+
+        $(".my-rating-5").starRating({
+            initialRating: 4,
+            readOnly: true
+        });
+
+        $(".my-rating-6").starRating({
+            useFullStars: true
+        });
+
+
+    });
+</script>
+    <script src="./js/distpicker.data.js"></script>
+    <script src="./js/distpicker.js"></script>
+    <script src="./js/main.js"></script>
+</div>
+<div class="footer">
+    <div>
+        <div style="float: left"> About us:</div>
+        <div> 029-1342535</div>
+    </div>
+
+    <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
+</div>
+</body>
+</html>

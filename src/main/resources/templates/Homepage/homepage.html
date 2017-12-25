@@ -12,49 +12,136 @@
     <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
     <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
     <style type="text/css">
-        .ex {
-            width: 800px;
-            margin: 0 auto;
-        }
-        .fsbanner {
-            margin-top: 10px;
-        }
-        .carousel {
-            height: 500px;
-        }
         .carousel .item {
             height: 500px;
         }
         .carousel .item img {
             width: 100%;
         }
+        *{
+            margin: 0px;
+            padding: 0px;
+        }
+        #head{
+            height: 60px;
+            background-color:cornflowerblue;
+        }
+        #favorite{
+            width:120px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: lightskyblue;
+        }
+        #cart{
+            width:120px;
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+
+        #siderBar {
+            margin: 0px 0px ;
+            background-color: cornflowerblue ;
+            float: right;
+
+        }
+        #siderBar ul li{
+            width: 150px;
+            height: 30px;
+            float: right;
+            background-color: cornflowerblue ;
+            list-style: none;
+            margin: 0px 10px;
+            text-align: center;
+        }
+        tr td{
+            text-align: center;
+        }
+
+        .list>table{
+            border: solid deepskyblue 1px;/*给表格添加边框*/
+            border-radius: 6px;/*设置表格圆角*/
+            box-shadow: 0 1px 1px deepskyblue;/*表格阴影设置*/
+
+            border-spacing: 0;
+            padding: 5px;
+        }
+        tr{
+            margin: 1px;
+        }
+
+        tr:nth-of-type(n+2):hover{
+            background: #a6e1ec;
+        }
+        td{
+            border-bottom: 1px solid lightgray;
+            border-collapse: collapse;
+
+        }
+        button{
+            background: dodgerblue;
+            font-size: 20px;
+            border: none;
+            height: 35px;
+
+            text-align: center;
+            color: white;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgray;
+        }
+        table tr:last-of-type td{
+            border-bottom: none;
+        }
+
     </style>
 </head>
-
 <body>
-<br>
-</br>
+<div id="head">
+    <img src="./Resource/parknshop_logo.jpg " alt="140x140"/>
+    <div id="siderBar">
+        <ul>
+            <li><a th:href="@{/User/login.html}">login</a></li>
+            <li><a th:href="@{/User/register.html}">register</a></li>
+            <li>
+                <form th:action="@{/ShoppingCartInHome}", method="get">
+                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
+                    <button type="submit", name="cart", th:value="购物车">Cart</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/FavoriteInHome}", method="get">
+                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
+                    <button type="submit", name="favorite", th:value="收藏夹">Favorite</button>
+                </form>
+            </li>
+            <li>
+                <form th:action="@{/History}", method="get">
+                    <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
+                    <button type="submit", name="history", th:value="购买记录">Order</button>
+                </form>
+            </li>
+
+        </ul>
+    </div>
+</div>
 <div class="content">
     <div class="row">
-
-        <div class="col-lg-6">
-            <a href="/homepage">
-                <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
-            </a>
-        </div>
-
         <!-- 搜索按钮-->
-        <div class="col-lg-6">
-            <div class="input-group">
-                <form role='form' class="bs-example bs-example-form" th:action="@{/search/name}" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="productname" class="form-control"/>
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" name="save">search</button>
+        <div class="input-group">
+            <form role='form' class="col-lg-6" th:action="@{/search/name}" method="GET">
+                <div class="input-group">
+                    <input type="text" name="productname" style="width: 600px" class="form-control"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="submit" name="save">Search</button>
                         </span>
-                    </div>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -234,51 +321,8 @@
         </th:block>
     </div>
 
-    <!--网页眉头 -->
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">
-                    <input type="text", name="UserName", th:value="${UserName}", readonly="readonly">
-                </a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <form th:action="@{/ShoppingCartInHome}", method="get">
-                            <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                            <button type="submit", name="cart", th:value="购物车">cart</button>
-                        </form>
-                    </li>
-                    <li>
-                        <form th:action="@{/FavoriteInHome}", method="get">
-                            <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                            <button type="submit", name="favorite", th:value="收藏夹">favorite</button>
-                        </form>
-                    </li>
-                    <li>
-                        <form th:action="@{/History}", method="get">
-                            <input type="hidden", name="UserID", th:value="${UserID}", style="display: none">
-                            <button type="submit", name="history", th:value="购买记录">history</button>
-                        </form>
-                    </li>
-                    <li><a th:href="@{/User/login.html}">login</a></li>
-                    <li><a th:href="@{/User/register.html}">register</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
 </div>
-
-
 <!--网页注脚-->
 <div class="footer">
     <div>
@@ -288,7 +332,6 @@
 
     <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
 </div>
-
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
 <script src="js/ajaxGoodsType.js"></script>
 <script type="text/javascript" src="./js/fsbanner.js"></script>

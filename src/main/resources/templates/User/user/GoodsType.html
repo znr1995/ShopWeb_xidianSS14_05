@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
+    <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
+    <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <link rel="stylesheet" href="css/GoodsTypeStyle.css">
+    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css">
+    <!--<script type="text/javascript" src="./js/jquery-1.7.2.min.js"></script>-->
+    <link rel="stylesheet" href="./css/style.css" type="text/css" />
+    <style type="text/css">
+        .ex {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .fsbanner {
+            margin-top: 10px;
+        }
+
+        .carousel {
+            height: 500px;
+        }
+
+        .carousel .item {
+            height: 500px;
+        }
+
+        .carousel .item img {
+            width: 100%;
+        }
+    </style>
+   <!-- <script type="text/javascript">
+        $(function(){
+            $(".bodys p").not(":first").hide();
+            $(".searchbox ul li").mouseover(function(){
+                var index = $(this).index();
+                if(index==0){
+                    $(this).find("a").addClass("style1");
+                    $("li").eq(1).find("a").removeClass("style2");
+                    $("li").eq(2).find("a").removeClass("style3");
+                }
+                if(index==1){
+                    $(this).find("a").addClass("style2");
+                    $("li").eq(0).find("a").removeClass("style1");
+                    $("li").eq(2).find("a").removeClass("style3");
+                }
+                if(index==2){
+                    $(this).find("a").addClass("style3");
+                    $("li").eq(0).find("a").removeClass("style1");
+                    $("li").eq(1).find("a").removeClass("style2");
+                }
+                var index=$(this).index();
+                $(".bodys p").eq(index).show().siblings().hide();
+            });
+        });
+    </script>
+
+    <style type="text/css">
+        *{margin:0;padding:0;list-style-type:none;}
+        a,img{border:0;}
+
+        /* searchbox */
+        .searchbox{width:520px;height:80px;margin:40px auto 0 auto;}
+        .searchbox ul{ height:35px; width:500px; list-style:none; margin-left:20px}
+        .searchbox ul li{ float:left}
+        .searchbox ul li a{ float:left; line-height:35px; padding:0 20px; text-decoration:none; color:#000; font-size:14px; font-weight:bold;}
+        .searchbox ul li .style1{ background-color:#000; color:#fff}
+        .searchbox ul li .style2{ background-color:#f00;color:#fff}
+        .searchbox ul li .style3{ background-color:#F90;color:#fff}
+        .bodys input{ height:30px;line-height:30px;width:390px;padding:0 10px;float:left;}
+        .bodys .one{ border:#000 3px solid}
+        .bodys .two{ border:#f00 3px solid}
+        .bodys .three{ border:#F90 3px solid}
+        .bodys .one1{ background-color:#000; }
+        .bodys .two2{ background-color:#f00;}
+        .bodys .three3{ background-color:#F90;}
+        .bodys button{float:left;border:0;height:36px;width:100px; color:#FFF; line-height:36px;text-align:center;overflow:hidden;}
+    </style>-->
+</head>
+<body>
+
+<div class="header">
+    <img alt="140x140" src="./Resource/parknshop_logo.jpg" class="img-rounded"/>
+</div>
+
+<div class="content">
+
+    <div class="zySearch" id="zySearch" style="text-align:center;"></div><br>
+
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse"
+                        data-target="#example-navbar-collapse">
+                    <span class="sr-only">切换导航</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <!--<a class="navbar-brand" href="#">GoodsType</a>-->
+            </div>
+            <div class="collapse navbar-collapse" id="example-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">TV& Home Theater</a></li>
+                    <li><a href="#">Computers & Tablets</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Cell Phones<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Cameras & Camcorders<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Audio<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Car Electronics & GPS<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Video, Games, Movies & Music<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Health, Fitness & Sports<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Home & Office<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">jmeter</a></li>
+                            <li><a href="#">EJB</a></li>
+                            <li><a href="#">Jasper Report</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">分离的链接</a></li>
+                            <li class="divider"></li>
+                            <li><a href="#">另一个分离的链接</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 轮播广告 -->
+    <div id="LBbox" class="carousel slide" data-ride="carousel">
+        <!-- 圆点按钮 -->
+        <ol class="carousel-indicators">
+            <li data-target="#LBbox" data-slide-to="0" class="active"></li>
+            <li data-target="#LBbox" data-slide-to="1"></li>
+        </ol>
+        <!-- 轮播内容 -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="./Resource/conon.jpg" alt="1 slide">
+                <div class="carousel-caption">
+                    <h1>第四代 Intel Core 处理器</h1>
+                    <p>无论是什么任务，配备 Intel HD Graphics 5000 图形处理器的第四代 Intel Core 处理器都能应对自如。</p>
+                    <p>
+                        <a href="#" class="btn btn-lg btn-primary" role="button">点我下载</a>
+                    </p>
+                </div>
+            </div>
+            <div class="item">
+                <img src="./Resource/macbook.jpg" alt="2 slide">
+                <div class="carousel-caption">
+                    <h1>MacBook Air</h1>
+                    <p>有了新一代 802.11ac 技术，MacBook Air 令 Wi-Fi 速度超越极限。</p>
+                    <p>
+                        <a href="#" class="btn btn-lg btn-primary" role="button">点我下载</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <!-- 左按钮 -->
+        <a href="#LBbox" class="left carousel-control" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">上一页</span>
+        </a>
+        <!-- 右按钮 -->
+        <a href="#LBbox" class="right carousel-control" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">下一页</span>
+        </a>
+    </div>
+    <div class="container">
+        <div class="col-lg-4">
+            <img src="./Resource/Present.jpg">
+        </div>
+        <div class="col-lg-8">
+            <article class="htmleaf-container">
+                <div class='ex' name='3'>
+                    <div class='fsbanner'>
+                        <div style='background-image:url(./Resource/server.jpg)'>
+                            <span class='name'>BLACK</span>
+                        </div>
+                        <div style='background-image:url(./Resource/conon.jpg)'>
+                            <span class='name'>BROWN</span>
+                        </div>
+                        <div style='background-image:url(./Resource/speaker.jpg)'>
+                            <span class='name'>PANDA</span>
+                        </div>
+                        <div style='background-image:url(./Resource/polar.jpg)'>
+                            <span class='name'>POLAR</span>
+                        </div>
+                        <div style='background-image:url(./Resource/polar.jpg)'>
+                            <span class='name'>POLAR</span>
+                        </div>
+                        <div style='background-image:url(./Resource/polar.jpg)'>
+                            <span class='name'>POLAR</span>
+                        </div>
+                        <div style='background-image:url(./Resource/polar.jpg)'>
+                            <span class='name'>POLAR</span>
+                        </div>
+                    </div>
+                </div>
+            </article>
+            <div class="col-lg-0">
+                <b>
+                    如果你还在犹豫要不要用电子发票，<br>
+
+                    恭喜亲啦，<br>
+
+                    马上参加感恩节大放“价”活动吧！！！<br>
+
+                    在阿里发票平台上订购百望电票服务：点我订购 <br>
+
+                    立享买一送一，真金白银省省省哦~ <br></b>
+            </div>
+        </div>
+
+    </div><br><br>
+
+
+    <div class="container">
+
+
+    <ol>
+        <li>
+            <div th:each=""><!--each遍历所有类别或搜索的商品-->
+                <div class="col-md-2">
+                    <div class="img">
+                        <a target="_blank" href="./Resource/server.jpg">
+                            <img src="./Resource/server.jpg" alt="Ballade" width="160" height="160">
+                        </a>
+                        <div class="desc">server</div>
+                    </div>
+
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th th:text="#{msgs.headers.name}">Product</th>
+                            <th th:text="#{msgs.headers.price}">Price</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="prod: ${allProducts}">
+                            <td th:text="${prod.name}">conon</td>
+                            <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </li>
+    </ol>
+
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/server.jpg">
+                <img src="./Resource/server.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">server</div>
+        </div>
+
+
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/server.jpg">
+                <img src="./Resource/server.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">server</div>
+        </div>
+
+
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/server.jpg">
+                <img src="./Resource/server.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">server</div>
+        </div>
+
+
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/phone.jpg">
+                <img src="./Resource/phone.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">phone</div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/conon.jpg">
+                <img src="./Resource/conon.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">teethbrush</div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="col-md-2">
+        <div class="img">
+            <a target="_blank" href="./Resource/teethbrush.jpg">
+                <img src="./Resource/teethbrush.jpg" alt="Ballade" width="160" height="160">
+            </a>
+            <div class="desc">teethbrush</div>
+        </div>
+        <table>
+            <thead>
+            <tr>
+                <th th:text="#{msgs.headers.name}">Product</th>
+                <th th:text="#{msgs.headers.price}">Price</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="prod: ${allProducts}">
+                <td th:text="${prod.name}">conon</td>
+                <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+        <div class="col-md-2">
+            <div class="img">
+                <a target="_blank" href="./Resource/teethbrush.jpg">
+                    <img src="./Resource/teethbrush.jpg" alt="Ballade" width="160" height="160">
+                </a>
+                <div class="desc">teethbrush</div>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th th:text="#{msgs.headers.name}">Product</th>
+                    <th th:text="#{msgs.headers.price}">Price</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="prod: ${allProducts}">
+                    <td th:text="${prod.name}">conon</td>
+                    <td th:text="${#numbers.formatDecimal(prod.price, 1, 2)}">$900</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+</div>
+    <!--<nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">User name</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">cart</a></li>
+                    <li><a href="#about">favorite</a></li>
+                    <li><a href="#contact">history</a></li>
+                </ul>
+            </div>&lt;!&ndash;/.nav-collapse &ndash;&gt;
+        </div>
+    </nav>-->
+</div>
+
+
+<div class="footer">
+    <div>
+        <div style="float: left"> About us:</div>
+        <div> 029-1342535</div>
+    </div>
+
+    <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
+</div>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src="./js/ajaxGoodsType.js"></script>
+<script type="text/javascript" src="./js/fsbanner.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $('.ex[name=3] .fsbanner').fsBanner({
+            trigger: 'mouse'
+        });
+    });
+</script>
+<script type="text/javascript" src="./js/zySearch.js"></script>
+<script type="text/javascript">
+    $("#zySearch").zySearch({
+        "width":"355",
+        "height":"33",
+        "parentClass":"pageTitle",
+        "callback":function(keyword){
+            console.info("搜索的关键字");
+            console.info(keyword);
+        }
+    });
+</script>
+</body>
+</html>
