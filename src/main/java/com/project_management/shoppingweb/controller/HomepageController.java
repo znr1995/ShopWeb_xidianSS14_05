@@ -47,7 +47,7 @@ public class HomepageController {
 
     @RequestMapping(value = "/homepage")
     public String homepage(Model model){
-        List<SellerAdvertisement> seller_ads = userSellerAdvertisementService.findAllByStatus(0);
+        List<SellerAdvertisement> seller_ads = userSellerAdvertisementService.findAllByStatus(1);
         boolean seller_ads_isnull = false;
         if(seller_ads == null || seller_ads.isEmpty())  seller_ads_isnull=true;
         model.addAttribute("shop_ads", seller_ads);//返回商铺广告的list，前端解析

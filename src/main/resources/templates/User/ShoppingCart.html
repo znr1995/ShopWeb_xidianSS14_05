@@ -83,13 +83,13 @@
             <li>
                 <form name="form2" th:action="@{/MyOrder}" method="get">
                     <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                    <button id="myorder" type="submit" name="myorder" th:value="我的订单">myorder</button>
+                    <button id="myorder" type="submit" name="myorder" th:value="我的订单">My order</button>
                 </form>
             </li>
             <li>
                 <form name="form1" th:action="@{/MyFavorite}" method="get">
                     <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-                    <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
+                    <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">My favorite</button>
                 </form>
             </li>
 
@@ -100,9 +100,9 @@
 
 <table id="table">
     <tr>
-        <td width="250px" height="60px"><strong>productName</strong></td>
-        <td width="250px" height="60px"><strong>productNumber</strong></td>
-        <td width="250px" height="60px"><strong>createTime</strong></td>
+        <td width="250px" height="60px"><strong>Product Name</strong></td>
+        <td width="250px" height="60px"><strong>Product Number</strong></td>
+        <td width="250px" height="60px"><strong>Create Time</strong></td>
     </tr>
     <tr th:each="GlobalShoppingCart :${GlobalShoppingCart}">
         <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productId}" style="display: none"></td>
@@ -117,7 +117,7 @@
         <form th:action="@{/ModifyAmount}" method="get">
             <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
             <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-            <td><button type="submit" name="ModifyAmount" th:value="修改数量" >ModifyNumber</button></td>
+            <td><button type="submit" name="ModifyAmount" th:value="修改数量" >Modify Number</button></td>
         </form>
     </tr>
 </table>
