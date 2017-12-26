@@ -1,69 +1,192 @@
-<!-- Seller Management Main page-->
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
-    <title>ModifyProductInformationPage</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Modify Product info</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
 </head>
-<body>
+<body style="background: #9acfea">
+<div class="header">header</div>
+    <div class="content">
+        <p>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+        </p>
+        <div class="col-lg-2">
+            <div id="wrapper">
+                <!-- Sidebar -->
+                <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                    <ul class="nav sidebar-nav">
+                        <li class="sidebar-brand">
 
-<h2>ModifyProductInformationPage</h2>
-<br /> <br />
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div class="col-lg-10">
+            <div class="row">
+                <br><br>
+                <div class="row col-lg-8">
+                    <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
+                        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                        <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
-<!--这里js做的工作如下:1.可以预览照片,2.可以让商家为商品动态修改\删除\添加"属性-值"-->
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Name:</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
+                            </div>
+                        </div>
 
-<!--r返回表单-->
-<form th:action="@{/Seller/ModifyProduct/ReturnBack}" method="get">
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
-    <button type="submit">return Back</button>
-</form>
+                        <div class="form-group ">
+                            <label class="col-lg-4 text-right">Product Stock:</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
+                            </div>
+                        </div>
 
-<br />
-<!--主信息表单-->
+                        <div class="from-group">
+                            <label class="col-lg-4 text-right">Catogery:</label>
+                            <div class="col-lg-4">
+                                <form role="form">
+                                <div class="form-group">
+                                    <select class="form-control" name="brandName">
+                                        <option value="TV & Home Theater">TV & Home Theater</option>
+                                        <option value="Computers & Tablets">Computers & Tablets</option>
+                                        <option value="Cell Phones">Cell Phones</option>
+                                        <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="Car Electronics & GPS">Car Electronics & GPS</option>
+                                        <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+                                        <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
+                                        <option value="Home & Office">Home & Office</option>
+                                    </select>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
 
+                        <br><br><br><br>
 
-<form name="form" th:action="@{/Seller/ModifyProduct/ModifyInformation}">
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
-    <tr>
-        <p />  <label>productName</label>           <input name="productName" th:value="*{productName}"></input>
-        <p />  <label>productStock</label>          <input name="productStock" th:value="*{productStock}"></input>
-        <p />  <label>brandName</label>             <input name="brandName" th:value="*{brandName}"></input>
-        <p />  <label>productPhoto</label>          <input type="file" id="productPhoto" name="productPhoto" th:value="*{productPhoto}"></input>
-        <p />  <label>ProductPrice</label>          <input name="ProductPrice" th:value="*{productPrice}"></input>
-        <p />  <label>productBriefInfo</label>      <input name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
-        <input type="hidden" name="isOnSaleValue" th:value="*{isOnSale}"></input>
-    </tr>
-    <table id="otherAttributes">
-        <tr>
-            <button type="button" onclick="addNewAttr()">addNewAttr</button>
-        </tr>
-        <tr>
-            <th>attrName</th>
-            <th>attrValue</th>
-            <th>modify</th>
-            <th>delete</th>
-        </tr>
-    </table>
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Market Price:(HK$)</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
 
-    <div>
-        <img id="photo" src=""  style="display: block;" />
+                            <label class="col-lg-4 text-right">Product Brief Information:</label>
+                            <div class="col-lg-3">
+                                <input class="form-control" name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Photo:</label>
+                            <div class="col-lg-3">
+                                <input type="file" id="productPhoto" name="productPhoto"></input>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Attribute:</label>
+                            <div class="col-lg-8">
+                                <table class="table table-striped" id="otherAttributes">
+                                    <tr>
+                                        <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
+                                    </tr>
+                                    <tr>
+                                        <th>Attribute Name</th>
+                                        <th>Attribute Value</th>
+                                        <th>Modify</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <button type="submit" class="btn-default">OK</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 text-left">
+                    <input type="hidden" id="srcPath" th:value="${productPhoto}"/>
+                    <img id="photo"  style="display: block;" th:src="${productPhoto}" height="200" width="300" alt="default" />
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div>
-        <button type="submit">ok</button>
+</div>
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body" >
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login"><button type="button" class="btn btn-primary">
+                                    Sure
+                                </button></a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
-</form>
-
-
-<br />
+    </div>
+</nav>
 <script>
-    var selectbox = document.form.isOnSale;
-    selectbox.value = document.form.isOnSaleValue.value;
 
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById("photo");
-    // 监听change事件:
     fileInput.addEventListener('change', function () {
         // 检查文件是否选择:
         if (!fileInput.value) {
@@ -81,6 +204,8 @@
                     return;
                 }
 
+
+        console.log(fileInput.value);
         // 读取文件:
         var reader = new FileReader();
 
@@ -167,6 +292,7 @@
 
     var attrs = document.getElementById('otherAttributes'),
         info = document.getElementById('productBriefInfo');
+    console.log(info.value);
     var obj = JSON.parse(info.value);
     console.log(obj);
 
@@ -188,14 +314,6 @@
 
 
 </script>
-
-<form name="form1" th:action="@{/Seller/FastJump}" method="get">
-    <button type="submit" name="action" value="ModifySellerAdvertisement" >ModifySellerAdvertisement</button>
-    <button type="submit" name="action" value="ModifySellerInformation" >ModifySellerInformation</button>
-    <button type="submit" name="action" value="ViewIncome" >ViewIncome</button>
-    <button type="submit" name="action" value="ViewTransaction">ViewTransaction</button>
-    <button type="submit" name="action" value="ProductsManagement">ProductsManagement</button>
-    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-</form>
 </body>
+
 </html>

@@ -2,39 +2,270 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"/>
     <title>HomePage</title>
+
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
-    <link rel="stylesheet" th:href="'/css/style.css'">
-    <script th:src="'/js/index.js'"></script>
+    <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
+    <style type="text/css">
+        .carousel .item {
+            height: 500px;
+        }
+
+        .carousel .item img {
+            width: 100%;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #head {
+            height: 60px;
+            background-color: cornflowerblue;
+        }
+
+        #favorite {
+            width: 120px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: lightskyblue;
+        }
+
+        #cart {
+            width: 120px;
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+
+        #siderBar {
+            margin: 0px 0px;
+            background-color: cornflowerblue;
+            float: right;
+        }
+
+        #siderBar ul li {
+            width: 150px;
+            height: 30px;
+            float: right;
+            background-color: cornflowerblue;
+            list-style: none;
+            margin: 0px 10px;
+            text-align: center;
+        }
+
+        tr td {
+            text-align: center;
+        }
+
+        .list > table {
+            border: solid deepskyblue 1px; /*给表格添加边框*/
+            border-radius: 6px; /*设置表格圆角*/
+            box-shadow: 0 1px 1px deepskyblue; /*表格阴影设置*/
+            border-spacing: 0;
+            padding: 5px;
+        }
+
+        tr {
+            margin: 1px;
+        }
+
+        tr:nth-of-type(n+2):hover {
+            background: #a6e1ec;
+        }
+
+        td {
+            border-bottom: 1px solid lightgray;
+            border-collapse: collapse;
+        }
+
+        button {
+            background: dodgerblue;
+            font-size: 20px;
+            border: none;
+            height: 35px;
+            text-align: center;
+            color: white;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgray;
+        }
+
+        table tr:last-of-type td {
+            border-bottom: none;
+        }
+
+        input,
+        button {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+
+        .searchdiv {
+            margin: 1px auto 5px auto;
+            width: 800px;
+            text-align: center;
+        }
+
+        a {
+            color: #4183c4;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        h3 {
+            color: #666;
+        }
+
+        ul {
+            list-style: none;
+            padding: 25px 0;
+        }
+
+        li {
+            display: inline;
+            margin: 10px 50px 10px 0px;
+        }
+
+        input[type=text],
+        input[type=password] {
+            font-size: 13px;
+            min-height: 32px;
+            margin: 0;
+            padding: 7px 8px;
+            outline: none;
+            color: #333;
+            background-color: #fff;
+            background-repeat: no-repeat;
+            background-position: right center;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075);
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            transition: all 0.15s ease-in;
+            -webkit-transition: all 0.15s ease-in 0;
+            vertical-align: middle;
+        }
+
+        .button {
+            position: relative;
+            display: inline-block;
+            margin: 0;
+            padding: 8px 15px;
+            font-size: 13px;
+            font-weight: bold;
+            color: #333;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.9);
+            white-space: nowrap;
+            background-color: #eaeaea;
+            background-image: -moz-linear-gradient(#fafafa, #eaeaea);
+            background-image: -webkit-linear-gradient(#fafafa, #eaeaea);
+            background-image: linear-gradient(#fafafa, #eaeaea);
+            background-repeat: repeat-x;
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            border-bottom-color: #c5c5c5;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .05);
+            vertical-align: middle;
+            cursor: pointer;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            -webkit-appearance: none;
+        }
+
+        .button:hover,
+        .button:active {
+            background-position: 0 -15px;
+            border-color: #ccc #ccc #b5b5b5;
+        }
+
+        .button:active {
+            background-color: #dadada;
+            border-color: #b5b5b5;
+            background-image: none;
+            box-shadow: inset 0 3px 5px rgba(0, 0, 0, .15);
+        }
+
+        .button:focus,
+        input[type=text]:focus,
+        input[type=password]:focus {
+            outline: none;
+            border-color: #51a7e8;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, .075), 0 0 5px rgba(81, 167, 232, .5);
+        }
+
+        label[for=search] {
+            display: block;
+            text-align: left;
+        }
+
+        #search label {
+            font-weight: 200;
+            padding: 5px 0;
+        }
+
+        #search input[type=text] {
+            font-size: 18px;
+            width: 705px;
+        }
+
+        #search .button {
+            padding: 10px;
+            width: 90px;
+        }
+
+    </style>
 </head>
-
 <body>
-<br>
-</br>
+<div id="head">
+    <img src="./Resource/parknshop_logo.jpg " alt="140x140"/>
+    <div id="siderBar">
+        <ul>
+            <li><a th:href="@{/User/login.html}">login</a></li>
+            <li><a th:href="@{/User/register.html}">register</a></li>
+            <li>
+                <a th:href="@{'/ShoppingCartInHome?UserID='+${UserID}}">ShoppingCart</a>
+            </li>
+            <li>
+                <a th:href="@{'/FavoriteInHome?UserID='+${UserID}}">Favorite</a>
+            </li>
+            <li>
+                <a th:href="@{'/History?UserID='+${UserID}}">History</a>
+            </li>
+
+        </ul>
+    </div>
+</div>
 <div class="content">
-    <div class="row">
 
-        <div class="col-lg-6">
-            <a href="/homepage">
-                <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
-            </a>
-        </div>
-
-        <!-- 搜索按钮-->
-        <div class="col-lg-6">
-            <div class="input-group">
-                <form role='form' class="bs-example bs-example-form" th:action="@{/search/name}" method="GET">
-                    <div class="input-group">
-                        <input type="text" name="productname" class="form-control"/>
-                        <span class="input-group-btn">
-                        <button class="btn btn-default" type="submit" name="save">search</button>
-                        </span>
-                    </div>
-                </form>
-            </div>
+    <div class="searchdiv">
+        <div id="search">
+            <form th:action="@{/search/name}" method="GET">
+                <input type="text" name="productname">
+                <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
+                <input class="button" type="submit" value="Search" name="save">
+            </form>
         </div>
     </div>
 
@@ -60,8 +291,8 @@
                             TV, Home Theater<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=TV">TV</a></li>
-                            <li><a href="/search/type?type=HomeTheater">Home Theater</a></li>
+                            <li><a th:href="@{'/search/type?type=TV&UserID='+${UserID}}">TV</a></li>
+                            <li><a th:href="@{'/search/type?type=HomeTheater&UserID='+${UserID}}">Home Theater</a></li>
                         </ul>
                     </li>
 
@@ -70,20 +301,20 @@
                             Computers, Tables<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Computers">Computers</a></li>
-                            <li><a href="/search/type?type=Tables">Tables</a></li>
+                            <li><a th:href="@{'/search/type?type=Computers&UserID='+${UserID}}">Computers</a></li>
+                            <li><a th:href="@{'/search/type?type=Tables&UserID='+${UserID}}">Tables</a></li>
                         </ul>
                     </li>
 
-                    <li><a href="/search/type?type=CellPhones">Cell Phones</a></li>
+                    <li><a th:href="@{'/search/type?type=CellPhones&UserID='+${UserID}}">Cell Phones</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Cameras, Camcorders<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Cameras">Cameras</a></li>
-                            <li><a href="/search/type?type=Camcorders">Camcorders</a></li>
+                            <li><a th:href="@{'/search/type?type=Cameras&UserID='+${UserID}}">Cameras</a></li>
+                            <li><a th:href="@{'/search/type?type=Camcorders&UserID='+${UserID}}">Camcorders</a></li>
                         </ul>
                     </li>
 
@@ -94,8 +325,8 @@
                             Car Electronics, GPS<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=CarElectronics">Car Electronics</a></li>
-                            <li><a href="/search/type?type=GPS">GPS</a></li>
+                            <li><a th:href="@{'/search/type?type=CarElectronics&UserID='+${UserID}}">Car Electronics</a></li>
+                            <li><a th:href="@{'/search/type?type=GPS&UserID='+${UserID}}">GPS</a></li>
                         </ul>
                     </li>
 
@@ -104,10 +335,10 @@
                             Video, Games, Movies, Music<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Video">Video</a></li>
-                            <li><a href="/search/type?type=Games">Games</a></li>
-                            <li><a href="/search/type?type=Movies">Movies</a></li>
-                            <li><a href="/search/type?type=Music">Music</a></li>
+                            <li><a th:href="@{'/search/type?type=Video&UserID='+${UserID}}">Video</a></li>
+                            <li><a th:href="@{'/search/type?type=Games&UserID='+${UserID}}">Games</a></li>
+                            <li><a th:href="@{'/search/type?type=Movies&UserID='+${UserID}}">Movies</a></li>
+                            <li><a th:href="@{'/search/type?type=Music&UserID='+${UserID}}">Music</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -115,9 +346,9 @@
                             Health,Fitness, Sports<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Health">Health</a></li>
-                            <li><a href="/search/type?type=Fitness">Fitness</a></li>
-                            <li><a href="/search/type?type=Sports">Sports</a></li>
+                            <li><a th:href="@{'/search/type?type=Health&UserID='+${UserID}}">Health</a></li>
+                            <li><a th:href="@{'/search/type?type=Fitness&UserID='+${UserID}}">Fitness</a></li>
+                            <li><a th:href="@{'/search/type?type=Sports&UserID='+${UserID}}">Sports</a></li>
                         </ul>
                     </li>
 
@@ -126,8 +357,8 @@
                             Home, Office<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Home">Home</a></li>
-                            <li><a href="/search/type?type=Office">Office</a></li>
+                            <li><a th:href="@{'/search/type?type=Home&UserID='+${UserID}}">Home</a></li>
+                            <li><a th:href="@{'/search/type?type=Office&UserID='+${UserID}}">Office</a></li>
                         </ul>
                     </li>
 
@@ -145,27 +376,18 @@
         </ol>
         <!-- 轮播内容 -->
         <div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
-        <th:block th:each="ads1:${pro_ads_roll}">
-            <div class="item active" th:if="${ads1.first}">
-                <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
-                    <img th:src="${ads1.current.PictureUrl}" alt="1 slide"/>
-                </a>
-                <div class="carousel-caption">
-                    <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
-                    <p th:text="${ads1.current.Description}">description</p>
+            <th:block th:each="ads1,index:${pro_ads_roll}">
+                <div class="item active" th:if="${index}==1?('th:class='+'item '+'active'):('th:class=item')">
+                    <a target="_blank" th:href="@{'/product/'+${ads1.productId}}">
+                        <img th:src="${ads1.pictureUrl}" alt="1 slide"/>
+                    </a>
+                    <div class="carousel-caption">
+                        <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
+                        <p th:text="${ads1.description}">description</p>
+                    </div>
                 </div>
-            </div>
-            <div class="item" th:if="${not ads1.first}">
-                <a target="_blank" th:href="@{'/product/'+${ads1.current.ProductId}}">
-                    <img th:src="${ads1.current.PictureUrl}" alt="2 slide"/>
-                </a>
-                <div class="carousel-caption">
-                    <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
-                    <p th:text="${ads1.current.Description}">description</p>
-                </div>
-            </div>
-        </th:block>
-    </div>
+            </th:block>
+        </div>
 
         <!-- 左按钮 -->
         <a href="#LBbox" class="left carousel-control" role="button" data-slide="prev">
@@ -183,24 +405,23 @@
     </br>
 
     <!-- 商铺广告区 -->
-
-    <div class="container" th:if="${not seller_ad_isnull}">
-        <th:block th:each="ads:${shop_ads}">
-            <div class="col-lg-2">
-                <a target="_blank" th:href="@{'/shop/'+*{ads.sellerId}}">
-                    <img th:src="@{*{ads.pictureUrl}}" alt="fail pics" width="200" height="300"/>
-                </a>
-            </div>
-        </th:block>
+    <div class="container" th:if="${not pro_rollad_isnull}">
+        <table>
+            <tr th:each="ads : ${shop_ads}">
+                <div class="col-lg-2">
+                    <a target="_blank" th:href="@{'/shop/'+${ads.sellerId}}">
+                        <img th:src="@{${ads.pictureUrl}}" alt="fail pics" width="200" height="300"/>
+                    </a>
+                </div>
+            </tr>
+        </table>
     </div>
-
     <br>
     </br>
 
     <!-- 商品广告展示-->
 
     <div class="container" th:if="${not pro_listad_isnull}">
-        <table></table>
         <th:block th:each="adv2 : ${pro_ads}">
             <div class="col-md-2">
                 <div class="img">
@@ -224,34 +445,8 @@
         </th:block>
     </div>
 
-    <!--网页眉头 -->
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
-                        aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">User name</a>
-            </div>
-                <div id="navbar" class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a href="/cart">cart</a></li>
-                        <li><a href="/favorite">favorite</a></li>
-                        <li><a href="/history">history</a></li>
-                        <li><a th:href="@{/User/login.html}">login</a></li>
-                        <li><a th:href="@{/User/register.html}">register</a></li>
-                    </ul>
-            </div>
-        </div>
-    </nav>
 </div>
-
-
 <!--网页注脚-->
 <div class="footer">
     <div>
@@ -261,19 +456,15 @@
 
     <div> Copyright © 2015 XiDian SPM Group 5 Ltd. All rights reserved.</div>
 </div>
-
 <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
-
 <script src="js/ajaxGoodsType.js"></script>
 <script type="text/javascript" src="./js/fsbanner.js"></script>
 <script type="text/javascript">
-    //<![CDATA[
     $(function () {
         $('.ex[name=3] .fsbanner').fsBanner({
             trigger: 'mouse'
         });
     });
-    //]]>
 </script>
 </body>
 </html>

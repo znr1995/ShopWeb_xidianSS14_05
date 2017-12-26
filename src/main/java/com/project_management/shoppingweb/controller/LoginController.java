@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller;
 
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import com.project_management.shoppingweb.service.User.User_LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,24 +20,31 @@ public class LoginController {
     @Autowired
     private User_LoginService userLoginService;
 
+    @Autowired
+    private Seller_SellerService seller_sellerService;
+
     @RequestMapping(value = "/")
     public String main(){
 
-        //return "redirect:/homepage";
-        return "/Login";
+        return "redirect:/homepage";
+
     }
 
+
+
     //商家登录
-    @RequestMapping(value = "/login",method = RequestMethod.GET,params = "action=SellerLogin")
+    @RequestMapping(value = "/login",method = RequestMethod.POST)
     public String login(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
         String pattern = ".*@*.com.*";
         long id;
-        //TODO:有bug,用户名和邮箱一样呢
 
-        //以邮箱方式登录
+
+        //有bug,用户名和邮箱一样呢
+
         if (Pattern.matches(pattern, account)) {
+            //以邮箱方式登录
             id = userLoginService.sellerLoginByEmail(account,password);
         } else {
             //用户名方式登录
@@ -46,7 +54,19 @@ public class LoginController {
         if(id < 0)
         {
             attributes.addAttribute("errorMessage",getErrorMessage(id));
-           return "redirect:/error/errorMessage";
+           return "redirect:/error/errorHandler";
+        }
+
+        switch (seller_sellerService.getSellerById(id).getApplyState()) // 1 - 通过， 2 - 未通过, 3-拉黑
+        {
+            case 2:
+                attributes.addAttribute("errorMessage","your apply not be passed, try login later!");
+                return "redirect:/error/errorHandler";
+            case 3:
+                attributes.addAttribute("errorMessage","your account is in the black list!");
+                return "redirect:/error/errorHandler";
+            default:
+                break;
         }
 
         attributes.addAttribute("SellerID",id);
@@ -74,6 +94,13 @@ public class LoginController {
         if(id < 0)
         {
             attributes.addAttribute("errorMessage",getErrorMessage(id));
+            return "redirect:/error/errorHandler";
+        }
+
+        // 1 - 可用 ，2 - 黑名单
+        if(seller_sellerService.getUser(id).getState() == 2)
+        {
+            attributes.addAttribute("errorMessage","Sorry,you are in the black list!");
             return "redirect:/error/errorHandler";
         }
 

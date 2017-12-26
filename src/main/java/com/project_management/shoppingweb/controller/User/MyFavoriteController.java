@@ -1,7 +1,9 @@
 package com.project_management.shoppingweb.controller.User;
 
+import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
+import com.project_management.shoppingweb.service.User.User_ProductService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,24 +17,29 @@ import java.util.List;
 @Controller
 public class MyFavoriteController {
     @Autowired
-    private User_ProductCollectionService userProductCollectionService;
+    private User_ProductCollectionService productCollectionService;
+    @Autowired
+    private User_ProductService productService;
     @RequestMapping(value = "/MyFavorite",method = RequestMethod.GET)
     public String MyFavorite(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
             String ProductID = request.getParameter("ProductID");
             String ShopID = request.getParameter("ShopID");
             String UnitPrice = request.getParameter("UnitPrice");
+            Product product = productService.findProductByProductID(Long.parseLong(ProductID));
+            String ProductName = product.getProductName();
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);
             model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/Product";
+            model.addAttribute("ProductName", ProductName);
+            return "/User/productdetial";
         }
 
         List<ProductCollection> FavoritelistP = new ArrayList<ProductCollection>();
-        FavoritelistP = userProductCollectionService.findAllByUserId(Long.parseLong(UserID));
+        FavoritelistP = productCollectionService.findAllByUserId(Long.parseLong(UserID));
 
 
         if(FavoritelistP.size() == 0){
@@ -41,14 +48,23 @@ public class MyFavoriteController {
         }
 
 
-        List<String> FavoriteProductID = new ArrayList<String>();
+        List<FavoriteToShow> FavoriteProduct = new ArrayList<FavoriteToShow>();
         for(int i = 0; i < FavoritelistP.size(); i++){
-            FavoriteProductID.add(String.valueOf(FavoritelistP.get(i).getProductId()));
+            FavoriteToShow favoriteToShow = new FavoriteToShow();
+            favoriteToShow.ID = String.valueOf(FavoritelistP.get(i).getProductId());
+            Product product = productService.findProductByProductID(FavoritelistP.get(i).getProductId());
+            favoriteToShow.Name = product.getProductName();
+            FavoriteProduct.add(favoriteToShow);
         }
-            model.addAttribute("ProductList", FavoriteProductID);
+            model.addAttribute("ProductList", FavoriteProduct);
 
         model.addAttribute("UserID", UserID);
         return "/User/Favorite";
 
     }
+}
+
+class FavoriteToShow{
+    public String ID;
+    public String Name;
 }

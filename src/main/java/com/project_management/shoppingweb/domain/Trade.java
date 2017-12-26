@@ -27,7 +27,7 @@ public class Trade {
     private Date tradeCreateTime;
     private Date tradeFinishTime;
     private String tradePayWay;
-    private int tradeStatus;// 0 - 未完成，1 - 完成
+    private int tradeStatus;// 0 - 待处理订单 1-等待发货 2-等待收货 3-完成
     private double tradeTotalMoney;
     private Long userId;
     private Long sellerId;

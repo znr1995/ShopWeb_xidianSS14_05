@@ -18,6 +18,7 @@ public interface SellerAdvertisementRepository extends JpaRepository<SellerAdver
     public List<SellerAdvertisement> findAllByStatus(Integer status);
     List<SellerAdvertisement> findBySellerId( Long sellerId);
     SellerAdvertisement findByAdvertisementId(Long advertisementId);
+    void delete(SellerAdvertisement sellerAdvertisement);
 
 
 

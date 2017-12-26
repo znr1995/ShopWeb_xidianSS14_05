@@ -2,56 +2,202 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 
-    <title>ShoppingCartByFFFF</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+
+    <style type="text/css">
+        * {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        #head {
+            height: 60px;
+            background-color: cornflowerblue;
+        }
+
+        #myfavorite {
+            width: 120px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: lightskyblue;
+        }
+
+        #myshoppingcart {
+            width: 120px;
+            height: 30px;
+            font-size: 15px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: lightskyblue;
+        }
+
+        #myorder{
+            width:120px;
+            height: 30px;
+            font-size: 15px;
+            text-align: center;
+            border-radius: 5px;
+            background-color: lightskyblue;
+        }
+
+        #siderBar {
+            margin: 0px 0px;
+            background-color: cornflowerblue;
+            float: right;
+
+        }
+
+        #siderBar ul {
+            margin: 0px 0px 0px 0px;
+            height: 60px;
+
+        }
+
+        #siderBar ul li {
+            width: 150px;
+            height: 30px;
+            float: right;
+            background-color: cornflowerblue;
+            list-style: none;
+            margin: 0px 10px;
+            text-align: center;
+        }
+
+        #table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        tr td {
+            text-align: center;
+        }
+
+        .list {
+            margin: 10px;
+        }
+
+        .list > table {
+            border: solid deepskyblue 1px; /*给表格添加边框*/
+            border-radius: 6px; /*设置表格圆角*/
+            box-shadow: 0 1px 1px deepskyblue; /*表格阴影设置*/
+
+            border-spacing: 0;
+            padding: 5px;
+        }
+
+        tr {
+            margin: 1px;
+        }
+
+        tr:nth-of-type(n+2):hover {
+            background: #a6e1ec;
+        }
+
+        td {
+            border-bottom: 1px solid lightgray;
+            border-collapse: collapse;
+
+        }
+
+        button {
+            background: dodgerblue;
+            font-size: 20px;
+            border: none;
+            height: 35px;
+
+            text-align: center;
+            color: white;
+            margin: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 1px 1px lightgray;
+        }
+
+        table tr:last-of-type td {
+            border-bottom: none;
+        }
+
+    </style>
+
 </head>
 
 <body>
-<div style="width: 250px;height: 500px;float: left">
-<table>
-    <tr>
-        <td>productID</td>
-    </tr>
-    <tr th:each="ProductList : ${ProductList}" >
-        <td th:text="${ProductList}">Onions</td>　　
-    </tr>
-</table>
-</div>
-
-
-<div style="width: 250px;height: 500px;float: left">
-<table>
-    <tr>
-        <td>productNumber</td>
-    </tr>
-    <tr th:each="AmountList : ${AmountList}" >
-        <td th:text="${AmountList}">Onions</td>　　
-    </tr>
-</table>
-</div>
-
-<div style="width: 250px;height: 500px;float: left">
-    <table>
-        <tr>
-            <td>createTime</td>
-        </tr>
-        <tr th:each="DateList : ${DateList}" >
-            <td th:text="${DateList}">Onions</td>　　
-        </tr>
-    </table>
+<div id="head">
+    <img src="./Resource/parknshop_logo.jpg " alt="140x140"/>
 </div>
 
 
 
-<form name="form1" th:action="@{/MyFavorite}" method="get">
-    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-    <button type="submit" name="myfavorite" th:value="我的收藏夹">myfavorite</button>
-</form>
 
-<form name="form2" th:action="@{/MyOrder}" method="get">
-    <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
-    <button type="submit" name="myorder" th:value="我的订单">myorder</button>
-</form>
+<div class="content">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 modal-content">
+                <div class="panel panel-default" style="height: 1200px">
+                    <div class="panel-body">
+
+                        <a th:href="@{homepage}"><b>Home</b></a>
+                        <br/>
+
+
+                        <form name="form2" th:action="@{/MyOrder}" method="get">
+                            <input type="hidden" name="UserID" th:value="${UserID}"/><br/>
+                            <button id="myorder" type="submit" name="myorder" th:value="我的订单">myorder</button>
+                        </form>
+
+
+                        <form name="form1" th:action="@{/MyFavorite}" method="get">
+                            <input type="hidden" name="UserID" th:value="${UserID}"/><br/>
+                            <button id="myfavorite" type="submit" name="myfavorite" th:value="我的收藏夹">My favorite
+                            </button>
+                        </form>
+
+
+                        <form name="form2" th:action="@{/MyShoppingCart}" method="get">
+                            <input type="hidden" name="UserID" th:value="${UserID}"/><br/>
+                            <button id="myshoppingcart" type="submit" name="myshoppingcart" th:value="我的购物车">My cart
+                            </button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-lg-10 modal-content">
+                <table id="table">
+                    <tr>
+                        <td width="250px" height="60px"><strong>Product Name</strong></td>
+                        <td width="250px" height="60px"><strong>Product Number</strong></td>
+                        <td width="250px" height="60px"><strong>Create Time</strong></td>
+                    </tr>
+                    <tr th:each="GlobalShoppingCart :${GlobalShoppingCart}">
+                        <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productId}" style="display: none"></td>
+                        <td width="250px" height="60px" th:text="*{GlobalShoppingCart.Name}" style="border-bottom: 1px lightgray solid"></td>
+                        <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productAmount}" style="border-bottom: 1px lightgray solid"></td>
+                        <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.createtime}" style="border-bottom: 1px lightgray solid"></td>
+                        <form th:action="@{/DeleteShoppingCart}" method="get">
+                            <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                            <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
+                            <td><button type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
+                        </form>
+                        <form th:action="@{/ModifyAmount}" method="get">
+                            <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                            <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
+                            <td><button type="submit" name="ModifyAmount" th:value="修改数量" >Modify Number</button></td>
+                        </form>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

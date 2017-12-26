@@ -30,7 +30,9 @@ public class SearchController {
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);
         model.addAttribute("pro_isnull", pro_isnull);
-        return "/Product/search";
+        String UserID = str.getParameter("UserID");
+        model.addAttribute("UserID", UserID);
+        return "/User/search";
     }
 
     //通过商品类型查询商品
@@ -42,7 +44,9 @@ public class SearchController {
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);
         model.addAttribute("pro_isnull", pro_isnull);
-        return  "/Product/search";
+        String UserID = str.getParameter("UserID");
+        model.addAttribute("UserID", UserID);
+        return  "/User/search";
     }
 
 }

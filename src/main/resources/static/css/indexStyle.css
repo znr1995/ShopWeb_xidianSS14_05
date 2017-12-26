@@ -7,25 +7,28 @@ html {
 }
 
 body {
-  background: #c1bdba;
+  background: #e18808;
   font-family: 'Titillium Web', sans-serif;
 }
 
 a {
   text-decoration: none;
-  color: #1ab188;
+  color: #de4b11;
   -webkit-transition: .5s ease;
   transition: .5s ease;
 }
 a:hover {
-  color: #179b77;
+  color: #cb830d;
 }
 
 .form {
-  background: rgba(19, 35, 47, 0.9);
+  position: absolute;
+  left: 900px;
+  top: 20px;
+  background: rgba(255, 209, 133, 0.9);
   padding: 40px;
-  max-width: 600px;
-  margin: 40px auto;
+  max-width: 400px;
+  margin: 20px auto;
   border-radius: 4px;
   box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
 }
@@ -55,11 +58,11 @@ a:hover {
   transition: .5s ease;
 }
 .tab-group li a:hover {
-  background: #179b77;
+  background: #84c1be;
   color: #ffffff;
 }
 .tab-group .active a {
-  background: #1ab188;
+  background: #84c1be;
   color: #ffffff;
 }
 
@@ -153,18 +156,18 @@ textarea {
   outline: none;
   border-radius: 0;
   padding: 15px 0;
-  font-size: 2rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 100;
   text-transform: uppercase;
   letter-spacing: .1em;
-  background: #1ab188;
+  background: #84c1be;
   color: #ffffff;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
   -webkit-appearance: none;
 }
 .button:hover, .button:focus {
-  background: #179b77;
+  background: #84c1be;
 }
 
 .button-block {
