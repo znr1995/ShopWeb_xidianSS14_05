@@ -1,0 +1,28 @@
+var get = document.getElementById("get");
+var city = document.getElementById("city");
+get.onclick = function () {
+        //创建XHR对象,主要是浏览器兼容性差异，处理兼容问题一般都是通过判断去解决。下面是一个三目运算符。
+        var xhr = window.XMLHttpRequest ? new XMLHttpRequest(): new ActiveXObject("Microsoft.XMLHTTP");
+        //设置请求URL
+        var url = "./login.php";
+        //设置XHR对象readyState变化时响应函数
+        xhr.onreadystatechange = function () {
+            //readyState是请求的状态，为4表示请求结束
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //responseText服务器响应的内容
+                //通过eval把传来的json字符串转成对象
+                var data = eval(this.responseText);
+                console.log(this.responseText)
+                var str = "";
+                for(var i in data) {
+                    str += "<option value='" + data[i].id + "'>" + data[i].name + "</option>";
+                }
+                city.innerHTML = str;
+            }
+        };
+        //打开链接，注意请求的方式是get还是post请求
+        xhr.open("get", url, true);
+        //发送请求
+        xhr.send();
+
+    }

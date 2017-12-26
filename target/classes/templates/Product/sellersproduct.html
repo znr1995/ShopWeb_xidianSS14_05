@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>shop page</title>
+    <!-- 新 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+    <!-- 可选的Bootstrap主题文件（一般不用引入） -->
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"/>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script src="http://cdn.bootcss.com/jquery/1.11.2/jquery.min.js"></script>
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="http://cdn.bootcss.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/GoodsTypeStyle.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/fsbanner.css"/>
+    <style type="text/css">
+        .ex {
+            width: 800px;
+            margin: 0 auto;
+        }
+
+        .fsbanner {
+            margin-top: 10px;
+        }
+        .carousel {
+            height: 500px;
+        }
+        .carousel .item {
+            height: 500px;
+        }
+        .carousel .item img {
+            width: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<div class="content">
+
+    <div class="col-lg-12">
+        <a href="/homepage">
+            <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
+        </a>
+    </div>
+
+    <br>
+    </br>
+    <br>
+    </br>
+
+    <div class="row">
+        <!-- 点击图片跳入产品介绍页面 -->
+        <div th:if="${not pro_isnull}">
+            <div th:each="adv : ${products}" class="col-lg-2">
+                <div class="img">
+                    <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
+                        <img th:src="'/'+${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
+                    </a>
+                </div>
+                <table>
+                    <thead>
+                    <th>Product </th>
+                    <th>Price</th>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><p th:text="${adv.productName}">ProductName</p></td>
+                        <td><p th:text="'$'+${adv.productTradePrice}">Price</p></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form th:action="@{/AddIntoFavoriteShop}" method="get">
+    <input type="hidden" name="ShopID" th:value="${ShopID}" /><br/>
+    <input type="hidden" name="UserID" th:value="1" /><br/>
+    <button type="submit" name="AddFavoriteShop" th:value="收藏商铺">AddShopIntoFavorite</button>
+</form>
+
+<form th:action="@{/MyFavoriteShop}" method="get">
+    <input type="hidden" name="ShopID" th:value="${ShopID}" /><br/>
+    <input type="hidden" name="UserID" th:value="1" /><br/>
+    <button type="submit" name="MyFavorite" th:value="我的收藏夹">MyFavorite</button>
+</form>
+</body>
+</html>
+</html>

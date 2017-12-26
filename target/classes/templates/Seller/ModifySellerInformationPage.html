@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>Seller Information</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background: #3c3c3c;
+            border: none;
+            border-radius: 12px;
+            box-shadow: 0 3px #999;
+        }
+
+        .button:active {
+            box-shadow: 0 1px #666;
+            transform: translateY(2px);
+        }
+    </style>
+</head>
+<body style="background: #84c1be">
+<div class="header">header</div>
+<div class="content">
+
+
+
+    <p>
+        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+    </p>
+    <div class="col-lg-2">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+    <div class="col-lg-10">
+        <div class="row">
+            <br><br>
+            <p>
+                <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+            </p>
+                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}"  method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                    <div class="col-lg-4 text-right">
+                    <img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">
+                    </div>
+                    <br><br><br><br><br><br><br><br><br>
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Shopname:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Shopname" th:value="*{Shopname}"></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">Catogery:</label>
+                        <div class="col-lg-6">
+                                    <form role="form">
+
+                                            <select class="form-control" name="Catogery">
+                                                <option value="TV & Home Theater">TV & Home Theater</option>
+                                                <option value="Computers & Tablets">Computers & Tablets</option>
+                                                <option value="Cell Phones">Cell Phones</option>
+                                                <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                                <option value="Audio">Audio</option>
+                                                <option value="Car Electronics & GPS">Car Electronics & GPS</option>
+                                                <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+                                                <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
+                                                <option value="Home & Office">Home & Office</option>
+                                            </select>
+                                    </form>
+                    </div>
+                    <br><br><br>
+                    <div class="form-group">
+                        <label class="col-lg-4 text-right">UserName:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Username" th:value="*{Username}"></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Address:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Address" th:value="*{Address}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Email:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Email" th:value="*{Email}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">PassWord:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="Passwd" th:value="*{Passwd}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">PhoneNum:</label>
+                        <div class="col-lg-3">
+                            <input type="text" class="form-control" name="PhoneNum" th:value="*{PhoneNum}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label class="col-lg-4 text-right">Sculpture:</label>
+                        <div class="col-lg-6">
+                            <input type="file" id="Sculpture" class="form-control" name="Sculpture" th:value="*{Sculpture}"></input></p>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <button class="button">OK</button>
+                    </div>
+
+
+                </form>
+
+
+
+
+        </div>
+
+    </div>
+    </div>
+</div>
+
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body" >
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login"><button type="button" class="btn btn-primary">
+                                    Sure
+                                </button></a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </div>
+</nav>
+<script>
+    var fileInput = document.getElementById('Sculpture'),
+        photo = document.getElementById('photo');
+
+
+    var selectAdverType = function (value) {
+        if(value == 2)
+        {
+            locationDiv.hidden = true;
+            productIDDiv.hidden = true;
+        }
+        else
+        {
+            productIDDiv.hidden =false;
+            locationDiv.hidden = false;
+        }
+    };
+
+    fileInput.addEventListener('change', function () {
+        photo.src = "";
+        if(!fileInput.value)
+        {
+            alert("not input image!");
+            return;
+        }
+
+        var file = fileInput.files[0];
+
+        if(file.type != "image/jpeg")
+            if( file.type != "image/png")
+                if(file.type != "image/gif")
+                {
+                    alert("Not a valued image file!");
+                    return;
+                }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            photo.src = e.target.result;
+        }
+
+        reader.readAsDataURL(file);
+
+    });
+</script>
+</body>
+</html>

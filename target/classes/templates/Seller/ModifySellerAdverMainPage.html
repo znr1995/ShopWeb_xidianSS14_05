@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>Ads Management</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
+</head>
+<body>
+<div class="header">header</div>
+<div class="content">
+
+    <p>
+        <input type="hidden" name="SellerID" th:value="*{SellerID}"/>
+    </p>
+    <div class="col-lg-2">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product
+                            Management</a>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income
+                            Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order
+                            Management</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="col-lg-10">
+            <br><br>
+
+            <div>
+                <form th:action="@{/Seller/ModifySellerAdvertisement/AddNewAdvertisement}">
+                    <button class="button">Add New Ads</button>
+                </form>
+            </div>
+
+            <br><br>
+
+            <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">
+                    <h2><b>Product Advertisements</b></h2>
+                </h1>
+            </div>
+            <div class="panel-body">
+                <form th:action="@{/Seller/ModifySellerAdvertisement/ModifyProductAdvertisement}">
+
+                    <table class="table table-striped" id="seller_table">
+
+                        <thead>
+                        <th>Description</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Type</th>
+                        <th>Status</th>
+                        </thead>
+
+                        <tr th:each="adv : ${productAdvertisements}">
+                            <td>
+                                <label th:text="*{adv.description}"></label>
+                            </td>
+                            <td>
+                                <data th:text="*{adv.startDate}"></data>
+                            </td>
+                            <td>
+                                <data th:text="*{adv.endDate}"></data>
+                            </td>
+
+                            <td>
+                                <label th:text="*{adv.typeString}" onclick="changeTypeText(this.value)"></label>
+                            </td>
+                            <td>
+                                <label th:text="*{adv.statusString}" onclick="changeStatusText(this.value)"></label>
+                            </td>
+
+                            <td>
+                                <button type="submit" class="btn-default" style="background: #258ecd;border-radius: 8px;" data-toggle="modal" data-target="#myModal"
+                                        name="modify" th:value="${adv.advertisementId}">modify
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+            <br><br>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <h2><b>Shop Advertisement</b></h2>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/Seller/ModifySellerAdvertisement/ModifySellerAdvertisement}">
+                        <!-- 这里需要一个列表-->
+                        <table class="table table-striped" id="seller_table">
+
+                            <thead>
+                            <th>Description</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
+                            </thead>
+
+                            <tr th:each="adv : ${sellerAdvertisements}">
+                                <td>
+                                    <label th:text="*{adv.description}"></label>
+                                </td>
+                                <td>
+                                    <data th:text="*{adv.startDate}"></data>
+                                </td>
+                                <td>
+                                    <data th:text="*{adv.endDate}"></data>
+                                </td>
+                                <td>
+                                    <label th:text="*{adv.statusString}"></label>
+                                </td>
+
+                                <td>
+                                    <button type="submit"  style="background: #258ecd;border-radius: 8px;" data-toggle="modal" data-target="#myModal"
+                                            name="modify" th:value="${adv.advertisementId}">modify
+                                    </button>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+</div>
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px"
+                        onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login">
+                                    <button type="button" class="btn btn-primary">
+                                        Sure
+                                    </button>
+                                </a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </div>
+</nav>
+
+<script>
+    function changeStatusText(value) {
+        if (value == 1)
+            this.innerText = 'not passed!';
+        else
+            this.innerText = 'passed';
+    }
+
+    function changeTypeText(value) {
+        if (value == 1)
+            this.innerText = 'roll advertisement';
+        else
+            this.innerText = 'list advertisement';
+    }
+</script>
+<script>
+    var menuLeft = document.getElementById('cbp-spmenu-s1'),
+
+        showLeftPush = document.getElementById('showLeftPush'),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function () {
+        classie.toggle(this, 'active');
+        classie.toggle(body, 'cbp-spmenu-push-toright');
+        classie.toggle(menuLeft, 'cbp-spmenu-open');
+        disableOther('showLeftPush');
+    };
+
+
+    function disableOther(button) {
+
+        if (button !== 'showLeftPush') {
+            classie.toggle(showLeftPush, 'disabled');
+        }
+
+    }
+
+</script>
+</body>
+</html>

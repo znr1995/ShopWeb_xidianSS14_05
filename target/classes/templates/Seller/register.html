@@ -1,0 +1,112 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Shop Owner Log up</title>
+    <!-- Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <style>
+        /*web background*/
+        .container{
+            display:table;
+            height:100%;
+        }
+
+        .row{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        /* centered columns styles */
+        .row-centered {
+            text-align:center;
+        }
+        .col-centered {
+            display:inline-block;
+            float:none;
+            text-align:left;
+            margin-right:-4px;
+        }
+    </style>
+</head>
+
+<body background="/2.jpg">
+<div class="container">
+    <div class="row row-centered">
+        <div class="well col-md-6 col-centered">
+            <form name="form2" id="regUser" accept-charset="utf-8"  action="/sellerRegister" method="post">
+                <ul class="reg_form" id="reg-ul">
+                    <div id="userCue" class="cue"><h2>Shop Owner Log up</h2></div>
+                    <li>
+                    <label for="username" class="input-tips2">User Name：</label>
+                    <div class="input-group input-group-md">
+                        <span class="input-group-addon" ><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
+                        <input type="username" class="form-control" id="username" name="username" maxlength="16" calss="inputstyle2"/>
+                    </div>
+                </li>
+                    <li>
+                        <label for="phone_number" class="input-tips2">Phone Num：</label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-phone" aria-hidden="true"></i></span>
+                            <input type="phone_number" class="form-control" id="phone_number" name="phone_number" maxlength="16" calss="inputstyle2"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="email" class="input-tips2">Email: </label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-envelope" aria-hidden="true"></i></span>
+                            <input type="email" class="form-control" id="email" name="email" maxlength="16" calss="inputstyle2"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="password_register" class="input-tips2">Password: </label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-lock" aria-hidden="true"></i></span>
+                            <input type="password" class="form-control" id="password_register" name="password_register" maxlength="16" calss="inputstyle2"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label for="shopname" class="input-tips2">Shop Name: </label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" ><i class="glyphicon glyphicon-certificate" aria-hidden="true"></i></span>
+                            <input type="shopname" class="form-control" id="Shopname" name="Shopname" maxlength="100" calss="inputstyle2"/>
+                        </div>
+                    </li>
+                    <li>
+                        <label class="input-tips2">Shop Catogery</label>
+                        <div class="input-group input-group-md">
+                            <span class="input-group-addon" id="sizing-addon1"><i class="glyphicon glyphicon-bookmark" aria-hidden="true"></i></span>
+                            <form role="form">
+                                <div class="form-group">
+                                    <select class="form-control" name="catogery">
+                                        <option value="TV & Home Theater">TV & Home Theater</option>
+                                                <option value="Computers & Tablets">Computers & Tablets</option>
+                                                <option value="Cell Phones">Cell Phones</option>
+                                                <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                                <option value="Audio">Audio</option>
+                                                <option value="Car Electronics & GPS">Car Electronics & GPS</option>
+                                                <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
+                                                <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
+                                                <option value="Home & Office">Home & Office</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </li>
+                    <br>
+                    <button type="submit" class="btn btn-success btn-block">register</button>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+</body>
+</html>
