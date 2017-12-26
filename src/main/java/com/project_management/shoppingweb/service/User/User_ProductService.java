@@ -15,7 +15,7 @@ public class User_ProductService {
         return productRepository.findAllByProductNameMatches(name);
     }*/
     public List<Product> findAllByNameMatch(String name){
-        return productRepository.findAllByProductName(name);
+        return productRepository.searchProducts(name);
     }
 
 

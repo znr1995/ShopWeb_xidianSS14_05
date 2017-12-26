@@ -6,6 +6,8 @@ import com.project_management.shoppingweb.domain.Price;
 
 import com.project_management.shoppingweb.domain.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -25,6 +27,8 @@ public interface ProductRepository extends JpaRepository<Product,Long>{
     //createProduct
     Product save(Product product);
     //searchPro
+    @Query(value = "select p from Product p where p.productName like  CONCAT('%',:names,'%')")
+    List<Product> searchProducts(@Param("names") String names);
     Product findByProductId(Long productId);
     List<Product> findByProductName(String productName);
     List<Product> findByType(Long type);
