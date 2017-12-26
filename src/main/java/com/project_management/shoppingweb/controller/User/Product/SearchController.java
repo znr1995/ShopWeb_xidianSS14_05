@@ -32,7 +32,7 @@ public class SearchController {
         model.addAttribute("pro_isnull", pro_isnull);
         String UserID = str.getParameter("UserID");
         model.addAttribute("UserID", UserID);
-        return "/Product/search";
+        return "/User/search";
     }
 
     //通过商品类型查询商品

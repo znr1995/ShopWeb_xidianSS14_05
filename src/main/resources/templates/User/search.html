@@ -49,6 +49,7 @@
             <form role='form' class = "bs-example bs-example-form" th:action="@{/search/name}" method = "GET">
                 <div class="input-group">
                     <input type="text" name="productname" class="form-control"/>
+                    <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <span class="input-group-btn">
                         <button  class="btn btn-default" type="submit" name="save">search</button>
                         </span>
