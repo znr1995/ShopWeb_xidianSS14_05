@@ -24,7 +24,7 @@ public class MyFavoriteController {
     public String MyFavorite(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
             String ProductID = request.getParameter("ProductID");
             String ShopID = request.getParameter("ShopID");
             String UnitPrice = request.getParameter("UnitPrice");

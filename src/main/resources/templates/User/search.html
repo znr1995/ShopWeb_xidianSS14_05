@@ -63,7 +63,7 @@
             <!-- 点击图片跳入产品介绍页面 -->
             <div th:if="${not pro_isnull}" th:each="adv : ${products}" class="col-lg-2">
                 <div class="img">
-                    <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
+                    <a target="_blank" th:href="@{'/product?UserID='+${UserID}+'&productId='+${adv.productId}}">
                         <img th:src="${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
                     </a>
                 </div>

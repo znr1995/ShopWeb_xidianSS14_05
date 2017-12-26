@@ -37,7 +37,7 @@ public class BuyController {
         String SellerName = seller.getShopname();
 
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);

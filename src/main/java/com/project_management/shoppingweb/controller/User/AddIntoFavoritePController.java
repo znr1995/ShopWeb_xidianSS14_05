@@ -30,7 +30,7 @@ public class AddIntoFavoritePController {
         Product product = productService.findProductByProductID(Long.parseLong(ProductID));
         String ProductName = product.getProductName();
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
             model.addAttribute("UserID", UserID);
             model.addAttribute("ShopID", ShopID);
             model.addAttribute("ProductID", ProductID);

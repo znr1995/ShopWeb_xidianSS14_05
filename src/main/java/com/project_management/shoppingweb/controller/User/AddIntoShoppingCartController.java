@@ -33,7 +33,7 @@ public class AddIntoShoppingCartController {
         Product product = productService.findProductByProductID(Long.parseLong(ProductID));
         String ProductName = product.getProductName();
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
             model.addAttribute("UserID", UserID);
             model.addAttribute("ProductID", ProductID);
             model.addAttribute("ShopID", ShopID);

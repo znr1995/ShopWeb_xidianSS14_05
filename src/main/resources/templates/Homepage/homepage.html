@@ -245,22 +245,13 @@
             <li><a th:href="@{/User/login.html}">login</a></li>
             <li><a th:href="@{/User/register.html}">register</a></li>
             <li>
-                <form th:action="@{/ShoppingCartInHome}" , method="get">
-                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
-                    <button type="submit" , name="cart" , th:value="购物车">Cart</button>
-                </form>
+                <a th:href="@{'/ShoppingCartInHome?UserID='+${UserID}}">ShoppingCart</a>
             </li>
             <li>
-                <form th:action="@{/FavoriteInHome}" , method="get">
-                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
-                    <button type="submit" , name="favorite" , th:value="收藏夹">Favorite</button>
-                </form>
+                <a th:href="@{'/FavoriteInHome?UserID='+${UserID}}">Favorite</a>
             </li>
             <li>
-                <form th:action="@{/History}" , method="get">
-                    <input type="hidden" , name="UserID" , th:value="${UserID}" , style="display: none">
-                    <button type="submit" , name="history" , th:value="购买记录">Order</button>
-                </form>
+                <a th:href="@{'/History?UserID='+${UserID}}">History</a>
             </li>
 
         </ul>
@@ -272,6 +263,7 @@
         <div id="search">
             <form th:action="@{/search/name}" method="GET">
                 <input type="text" name="productname">
+                <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                 <input class="button" type="submit" value="Search" name="save">
             </form>
         </div>
@@ -299,8 +291,8 @@
                             TV, Home Theater<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=TV">TV</a></li>
-                            <li><a href="/search/type?type=HomeTheater">Home Theater</a></li>
+                            <li><a th:href="@{'/search/type?type=TV&UserID='+${UserID}}">TV</a></li>
+                            <li><a th:href="@{'/search/type?type=HomeTheater&UserID='+${UserID}}">Home Theater</a></li>
                         </ul>
                     </li>
 
@@ -309,20 +301,20 @@
                             Computers, Tables<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Computers">Computers</a></li>
-                            <li><a href="/search/type?type=Tables">Tables</a></li>
+                            <li><a th:href="@{'/search/type?type=Computers&UserID='+${UserID}}">Computers</a></li>
+                            <li><a th:href="@{'/search/type?type=Tables&UserID='+${UserID}}">Tables</a></li>
                         </ul>
                     </li>
 
-                    <li><a href="/search/type?type=CellPhones">Cell Phones</a></li>
+                    <li><a th:href="@{'/search/type?type=CellPhones&UserID='+${UserID}}">Cell Phones</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                             Cameras, Camcorders<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Cameras">Cameras</a></li>
-                            <li><a href="/search/type?type=Camcorders">Camcorders</a></li>
+                            <li><a th:href="@{'/search/type?type=Cameras&UserID='+${UserID}}">Cameras</a></li>
+                            <li><a th:href="@{'/search/type?type=Camcorders&UserID='+${UserID}}">Camcorders</a></li>
                         </ul>
                     </li>
 
@@ -333,8 +325,8 @@
                             Car Electronics, GPS<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=CarElectronics">Car Electronics</a></li>
-                            <li><a href="/search/type?type=GPS">GPS</a></li>
+                            <li><a th:href="@{'/search/type?type=CarElectronics&UserID='+${UserID}}">Car Electronics</a></li>
+                            <li><a th:href="@{'/search/type?type=GPS&UserID='+${UserID}}">GPS</a></li>
                         </ul>
                     </li>
 
@@ -343,10 +335,10 @@
                             Video, Games, Movies, Music<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Video">Video</a></li>
-                            <li><a href="/search/type?type=Games">Games</a></li>
-                            <li><a href="/search/type?type=Movies">Movies</a></li>
-                            <li><a href="/search/type?type=Music">Music</a></li>
+                            <li><a th:href="@{'/search/type?type=Video&UserID='+${UserID}}">Video</a></li>
+                            <li><a th:href="@{'/search/type?type=Games&UserID='+${UserID}}">Games</a></li>
+                            <li><a th:href="@{'/search/type?type=Movies&UserID='+${UserID}}">Movies</a></li>
+                            <li><a th:href="@{'/search/type?type=Music&UserID='+${UserID}}">Music</a></li>
                         </ul>
                     </li>
                     <li class="dropdown">
@@ -354,9 +346,9 @@
                             Health,Fitness, Sports<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Health">Health</a></li>
-                            <li><a href="/search/type?type=Fitness">Fitness</a></li>
-                            <li><a href="/search/type?type=Sports">Sports</a></li>
+                            <li><a th:href="@{'/search/type?type=Health&UserID='+${UserID}}">Health</a></li>
+                            <li><a th:href="@{'/search/type?type=Fitness&UserID='+${UserID}}">Fitness</a></li>
+                            <li><a th:href="@{'/search/type?type=Sports&UserID='+${UserID}}">Sports</a></li>
                         </ul>
                     </li>
 
@@ -365,8 +357,8 @@
                             Home, Office<b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="/search/type?type=Home">Home</a></li>
-                            <li><a href="/search/type?type=Office">Office</a></li>
+                            <li><a th:href="@{'/search/type?type=Home&UserID='+${UserID}}">Home</a></li>
+                            <li><a th:href="@{'/search/type?type=Office&UserID='+${UserID}}">Office</a></li>
                         </ul>
                     </li>
 

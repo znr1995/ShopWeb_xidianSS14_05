@@ -24,6 +24,7 @@
                     <input type="text" name="ShopID" th:value="${productdetail.sellerId}" readonly="readonly" >ShopID</input><br/>
                     <input type="text" name="ProductName" th:value="${productdetail.productName}" readonly="readonly" >ProductName</input><br/>
                     <input type="text" name="Price" th:value="${productdetail.productPrice}" readonly="readonly" >Price</input><br/>
+                    <input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" style="display: none" /><br/>
                     <th th:text="'Type: ' +${productdetail.type}">type</th><br/>
                     <button type="submit" name="operation" th:value="go">go</button>
                 </form>
