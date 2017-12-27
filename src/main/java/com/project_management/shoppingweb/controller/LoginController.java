@@ -97,10 +97,16 @@ public class LoginController {
             return "redirect:/error/errorHandler";
         }
 
-        // 1 - 可用 ，2 - 黑名单
+        // 1 - 可用 ，2 - 黑名单 0 - 被删除
         if(seller_sellerService.getUser(id).getState() == 2)
         {
             attributes.addAttribute("errorMessage","Sorry,you are in the black list!");
+            return "redirect:/error/errorHandler";
+        }
+
+        if(seller_sellerService.getUser(id).getState() == 0)
+        {
+            attributes.addAttribute("errorMessage","Sorry,your count has been delete by admin!");
             return "redirect:/error/errorHandler";
         }
 
