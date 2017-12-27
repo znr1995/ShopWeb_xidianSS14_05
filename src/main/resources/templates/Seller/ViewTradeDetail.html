@@ -132,7 +132,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <li><a th:href="@{'/Seller/FastJump/ModifySellerInformationHandler?SellerID='+${SellerID}}">Personal Infomation</a></li>
                 <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
                     Log out
                 </button>
