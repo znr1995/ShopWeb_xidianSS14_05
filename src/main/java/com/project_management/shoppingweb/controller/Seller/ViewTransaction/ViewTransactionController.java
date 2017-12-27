@@ -115,8 +115,11 @@ public class ViewTransactionController {
     public String jumpToViewTransaction(@ModelAttribute("SellerID")long sellerId, Model model)
     {
         sellerID = sellerId;
-        //0 - 未完成，1 - 完成
         List<Trade> trades = seller_sellerService.getTradeList(sellerId,0);
+        trades.addAll(seller_sellerService.getTradeList(sellerId,1));
+        trades.addAll(seller_sellerService.getTradeList(sellerId,2));
+
+        model.addAttribute("totlePrice",seller_sellerService.getTradeSum(trades));
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
         for(Trade trade : trades)
         {
@@ -169,6 +172,7 @@ public class ViewTransactionController {
         }
 
         List<Trade> trades = seller_sellerService.getTradeListByTime(sellerId,status,start,end);
+        model.addAttribute("totlePrice",seller_sellerService.getTradeSum(trades));
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
         for(Trade trade : trades)
         {
