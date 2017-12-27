@@ -2,9 +2,11 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.Address;
+import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.domain.TradeDetail;
 import com.project_management.shoppingweb.service.AddressService;
+import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import com.project_management.shoppingweb.service.User.User_TradeDetailService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -26,6 +28,8 @@ public class PayController {
     private AddressService addressService;
     @Autowired
     private User_TradeDetailService tradeDetailService;
+    @Autowired
+    private User_ShoppingCartService shoppingCartService;
 
 
     @RequestMapping(value = "/Pay",method = RequestMethod.GET)
@@ -141,6 +145,18 @@ public class PayController {
         tradeDetailService.save(newTradeDetail);
 
         model.addAttribute("UserID", UserID);
+        String IsFromShoppingCart = request.getParameter("IsFromShoppingCart");
+        if(IsFromShoppingCart.equals("1")){
+            List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
+            shoppingCarts = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
+            ShoppingCart target = new ShoppingCart();
+            for(int i = 0; i < shoppingCarts.size(); i++){
+                if(shoppingCarts.get(i).getProductId() == Long.parseLong(ProductID)){
+                    target = shoppingCarts.get(i);break;
+                }
+            }
+            shoppingCartService.delete(target);
+        }
         return "/User/Success";
     }
 }

@@ -48,7 +48,7 @@ public class ShoppingCartInHomeController {
 
         if(GlobalShoppingCart.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/ShoppingCart";
+            return "/User/ShoppingCartNew";
         }
 
         List<ShoppingCartToShow> shoppingCartToShowList = new ArrayList<ShoppingCartToShow>();
@@ -63,7 +63,7 @@ public class ShoppingCartInHomeController {
         model.addAttribute("UserID", UserID);
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
 
-        return "/User/ShoppingCart";
+        return "/User/ShoppingCartNew";
     }
 }
 

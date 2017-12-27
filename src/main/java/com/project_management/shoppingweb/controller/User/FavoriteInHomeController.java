@@ -45,7 +45,7 @@ public class FavoriteInHomeController {
 
         if(FavoritelistP.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/Favorite";
+            return "/User/FavoriteNew";
         }
 
 
@@ -60,7 +60,7 @@ public class FavoriteInHomeController {
         model.addAttribute("ProductList", FavoriteProduct);
 
         model.addAttribute("UserID", UserID);
-        return "/User/Favorite";
+        return "/User/FavoriteNew";
     }
 }
 

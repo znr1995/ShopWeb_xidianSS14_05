@@ -83,6 +83,7 @@ public class BuyController {
 
 
         model.addAttribute("UserID", UserID);
+        model.addAttribute("IsFromShoppingCart", "0");
         model.addAttribute("ProductID", ProductID);
         model.addAttribute("ShopID", ShopID);
         model.addAttribute("UnitPrice", UnitPrice);

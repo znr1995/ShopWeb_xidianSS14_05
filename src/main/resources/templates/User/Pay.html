@@ -47,6 +47,7 @@
 <form name="form1" th:action="@{/Pay}" method="get">
     <div id="infor">
         <input type="hidden" name="UserID" th:value="${UserID}"  readonly="readonly" /><br/>
+        <input type="hidden" name="IsFromShoppingCart" th:value="${IsFromShoppingCart}" style="display: none">
         <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" style="display: none" /><br/>
         <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" style="display: none" /><br/>
         <strong style="margin-left: 65px">ShopName</strong>: <input type="text" name="SellerName"  th:value="${SellerName}" readonly="readonly" /><br/>

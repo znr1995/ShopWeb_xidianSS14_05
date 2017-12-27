@@ -35,7 +35,7 @@ public class UploadSCAmountController {
                 model.addAttribute("UserID", UserID);
                 model.addAttribute("ShoppingCartID", ShoppingCartID);
                 model.addAttribute("Amount", Amount);
-                return "/User/ShoppingCartAmount";
+                return "/User/ShoppingCartAmountNew";
             }
             int hehe;
             try{
@@ -45,13 +45,13 @@ public class UploadSCAmountController {
                 model.addAttribute("UserID", UserID);
                 model.addAttribute("ShoppingCartID", ShoppingCartID);
                 model.addAttribute("Amount", Amount);
-                return "/User/ShoppingCartAmount";
+                return "/User/ShoppingCartAmountNew";
             }
             if(hehe <= 0){
                 model.addAttribute("UserID", UserID);
                 model.addAttribute("ShoppingCartID", ShoppingCartID);
                 model.addAttribute("Amount", Amount);
-                return "/User/ShoppingCartAmount";
+                return "/User/ShoppingCartAmountNew";
             }
 
             ShoppingCartList.get(0).setProductAmount(hehe);
@@ -64,7 +64,7 @@ public class UploadSCAmountController {
 
         if(GlobalShoppingCart.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/ShoppingCart";
+            return "/User/ShoppingCartNew";
         }
 
         List<ShoppingCartToShow> shoppingCartToShowList = new ArrayList<ShoppingCartToShow>();
@@ -79,6 +79,6 @@ public class UploadSCAmountController {
         model.addAttribute("UserID", UserID);
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
 
-        return "/User/ShoppingCart";
+        return "/User/ShoppingCartNew";
     }
 }

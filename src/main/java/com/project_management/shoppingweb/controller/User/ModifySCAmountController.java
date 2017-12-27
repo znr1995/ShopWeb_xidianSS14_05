@@ -35,6 +35,6 @@ public class ModifySCAmountController {
         model.addAttribute("UserID", UserID);
         model.addAttribute("ShoppingCartID", ShoppingCartID);
 
-        return "/User/ShoppingCartAmount";
+        return "/User/ShoppingCartAmountNew";
     }
 }
