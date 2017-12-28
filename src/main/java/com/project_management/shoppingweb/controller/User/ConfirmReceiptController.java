@@ -47,7 +47,7 @@ public class ConfirmReceiptController {
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/MyOrder";
+            return "/User/MyOrderNew";
         }
 
 
@@ -102,6 +102,6 @@ public class ConfirmReceiptController {
         model.addAttribute("UserID", UserID);
 
 
-        return "/User/MyOrder";
+        return "/User/MyOrderNew";
     }
 }

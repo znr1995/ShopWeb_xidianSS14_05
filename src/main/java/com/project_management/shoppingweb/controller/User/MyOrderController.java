@@ -55,7 +55,7 @@ public class MyOrderController {
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/MyOrder";
+            return "/User/MyOrderNew";
         }
 
 
@@ -110,7 +110,7 @@ public class MyOrderController {
         model.addAttribute("UserID", UserID);
 
 
-        return "/User/MyOrder";
+        return "/User/MyOrderNew";
     }
 }
 

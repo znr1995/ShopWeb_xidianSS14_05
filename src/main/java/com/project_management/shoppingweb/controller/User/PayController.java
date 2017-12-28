@@ -157,6 +157,6 @@ public class PayController {
             }
             shoppingCartService.delete(target);
         }
-        return "/User/Success";
+        return "/User/SuccessNew";
     }
 }

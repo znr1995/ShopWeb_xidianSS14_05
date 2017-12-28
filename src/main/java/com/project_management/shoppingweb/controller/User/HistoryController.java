@@ -53,7 +53,7 @@ public class HistoryController {
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/MyOrder";
+            return "/User/MyOrderNew";
         }
 
 
@@ -108,6 +108,6 @@ public class HistoryController {
         model.addAttribute("UserID", UserID);
 
 
-        return "/User/MyOrder";
+        return "/User/MyOrderNew";
     }
 }

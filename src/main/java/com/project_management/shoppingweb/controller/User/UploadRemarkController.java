@@ -42,7 +42,7 @@ public class UploadRemarkController {
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
-            return "/User/MyOrder";
+            return "/User/MyOrderNew";
         }
 
 
@@ -97,7 +97,7 @@ public class UploadRemarkController {
         model.addAttribute("UserID", UserID);
 
 
-        return "/User/MyOrder";
+        return "/User/MyOrderNew";
 
     }
 }
