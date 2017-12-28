@@ -1,6 +1,5 @@
 package com.project_management.shoppingweb.controller.User;
 
-
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.SellerService;
@@ -13,31 +12,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Controller
-public class ConfirmReceiptController {
+public class StartRefundController {
     @Autowired
     private User_TradeService tradeService;
     @Autowired
     private SellerService sellerService;
-    @RequestMapping(value = "/ConfirmReceipt", method = RequestMethod.GET)
-    public String ConfirmReceipt(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/StartRefund", method = RequestMethod.GET)
+    public String StartRefund(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String TradeID = request.getParameter("TradeID");
-        System.out.println(UserID);
-        System.out.println(TradeID);
 
         List<Trade> TradeList = new ArrayList<Trade>();
         TradeList = tradeService.findByTradeId(Long.parseLong(TradeID));
         if(TradeList.size() != 0){
-            Date now = new Date();
-            TradeList.get(0).setTradeFinishTime(now);
-            TradeList.get(0).setTradeStatus(3);
+            TradeList.get(0).setTradeStatus(4);
             tradeService.save(TradeList.get(0));
         }
-
 
         List<Trade> MyOrder = new ArrayList<Trade>();
         MyOrder = tradeService.findAllByUserId(Long.parseLong(UserID));

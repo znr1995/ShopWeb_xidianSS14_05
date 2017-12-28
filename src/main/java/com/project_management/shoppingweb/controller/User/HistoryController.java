@@ -50,6 +50,7 @@ public class HistoryController {
         List<Trade> MyOrderS0 = new ArrayList<Trade>();
         List<Trade> MyOrderS12 = new ArrayList<Trade>();
         List<Trade> MyOrderS3 = new ArrayList<Trade>();
+        List<Trade> MyOrderS45 = new ArrayList<Trade>();
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
@@ -67,6 +68,9 @@ public class HistoryController {
             }
             if(MyOrder.get(i).getTradeStatus() == 3){
                 MyOrderS3.add(MyOrder.get(i));
+            }
+            if(MyOrder.get(i).getTradeStatus() == 4||MyOrder.get(i).getTradeStatus() == 5){
+                MyOrderS45.add(MyOrder.get(i));
             }
         }
 
@@ -102,6 +106,17 @@ public class HistoryController {
                 tradeToShowsS3.add(tradeToShow);
             }
             model.addAttribute("MyOrderS3", tradeToShowsS3);
+        }
+        if(MyOrderS45.size() != 0){
+            List<TradeToShow> tradeToShowsS45 = new ArrayList<TradeToShow>();
+            for(int i = 0; i < MyOrderS45.size(); i++){
+                TradeToShow tradeToShow = new TradeToShow();
+                tradeToShow.trade = MyOrderS45.get(i);
+                Seller seller = sellerService.findBySellerId(MyOrderS45.get(i).getSellerId());
+                tradeToShow.SellerName = seller.getShopname();
+                tradeToShowsS45.add(tradeToShow);
+            }
+            model.addAttribute("MyOrderS45", tradeToShowsS45);
         }
 
 

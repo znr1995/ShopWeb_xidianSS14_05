@@ -36,6 +36,11 @@
             border: 1px rgb(116,176,200) solid;
             border-radius: 10px;
         }
+        #refund{
+            margin: 10px;
+            border: 1px rgb(116,176,200) solid;
+            border-radius: 10px;
+        }
         h2{
             margin: 10px;
             font-size: 20px;
@@ -53,7 +58,7 @@
         }
         button{
             height: 40px;
-            width: 110px;
+            width: 160px;
             font-size: 18px;
             background-color: rgb(116,176,200);
             color: #FFFFFF;
@@ -234,6 +239,13 @@
                         <button type="submit" name="ConfirmReceipt" th:value="确认收货">ConfirmReceipt</button>
                     </td>
                 </form>
+                <form th:action="@{/StartRefund}" method="get">
+                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
+                    <td>
+                        <button type="submit" name="StartRefund" th:value="发起退货">Refund</button>
+                    </td>
+                </form>
             </tr>
         </table>
     </div>
@@ -266,6 +278,31 @@
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="feedbackRemarks" th:value="评论">Remarks</button>
+                    </td>
+                </form>
+            </tr>
+        </table>
+    </div>
+    <div id="refund">
+        <h2><strong>Refund</strong></h2><br>
+        <table>
+            <tr>
+                <td width="220px" height="60px"><strong>Shop Owner</strong></td>
+                <td width="220px" height="60px"><strong>Total Payment</strong></td>
+                <td width="220px" height="60px"><strong>PayWay</strong></td>
+                <td width="220px" height="60px"><strong>Create Time</strong></td>
+            </tr>
+            <tr th:each="MyOrderS45 : ${MyOrderS45}">
+                <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS45.trade.sellerId}">Onions</td>
+                <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS45.SellerName}">Onions</td>
+                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
+                <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS45.trade.tradePayWay}">Onions</td>
+                <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS45.trade.tradeCreateTime}">Oinons</td>
+                <form th:action="@{/TradeDetail}" method="get">
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS45.trade.tradeId}" readonly="readonly"></td>
+                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                    <td>
+                        <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
                     </td>
                 </form>
             </tr>

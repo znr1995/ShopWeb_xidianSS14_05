@@ -72,6 +72,12 @@ public class TradeDetailController {
         if(TradeList.get(0).getTradeStatus() == 3){
             Status = "Finished";
         }
+        if(TradeList.get(0).getTradeStatus() == 4){
+            Status = "Started refund, Waiting for confirm";
+        }
+        if(TradeList.get(0).getTradeStatus() == 5){
+            Status = "Refund confirmed";
+        }
 
         model.addAttribute("Status", Status);
 
