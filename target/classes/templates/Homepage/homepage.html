@@ -258,7 +258,7 @@
     </div>
 </div>
 <div class="content">
-
+    <!--搜索框-->
     <div class="searchdiv">
         <div id="search">
             <form th:action="@{/search/name}" method="GET">
@@ -318,7 +318,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="/search/type?type=Audio">Audio</a></li>
+                    <li><a href="@{'/search/type?type=Audio&UserID='+${UserID}}">Audio</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
