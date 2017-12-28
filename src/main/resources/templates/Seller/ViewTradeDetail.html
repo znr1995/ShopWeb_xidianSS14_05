@@ -107,7 +107,7 @@
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                     <input id="satuse" type="hidden" name="status" th:value="*{status}" />
                    <div id="buttonDiv">
-                       <button id="disposeDose" type="submit" onclick="dosubmit()" ></button>
+                       <button id="disposeDose" type="submit"></button>
                    </div>
                 </form>
             </div>
@@ -167,7 +167,7 @@
 </nav>
 </body>
 <script>
-    var bttonDiv = document.getElementById("buttonDiv");
+    var buttonDiv = document.getElementById("buttonDiv");
     var satuse = document.getElementById("satuse");
     var disposeDose = document.getElementById("disposeDose");
     switch (parseInt(satuse.value))
@@ -182,6 +182,12 @@
             buttonDiv.hidden = true;
             break;
         case 3:
+            buttonDiv.hidden = true;
+            break;
+        case 4:
+            disposeDose.innerHTML = "Accpet Reject Goods";
+            break;
+        case 5:
             buttonDiv.hidden = true;
             break;
     }

@@ -107,6 +107,8 @@ public class Seller_SellerService {
         if(statue == 9)
         {
             LinkedList<Trade> retTrades = new LinkedList<Trade>();
+            retTrades.addAll(getTradeList(sellerID,5));
+            retTrades.addAll(getTradeList(sellerID,4));
             retTrades.addAll(getTradeList(sellerID,3));
             retTrades.addAll(getTradeList(sellerID,2));
             retTrades.addAll(getTradeList(sellerID,1));
@@ -128,7 +130,7 @@ public class Seller_SellerService {
         {
             if(endDate == null)
             {
-                return getTradeBySellerID(sellerID);
+                return getTradeList(sellerID,statue);
             }
             else
                 return getTradeListBeforeEndDate(sellerID, statue, endDate);
@@ -173,8 +175,6 @@ public class Seller_SellerService {
         return reTrade;
     }
 
-
-
     public double getTradeSum(List<Trade> trades)
     {
         double sum = 0.0;
@@ -185,10 +185,6 @@ public class Seller_SellerService {
         return sum;
     }
 
-    public List<Trade> getTradeBySellerID(long sellerID)
-    {
-        return tradeRepository.findAllBySellerId(sellerID);
-    }
 
     public List<TradeDetail> getTradeList(long tradeID)
     {

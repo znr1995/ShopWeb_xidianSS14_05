@@ -174,8 +174,7 @@ public class ViewTransactionController {
         List<Trade> trades = seller_sellerService.getTradeListByTime(sellerId,status,start,end);
         model.addAttribute("totlePrice",seller_sellerService.getTradeSum(trades));
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
-        for(Trade trade : trades)
-        {
+        for(Trade trade : trades) {
             PageDetail pageDetail = new PageDetail();
             pageDetail.setTotlePrice(trade.getTradeTotalMoney());
             pageDetail.setTrandId(trade.getTradeId());
@@ -251,6 +250,8 @@ public class ViewTransactionController {
            return "redirect:/error/errorHandler";
        }
 
+        // 0 - 待处理订单 1-等待发货 2-等待收货 3-完成 4-发起退货等待确认 5-退货成功 6-申诉
+        // 0,1,4需要确认
        trade.setTradeStatus(status+1);
        seller_sellerService.writeInTrade(trade);
        attributes.addAttribute("SellerID",sellerId);
@@ -269,7 +270,12 @@ public class ViewTransactionController {
                 return "wait for receive Trade";
             case 3:
                 return "Finished Trade";
-
+            case 4:
+                return "GoodsRejected Trade";
+            case 5:
+                return "Return Goods Finished Trade";
+            case 6:
+                return "Appeal Trade";
         }
         return "unknow status";
     }
