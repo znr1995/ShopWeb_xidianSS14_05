@@ -95,9 +95,9 @@ public class BuyController {
         List<Address> AddressList = new ArrayList<Address>();
         AddressList = addressService.findAllByUserId(Long.parseLong(UserID));
         if(AddressList.size() == 0)
-            return "/User/Pay";
+            return "/User/PayNew";
         model.addAttribute("AddressList", AddressList);
 
-        return "/User/Pay";
+        return "/User/PayNew";
     }
 }

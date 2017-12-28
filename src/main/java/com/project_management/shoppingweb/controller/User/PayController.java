@@ -62,9 +62,9 @@ public class PayController {
             model.addAttribute("SellerName", SellerName);
             model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         try {
@@ -82,9 +82,9 @@ public class PayController {
             model.addAttribute("SellerName", SellerName);
             model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         int b = Integer.parseInt(address);
@@ -101,9 +101,9 @@ public class PayController {
             model.addAttribute("SellerName", SellerName);
             model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         if(number == 0){
@@ -118,9 +118,9 @@ public class PayController {
             model.addAttribute("SellerName", SellerName);
             model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
 
