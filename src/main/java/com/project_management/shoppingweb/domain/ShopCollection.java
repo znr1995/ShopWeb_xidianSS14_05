@@ -1,7 +1,13 @@
 
 package com.project_management.shoppingweb.domain;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "t_shopCollection")
 public class ShopCollection {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
     Long sellerId;
     Long userId;
