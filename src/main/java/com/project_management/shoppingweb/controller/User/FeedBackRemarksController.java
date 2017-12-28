@@ -31,6 +31,6 @@ public class FeedBackRemarksController {
 
         model.addAttribute("UserID", UserID);
         model.addAttribute("TradeID", TradeID);
-        return "/User/FeedBackRemarks";
+        return "/User/FeedBackRemarksNew";
     }
 }

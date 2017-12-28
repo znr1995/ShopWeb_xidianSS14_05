@@ -35,6 +35,8 @@ public class TradeDetailController {
     @RequestMapping(value = "/TradeDetail", method = RequestMethod.GET)
     public String TradeDetail(HttpServletRequest request, Model model){
         String TradeID = request.getParameter("TradeID");
+        String UserID = request.getParameter("UserID");
+        model.addAttribute("UserID", UserID);
         System.out.println(TradeID);
 
         List<TradeDetail> TradeDetailList = new ArrayList<TradeDetail>();
@@ -44,7 +46,7 @@ public class TradeDetailController {
         TradeList = tradeService.findByTradeId(Long.parseLong(TradeID));
 
         if(TradeDetailList.size() == 0||TradeList.size() == 0){
-            return "/User/TradeDetail";
+            return "/User/TradeDetailNew";
         }
 
         List<TradeDetailToShow> tradeDetailToShows = new ArrayList<TradeDetailToShow>();
@@ -70,6 +72,12 @@ public class TradeDetailController {
         if(TradeList.get(0).getTradeStatus() == 3){
             Status = "Finished";
         }
+        if(TradeList.get(0).getTradeStatus() == 4){
+            Status = "Started refund, Waiting for confirm";
+        }
+        if(TradeList.get(0).getTradeStatus() == 5){
+            Status = "Refund confirmed";
+        }
 
         model.addAttribute("Status", Status);
 
@@ -84,7 +92,7 @@ public class TradeDetailController {
             model.addAttribute("Tel", Tel);
             model.addAttribute("Postcode", Postcode);
             model.addAttribute("name", name);
-            return "/User/TradeDetail";
+            return "/User/TradeDetailNew";
         }
         position = address.get(0).getProvince()+" "+address.get(0).getCity()+" "+address.get(0).getDistrict()+" "+address.get(0).getDetailAddress();
         Tel = address.get(0).getTel();
@@ -100,7 +108,7 @@ public class TradeDetailController {
 
 
 
-        return "/User/TradeDetail";
+        return "/User/TradeDetailNew";
     }
 }
 
