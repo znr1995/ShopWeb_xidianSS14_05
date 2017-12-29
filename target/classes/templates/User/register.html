@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Customer register</title>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
+    <link rel="stylesheet" th:href="'/css/indexStyle.css'"/>
+    <script  th:src="'/js/index.js'"></script>
+</head>
+<body>
+<div class="form">
+
+
+            <h2 style="color: #0f0f0f">Customer Register</h2>
+            <form action="/userRegister" method="post">
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">User Name</div>
+                    <input name="username"  type="text" th:required="required" autocomplete="off" />
+                </div>
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">Phone Number</div>
+                    <input name="phone_number" type="text" th:required="required" autocomplete="off"/>
+                </div>
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">Set A Password</div>
+                    <input name="password_register"  type="password" th:required="required" autocomplete="off"/>
+                </div>
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">Email Address</div>
+                    <input name="email" type="email" th:required="required" autocomplete="off"/>
+                </div>
+              <!--  <div class="field-wrap">
+                    <input style="" id="authentication"/><br>
+                    <input type="submit" class="button button-block" value="getNum">Send code</input>
+                </div>-->
+                <button type="submit" class="button button-block"  onclick="checkNum()"/>Submit</button
+            </form>
+</div>
+<script>
+
+    function checkNum() {
+        var autentication = document.getElementById('authentication');
+        var num = document.getElementById('num');
+        if(num.value == autentication.value)
+            return true;
+        else
+        {
+            alert("autentication error!");
+            return false;
+        }
+    }
+    function submit1() {
+        var loginfrom = document.getElementById('loginfrom');
+        loginfrom.submit();
+    }
+</script>
+    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+</body>
+</html>

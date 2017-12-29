@@ -46,11 +46,17 @@ public class DeleteShoppingCartController {
         }
 
         List<ShoppingCartToShow> shoppingCartToShowList = new ArrayList<ShoppingCartToShow>();
+
+
         for(int i = 0; i < GlobalShoppingCart.size(); i++){
             ShoppingCartToShow shoppingCartToShow = new ShoppingCartToShow();
+
             shoppingCartToShow.shoppingCart = GlobalShoppingCart.get(i);
+
             Product product = productService.findProductByProductID(GlobalShoppingCart.get(i).getProductId());
+
             shoppingCartToShow.Name = product.getProductName();
+
             shoppingCartToShowList.add(shoppingCartToShow);
         }
 

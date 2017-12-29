@@ -16,4 +16,5 @@ public interface ShoppingCartRepository extends JpaRepository<ShoppingCart,Long>
 
     void delete(ShoppingCart shoppingCart);
 
+
 }

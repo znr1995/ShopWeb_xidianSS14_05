@@ -18,4 +18,8 @@ public class User_ProductCollectionService {
     public List<ProductCollection> findAllByUserId(Long UserID){
         return productCollectionRepository.findAllByUserId(UserID);
     }
+   public void delete(ProductCollection productCollection){
+        productCollectionRepository.delete(productCollection);
+   }
+
 }

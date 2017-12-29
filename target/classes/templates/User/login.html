@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Customer Login</title>
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css"/>
+    <link rel="stylesheet" th:href="'/css/indexStyle.css'"/>
+    <script  th:src="'/js/index.js'"></script>
+     <style>
+         body {background-image:url('static/background.jpg');}
+     </style>
+</head>
+<body>
+<div class="form">
+
+    <input id="num" type="hidden" th:value="*{num}"/>
+
+            <h2 style="color: #0f0f0f">Welcome Back!</h2>
+            <form action="/login" method="get" id="loginfrom">
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">Email Address</div>
+                    <input name="account_login"  type="email" th:required="required" autocomplete="off"/>
+                </div>
+                <div class="field-wrap">
+                    <div style="color: #0f0f0f">Password</div>
+                    <input name="password_login" type="password" th:required="required" autocomplete="off"/>
+                </div>
+                <p class="forgot"><a href="#">Forgot Password?</a></p>
+                <button class="button button-block" type="submit" name="action" value="UserLogin"/>Login</button>
+            </form>
+
+    </div><!-- tab-content -->
+</div> <!-- /form -->
+<script>
+
+    function checkNum() {
+        var autentication = document.getElementById('authentication');
+        var num = document.getElementById('num');
+        if(num.value == autentication.value)
+            return true;
+        else
+        {
+            alert("autentication error!");
+            return false;
+        }
+    }
+    function submit1() {
+        var loginfrom = document.getElementById('loginfrom');
+        loginfrom.submit();
+    }
+</script>
+<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
+<script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+</body>
+</html>

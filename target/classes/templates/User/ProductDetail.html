@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ProductDetail</title>
+    </meta>
+</head>
+
+<body>
+<div class="header">
+    <a href="/homepage">
+        <img src="/parknshop_logo.jpg" alt="logo" class="img-rounded"/>
+    </a>
+</div>
+<div class="content">
+    <div class="container">
+
+        <div class="col-md-6" th:if="${not proisnull}">
+            <img alt="140x140" th:src="@{${productdetail.productPhoto}}" class="img-rounded"/>
+            <div class="container">
+                <form name="form1" th:action="@{/Start}" method="get">
+                    <input type="text" name="ProductID" th:value="${productdetail.productId}" readonly="readonly" > ProductID </input><br/>
+                    <input type="text" name="ShopID" th:value="${productdetail.sellerId}" readonly="readonly" >ShopID</input><br/>
+                    <input type="text" name="ProductName" th:value="${productdetail.productName}" readonly="readonly" >ProductName</input><br/>
+                    <input type="text" name="Price" th:value="${productdetail.productPrice}" readonly="readonly" >Price</input><br/>
+                    <input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" style="display: none" /><br/>
+                    <th th:text="'Type: ' +${productdetail.type}">type</th><br/>
+                    <button type="submit" name="operation" th:value="go">go</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
+</html>

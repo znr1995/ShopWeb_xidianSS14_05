@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
+<head>
+    <meta charset="UTF-8">
+    <title>Ads Management</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
+</head>
+<body>
+<div class="header">header</div>
+<div class="content">
+
+    <p>
+        <input type="hidden" name="SellerID" th:value="*{SellerID}"/>
+    </p>
+    <div class="col-lg-2">
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                <ul class="nav sidebar-nav">
+                    <li class="sidebar-brand">
+
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product
+                            Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income
+                            Management</a>
+                    </li>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order
+                            Management</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+
+
+    <div class="col-lg-10">
+        <div class="container" style="col-lg-10">
+            <br><br>
+            <div class="row col-lg-8" >
+                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
+                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                    <input type="hidden" name="ProductID" th:value="*{ProdcutID}"/>
+                    <input type="hidden" name="ProductAdvertisement" th:value="*{ProductAdvertisement}"/>
+                    <input type="hidden" name="SellerAdvertisement" th:value="*{SellerAdvertisement}"/>
+                    <input type="hidden" name="AddOrModify" id="AddOrModify" th:value="*{AddOrModify}"/>
+                    <input type="hidden" name="IsProductAdvertisement" id="IsProductAdvertisement" th:value="*{IsProductAdvertisement}"/>
+
+                    <input type="hidden" name="status" id="status" th:value="*{status}" />
+
+                    <div class="form-group">
+                        <label class="col-lg-5 text-right">Advertisement Type:</label>
+                        <div id="advertisementTypeLabelDiv">
+                            <label id="advertisementTypeLabel"  th:text="*{advertisementType}"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="locationDiv">
+                        <label class="col-lg-5 text-right" >Location Type:</label>
+                        <div id="localTypeLableDiv">
+                            <label id="localTypeLable" th:text="*{type}"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="productIDDiv">
+                        <label class="col-lg-5 text-right">Product Name:</label>
+                        <div id="productIDLableDiv">
+                            <label id="productIDLable" th:text="*{ProductName}" ></label>
+                        </div>
+                    </div>
+
+                    <div class="from-group">
+                        <label class="col-lg-5 text-right">Start Date:</label>
+                        <div id="startDateLabelDiv">
+                            <label id="startDateLabel"  th:text="*{startDate}"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-5 text-right">End Date:</label>
+                        <div id="endDateLabelDiv">
+                            <label id="endDateLabel"  th:text="*{endDate}"></label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-5 text-right">Picture Url:</label>
+                        <div class="col-lg-3">
+                            <input type="file" id="pictureUrl" name="pictureUrl" ></input>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-5 text-right">Description:</label>
+                        <div class="col-lg-3">
+                            <textarea class="form-control" rows="3" id="description" name="description" th:text="*{description}"></textarea>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="form-group " id="statusDiv">
+                        <label class="col-lg-5 text-right">Status:</label>
+                        <div class="col-lg-3">
+                            <label type="text" class="form-control"th:text="*{status}"></label></p>
+                        </div>
+                    </div>
+
+                    <div class="row text-center">
+                        <button type="submit" id="submitBtn" style="background: #258ecd;border-radius: 8px;">modify</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-lg-4 text-left">
+
+                <img id="photo" th:src="*{pictureUrl}" alt="nothing here" height="300" width="500" style="display: block;" />
+            </div>
+
+        </div>
+
+    </div>
+</div>
+</div>
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}"></span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{'/Seller/FastJump/ModifySellerInformationHandler?SellerID='+${SellerID}}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px"
+                        onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                     aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body">
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/Seller/login">
+                                    <button type="button" class="btn btn-primary">
+                                        Sure
+                                    </button>
+                                </a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </div>
+</nav>
+
+<script>
+
+    var fileInput = document.getElementById('pictureUrl'),
+        IsProductAdvertisement = document.getElementById('IsProductAdvertisement'),
+        locationDiv = document.getElementById('locationDiv'),
+        productIDDiv = document.getElementById('productIDDiv');
+
+    if(IsProductAdvertisement.value == "false")
+    {
+        locationDiv.hidden = true;
+        productIDDiv.hidden = true;
+    }
+
+
+    fileInput.addEventListener('change', function () {
+        photo.src = "";
+        if(!fileInput.value)
+        {
+            alert("not input image!");
+            return;
+        }
+
+        var file = fileInput.files[0];
+
+        if(file.type != "image/jpeg")
+            if( file.type != "image/png")
+                if(file.type != "image/gif")
+                {
+                    alert("不是有效的图片文件!");
+                    return;
+                }
+
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            photo.src = e.target.result;
+        }
+
+        reader.readAsDataURL(file);
+
+    });
+
+
+
+</script>
+<script>
+    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
+
+        showLeftPush = document.getElementById( 'showLeftPush' ),
+
+        body = document.body;
+
+
+    showLeftPush.onclick = function() {
+        classie.toggle( this, 'active' );
+        classie.toggle( body, 'cbp-spmenu-push-toright' );
+        classie.toggle( menuLeft, 'cbp-spmenu-open' );
+        disableOther( 'showLeftPush' );
+    };
+
+
+    function disableOther( button ) {
+
+        if( button !== 'showLeftPush' ) {
+            classie.toggle( showLeftPush, 'disabled' );
+        }
+
+    }
+</script>
+</body>
+>>>>>>> origin/dev
+</html>
