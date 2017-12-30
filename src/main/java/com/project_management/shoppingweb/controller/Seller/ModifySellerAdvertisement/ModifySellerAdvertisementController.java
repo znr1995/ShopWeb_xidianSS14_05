@@ -471,7 +471,7 @@ public class ModifySellerAdvertisementController {
             sellerAdvertisement.setEndDate(endDate);
             sellerAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
             sellerAdvertisement.setSellerId(sellerID);
-            sellerAdvertisement.setStatus(notPassStatus);
+            sellerAdvertisement.setStatus(notPayStatus);
 
         }
         else
