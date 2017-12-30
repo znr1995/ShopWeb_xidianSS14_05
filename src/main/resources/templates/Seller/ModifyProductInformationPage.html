@@ -66,16 +66,27 @@
                             <div class="col-lg-4">
                                 <form role="form">
                                 <div class="form-group">
-                                    <select class="form-control" name="brandName">
-                                        <option value="TV & Home Theater">TV & Home Theater</option>
-                                        <option value="Computers & Tablets">Computers & Tablets</option>
+                                    <input type="hidden" id="brandName"  th:value="${brandName}" />
+                                    <select class="form-control" name="brandName" id="brandNameSelect">
+                                        <option value="TV">TV</option>
+                                        <option value="Home Theater">Home Theater</option>
+                                        <option value="Computers">Computers</option>
+                                        <option value="Tablets">Tablets</option>
                                         <option value="Cell Phones">Cell Phones</option>
-                                        <option value="Cameras & Camcorders">Cameras & Camcorders</option>
+                                        <option value="Cameras">Cameras</option>
+                                        <option value="Camcorders">Camcorders</option>
                                         <option value="Audio">Audio</option>
-                                        <option value="Car Electronics & GPS">Car Electronics & GPS</option>
-                                        <option value="Video, Games, Movies & Music">Video, Games, Movies & Music</option>
-                                        <option value="Health, Fitness & Sports">Health, Fitness & Sports</option>
-                                        <option value="Home & Office">Home & Office</option>
+                                        <option value="Car Electronics">Car Electronics</option>
+                                        <option value="GPS">GPS</option>
+                                        <option value="Video">Video</option>
+                                        <option value="Games">Games</option>
+                                        <option value="Movies">Movies</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Fitness">Fitness</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Home">Home</option>
+                                        <option value="Office">Office</option>
                                     </select>
                                 </div>
                             </form>
@@ -187,6 +198,9 @@
 
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById("photo");
+    var brandNameInput = document.getElementById('brandName'),
+        brandNameSelect = document.getElementById('brandNameSelect');
+    brandNameSelect.value = brandNameInput.value;
     fileInput.addEventListener('change', function () {
         // 检查文件是否选择:
         if (!fileInput.value) {
