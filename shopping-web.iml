@@ -81,5 +81,6 @@
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="mail (2)" level="project" />
   </component>
 </module>
