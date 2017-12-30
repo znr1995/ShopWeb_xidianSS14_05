@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.User.Product;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.service.User.User_ProductService;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +22,13 @@ public class ShopsProductsController {
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/{sellerid}")//商铺内商品页面
-    public String ShopsProduct(Model model, @PathVariable("sellerid") Long sellerid){
+    public String ShopsProduct(Model model, HttpServletRequest str, @PathVariable("sellerid") Long sellerid){
         List<Product> products =
                userProductService.findAllBySellerID(sellerid);
         boolean pro_isnull = false;
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
+        String UserID = str.getParameter("UserID");
+        model.addAttribute("UserID", UserID);
         model.addAttribute("products",products);
         model.addAttribute("ShopID", sellerid);
         model.addAttribute("pro_isnull", pro_isnull);

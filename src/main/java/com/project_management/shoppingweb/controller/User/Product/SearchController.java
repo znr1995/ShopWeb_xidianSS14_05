@@ -39,7 +39,7 @@ public class SearchController {
     //eg: /search/type=TV  查询TV
     @RequestMapping(value = "/search/type",method = RequestMethod.GET)
     public String searchByType(Model model, HttpServletRequest str){
-        List<Product> products = userProductService.finAllByType(str.getParameter("producttype"));
+        List<Product> products = userProductService.findAllByBrandNameMatch(str.getParameter("producttype"));
         boolean pro_isnull = false;
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);

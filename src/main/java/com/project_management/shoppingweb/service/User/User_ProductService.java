@@ -15,10 +15,12 @@ public class User_ProductService {
         return productRepository.findAllByProductNameMatches(name);
     }*/
     public List<Product> findAllByNameMatch(String name){
-        return productRepository.findAllByProductName(name);
+        return productRepository.searchProducts(name);
     }
 
-
+    public List<Product> findAllByBrandNameMatch(String brandname){
+        return productRepository.findAllByBrandName(brandname);
+    }
     public List<Product> finAllByType(String type){
         return  productRepository.findAllByType(type);
     }
