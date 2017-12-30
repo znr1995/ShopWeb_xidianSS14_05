@@ -18,6 +18,9 @@ public class User_ProductService {
         return productRepository.searchProducts(name);
     }
 
+    public List<Product> findAllByBrandNameMatch(String brandname){
+        return productRepository.findAllByBrandName(brandname);
+    }
 
     public List<Product> finAllByType(String type){
         return  productRepository.findAllByType(type);
