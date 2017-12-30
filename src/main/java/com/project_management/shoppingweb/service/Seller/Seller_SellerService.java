@@ -195,6 +195,40 @@ public class Seller_SellerService {
     public List<Trade> getTradeListByFindedTime(long sellerID, Date startDate, Date endDate)
     {
         List<Trade> reTrade = new LinkedList<Trade>();
+        if(startDate == null)
+        {
+            if(endDate == null)
+            {
+                //get all date
+                return getTradeList(sellerID, 3);
+            }else{
+                //before end date
+                for(Trade trade : getTradeList(sellerID, 3))
+                {
+                    if( trade.getTradeFinishTime() != null && endDate.after(trade.getTradeFinishTime()))
+                    {
+                        reTrade.add(trade);
+                    }
+                }
+                return reTrade;
+            }
+        }
+        else
+        {
+            if(endDate == null)
+            {
+                //after start date
+                for(Trade trade : getTradeList(sellerID, 3))
+                {
+                    if( trade.getTradeFinishTime() != null && startDate.before(trade.getTradeFinishTime()))
+                    {
+                        reTrade.add(trade);
+                    }
+                }
+                return reTrade;
+            }
+        }
+
         for(Trade trade : getTradeList(sellerID, 3))
         {
             if( trade.getTradeFinishTime() != null && endDate.after(trade.getTradeFinishTime()) && startDate.before(trade.getTradeFinishTime()))
