@@ -50,7 +50,7 @@
             <div th:each="adv : ${products}" class="col-lg-2">
                 <div class="img">
                     <a target="_blank" th:href="@{'/product/'+${adv.productId}}">
-                        <img th:src="'/'+${adv.productPhoto}" alt="fail load pics" width="160" height="160"/>
+                        <img th:src="@{${adv.productPhoto}}" alt="fail load pics" width="160" height="160"/>
                     </a>
                 </div>
                 <table>

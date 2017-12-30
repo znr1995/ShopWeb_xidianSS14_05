@@ -378,8 +378,8 @@
         <div class="carousel-inner" role="listbox" th:if="${not pro_rollad_isnull}">
             <th:block th:each="ads1,index:${pro_ads_roll}">
                 <div class="item active" th:if="${index}==1?('th:class='+'item '+'active'):('th:class=item')">
-                    <a target="_blank" th:href="@{'/product/'+${ads1.productId}}">
-                        <img th:src="${ads1.pictureUrl}" alt="1 slide"/>
+                    <a target="_blank" th:href="@{'/product/'+${ads1.productId}+'?UserID='+${UserID}}">
+                        <img th:src="@{${ads1.pictureUrl}}" alt="1 slide"/>
                     </a>
                     <div class="carousel-caption">
                         <!--<h1 th:text="'$'+${ads1.current.getType()}">type</h1>-->
@@ -409,7 +409,7 @@
         <table>
             <tr th:each="ads : ${shop_ads}">
                 <div class="col-lg-2">
-                    <a target="_blank" th:href="@{'/shop/'+${ads.sellerId}}">
+                    <a target="_blank" th:href="@{'/shop/'+${ads.sellerId}+'?UserID='+${UserID}}">
                         <img th:src="@{${ads.pictureUrl}}" alt="fail pics" width="200" height="300"/>
                     </a>
                 </div>
@@ -425,8 +425,8 @@
         <th:block th:each="adv2 : ${pro_ads}">
             <div class="col-md-2">
                 <div class="img">
-                    <a target="_blank" th:href="@{'/product/'+${adv2.productId}}">
-                        <img th:src="${adv2.pictureUrl}" alt="Ballade" width="160" height="160"/>
+                    <a target="_blank" th:href="@{'/product/'+${adv2.productId}+'?UserID='+${UserID}}">
+                        <img th:src="@{${adv2.pictureUrl}}" alt="Ballade" width="160" height="160"/>
                     </a>
                 </div>
                 <table>
