@@ -87,8 +87,8 @@
                         <label class="col-lg-4 text-right">Catogery:</label>
                         <div class="col-lg-6">
                                     <form role="form">
-
-                                            <select class="form-control" name="Catogery">
+                                            <input type="hidden"  th:value="${Catogery}" id="CatogeryInput" />
+                                            <select class="form-control" name="Catogery" id="CatogerySelect">
                                                 <option value="TV & Home Theater">TV & Home Theater</option>
                                                 <option value="Computers & Tablets">Computers & Tablets</option>
                                                 <option value="Cell Phones">Cell Phones</option>
@@ -210,7 +210,10 @@
 </nav>
 <script>
     var fileInput = document.getElementById('Sculpture'),
-        photo = document.getElementById('photo');
+        photo = document.getElementById('photo'),
+        CatogeryInput = document.getElementById('CatogeryInput'),
+        CatogerySelect = document.getElementById('CatogerySelect');
+    CatogerySelect.value = CatogeryInput.value;
 
 
     var selectAdverType = function (value) {
