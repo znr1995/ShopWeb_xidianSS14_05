@@ -33,7 +33,7 @@ public class LoginController {
 
 
     //商家登录
-    @RequestMapping(value = "/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/login")
     public String login(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
@@ -75,7 +75,7 @@ public class LoginController {
 
 
     //用户登录
-    @RequestMapping(value = "/login",method = RequestMethod.GET,params = "action=UserLogin")
+    @RequestMapping(value = "/userlogin")
     public String userLogin(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");

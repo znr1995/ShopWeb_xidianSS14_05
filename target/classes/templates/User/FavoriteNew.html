@@ -87,7 +87,10 @@
             </div>
             <div class="menu">
                 <ul class="megamenu skyblue">
-                    <li class="active grid"><a th:href="@{'/User/Main?UserID='+${UserID}}">Home</a></li>
+                    <li class="active grid">
+                        <a th:href="@{'/User/Main?UserID='+${UserID}}">Home</a>
+
+                    </li>
                     <!--此处为商品目录，信息自己修改-->
                     <li><a class="color4" href="#">Category</a>
                         <div class="megapanel">

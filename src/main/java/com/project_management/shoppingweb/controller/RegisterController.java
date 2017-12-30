@@ -84,7 +84,7 @@ public class RegisterController {
             user.setSex(1);  // 1 - 男， 2 - 女
             user.setState(1); // 1 - 可用 ，2 - 黑名单
             userRegisterService.userRegister(user);
-            return "/User/login";
+            return "/User/loginNew";
         }else {
             attributes.addAttribute("errorMessage","fail to register!");
             return "redirect:/error/errorHandler";

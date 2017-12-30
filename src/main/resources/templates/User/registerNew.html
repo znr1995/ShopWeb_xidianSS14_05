@@ -1,0 +1,271 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Free Leoshop Website Template | Register :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/css/style_user.css" rel="stylesheet" type="text/css" media="all" />
+    <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="/js/jquery1.min_user.js"></script>
+    <!-- start menu -->
+    <link href="/css/megamenu_user.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="js/megamenu_user.js"></script>
+    <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
+    <script src="/js/jquery.easydropdown_user.js"></script>
+</head>
+<body>
+<div class="header-top">
+    <div class="wrap">
+        <div class="header-top-left">
+            <div class="box">
+
+            </div>
+            <div class="box1">
+
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div class="cssmenu">
+            <ul>
+                <li><a href="checkout.html">Checkout</a></li> |
+                <li><a th:href="@{/User/login.html}">Log In</a></li> |
+                <li><a th:href="@{/User/register.html}">Sign Up</a></li>
+            </ul>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+<div class="header-bottom">
+    <div class="wrap">
+        <div class="header-bottom-left">
+            <div class="logo">
+                <a href="homepage1.html"><img src="./images/logo.png" alt=""/></a>
+            </div>
+            <div class="menu">
+                <ul class="megamenu skyblue">
+                    <li class="active grid"><a th:href="@{/homepage}">Home</a></li>
+                    <!--此处为商品目录，信息自己修改-->
+                    <li><a class="color4" href="#">Category</a>
+                        <div class="megapanel">
+                            <div class="row">
+                                <div class="col1">
+                                    <!--更改目录-->
+                                    <div class="h_nav">
+                                        <h4>Electronic</h4>
+                                        <ul>
+                                            <li><a href="category.html">TV & Home Theater</a></li>
+                                            <li><a href="category.html">Computers & Tables</a></li>
+                                            <li><a href="category.html">Cell Phones</a></li>
+                                            <li><a href="category.html">Camera & Camcorders</a></li>
+                                            <li><a href="category.html">Audio</a></li>
+                                            <li><a href="category.html">Car Electronics & GPS</a></li>
+                                            <li><a href="category.html">Video, Ganme, Movie</a></li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Health</h4>
+                                        <ul>
+                                            <li><a href="category.html">Health, Fintiness & Sports</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Office</h4>
+                                        <ul>
+                                            <li><a href="category.html">Home & Office</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a class="color5" th:href="@{'/MyOrder?UserID='+${UserID}}">History</a>
+                    </li>
+                    <li><a class="color6" th:href="@{'/MyShoppingCart?UserID='+${UserID}}">Cart</a></li>
+                    <li><a class="color7" th:href="@{'/MyFavorite?UserID='+${UserID}}">Favorite</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="header-bottom-right">
+            <div class="search">
+                <form th:action="@{/search/name}" method="GET">
+                    <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
+                    <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
+                    <input type="submit" value="Subscribe" id="submit" name="submit">
+                </form>
+                <div id="response"> </div>
+            </div>
+            <div class="tag-list">
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c1" href="#"> </a>
+                        <ul class="sub-icon1 list">
+                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
+                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c2" href="#"> </a>
+                        <ul class="sub-icon1 list">
+                            <li><h3>No Products</h3><a href=""></a></li>
+                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div >
+<div class="register_account">
+    <div class="wrap">
+        <h4 class="title">Create an Account</h4>
+        <form action="/userRegister" method="post">
+            <div class="col_1_of_2 span_1_of_2">
+                <div><input name="username" type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
+                <div><input name="phone_number" type="text"  value="phone_number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone_number';}" ></div>
+                <div><input type="text" name="email" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
+                <div><input type="text" name="password_register" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
+            </div>
+            <div class="col_1_of_2 span_1_of_2">
+                <h1 style="color: gray">
+                        Welcome to PARKNSHOP!
+                </h1>
+                <!--<div><input type="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>-->
+
+                <!--<div><input type="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}"></div>-->
+                <!--<div>-->
+                <!--</div>-->
+                <!--<input type="text" value="" class="code"> - <input type="text" value="" class="number">-->
+                <!--<p class="code">Country Code + Phone Number</p>-->
+            </div>
+            <button class="grey">Submit</button>
+            <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
+            <div class="clear"></div>
+        </form>
+    </div>
+</div>
+<div class="footer">
+    <div class="footer-top">
+        <div class="wrap">
+            <div class="section group example">
+                <div class="col_1_of_2 span_1_of_2">
+                    <ul class="f-list">
+                        <li><img src="./images/2.png"><span class="f-text">Free Shipping on orders over $ 100</span><div class="clear"></div></li>
+                    </ul>
+                </div>
+                <div class="col_1_of_2 span_1_of_2">
+                    <ul class="f-list">
+                        <li><img src="./images/3.png"><span class="f-text">Call us! toll free-222-555-6666 </span><div class="clear"></div></li>
+                    </ul>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-middle">
+        <div class="wrap">
+            <div class="section group example">
+                <div class="col_1_of_f_1 span_1_of_f_1">
+                    <div class="section group example">
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Facebook</h3>
+                            <script>(function(d, s, id) {
+                                var js, fjs = d.getElementsByTagName(s)[0];
+                                if (d.getElementById(id)) return;
+                                js = d.createElement(s); js.id = id;
+                                js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
+                                fjs.parentNode.insertBefore(js, fjs);
+                            }(document, 'script', 'facebook-jssdk'));</script>
+                            <div class="like_box">
+                                <div class="fb-like-box" data-href="http://www.facebook.com/w3layouts" data-colorscheme="light" data-show-faces="true" data-header="true" data-stream="false" data-show-border="true"></div>
+                            </div>
+                        </div>
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>From Twitter</h3>
+                            <div class="recent-tweet">
+                                <div class="recent-tweet-icon">
+                                    <span> </span>
+                                </div>
+                                <div class="recent-tweet-info">
+                                    <p>Ds which don't look even slightly believable. If you are <a href="#">going to use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                </div>
+                                <div class="clear"> </div>
+                            </div>
+                            <div class="recent-tweet">
+                                <div class="recent-tweet-icon">
+                                    <span> </span>
+                                </div>
+                                <div class="recent-tweet-info">
+                                    <p>Ds which don't look even slightly believable. If you are <a href="#">going to use nibh euismod</a> tincidunt ut laoreet adipisicing</p>
+                                </div>
+                                <div class="clear"> </div>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="col_1_of_f_1 span_1_of_f_1">
+                    <div class="section group example">
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Information</h3>
+                            <ul class="f-list1">
+                                <li><a href="#">Duis autem vel eum iriure </a></li>
+                                <li><a href="#">anteposuerit litterarum formas </a></li>
+                                <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                                <li><a href="#">Duis autem vel eum iriure </a></li>
+                                <li><a href="#">anteposuerit litterarum formas </a></li>
+                                <li><a href="#">Tduis dolore te feugait nulla</a></li>
+                            </ul>
+                        </div>
+                        <div class="col_1_of_f_2 span_1_of_f_2">
+                            <h3>Contact us</h3>
+                            <div class="company_address">
+                                <p>500 Lorem Ipsum Dolor Sit,</p>
+                                <p>22-56-2-9 Sit Amet, Lorem,</p>
+                                <p>USA</p>
+                                <p>Phone:(00) 222 666 444</p>
+                                <p>Fax: (000) 000 00 00 0</p>
+                                <p>Email: <span>mail[at]leoshop.com</span></p>
+
+                            </div>
+                            <div class="social-media">
+                                <ul>
+                                    <li> <span class="simptip-position-bottom simptip-movable" data-tooltip="Google"><a href="#" target="_blank"> </a></span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Linked in"><a href="#" target="_blank"> </a> </span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Rss"><a href="#" target="_blank"> </a></span></li>
+                                    <li><span class="simptip-position-bottom simptip-movable" data-tooltip="Facebook"><a href="#" target="_blank"> </a></span></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="wrap">
+            <div class="copy">
+                <p>© 2014 Template by <a href="http://w3layouts.com" target="_blank">w3layouts</a></p>
+            </div>
+            <div class="f-list2">
+                <ul>
+                    <li class="active"><a href="about.html">About Us</a></li> |
+                    <li><a href="delivery.html">Delivery & Returns</a></li> |
+                    <li><a href="delivery.html">Terms & Conditions</a></li> |
+                    <li><a href="remark.html">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

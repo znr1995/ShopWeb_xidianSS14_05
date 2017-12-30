@@ -33,9 +33,9 @@ public class HomepageController {
 
 
     @RequestMapping("/User/login")
-    public String login(){return "/User/login";}
+    public String login(){return "/User/loginNew";}
     @RequestMapping("/User/register")
-    public String register(){return "/User/register";}
+    public String register(){return "/User/registerNew";}
 
     @RequestMapping("/User/Main")
     public String userMain(@ModelAttribute("UserID")long userId, Model model, RedirectAttributes attributes)
