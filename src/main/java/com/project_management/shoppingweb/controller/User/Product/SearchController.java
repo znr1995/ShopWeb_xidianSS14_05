@@ -1,7 +1,9 @@
 package com.project_management.shoppingweb.controller.User.Product;
 
 import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,8 @@ public class SearchController {
 
     @Autowired
     private User_ProductService userProductService;
+    @Autowired
+    private UserService userService;
 
     private Logger logger = Logger.getLogger(this.getClass());
     //通过商品名查询商品
@@ -30,8 +34,15 @@ public class SearchController {
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);
         model.addAttribute("pro_isnull", pro_isnull);
-        String UserID = str.getParameter("UserID");
+        long UserID = Long.parseLong(str.getParameter("UserID"));
         model.addAttribute("UserID", UserID);
+        if(UserID == -1){
+            model.addAttribute("UserName", "UserName");
+        }
+        else{
+            User user = userService.findByUserId(UserID);
+            model.addAttribute("UserName", user.getUsername());
+        }
         return "/User/search";
     }
 
@@ -44,8 +55,15 @@ public class SearchController {
         if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
         model.addAttribute("products",products);
         model.addAttribute("pro_isnull", pro_isnull);
-        String UserID = str.getParameter("UserID");
+        long UserID = Long.parseLong(str.getParameter("UserID"));
         model.addAttribute("UserID", UserID);
+        if(UserID == -1){
+            model.addAttribute("UserName", "UserName");
+        }
+        else{
+            User user = userService.findByUserId(UserID);
+            model.addAttribute("UserName", user.getUsername());
+        }
         return  "/User/search";
     }
 

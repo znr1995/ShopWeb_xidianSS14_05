@@ -72,6 +72,6 @@ public class HomepageController {
             User user = userService.findByUserId(UserID);
             model.addAttribute("UserName", user.getUsername());
         }
-        return "/Homepage/homepage";
+        return "/Homepage/homepage1";
     }
 }
