@@ -1,4 +1,4 @@
-<html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -32,10 +32,11 @@
 </head>
 
 <body background="/2.jpg">
+<input type="hidden" id="hasPayed" value="false"></input>
 <div class="container">
     <div class="row row-centered">
-        <div class="well col-md-6 col-centered">
-            <form name="form2" id="regUser" accept-charset="utf-8"  action="/sellerRegister" method="post">
+        <div class="well col-lg-6 col-centered">
+            <form name="form2" id="regUser" accept-charset="utf-8" onsubmit="return register()"  action="/sellerRegister" method="post">
                 <ul class="reg_form" id="reg-ul">
                     <div id="userCue" class="cue"><h2>Shop Owner Log up</h2></div>
                     <li>
@@ -95,9 +96,26 @@
                         </div>
                     </li>
                     <br>
-                    <button type="submit" class="btn btn-success btn-block">register</button>
+                    <button type="submit"  class="btn btn-success btn-block" >register</button>
                 </ul>
             </form>
+        </div>
+        <div class="well col-lg-4 col-righted">
+            <div  >
+                <img src="/alipay.JPG">
+                <br> <br>
+                <button onclick="setPayTypeAl()">Pay Success</button>
+                <br><br>
+            </div>
+            <div  c>
+                <img src="/wechatpay.JPG">
+                <br> <br>
+                <button onclick="setPayTypeWe()">Pay Success</button>
+                <br><br>
+            </div>
+            <div>
+                <label th:text="@{'you must pay at least ' + *{shopPrice}}"></label>
+            </div>
         </div>
     </div>
 </div>
@@ -108,5 +126,45 @@
 
 <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+<script>
+    var pay = document.getElementById('hasPayed');
+    function setPayTypeAl() {
+        if(pay.value == 'false')
+        {
+            pay.value = "alPay";
+            alert("pay success!alPay");
+        }
+        else
+        {
+            alert("do not pay again!");
+        }
+    }
+    function setPayTypeWe() {
+        if(pay.value == 'false')
+        {
+            pay.value = "wePay";
+            alert("pay success!wePay");
+        }
+        else
+        {
+            alert("do not pay again!");
+        }
+    }
+
+    function register() {
+        if(pay.value == 'false')
+        {
+            alert("plase pay first!");
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+
+    }
+
+
+</script>
 </body>
 </html>

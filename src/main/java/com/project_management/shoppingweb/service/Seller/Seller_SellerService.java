@@ -326,16 +326,21 @@ public class Seller_SellerService {
 
     public double getProductListAdvertisementPrice()
     {
-        return priceRepository.findAll().get(productRepository.findAll().size()-1).getProductHighAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getProductHighAdvertisementPrice();
     }
 
     public double getProductRollAdvertisementPrice()
     {
-        return priceRepository.findAll().get(productRepository.findAll().size()-1).getProductLowAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getProductLowAdvertisementPrice();
     }
 
     public double getSellerListAdvertisementPrice()
     {
-        return priceRepository.findAll().get(productRepository.findAll().size()-1).getSellerListAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getSellerListAdvertisementPrice();
+    }
+
+    public double getShopPrice()
+    {
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getShopPrice();
     }
 }

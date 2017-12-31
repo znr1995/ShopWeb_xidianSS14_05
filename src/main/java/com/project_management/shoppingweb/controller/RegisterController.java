@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.controller;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
+import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import com.project_management.shoppingweb.service.User.User_RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,11 +31,26 @@ public class RegisterController {
     @Autowired
     private User_RegisterService userRegisterService;
 
+    @Autowired
+    private Seller_SellerService seller_sellerService;
+
     private String emailString;
 
     //默认头像
     private String DEFATE_SCULPTURE = "/head.jpg";
 
+    @RequestMapping(value = "/Seller/Register")
+    public String beforeRegister(Model model, RedirectAttributes attributes)
+    {
+        if(!seller_sellerService.hasCorrentPrice())
+        {
+            attributes.addAttribute("error","the shop price has not know,the admin not add it.try register later");
+            return  "redirect:/error/errorHandler";
+        }
+
+        model.addAttribute("shopPrice",seller_sellerService.getShopPrice());
+        return "/Seller/register";
+    }
 
     @RequestMapping(value = "sellerRegister",method = RequestMethod.POST)
     public String sellerRegister(HttpServletRequest httpServletRequest, Model model, RedirectAttributes attributes){
@@ -58,7 +74,6 @@ public class RegisterController {
             seller.setApplyState(2);// 1 - 通过， 2 - 未通过, 3-拉黑
             userRegisterService.sellerRegister(seller);
             return "redirect:/Seller/login";
-
         }
         else
         {
