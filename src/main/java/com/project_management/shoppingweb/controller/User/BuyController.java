@@ -6,6 +6,7 @@ import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.service.AddressService;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,6 +26,7 @@ public class BuyController {
     @Autowired
     private SellerService sellerService;
 
+
     @RequestMapping(value = "/Buy",method = RequestMethod.GET)
     public String Buy(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -35,6 +37,7 @@ public class BuyController {
         String ProductName = product.getProductName();
         Seller seller = sellerService.findBySellerId(Long.parseLong(ShopID));
         String SellerName = seller.getShopname();
+
 
 
         if(UserID.equals("-1")){

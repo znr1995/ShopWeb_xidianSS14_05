@@ -42,7 +42,7 @@ public class HistoryController {
 //            model.addAttribute("ProductID", ProductID);
 //            model.addAttribute("UnitPrice", UnitPrice);
 //            model.addAttribute("ProductName", ProductName);
-            return "/User/login";
+            return "/User/loginNew";
         }
 
         List<Trade> MyOrder = new ArrayList<Trade>();

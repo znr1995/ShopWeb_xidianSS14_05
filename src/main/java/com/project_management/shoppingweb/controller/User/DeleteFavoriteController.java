@@ -3,8 +3,10 @@ package com.project_management.shoppingweb.controller.User;
 import com.project_management.shoppingweb.domain.Collection;
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +27,8 @@ public class DeleteFavoriteController {
     private User_ProductCollectionService user_productCollectionService;
     @Autowired
     private User_ProductService productService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/deletefavorite",method = RequestMethod.GET)
     public String deleteFavorite(HttpServletRequest servletRequest,Model model){
 
@@ -37,6 +41,7 @@ public class DeleteFavoriteController {
 
         collectionList = user_productCollectionService.findAllByUserId(Long.parseLong(User_ID));
 
+        User user = userService.findByUserId(Long.parseLong(User_ID));
 
 
         ProductCollection productCollection = new ProductCollection();
@@ -59,6 +64,7 @@ public class DeleteFavoriteController {
 
         if (productCollections.size()==0){
             model.addAttribute("UserID",User_ID);
+            model.addAttribute("UserName",user.getUsername());
             System.out.println("if ok");
             return "User/FavoriteNew";
         }
@@ -74,7 +80,7 @@ public class DeleteFavoriteController {
             favoriteToShow.Name = product.getProductName();
             FavoriteProduct.add(favoriteToShow);
         }
-
+        model.addAttribute("UserName",user.getUsername());
         model.addAttribute("ProductList", FavoriteProduct);
         model.addAttribute("UserID", User_ID);
         return "/User/FavoriteNew";

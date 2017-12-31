@@ -2,8 +2,10 @@ package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.Trade;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,10 +22,15 @@ public class StartRefundController {
     private User_TradeService tradeService;
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/StartRefund", method = RequestMethod.GET)
     public String StartRefund(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String TradeID = request.getParameter("TradeID");
+
+        User user = userService.findByUserId(Long.parseLong(UserID));
+
 
         List<Trade> TradeList = new ArrayList<Trade>();
         TradeList = tradeService.findByTradeId(Long.parseLong(TradeID));
@@ -41,6 +48,7 @@ public class StartRefundController {
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName",user.getUsername());
             return "/User/MyOrderNew";
         }
 
@@ -106,7 +114,7 @@ public class StartRefundController {
             model.addAttribute("MyOrderS45", tradeToShowsS45);
         }
 
-
+        model.addAttribute("UserName",user.getUsername());
         model.addAttribute("UserID", UserID);
 
 
