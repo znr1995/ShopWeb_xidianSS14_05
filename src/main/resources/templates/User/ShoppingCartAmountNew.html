@@ -44,8 +44,8 @@
         </div>
         <div class="cssmenu">
             <ul>
-                <li><a href="checkout.html">Checkout</a></li> |
-                <li><a href="login.html">Log In</a></li> |
+
+                <li><a th:text="${UserName}">UserName</a></li> |
                 <li><a href="register.html">Sign Up</a></li>
             </ul>
         </div>
@@ -70,13 +70,27 @@
                                     <div class="h_nav">
                                         <h4>Electronic</h4>
                                         <ul>
-                                            <li><a href="category.html">TV & Home Theater</a></li>
-                                            <li><a href="category.html">Computers & Tables</a></li>
-                                            <li><a href="category.html">Cell Phones</a></li>
-                                            <li><a href="category.html">Camera & Camcorders</a></li>
-                                            <li><a href="category.html">Audio</a></li>
-                                            <li><a href="category.html">Car Electronics & GPS</a></li>
-                                            <li><a href="category.html">Video, Ganme, Movie</a></li>
+                                            <li><a th:href="@{'/search/type?producttype=TV&UserID='+${UserID}}">TV</a>
+                                                <a th:href="@{'/search/type?producttype=HomeTheater&UserID='+${UserID}}">HomeTheater</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Computers&UserID='+${UserID}}">Computers</a>
+                                                <a th:href="@{'/search/type?producttype=Tables&UserID='+${UserID}}">Tables</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=CellPhones&UserID='+${UserID}}">CellPhones</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Camera&UserID='+${UserID}}">Camera</a>
+                                                <a th:href="@{'/search/type?producttype=Camcorders&UserID='+${UserID}}">Camcorders</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Audio&UserID='+${UserID}}">Audio</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=CarElectronics&UserID='+${UserID}}">CarElectronics</a>
+                                                <a th:href="@{'/search/type?producttype=GPS&UserID='+${UserID}}">GPS</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Video&UserID='+${UserID}}">Video</a>
+                                                <a th:href="@{'/search/type?producttype=Game&UserID='+${UserID}}">Game</a>
+                                                <a th:href="@{'/search/type?producttype=Movie&UserID='+${UserID}}">Movie</a>
+                                                <a th:href="@{'/search/type?producttype=Music&UserID='+${UserID}}">Music</a>
+                                            </li>
 
                                         </ul>
                                     </div>

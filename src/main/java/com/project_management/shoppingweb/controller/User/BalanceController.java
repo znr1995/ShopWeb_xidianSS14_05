@@ -1,13 +1,11 @@
 package com.project_management.shoppingweb.controller.User;
 
-import com.project_management.shoppingweb.domain.Address;
-import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.domain.Seller;
-import com.project_management.shoppingweb.domain.ShoppingCart;
+import com.project_management.shoppingweb.domain.*;
 import com.project_management.shoppingweb.service.AddressService;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,10 +26,14 @@ public class BalanceController {
     private User_ProductService productService;
     @Autowired
     private AddressService addressService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "balance", method = RequestMethod.GET)
     public String Balance(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShoppingCartID = request.getParameter("ShoppingCartID");
+
+        User user = userService.findByUserId(Long.parseLong(UserID));
 
         List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
         shoppingCarts = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
@@ -45,6 +47,8 @@ public class BalanceController {
             model.addAttribute("ShopID", seller.getSellerId());
             model.addAttribute("UnitPrice", product.getProductPrice());
             model.addAttribute("ProductAmount", shoppingCarts.get(0).getProductAmount());
+
+            model.addAttribute("UserName", user.getUsername());
 
             double UP = product.getProductPrice();
             double PA = shoppingCarts.get(0).getProductAmount();

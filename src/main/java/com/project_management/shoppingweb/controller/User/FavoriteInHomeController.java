@@ -36,7 +36,7 @@ public class FavoriteInHomeController {
 //            model.addAttribute("ShopID", ShopID);
 //            model.addAttribute("UnitPrice", UnitPrice);
 //            model.addAttribute("ProductName", ProductName);
-            return "/User/login";
+            return "/User/loginNew";
         }
 
         List<ProductCollection> FavoritelistP = new ArrayList<ProductCollection>();

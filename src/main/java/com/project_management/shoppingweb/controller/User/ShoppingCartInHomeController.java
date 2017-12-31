@@ -2,8 +2,10 @@ package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,11 +22,13 @@ public class ShoppingCartInHomeController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/ShoppingCartInHome", method = RequestMethod.GET)
 
     public String ShoppingCartInHome(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
-
+        User user = userService.findByUserId(Long.parseLong(UserID));
 
         if(UserID.equals("-1")){
 //            String ProductID = request.getParameter("ProductID");
@@ -38,7 +42,7 @@ public class ShoppingCartInHomeController {
 //            model.addAttribute("ProductID", ProductID);
 //            model.addAttribute("UnitPrice", UnitPrice);
 //            model.addAttribute("ProductName", ProductName);
-            return "/User/login";
+            return "/User/loginNew";
         }
 
 
@@ -48,6 +52,7 @@ public class ShoppingCartInHomeController {
 
         if(GlobalShoppingCart.size() == 0){
             model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName",user.getUsername());
             return "/User/ShoppingCartNew";
         }
 
@@ -62,6 +67,7 @@ public class ShoppingCartInHomeController {
 
         model.addAttribute("UserID", UserID);
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
+        model.addAttribute("UserName",user.getUsername());
 
         return "/User/ShoppingCartNew";
     }

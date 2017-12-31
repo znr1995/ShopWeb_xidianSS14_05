@@ -2,8 +2,10 @@ package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,14 +22,15 @@ public class DeleteShoppingCartController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/DeleteShoppingCart", method = RequestMethod.GET)
-
     public String DeleteShoppingCart(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShoppingCartID = request.getParameter("ShoppingCartID");
         System.out.println(UserID);
         System.out.println(ShoppingCartID);
-
+        User user = userService.findByUserId(Long.parseLong(UserID));
 
         List<ShoppingCart> ShoppingCartList = new ArrayList<ShoppingCart>();
         ShoppingCartList = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
@@ -42,6 +45,7 @@ public class DeleteShoppingCartController {
 
         if(GlobalShoppingCart.size() == 0){
             model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName",user.getUsername());
             return "/User/ShoppingCartNew";
         }
 
@@ -62,7 +66,7 @@ public class DeleteShoppingCartController {
 
         model.addAttribute("UserID", UserID);
         model.addAttribute("GlobalShoppingCart", shoppingCartToShowList);
-
+        model.addAttribute("UserName",user.getUsername());
         return "/User/ShoppingCartNew";
     }
 }

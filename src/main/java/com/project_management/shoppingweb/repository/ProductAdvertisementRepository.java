@@ -10,7 +10,7 @@ import com.project_management.shoppingweb.domain.ProductAdvertisement;
 
 @Repository
 public interface ProductAdvertisementRepository extends JpaRepository<ProductAdvertisement,Long>{
-    List<ProductAdvertisement> findAllByType(Integer type);
+    List<ProductAdvertisement> findAllByTypeAndStatus(Integer type, Integer status);
 	List<ProductAdvertisement> findAllByStatus(Integer status);
 	ProductAdvertisement findByAdvertisementId(Long advertisementId);
 	ProductAdvertisement save(ProductAdvertisement productAdvertisement);
