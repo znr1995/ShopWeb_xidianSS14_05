@@ -137,7 +137,7 @@
         </div>
         <div class="header-bottom-right">
             <div class="search">
-                <form th:action="@{/search/name}" method="GET">
+                <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
                     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">
@@ -179,17 +179,17 @@
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.Name}" ></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productAmount}"></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.createtime}" ></td>
-            <form th:action="@{/DeleteShoppingCart}" method="get">
+            <form th:action="@{/DeleteShoppingCart}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
             </form>
-            <form th:action="@{/ModifyAmount}" method="get">
+            <form th:action="@{/ModifyAmount}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
             </form>
-            <form th:action="@{/balance}" method="get">
+            <form th:action="@{/balance}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button type="submit" name="Balance" th:value="结算" >Settlement</button></td>

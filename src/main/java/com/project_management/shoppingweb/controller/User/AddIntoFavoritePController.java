@@ -3,11 +3,8 @@ package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
-import com.project_management.shoppingweb.domain.User;
-import com.project_management.shoppingweb.service.User.User_LoginService;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
-import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,7 +24,7 @@ public class AddIntoFavoritePController {
 
 
 
-    @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.GET)
+    @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.POST)
     public String AddIntoFavoriteP(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");

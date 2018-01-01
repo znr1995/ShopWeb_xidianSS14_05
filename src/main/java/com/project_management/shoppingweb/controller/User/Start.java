@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class Start {
-    @RequestMapping(value = "/Start", method = RequestMethod.GET)
+    @RequestMapping(value = "/Start", method = RequestMethod.POST)
     public String start(HttpServletRequest request, Model model){
 
 

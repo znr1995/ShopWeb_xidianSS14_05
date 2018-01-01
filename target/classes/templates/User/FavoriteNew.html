@@ -153,7 +153,7 @@
         </div>
         <div class="header-bottom-right">
             <div class="search">
-                <form th:action="@{/search/name}" method="GET">
+                <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
                     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">
@@ -192,7 +192,7 @@
         <tr th:each="ProductList : ${ProductList}">
             <td width="200px" height="60px" th:text="*{ProductList.ID}" style="display: none" >Onions</td>　
             <td width="200px" height="60px" th:text="*{ProductList.Name}" >Onions</td>
-            <form th:action="@{/deletefavorite}" method="get">
+            <form th:action="@{/deletefavorite}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                 <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.ID}"></td>
                 <td style="width: 200px;height: 60px"><button type="submit">删除</button></td>

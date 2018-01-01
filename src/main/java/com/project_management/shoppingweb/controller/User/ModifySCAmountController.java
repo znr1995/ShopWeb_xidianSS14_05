@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,8 +17,10 @@ import java.util.List;
 public class ModifySCAmountController {
     @Autowired
     private User_ShoppingCartService shoppingCartService;
+    @Autowired
+    private UserService userService;
 
-    @RequestMapping(value = "/ModifyAmount", method = RequestMethod.GET)
+    @RequestMapping(value = "/ModifyAmount", method = RequestMethod.POST)
 
     public String ModifySCAmount(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -34,6 +37,7 @@ public class ModifySCAmountController {
 
         model.addAttribute("UserID", UserID);
         model.addAttribute("ShoppingCartID", ShoppingCartID);
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         return "/User/ShoppingCartAmountNew";
     }

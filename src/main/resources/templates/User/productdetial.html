@@ -232,7 +232,7 @@
                     <input id="Productamount" placeholder=" please input number" type="text" name="ProductAmount" th:value="0" onkeyup="KeyP4(this);"  />ProductAmount<br/>
                 </div>
 
-                <form name="form1" th:action="@{/Buy}" method="get">
+                <form name="form1" th:action="@{/Buy}" method="post">
                     <div  style="display: none">
                         <input type="hidden" name="UserID" id="txt19" th:value="${UserID}"  /><br/>
                         <input type="text" name="ShopID" th:value="${ShopID}" readonly="readonly" />ShopID<br/>
@@ -243,7 +243,7 @@
                     <button id="buy" type="submit" name="buy" th:value="立即购买">buy</button>
                 </form>
 
-                <form name="form2" th:action="@{/AddIntoFavoriteP}" method="get">
+                <form name="form2" th:action="@{/AddIntoFavoriteP}" method="post">
                     <button id="addfavorite" type="submit" name="addintofavorite" th:value="加入收藏夹">addintofavorite</button>
                     <div style="display:none">
                         <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
@@ -254,7 +254,7 @@
                     </div>
                 </form>
 
-                <form name="form5" th:action="@{/AddIntoShoppingCart}" method="get">
+                <form name="form5" th:action="@{/AddIntoShoppingCart}" method="post">
                     <div style="display: none">
                         <input type="hidden" name="UserID" th:value="${UserID}"  /><br/>
                         <input type="hidden" name="ShopID" th:value="${ShopID}"  /><br/>

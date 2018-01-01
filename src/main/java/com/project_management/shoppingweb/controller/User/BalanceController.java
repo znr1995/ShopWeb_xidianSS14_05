@@ -28,7 +28,7 @@ public class BalanceController {
     private AddressService addressService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "balance", method = RequestMethod.GET)
+    @RequestMapping(value = "balance", method = RequestMethod.POST)
     public String Balance(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShoppingCartID = request.getParameter("ShoppingCartID");
@@ -58,6 +58,7 @@ public class BalanceController {
             model.addAttribute("Total", Total);
             model.addAttribute("ProductName", product.getProductName());
             model.addAttribute("SellerName", seller.getShopname());
+            model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
             List<Address> AddressList = new ArrayList<Address>();
             AddressList = addressService.findAllByUserId(Long.parseLong(UserID));

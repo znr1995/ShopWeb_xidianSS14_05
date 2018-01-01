@@ -25,9 +25,11 @@ public class BuyController {
     private User_ProductService productService;
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private UserService userService;
 
 
-    @RequestMapping(value = "/Buy",method = RequestMethod.GET)
+    @RequestMapping(value = "/Buy",method = RequestMethod.POST)
     public String Buy(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");
@@ -94,6 +96,7 @@ public class BuyController {
         model.addAttribute("Total", Total);
         model.addAttribute("ProductName", ProductName);
         model.addAttribute("SellerName", SellerName);
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         List<Address> AddressList = new ArrayList<Address>();
         AddressList = addressService.findAllByUserId(Long.parseLong(UserID));

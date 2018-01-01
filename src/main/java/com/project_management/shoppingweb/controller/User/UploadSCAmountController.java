@@ -4,6 +4,7 @@ import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,9 @@ public class UploadSCAmountController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
-    @RequestMapping(value = "/uploadAmount", method = RequestMethod.GET)
+    @Autowired
+    private UserService userService;
+    @RequestMapping(value = "/uploadAmount", method = RequestMethod.POST)
 
     public String UploadSCAmount(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -29,6 +32,8 @@ public class UploadSCAmountController {
 
         List<ShoppingCart> ShoppingCartList = new ArrayList<ShoppingCart>();
         ShoppingCartList = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         if(ShoppingCartList.size() != 0){
             if(Amount.equals("")){

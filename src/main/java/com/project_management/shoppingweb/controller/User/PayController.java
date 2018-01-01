@@ -9,6 +9,7 @@ import com.project_management.shoppingweb.service.AddressService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import com.project_management.shoppingweb.service.User.User_TradeDetailService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,9 +31,11 @@ public class PayController {
     private User_TradeDetailService tradeDetailService;
     @Autowired
     private User_ShoppingCartService shoppingCartService;
+    @Autowired
+    private UserService userService;
 
 
-    @RequestMapping(value = "/Pay",method = RequestMethod.GET)
+    @RequestMapping(value = "/Pay",method = RequestMethod.POST)
     public String Pay(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");
@@ -49,6 +52,8 @@ public class PayController {
         List<Address> AddressList = new ArrayList<Address>();
         AddressList = addressService.findAllByUserId(Long.parseLong(UserID));
         int number = AddressList.size();
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         if(account.equals("") || password.equals("") || address.equals("")){
             model.addAttribute("UserID", UserID);

@@ -213,7 +213,7 @@
         </div>
         <div class="header-bottom-right">
             <div class="search">
-                <form th:action="@{/search/name}" method="GET">
+                <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
                     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">
@@ -243,7 +243,7 @@
         <div class="clear"></div>
     </div>
 </div >
-<form name="form1" th:action="@{/Pay}" method="get">
+<form name="form1" th:action="@{/Pay}" method="post">
     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
     <input type="hidden" name="IsFromShoppingCart" th:value="${IsFromShoppingCart}" style="display: none">
     <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" style="display: none" />

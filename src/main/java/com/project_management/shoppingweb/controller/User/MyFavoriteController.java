@@ -4,6 +4,7 @@ import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,8 @@ public class MyFavoriteController {
     private User_ProductCollectionService productCollectionService;
     @Autowired
     private User_ProductService productService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/MyFavorite",method = RequestMethod.GET)
     public String MyFavorite(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -42,6 +45,7 @@ public class MyFavoriteController {
         FavoritelistP = productCollectionService.findAllByUserId(Long.parseLong(UserID));
 
 
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
         if(FavoritelistP.size() == 0){
             model.addAttribute("UserID", UserID);
             return "/User/FavoriteNew";

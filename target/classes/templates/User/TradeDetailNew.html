@@ -179,7 +179,7 @@
         </div>
         <div class="header-bottom-right">
             <div class="search">
-                <form th:action="@{/search/name}" method="GET">
+                <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
                     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">

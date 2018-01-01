@@ -26,7 +26,7 @@ public class ConfirmReceiptController {
     private SellerService sellerService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/ConfirmReceipt", method = RequestMethod.GET)
+    @RequestMapping(value = "/ConfirmReceipt", method = RequestMethod.POST)
     public String ConfirmReceipt(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String TradeID = request.getParameter("TradeID");

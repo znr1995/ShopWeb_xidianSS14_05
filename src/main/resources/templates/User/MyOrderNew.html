@@ -167,7 +167,7 @@
         </div>
         <div class="header-bottom-right">
             <div class="search">
-                <form th:action="@{/search/name}" method="GET">
+                <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
                     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">
@@ -208,7 +208,7 @@
                 <td width="220px" height="60px"><strong>Create Time</strong></td>
             </tr>
             <tr th:each="MyOrderS0 : ${MyOrderS0}">
-                <form th:action="@{/TradeDetail}" method="get">
+                <form th:action="@{/TradeDetail}" method="post">
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS0.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS0.trade.sellerId}">Onions</td>
@@ -238,21 +238,21 @@
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS12.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS12.trade.tradeCreateTime}">Oinons</td>
-                <form th:action="@{/TradeDetail}" method="get">
+                <form th:action="@{/TradeDetail}" method="post">
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
                     </td>
                 </form>
-                <form th:action="@{/ConfirmReceipt}" method="get">
+                <form th:action="@{/ConfirmReceipt}" method="post">
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="ConfirmReceipt" th:value="确认收货">ConfirmReceipt</button>
                     </td>
                 </form>
-                <form th:action="@{/StartRefund}" method="get">
+                <form th:action="@{/StartRefund}" method="post">
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
                     <td>
@@ -279,14 +279,14 @@
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS3.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeCreateTime}">Oinons</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeFinishTime}">Oinons</td>
-                <form th:action="@{/TradeDetail}" method="get">
+                <form th:action="@{/TradeDetail}" method="post">
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
                     </td>
                 </form>
-                <form th:action="@{/feedbackRemarks}" method="get">
+                <form th:action="@{/feedbackRemarks}" method="post">
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly"></td>
                     <td>
@@ -311,7 +311,7 @@
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS45.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS45.trade.tradeCreateTime}">Oinons</td>
-                <form th:action="@{/TradeDetail}" method="get">
+                <form th:action="@{/TradeDetail}" method="post">
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS45.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td>

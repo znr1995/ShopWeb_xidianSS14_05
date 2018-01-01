@@ -4,6 +4,7 @@ import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,9 @@ public class UploadRemarkController {
     private User_TradeService tradeService;
     @Autowired
     private SellerService sellerService;
-    @RequestMapping(value = "/uploadRemark", method = RequestMethod.GET)
+    @Autowired
+    private UserService userService;
+    @RequestMapping(value = "/uploadRemark", method = RequestMethod.POST)
     public String UpLoadRemark(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String TradeID = request.getParameter("TradeID");
@@ -40,6 +43,8 @@ public class UploadRemarkController {
         List<Trade> MyOrderS12 = new ArrayList<Trade>();
         List<Trade> MyOrderS3 = new ArrayList<Trade>();
         List<Trade> MyOrderS45 = new ArrayList<Trade>();
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);

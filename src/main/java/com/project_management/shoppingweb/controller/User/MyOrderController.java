@@ -8,6 +8,7 @@ import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,8 @@ public class MyOrderController {
     private User_ProductService productService;
     @Autowired
     private SellerService sellerService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/MyOrder",method = RequestMethod.GET)
     public String MyOrder(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -53,6 +56,8 @@ public class MyOrderController {
         List<Trade> MyOrderS12 = new ArrayList<Trade>();
         List<Trade> MyOrderS3 = new ArrayList<Trade>();
         List<Trade> MyOrderS45 = new ArrayList<Trade>();
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         if(MyOrder.size() == 0){
             model.addAttribute("UserID", UserID);

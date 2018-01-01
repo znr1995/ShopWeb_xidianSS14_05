@@ -24,7 +24,7 @@ public class DeleteShoppingCartController {
     private User_ProductService productService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/DeleteShoppingCart", method = RequestMethod.GET)
+    @RequestMapping(value = "/DeleteShoppingCart", method = RequestMethod.POST)
     public String DeleteShoppingCart(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShoppingCartID = request.getParameter("ShoppingCartID");

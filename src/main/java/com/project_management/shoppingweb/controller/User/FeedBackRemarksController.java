@@ -20,7 +20,7 @@ public class FeedBackRemarksController {
     private User_TradeService tradeService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/feedbackRemarks", method = RequestMethod.GET)
+    @RequestMapping(value = "/feedbackRemarks", method = RequestMethod.POST)
 
     public String FeedBackRemarks(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");

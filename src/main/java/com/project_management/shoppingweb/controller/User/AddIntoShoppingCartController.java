@@ -23,7 +23,7 @@ public class AddIntoShoppingCartController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
-    @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.GET)
+    @RequestMapping(value = "/AddIntoShoppingCart", method = RequestMethod.POST)
 
     public String AddIntoShoppingCart(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");

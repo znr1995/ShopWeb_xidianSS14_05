@@ -1,6 +1,5 @@
 package com.project_management.shoppingweb.controller.User;
 
-import com.project_management.shoppingweb.domain.Collection;
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
 import com.project_management.shoppingweb.domain.User;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -29,7 +27,7 @@ public class DeleteFavoriteController {
     private User_ProductService productService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/deletefavorite",method = RequestMethod.GET)
+    @RequestMapping(value = "/deletefavorite",method = RequestMethod.POST)
     public String deleteFavorite(HttpServletRequest servletRequest,Model model){
 
         String User_ID =  servletRequest.getParameter("UserID");

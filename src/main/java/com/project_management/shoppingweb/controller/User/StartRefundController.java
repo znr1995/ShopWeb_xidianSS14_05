@@ -24,7 +24,7 @@ public class StartRefundController {
     private SellerService sellerService;
     @Autowired
     private UserService userService;
-    @RequestMapping(value = "/StartRefund", method = RequestMethod.GET)
+    @RequestMapping(value = "/StartRefund", method = RequestMethod.POST)
     public String StartRefund(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String TradeID = request.getParameter("TradeID");

@@ -32,11 +32,12 @@ public class TradeDetailController {
     @Autowired
     private User_ProductService productService;
 
-    @RequestMapping(value = "/TradeDetail", method = RequestMethod.GET)
+    @RequestMapping(value = "/TradeDetail", method = RequestMethod.POST)
     public String TradeDetail(HttpServletRequest request, Model model){
         String TradeID = request.getParameter("TradeID");
         String UserID = request.getParameter("UserID");
         model.addAttribute("UserID", UserID);
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
         System.out.println(TradeID);
 
         List<TradeDetail> TradeDetailList = new ArrayList<TradeDetail>();

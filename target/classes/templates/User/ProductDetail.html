@@ -19,7 +19,7 @@
         <div class="col-md-6" th:if="${not proisnull}">
             <img alt="140x140" th:src="@{${productdetail.productPhoto}}" class="img-rounded"/>
             <div class="container">
-                <form name="form1" th:action="@{/Start}" method="get">
+                <form name="form1" th:action="@{/Start}" method="post">
                     <input type="text" name="ProductID" th:value="${productdetail.productId}" readonly="readonly" > ProductID </input><br/>
                     <input type="text" name="ShopID" th:value="${productdetail.sellerId}" readonly="readonly" >ShopID</input><br/>
                     <input type="text" name="ProductName" th:value="${productdetail.productName}" readonly="readonly" >ProductName</input><br/>

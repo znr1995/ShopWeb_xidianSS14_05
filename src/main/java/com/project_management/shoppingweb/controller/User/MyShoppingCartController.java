@@ -5,6 +5,7 @@ import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class MyShoppingCartController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private User_ProductService productService;
+    @Autowired
+    private UserService userService;
     @RequestMapping(value = "/MyShoppingCart", method = RequestMethod.GET)
     public String MyShoppingCart(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
@@ -44,6 +47,8 @@ public class MyShoppingCartController {
 
         List<ShoppingCart> GlobalShoppingCart = new ArrayList<ShoppingCart>();
         GlobalShoppingCart = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
 
         if(GlobalShoppingCart.size() == 0){
