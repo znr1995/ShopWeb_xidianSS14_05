@@ -53,9 +53,10 @@
         <table class="table table-bordered table-hover">
             <thead>
             <tr class="success">
+                <th>picture</th>
                 <th>Shop Name</th>
                 <th>Shop Owner</th>
-                <th>Catogery</th>
+                <th>Category</th>
                 <th>address</th>
                 <th>Agree</th>
                 <th>Reject</th>
@@ -65,6 +66,7 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusNoList}">
                 <tr>
+                    <td ><img th:src="${p.sculpture}"></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.catogery}"></td>
@@ -82,6 +84,7 @@
             <caption style="background: #bee5eb">Shop List</caption>
             <thead>
             <tr>
+                <th>picture</th>
                 <th>Shop Name</th>
                 <th>Shop Owner</th>
                 <th>Shop Description</th>
@@ -91,7 +94,7 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusList}">
                 <tr>
-
+                    <td ><img th:src="${p.sculpture}"></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.address}"></td>
@@ -108,6 +111,7 @@
             <caption style="background: #007bff"> Blacklist</caption>
             <thead>
             <tr>
+                <th>picture</th>
                 <th>Shop Name</th>
                 <th>Unlock</th>
             </tr>
@@ -115,7 +119,7 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusBlackList}">
                 <tr>
-
+                    <td ><img th:src="${p.sculpture}"></td>
                     <td th:text="${p.shopname}"></td>
                     <td><button th:onclick="'unblack('+${p.sellerId}+')'">✖</button></td>
                 </tr>
