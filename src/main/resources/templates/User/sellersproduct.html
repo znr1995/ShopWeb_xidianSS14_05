@@ -44,7 +44,7 @@
             </ul>
             <ul th:if = "${UserID != -1 && UserID != null}">
                 <li><a th:text="${UserName}">UserName</a></li> |
-                <li><a th:href="@{/User/login.html}">Sign Out</a></li>
+                <li><a th:href="@{/signout}">Sign Out</a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -150,7 +150,7 @@
                             <div class="inner_content clearfix">
                                 <div class="product_image">
                                     <a target="_blank" th:href="@{'/product?productId='+${adv.productId}+'&UserID='+${UserID}}">
-                                        <img th:src="@{${adv.productPhoto}}" alt="fail load pics" width="200" height="300"/>
+                                        <img th:src="@{${adv.productPhoto}}" alt="fail load pics" width="280" height="300"/>
                                     </a>
                                 </div>
                                 <div class="price">

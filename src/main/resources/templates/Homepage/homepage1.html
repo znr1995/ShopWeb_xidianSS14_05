@@ -168,9 +168,15 @@
 
 						<div th:each="ads : ${shop_ads}">
 							<div class="col_1_of_3 span_1_of_3">
-								<a target="_blank" th:href="@{'/shop/'+${ads.sellerId}+'?UserID='+${UserID}}">
-									<img th:src="@{${ads.pictureUrl}}" alt="fail pics" width="200" height="300"/>
-								</a>
+								<div class="product_image">
+									<a target="_blank" th:href="@{'/shop/'+${ads.sellerId}+'?UserID='+${UserID}}">
+										<img th:src="@{${ads.pictureUrl}}" alt="fail pics" width="280" height="300" align="center"/>
+									</a>
+								</div>
+								<div class="price">
+										<p class="title" align="center" th:text="${ads.sellerName}"></p>
+								</div>
+								<div class="clear"></div>
 							</div>
 						</div>
 					</div>
@@ -192,7 +198,7 @@
 						  <div class="inner_content clearfix">
 							  <div class="product_image">
 								  <a target="_blank" th:href="@{'/product?productId='+${adv2.productId}+'&UserID='+${UserID}}">
-									  <img th:src="${adv2.pictureUrl}" alt="" width="200" height="300"/>
+									  <img th:src="${adv2.pictureUrl}" width="280" height="300" alt=""/>
 								  </a>
 							  </div>
 							  <div class="price">
@@ -202,7 +208,7 @@
 										  <span class="actual" th:text="'$ '+${adv2.price}"></span>
 									  </div>
 								  </div>
-								  <!--<div class="cart-right"></div>-->
+								  <div class="cart-right"></div>
 								  <div class="clear"></div>
 							  </div>
 						  </div>
