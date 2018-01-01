@@ -125,13 +125,13 @@ public class ModifySellerInformationController {
          * 3.@
          * 4.@之后字母数字组合至少一位
          * 5.小数点.
-         * 6.最后为至少一位的字母组合
-         *
+         * 6.最后为至少一位的字母组合(1-6已不用)
+         * 正则表达式^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$
          * 7.qq邮箱9-11位
          */
         Pattern p1,qq;
-        //p1= Pattern.compile("[a-zA-Z_]{1,}[0-9a-zA-Z_]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,}[a-zA-z]{1,}");
-        p1= Pattern.compile("[a-zA-Z_]{1,}[0-9a-zA-Z_]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,}com");
+        p1= Pattern.compile("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
+        //p1= Pattern.compile("[a-zA-Z_]{1,}[0-9a-zA-Z_]{0,}@(([a-zA-z0-9]-*){1,}\\.){1,}com");
         qq= Pattern.compile("[0-9]{9,11}@qq\\.com");
         //p1= Pattern.compile(".*@*.com.*");
         Matcher m1 = p1.matcher(email);
@@ -140,7 +140,10 @@ public class ModifySellerInformationController {
         boolean b2 = m2.matches();
         if(!(b1||b2))
         {
-            attributes.addAttribute("errorMessage","The format of email is illegal " );
+            attributes.addAttribute("errorMessage","The format of email is illegal.Please use QQemail or" +
+                    "others.For example, '353171537@qq.com' or 'gsy@163.com'" +
+                    "测试版正则表达式（待定）：" +
+                    "^[a-z0-9]+([._\\\\\\\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$ " );
             return "redirect:/error/errorHandler";
         }
 
@@ -154,7 +157,15 @@ public class ModifySellerInformationController {
         boolean b3 = m3.matches();
         if(!b3)
         {
-            attributes.addAttribute("errorMessage","The format of phoneNum is illegal " );
+            attributes.addAttribute("errorMessage","The format of phoneNum is illegal .Your phonenum must" +
+                    "start with 13-18 and the length of your phonenum must be 11. " );
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断密码格式
+        if(newSeller.getPassword().equals(""))
+        {
+            attributes.addAttribute("errorMessage","The password can't be null");
             return "redirect:/error/errorHandler";
         }
 
