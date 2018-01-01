@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b863159b-dc9f-43c0-afd8-9411ce1d3be2" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/User/search.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/User/search.html" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/User/sellersproduct.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/User/sellersproduct.html" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/User/FavoriteNew.html" afterPath="$PROJECT_DIR$/src/main/resources/templates/User/FavoriteNew.html" />
+      <change beforePath="$PROJECT_DIR$/target/classes/templates/User/sellersproduct.html" afterPath="$PROJECT_DIR$/target/classes/templates/User/sellersproduct.html" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -19,39 +19,35 @@
       <file leaf-file-name="homepage1.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="999">
-              <caret line="175" column="51" lean-forward="true" selection-start-line="175" selection-start-column="51" selection-end-line="175" selection-end-column="51" />
+            <state relative-caret-position="297">
+              <caret line="199" column="28" lean-forward="false" selection-start-line="199" selection-start-column="28" selection-end-line="199" selection-end-column="28" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="search.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="FavoriteNew.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/FavoriteNew.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="139">
+              <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+              <folding>
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="search.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/search.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="143" column="19" lean-forward="false" selection-start-line="143" selection-start-column="19" selection-end-line="143" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="sellersproduct.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/sellersproduct.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="655">
-              <caret line="182" column="34" lean-forward="false" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductDetail.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/ProductDetail.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
-              <caret line="167" column="47" lean-forward="true" selection-start-line="167" selection-start-column="47" selection-end-line="167" selection-end-column="47" />
-              <folding />
+            <state relative-caret-position="246">
+              <caret line="141" column="35" lean-forward="false" selection-start-line="141" selection-start-column="35" selection-end-line="141" selection-end-column="35" />
+              <folding>
+                <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,9 +74,10 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/User/loginNew.html" />
         <option value="$PROJECT_DIR$/src/main/java/com/project_management/shoppingweb/controller/User/Product/ProductDetailController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/User/ProductDetail.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/User/search.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/User/sellersproduct.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/User/FavoriteNew.html" />
       </list>
     </option>
   </component>
@@ -90,7 +87,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="130" />
     <option name="y" value="16" />
     <option name="width" value="1213" />
@@ -399,15 +396,15 @@
       <workItem from="1514778678040" duration="594000" />
       <workItem from="1514784194840" duration="1905000" />
       <workItem from="1514812178012" duration="2973000" />
-      <workItem from="1514816295273" duration="6889000" />
+      <workItem from="1514816295273" duration="8521000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15543000" />
+    <option name="totallyTimeSpent" value="17175000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="784" extended-state="7" />
+    <frame x="-8" y="-8" width="1382" height="784" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -522,7 +519,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3618">
           <caret line="134" column="14" lean-forward="false" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
-          <folding />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -554,7 +554,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3618">
           <caret line="134" column="14" lean-forward="false" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
-          <folding />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -586,7 +589,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3618">
           <caret line="134" column="14" lean-forward="false" selection-start-line="134" selection-start-column="14" selection-end-line="134" selection-end-column="14" />
-          <folding />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -706,35 +712,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/ProductDetail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="999">
-          <caret line="175" column="51" lean-forward="true" selection-start-line="175" selection-start-column="51" selection-end-line="175" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/search.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="143" column="19" lean-forward="false" selection-start-line="143" selection-start-column="19" selection-end-line="143" selection-end-column="19" />
+        <state relative-caret-position="2322">
+          <caret line="167" column="47" lean-forward="true" selection-start-line="167" selection-start-column="47" selection-end-line="167" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/sellersproduct.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="655">
-          <caret line="182" column="34" lean-forward="false" selection-start-line="182" selection-start-column="34" selection-end-line="182" selection-end-column="34" />
+        <state relative-caret-position="4374">
+          <caret line="162" column="12" lean-forward="false" selection-start-line="162" selection-start-column="12" selection-end-line="162" selection-end-column="12" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/ProductDetail.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/Homepage/homepage1.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="167" column="47" lean-forward="true" selection-start-line="167" selection-start-column="47" selection-end-line="167" selection-end-column="47" />
+        <state relative-caret-position="297">
+          <caret line="199" column="28" lean-forward="false" selection-start-line="199" selection-start-column="28" selection-end-line="199" selection-end-column="28" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/FavoriteNew.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="60" column="8" lean-forward="true" selection-start-line="60" selection-start-column="8" selection-end-line="60" selection-end-column="8" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/User/search.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="141" column="35" lean-forward="false" selection-start-line="141" selection-start-column="35" selection-end-line="141" selection-end-column="35" />
+          <folding>
+            <element signature="n#div#0;n#body#0;n#html#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#body#0;n#html#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
