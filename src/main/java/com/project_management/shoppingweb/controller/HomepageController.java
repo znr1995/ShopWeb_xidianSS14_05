@@ -45,6 +45,13 @@ public class HomepageController {
         return "redirect:/homepage";
     }
 
+    @RequestMapping("/signout")
+    public  String signout(){
+        //登出逻辑处理
+        UserID = -1;
+        return "redirect:/homepage";
+    }
+
     @RequestMapping(value = "/homepage")
     public String homepage(Model model){
         List<SellerAdvertisement> seller_ads = userSellerAdvertisementService.findAllByStatus(1);
