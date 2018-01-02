@@ -194,6 +194,11 @@
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button type="submit" name="Balance" th:value="结算" >Settlement</button></td>
             </form>
+            <form th:action="@{/CartPortal}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
+                <td style="width: 120px"><button type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
+            </form>
         </tr>
     </table>
 </div>

@@ -45,7 +45,17 @@
             /*background-color: dodgerblue;*/
         /*}*/
         /**/
-
+        button{
+            height: 40px;
+            width: 100px;
+            font-size: 18px;
+            background-color: rgb(116,176,200);
+            color: #FFFFFF;
+            line-height: 40px;
+            border-radius: 10px;
+            outline: none;
+            margin: 10px auto;
+        }
 
         table tr:first-child td:first-child{
             overflow: hidden;
@@ -218,10 +228,14 @@
             <td width="250px" height="60px"><strong>ProductTradePrice</strong></td>
         </tr>
         <tr th:each="TradeDetailList : ${TradeDetailList}">
-            <td style="display: none" width="250px" height="60px" name="ProductID" th:text="*{TradeDetailList.tradeDetail.productId}">Onions</td>
             <td width="250px" height="60px" name="ProductName" th:text="*{TradeDetailList.Name}">Onions</td>
             <td width="250px" height="60px" name="ProductAmount" th:text="*{TradeDetailList.tradeDetail.productAmount}">Onions</td>
             <td width="250px" height="60px" name="ProductTradePrice" th:text="*{TradeDetailList.tradeDetail.productTradePrice}">Onions</td>
+            <form th:action="@{/TradeDetailPortal}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
+                <td style="display: none"><input type="hidden" name="ProductID" th:value="*{TradeDetailList.tradeDetail.productId}">Onions</td>
+                <td style="width: 120px"><button type="submit" name="TradeDetailPortal" th:value="传送门" >Portal</button></td>
+            </form>
         </tr>
     </table>
     </div>

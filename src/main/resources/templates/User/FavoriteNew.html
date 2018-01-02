@@ -195,7 +195,12 @@
             <form th:action="@{/deletefavorite}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                 <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.ID}"></td>
-                <td style="width: 200px;height: 60px"><button type="submit">删除</button></td>
+                <td style="width: 200px;height: 60px"><button type="submit">Delete</button></td>
+            </form>
+            <form th:action="@{/PPortal}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.ID}"></td>
+                <td style="width: 200px;height: 60px"><button type="submit">Portal</button></td>
             </form>　
         </tr>
     </table>
