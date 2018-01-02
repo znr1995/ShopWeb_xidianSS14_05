@@ -189,6 +189,7 @@
                     <span class="m_link"><a href="#">add in collection</a> </span>
 
                     <p class="m_text2" th:text="${productdetail.productBriefInfo}">productBriefInfo</p>
+                    <span class="m_link"><a th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
                 </div>
                 <div class="clear"></div>
                 <script type="text/javascript">
