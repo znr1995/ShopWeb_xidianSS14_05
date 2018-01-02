@@ -1,9 +1,7 @@
 package com.project_management.shoppingweb.controller.User.Product;
 
 import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
-import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
@@ -24,8 +22,6 @@ public class ShopsProductsController {
     private User_ProductService userProductService;
     @Autowired
     private UserService userService;
-    @Autowired
-    private SellerService sellerService;
     private Logger logger = Logger.getLogger(this.getClass());
 
     @RequestMapping("/{sellerid}")//商铺内商品页面
@@ -37,8 +33,6 @@ public class ShopsProductsController {
         long UserID = Long.parseLong(str.getParameter("UserID"));
         model.addAttribute("UserID", UserID);
         model.addAttribute("products",products);
-        Seller seller = sellerService.findBySellerId(sellerid);
-        model.addAttribute("seller", seller);
         model.addAttribute("ShopID", sellerid);
         model.addAttribute("pro_isnull", pro_isnull);
         if(UserID == -1){
