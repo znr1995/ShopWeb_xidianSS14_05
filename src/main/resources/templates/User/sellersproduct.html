@@ -137,6 +137,86 @@
     <div class="clear"></div>
 </div>
 
+<div class="mens">
+    <div class="main">
+        <div class="wrap">
+            <!-- 商铺图片，名称与加入收藏夹按钮 -->
+            <div class="cont span_2_of_3">
+                <div class="grid images_3_of_2">
+                    <div id="container">
+                        <div id="products_example">
+                            <div id="products">
+                                <!-- shop- photo -->
+                                <img class="a" th:src="@{${seller.sculpture}}" width="450" height="200" alt=""/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="desc1 span_3_of_2">
+                    <h3 class="m_3" th:text="${seller.shopname}">sellerName</h3>
+                    <div class="btn_form">
+                        <form>
+                            <!--加入收藏夹-->
+                            <input type="submit" value="addintofavorite" title="">
+                        </form>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <script type="text/javascript">
+                    $(window).load(function() {
+                        $("#flexiselDemo1").flexisel();
+                        $("#flexiselDemo2").flexisel({
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint:480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint:640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint:768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                        $("#flexiselDemo3").flexisel({
+                            visibleItems: 5,
+                            animationSpeed: 1000,
+                            autoPlay: true,
+                            autoPlaySpeed: 3000,
+                            pauseOnHover: true,
+                            enableResponsiveBreakpoints: true,
+                            responsiveBreakpoints: {
+                                portrait: {
+                                    changePoint:480,
+                                    visibleItems: 1
+                                },
+                                landscape: {
+                                    changePoint:640,
+                                    visibleItems: 2
+                                },
+                                tablet: {
+                                    changePoint:768,
+                                    visibleItems: 3
+                                }
+                            }
+                        });
+
+                    });
+                </script>
+                <script type="text/javascript" src="/js/jquery.flexisel_user.js"></script>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+
+
 <div class="main">
     <div class="wrap">
         <div class="section group">
@@ -171,20 +251,6 @@
         </div>
     </div>
 </div>
-
-<form th:action="@{/AddIntoFavoriteShop}" method="get">
-    <input type="hidden" name="ShopID" th:value="${ShopID}" /><br/>
-    <input type="hidden" name="UserID" th:value="1" /><br/>
-    <button type="submit" name="AddFavoriteShop" th:value="收藏商铺">AddShopIntoFavorite</button>
-</form>
-
-<form th:action="@{/MyFavoriteShop}" method="get">
-    <input type="hidden" name="ShopID" th:value="${ShopID}" /><br/>
-    <input type="hidden" name="UserID" th:value="1" /><br/>
-    <button type="submit" name="MyFavorite" th:value="我的收藏夹">MyFavorite</button>
-</form>
-
-
 </body>
 </html>
 
