@@ -3,6 +3,7 @@ package com.project_management.shoppingweb.controller.User;
 import com.project_management.shoppingweb.domain.Address;
 import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.Seller;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.AddressService;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
@@ -43,42 +44,98 @@ public class BuyController {
 
 
         if(UserID.equals("-1")){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductName", ProductName);
+//            return "/User/productdetial";
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
         }
         String ProductAmount = request.getParameter("ProductAmount");
 
         if(ProductAmount.equals("")||UnitPrice.equals("")){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductName", ProductName);
+//            return "/User/productdetial";
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
         }
         int haha;
         try {
             haha = Integer.parseInt(ProductAmount);
         }
         catch (Exception e){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductName", ProductName);
+//            return "/User/productdetial";
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
         }
         if(haha<=0||Double.valueOf(UnitPrice)<=0){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductName", ProductName);
+//            return "/User/productdetial";
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductName", ProductName);
-            return "/User/productdetial";
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
         }
 
         double UP = Double.valueOf(UnitPrice);

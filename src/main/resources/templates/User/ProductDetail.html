@@ -179,14 +179,37 @@
                     <p class="m_5" th:text="'$ '+${productdetail.productPrice}">productPrice</p><!--<span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p>-->
                     <!--<p class="m-5" th:text="'stack:'+${productdetail.productStock}">Stack : Unknown</p>-->
                     <div class="btn_form">
-                        <form>
+                        <form th:action="@{/Buy}" method="post">
                             <!--立即购买按钮-->
-                            <input type="submit" value="buy" title="">
+                            <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
+                            <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
+                            <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
+                            <input type="hidden" name="UnitPrice" th:value="${productdetail.productPrice}" style="display: none">
+                            <input type="text" name="ProductAmount" th:value="0" onkeyup="KeyP4(this);" />ProductAmount<br/>
+                            <input type="submit" value="buy" title="" name="buy">
                         </form>
                     </div>
                     <!-- 加入购物车/收藏夹 -->
-                    <span class="m_link"><a href="#">add in cart</a> </span>
-                    <span class="m_link"><a href="#">add in collection</a> </span>
+                    <!--<span class="m_link"><a href="#">add in cart</a> </span>
+                    <span class="m_link"><a href="#">add in collection</a> </span>-->
+                    <div class="btn_form">
+                        <form th:action="@{/AddIntoFavoriteP}" method="post">
+                            <!--立即购买按钮-->
+                            <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
+                            <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
+                            <input type="submit" value="addintofavorite" title="" name="addintofavorite">
+                        </form>
+                    </div>
+                    <div class="btn_form">
+                        <form th:action="@{/AddIntoShoppingCart}" method="post">
+                            <!--立即购买按钮-->
+                            <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
+                            <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
+                            <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
+                            <input type="hidden" name="ProductAmount" th:value="0" style="display: none" id="txt15" />
+                            <input type="submit" value="addintocart" title="" name="addintocart">
+                        </form>
+                    </div>
 
                     <p class="m_text2" th:text="${productdetail.productBriefInfo}">productBriefInfo</p>
                     <span class="m_link"><a th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
@@ -246,7 +269,11 @@
     </div>
 </div>
 
-
+<script type="text/javascript">
+    function KeyP4(v){
+        document.getElementById("txt15").value = v.value;
+    }
+</script>
 </body>
 </html>
 
