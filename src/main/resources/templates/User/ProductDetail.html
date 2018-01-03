@@ -194,7 +194,7 @@
                     <span class="m_link"><a href="#">add in collection</a> </span>-->
                     <div class="btn_form">
                         <form th:action="@{/AddIntoFavoriteP}" method="post">
-                            <!--立即购买按钮-->
+                            <!--加入收藏夹-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
                             <input type="submit" value="addintofavorite" title="" name="addintofavorite">
@@ -202,7 +202,7 @@
                     </div>
                     <div class="btn_form">
                         <form th:action="@{/AddIntoShoppingCart}" method="post">
-                            <!--立即购买按钮-->
+                            <!--加入购物车-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">

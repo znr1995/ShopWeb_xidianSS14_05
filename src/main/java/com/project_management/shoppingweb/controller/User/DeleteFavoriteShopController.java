@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-public class DeleteFavoriteController {
+public class DeleteFavoriteShopController {
     @Autowired
     private User_ProductCollectionService productCollectionService;
     @Autowired
@@ -32,8 +32,8 @@ public class DeleteFavoriteController {
     @Autowired
     private SellerService sellerService;
 
-    @RequestMapping(value = "/deletefavorite", method = RequestMethod.POST)
-    public String DeleteFavorite(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/deletefavoriteShop", method = RequestMethod.POST)
+    public String DeleteFavoriteShop(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ID = request.getParameter("ID");
         User user = userService.findByUserId(Long.parseLong(UserID));
@@ -41,10 +41,10 @@ public class DeleteFavoriteController {
         model.addAttribute("UserID", UserID);
         model.addAttribute("UserName", user.getUsername());
 
-        List<ProductCollection> productCollections = new ArrayList<ProductCollection>();
-        productCollections = productCollectionService.findAllByCollectionId(Long.parseLong(ID));
-        if(productCollections.size() != 0){
-            productCollectionService.delete(productCollections.get(0));
+        List<ShopCollection> shopCollections = new ArrayList<ShopCollection>();
+        shopCollections = shopCollectionService.findAllById(Long.parseLong(ID));
+        if(shopCollections.size() != 0){
+            shopCollectionService.delete(shopCollections.get(0));
         }
 
         List<ProductCollection> FavoritelistP = new ArrayList<ProductCollection>();
@@ -86,5 +86,6 @@ public class DeleteFavoriteController {
         }
 
         return "/User/FavoriteNew";
+
     }
 }

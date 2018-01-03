@@ -35,7 +35,12 @@
             margin: 20px auto;
 
         }
-        #favorite_table{
+        #favorite_table1{
+            border: none;
+            margin: 0 auto;
+
+        }
+        #favorite_table2{
             border: none;
             margin: 0 auto;
 
@@ -184,25 +189,52 @@
     </div>
 </div >
 <div  id="favorite">
-    <table id="favorite_table" >
+    <table id="favorite_table1" >
         <tr>
             <td width="250px" height="60px"><strong>ProductName</strong></td>
-
+            <td width="250px" height="60px"><strong>ShopName</strong></td>
         </tr>
         <tr th:each="ProductList : ${ProductList}">
-            <td width="200px" height="60px" th:text="*{ProductList.ID}" style="display: none" >Onions</td>　
-            <td width="200px" height="60px" th:text="*{ProductList.Name}" >Onions</td>
+            <td width="200px" height="60px" th:text="*{ProductList.PID}" style="display: none" >Onions</td>　
+            <td width="200px" height="60px" th:text="*{ProductList.NameP}" >Onions</td>
+            <td width="200px" height="60px" th:text="*{ProductList.NameS}" >Onions</td>
             <form th:action="@{/deletefavorite}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.ID}"></td>
+                <td style="display: none"><input type="hidden" name="ID" th:value="*{ProductList.ID}"></td>
                 <td style="width: 200px;height: 60px"><button type="submit">Delete</button></td>
             </form>
             <form th:action="@{/PPortal}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.ID}"></td>
-                <td style="width: 200px;height: 60px"><button type="submit">Portal</button></td>
+                <td style="display: none"><input type="hidden" name="ProductID" th:value="*{ProductList.PID}"></td>
+                <td style="width: 200px;height: 60px"><button type="submit">ProductPortal</button></td>
             </form>　
+            <form th:action="@{/SPortal}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                <td style="display: none"><input type="hidden" name="SellerID" th:value="*{ProductList.SID}"></td>
+                <td style="width: 200px;height: 60px"><button type="submit">ShopPortal</button></td>
+            </form>
         </tr>
     </table>
+
+    <table id="favorite_table2" >
+        <tr>
+            <td width="250px" height="60px"><strong>ShopName</strong></td>
+        </tr>
+        <tr th:each="ShopList : ${ShopList}">
+            <td width="200px" height="60px" th:text="*{ShopList.SID}" style="display: none" >Onions</td>　
+            <td width="200px" height="60px" th:text="*{ShopList.NameS}" >Onions</td>
+            <form th:action="@{/deletefavoriteShop}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                <td style="display: none"><input type="hidden" name="ID" th:value="*{ShopList.ID}"></td>
+                <td style="width: 200px;height: 60px"><button type="submit">Delete</button></td>
+            </form>
+            <form th:action="@{/SPortal}" method="post">
+                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
+                <td style="display: none"><input type="hidden" name="SellerID" th:value="*{ShopList.SID}"></td>
+                <td style="width: 200px;height: 60px"><button type="submit">ShopPortal</button></td>
+            </form>
+        </tr>
+    </table>
+
 
 </div>

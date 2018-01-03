@@ -116,10 +116,10 @@
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td th:text="${p.sellerName}">1</td>
                                     <td th:text="${p.description}">1</td>
-                                    <td><div class="pic"><img th:src="${p.picurl}"></div></td>
+                                    <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                     <td th:text="${p.price}">$50</td>
-                                    <td th:text="${p.startDate}">1</tb>
-                                    <td th:text="${p.endDate}">1</tb>
+                                    <td th:text="${p.startDate}">1</td>
+                                    <td th:text="${p.endDate}">1</td>
                                     <td><button th:onclick="'shopagree('+${p.advertisementId}+')'">✔</button></td>
                                     <td><button th:onclick="'shopreject('+${p.advertisementId}+')'">✖</button></td>
 
@@ -161,7 +161,7 @@
                                     <td th:text="${p.description}">iWatch</td>
                                     <td th:text="${p.sellerName}">Anna</td>
                                     <td th:text="${p.type}">1</td>
-                                    <td><div class="pic"><img src="/1.jpg"></div></td>
+                                    <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                     <td th:text="${p.price}">$50</td>
                                     <td th:text="${p.startDate}">1</td>
                                     <td th:text="${p.endDate}">1</td>
@@ -208,7 +208,7 @@
                                 <td th:text="${p.description}">iWatch</td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.price}">1</td>
-                                <td><div class="pic"><img src="/1.jpg"></div></td>
+                                <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
 
@@ -218,7 +218,7 @@
                     </table>
                 </div>
                 <div class="panel panel-default">
-                    <div class="panel-heading" style="background: #1ab188">Produce Ads</div>
+                    <div class="panel-heading" style="background: #1ab188">Product Ads</div>
                     <table class="table">
                         <thead>
                         <th>Ads ID</th>
@@ -239,7 +239,7 @@
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.type}">1</td>
                                 <td th:text="${p.price}">$50</td>
-                                <td><div class="pic"><img src="/1.jpg"></div></td>
+                                <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
                             </tr>
