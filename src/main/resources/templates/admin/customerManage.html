@@ -58,7 +58,7 @@
                 <th>Customer ID</th>
                 <th>Customer Username</th>
                 <th>Customer E-mail</th>
-                <th>Black</th>
+                <th>Blacklist</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -69,7 +69,7 @@
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerblack('+${u.userId}+')'">✔</button></td>
+                                   <td><button th:onclick="'customerblack('+${u.userId}+')'">Blacklist</button></td>
                                    <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
 
 
@@ -92,7 +92,7 @@
                 <th>Customer ID</th>
                 <th>Customer Username</th>
                 <th>Customer E-mail</th>
-                <th>Recover</th>
+                <th>Whitelist</th>
                 <th>Delete</th>
             </tr>
             </thead>
@@ -103,7 +103,7 @@
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerrecover('+${u.userId}+')'">✔</button></td>
+                                   <td><button th:onclick="'customerrecover('+${u.userId}+')'">Whitelist</button></td>
                                    <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
 
 

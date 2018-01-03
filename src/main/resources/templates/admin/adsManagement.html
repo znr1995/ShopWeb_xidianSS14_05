@@ -107,7 +107,7 @@
                                 <th>Price</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Agree</th>
+                                <th>Approve</th>
                                 <th>Reject</th>
                             </tr>
                             </thead>
@@ -117,7 +117,9 @@
 
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td th:text="${p.sellerName}">1</td>
-                                    <td th:text="${p.description}">1</td>
+                                    <td>
+                                        <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                    </td>
                                     <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                     <td th:text="${p.price}">$50</td>
                                     <td th:text="${p.startDate}">1</td>
@@ -151,7 +153,7 @@
                                 <th>Price</th>
                                 <th>Start Date</th>
                                 <th>End Date</th>
-                                <th>Agree</th>
+                                <th>Approve</th>
                                 <th>Reject</th>
                             </tr>
                             </thead>
@@ -160,7 +162,9 @@
                                 <tr>
 
                                     <td th:text="${p.advertisementId}">a001</td>
-                                    <td th:text="${p.description}">iWatch</td>
+                                    <td>
+                                        <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                    </td>
                                     <td th:text="${p.sellerName}">Anna</td>
                                     <td th:text="${p.type}">1</td>
                                     <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
@@ -199,21 +203,22 @@
                         <th>Picture</th>
                         <th>Statr Date</th>
                         <th>End Date</th>
-
+                        <th>Delete</th>
                         </thead>
                         <tbody>
                         <th:block th:each="p,index:${onShopFindAll}">
 
                             <tr>
                                 <td th:text="${p.advertisementId}">a001</td>
-
-                                <td th:text="${p.description}">iWatch</td>
+                                <td>
+                                    <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.price}">1</td>
                                 <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
-
+                                <td><button>Delete</button></td>
                             </tr>
                         </th:block>
                         </tbody>
@@ -231,19 +236,22 @@
                         <th>Picture</th>
                         <th>Start Date</th>
                         <th>End Date</th>
-
+                        <th>Delete</th>
                         </thead>
                         <tbody>
                         <th:block th:each="p,index:${onProductFindAll}">
                             <tr>
                                 <td th:text="${p.advertisementId}">a001</td>
-                                <td th:text="${p.description}">iWatch</td>
+                                <td>
+                                    <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.type}">1</td>
                                 <td th:text="${p.price}">$50</td>
                                 <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
+                                <td><button>Delete</button></td>
                             </tr>
                         </th:block>
                         </tbody>
