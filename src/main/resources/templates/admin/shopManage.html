@@ -3,13 +3,24 @@
 <html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
-    <title>shopManage</title>
+    <title>ShopManage</title>
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
 </head>
+<style>
+    .pic{
+        width: 60px;
+        height: 60px;
+        border: 1px solid;
+    }
+    .pic img{
+        width: 100%;
+        height: 100%;
+    }
+</style>
 <body>
 
 <div class="col-lg-2">
@@ -46,19 +57,19 @@
     <br>
     <!--商铺申请管理-->
     <div class="panel panel-primary">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background: #83848e">
             Shop Requests Management
         </div>
 
         <table class="table table-bordered table-hover">
             <thead>
             <tr class="success">
-                <th>picture</th>
+                <th>Picture</th>
                 <th>Shop Name</th>
                 <th>Shop Owner</th>
                 <th>Category</th>
-                <th>address</th>
-                <th>Agree</th>
+                <th>Address</th>
+                <th>Approve</th>
                 <th>Reject</th>
 
             </tr>
@@ -66,68 +77,64 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusNoList}">
                 <tr>
-                    <td ><img th:src="${p.sculpture}"></td>
+                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.catogery}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button th:onclick="'shopagreeOne('+${p.sellerId}+')'">✔</button></td>
-                    <td><button th:onclick="'shoprejectOne('+${p.sellerId}+')'">✖</button></td>
+                    <td><button style="background: #45f017;border-radius: 8px;" class="btn-default" th:onclick="'shopagreeOne('+${p.sellerId}+')'">✔</button></td>
+                    <td><button style="background: #f01526;border-radius: 8px;" class="btn-default" th:onclick="'shoprejectOne('+${p.sellerId}+')'">✖</button></td>
                 </tr>
             </th:block>
             </tbody>
         </table>
     </div><!-- end of panel -->
-    <div class="well">
         <table class="table">
 
             <caption style="background: #bee5eb">Shop List</caption>
             <thead>
             <tr>
-                <th>picture</th>
+                <th>Picture</th>
                 <th>Shop Name</th>
                 <th>Shop Owner</th>
-                <th>Shop Description</th>
-                <th>Lock</th>
+                <th>Shop Address</th>
+                <th>Blacklist</th>
             </tr>
             </thead>
             <tbody>
             <th:block th:each="p,index:${sellerStatusList}">
                 <tr>
-                    <td ><img th:src="${p.sculpture}"></td>
+                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button th:onclick="'black('+${p.sellerId}+')'">✔</button></td>
+                    <td><button style="background: #343434;border-radius: 8px;" class="btn-default" th:onclick="'black('+${p.sellerId}+')'">Black</button></td>
                 </tr>
 
             </th:block>
             </tbody>
         </table>
-    </div>
 
-    <div class="well">
         <table class="table">
-            <caption style="background: #007bff"> Blacklist</caption>
+            <caption style="background: #e2b974"> Blacklist</caption>
             <thead>
             <tr>
-                <th>picture</th>
+                <th>Picture</th>
                 <th>Shop Name</th>
-                <th>Unlock</th>
+                <th>Whitelist</th>
             </tr>
             </thead>
             <tbody>
             <th:block th:each="p,index:${sellerStatusBlackList}">
                 <tr>
-                    <td ><img th:src="${p.sculpture}"></td>
+                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
                     <td th:text="${p.shopname}"></td>
-                    <td><button th:onclick="'unblack('+${p.sellerId}+')'">✖</button></td>
+                    <td><button style="background: #5ff00b;border-radius: 8px;" class="btn-default" th:onclick="'unblack('+${p.sellerId}+')'">Whitelist</button></td>
                 </tr>
 
             </th:block>
             </tbody>
         </table>
-    </div>
 </div>
 <div class="footer"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
