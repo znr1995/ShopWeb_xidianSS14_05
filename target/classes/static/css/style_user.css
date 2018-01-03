@@ -73,8 +73,9 @@ body{
 	color: #ACEAFA;
 }
 .header-bottom{
-	background:#fff;
+	background:rgb(46,49,129);
 	padding:2% 0;
+
 }
 .logo{
 	float:left;
