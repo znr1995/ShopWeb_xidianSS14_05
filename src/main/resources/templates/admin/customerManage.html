@@ -50,7 +50,8 @@
 
      <div class="panel-group">
                        <div class="panel panel-primary">
-                           <div class="panel-heading">Customer List</div>
+                           <div class="panel-heading" style="background: #c8ecb4 ">
+                               Customer List</div>
                            <table class="table table-bordered table-hover">
             <thead>
             <tr class="success">
@@ -69,8 +70,8 @@
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerblack('+${u.userId}+')'">Blacklist</button></td>
-                                   <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
+                                   <td><button style="background: #343434;border-radius: 8px;" class="btn-default" th:onclick="'customerblack('+${u.userId}+')'">Blacklist</button></td>
+                                   <td><button style="background: #f02315;border-radius: 8px;" class="btn-default" th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
 
 
                                </tr>
@@ -84,7 +85,8 @@
     <br />
 	<div class="panel-group">
                        <div class="panel panel-primary">
-                           <div class="panel-heading">Blacklist</div>
+                           <div class="panel-heading" style="background: #b67a74">
+                               Blacklist</div>
                            <table class="table table-bordered table-hover">
             <thead>
             <tr class="success">
@@ -103,8 +105,8 @@
                                    <td th:text="${u.userId}"></td>
                                    <td th:text="${u.username}"></td>
                                    <td th:text="${u.email}"></td>
-                                   <td><button th:onclick="'customerrecover('+${u.userId}+')'">Whitelist</button></td>
-                                   <td><button th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
+                                   <td><button style="background: #5ff00b;border-radius: 8px;" class="btn-default" th:onclick="'customerrecover('+${u.userId}+')'">Whitelist</button></td>
+                                   <td><button style="background: #f01525;border-radius: 8px;" class="btn-default" th:onclick="'customerdelete('+${u.userId}+')'">✖</button></td>
 
 
                                </tr>

@@ -57,7 +57,7 @@
     <br>
     <!--商铺申请管理-->
     <div class="panel panel-primary">
-        <div class="panel-heading">
+        <div class="panel-heading" style="background: #83848e">
             Shop Requests Management
         </div>
 
@@ -82,14 +82,13 @@
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.catogery}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button th:onclick="'shopagreeOne('+${p.sellerId}+')'">✔</button></td>
-                    <td><button th:onclick="'shoprejectOne('+${p.sellerId}+')'">✖</button></td>
+                    <td><button style="background: #45f017;border-radius: 8px;" class="btn-default" th:onclick="'shopagreeOne('+${p.sellerId}+')'">✔</button></td>
+                    <td><button style="background: #f01526;border-radius: 8px;" class="btn-default" th:onclick="'shoprejectOne('+${p.sellerId}+')'">✖</button></td>
                 </tr>
             </th:block>
             </tbody>
         </table>
     </div><!-- end of panel -->
-    <div class="well">
         <table class="table">
 
             <caption style="background: #bee5eb">Shop List</caption>
@@ -109,17 +108,15 @@
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button th:onclick="'black('+${p.sellerId}+')'">Black</button></td>
+                    <td><button style="background: #343434;border-radius: 8px;" class="btn-default" th:onclick="'black('+${p.sellerId}+')'">Black</button></td>
                 </tr>
 
             </th:block>
             </tbody>
         </table>
-    </div>
 
-    <div class="well">
         <table class="table">
-            <caption style="background: #007bff"> Blacklist</caption>
+            <caption style="background: #e2b974"> Blacklist</caption>
             <thead>
             <tr>
                 <th>Picture</th>
@@ -130,15 +127,14 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusBlackList}">
                 <tr>
-                    <td ><img th:src="${p.sculpture}"></td>
+                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
                     <td th:text="${p.shopname}"></td>
-                    <td><button th:onclick="'unblack('+${p.sellerId}+')'">Whitelist</button></td>
+                    <td><button style="background: #5ff00b;border-radius: 8px;" class="btn-default" th:onclick="'unblack('+${p.sellerId}+')'">Whitelist</button></td>
                 </tr>
 
             </th:block>
             </tbody>
         </table>
-    </div>
 </div>
 <div class="footer"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
