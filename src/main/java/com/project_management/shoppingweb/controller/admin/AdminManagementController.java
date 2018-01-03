@@ -107,6 +107,7 @@ public class AdminManagementController {
 		price.setProductLowAdvertisementPrice(Double.parseDouble(request.getParameter("productLowAdvertisementPrice")));
 		price.setSellerListAdvertisementPrice(Double.parseDouble(request.getParameter("sellerListAdvertisementPrice")));
 		price.setProductRate(Double.parseDouble(request.getParameter("productRate")));
+		price.setShopPrice(Double.parseDouble(request.getParameter("shopPrice")));
 		priceService.updatePrice(price);
 		
     	List<SellerAdvertisement> sellerAdvertisementList = sellerAdvertisementService.findAllByStatus(0);
