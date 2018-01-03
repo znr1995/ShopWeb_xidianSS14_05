@@ -155,8 +155,10 @@
                 <div class="desc1 span_3_of_2">
                     <h3 class="m_3" th:text="${seller.shopname}">sellerName</h3>
                     <div class="btn_form">
-                        <form>
+                        <form th:action="@{/AddIntoFavoriteS}" method="post">
                             <!--加入收藏夹-->
+                            <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
+                            <input type="hidden" name="SellerID" th:value="${seller.sellerId}" style="display: none">
                             <input type="submit" value="addintofavorite" title="">
                         </form>
                     </div>

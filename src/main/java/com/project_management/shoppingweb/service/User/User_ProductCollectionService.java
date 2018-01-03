@@ -21,5 +21,7 @@ public class User_ProductCollectionService {
    public void delete(ProductCollection productCollection){
         productCollectionRepository.delete(productCollection);
    }
-
+   public List<ProductCollection> findAllByCollectionId(Long ID){
+       return productCollectionRepository.findAllByCollectionId(ID);
+   }
 }
