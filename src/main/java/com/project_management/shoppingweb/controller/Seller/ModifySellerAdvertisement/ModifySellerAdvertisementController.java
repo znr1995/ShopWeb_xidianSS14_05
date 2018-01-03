@@ -289,7 +289,7 @@ public class ModifySellerAdvertisementController {
 
     //修改或添加广告后的处理
     @RequestMapping(value = "ModifyAdvertisement",method = RequestMethod.POST)
-    public String advertisementHandler(@RequestParam(value = "pictureUrl",required = false)MultipartFile file,
+    public String advertisementHandler(@RequestParam(value = "pictureUrl",required = true)MultipartFile file,
                                        HttpServletRequest request,
                                        Model model,
                                        RedirectAttributes attributes)
@@ -323,7 +323,7 @@ public class ModifySellerAdvertisementController {
                 return "redirect:/error/errorHandler";
             }
 
-            if(file == null)
+            if(file.isEmpty())
             {
                 attributes.addAttribute("errorMessage","picture do not allow null when add advertisement !");
                 return "redirect:/error/errorHandler";
@@ -389,12 +389,15 @@ public class ModifySellerAdvertisementController {
             //新建商品广告
             productAdvertisement = new ProductAdvertisement();
 
-            int dayNum = getDateDifference(startDate,endDate);
-            if(dayNum <= 0)
+            //判断起止日期是否合法
+            if(startDate.after(endDate))
             {
                 attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
                 return "redirect:/error/errorHandler";
             }
+
+            //计算广告投放时间
+            int dayNum = getDateDifference(startDate, endDate);
 
             productAdvertisement.setStatus(notPayStatus);  // 1 - 未判断， 0 - 通过 2 - 未付款
             long productId = Long.valueOf(request.getParameter("productIDs"));
@@ -421,7 +424,13 @@ public class ModifySellerAdvertisementController {
         // 修改广告只允许修改描述和图片
         if(pictureUrl != null)
             productAdvertisement.setPictureUrl(pictureUrl);
+        //广告描述非空
+        if(request.getParameter("description").isEmpty()){
+               attributes.addAttribute("errorMessage","The description can't be null!");
+               return "redirect:/error/errorHandler";
+            }
         productAdvertisement.setDescription(request.getParameter("description"));
+
 
 
 
@@ -455,17 +464,25 @@ public class ModifySellerAdvertisementController {
             //新建商家广告
             sellerAdvertisement = new SellerAdvertisement();
 
-            int dayNum = getDateDifference(startDate, endDate);
-            if(dayNum <= 0)
+
+            //判断起止日期是否合法
+            if(startDate.after(endDate))
             {
                 attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
                 return "redirect:/error/errorHandler";
             }
+
+            //计算广告投放时间
+            int dayNum = getDateDifference(startDate, endDate);
+
+
             //判断数据库是否有price相关的数据
             if(!sellerSellerService.hasCorrentPrice()) {
                 attributes.addAttribute("errorMessage","not find price file,the admin is too lazy!");
                 return "redirect:/error/errorHandler";
             }
+
+
             sellerAdvertisement.setPrice(dayNum * sellerSellerService.getSellerListAdvertisementPrice());
             sellerAdvertisement.setStartDate(startDate);
             sellerAdvertisement.setEndDate(endDate);
@@ -484,6 +501,11 @@ public class ModifySellerAdvertisementController {
         // 修改广告只允许修改描述和图片
         if(pictureUrl != null)
             sellerAdvertisement.setPictureUrl(pictureUrl);
+        //广告描述非空
+        if(request.getParameter("description").isEmpty()){
+            attributes.addAttribute("errorMessage","The description can't be null!");
+            return "redirect:/error/errorHandler";
+        }
         sellerAdvertisement.setDescription(request.getParameter("description"));
 
 
@@ -576,7 +598,12 @@ public class ModifySellerAdvertisementController {
 
     private int getDateDifference(Date startDate, Date endDate)
     {
-        return  (int)(endDate.getTime()-startDate.getTime())/(1000*60*60*24);
+        long e = endDate.getTime();
+        long s = startDate.getTime();
+        long x1 = e-s;
+        long y = x1/(1000*60*60*24);
+        int x = (int)((e-s)/(long)(1000*60*60*24));
+        return  x;
     }
 }
 
