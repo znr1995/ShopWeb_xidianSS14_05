@@ -13,7 +13,7 @@ public class Income {
     private Long commission;
     private Long sellerId;
     private String sellerName;
-    private String type;
+    private String type; //"rate"佣金，“shop”开店，“advertisement”广告
 
     public Date getDate() {
         return date;
@@ -54,4 +54,5 @@ public class Income {
     public void setType(String type) {
         this.type = type;
     }
+
 }
