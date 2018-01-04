@@ -298,4 +298,20 @@ public class AdminManagementController {
 		
 		return "admin/commission";
 	}
+	@GetMapping("/search")
+	public String search(@RequestParam("shopname") String shopname, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
+
+		List<Seller> searchList = sellerService.findAllByShopnameLike(shopname);
+		model.addAttribute("searchList", searchList);
+		List<Seller> statusList = sellerService.findAllByApplyState(1);
+		model.addAttribute("sellerStatusList", statusList);
+		//拉出未被拉黑的人
+		List<Seller> statusNoList = sellerService.findAllByApplyState(3);
+		model.addAttribute("sellerStatusNoList", statusList);
+		//拉出被拉黑的人
+		List<Seller> applyStatusList = sellerService.findAllByApplyState(2);
+		model.addAttribute("sellerApplyStatusList", statusList);
+		//拉出未通过审核的商店
+		return "/admin/shopManageSearch";
+	}
 }

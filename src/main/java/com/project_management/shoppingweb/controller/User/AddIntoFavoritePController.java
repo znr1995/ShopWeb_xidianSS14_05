@@ -33,7 +33,6 @@ public class AddIntoFavoritePController {
         String UserID = request.getParameter("UserID");
         String ProductID = request.getParameter("ProductID");
         Product product = productService.findProductByProductID(Long.parseLong(ProductID));
-        String ProductName = product.getProductName();
 
         if(UserID.equals("-1")){
 //            model.addAttribute("UserID", UserID);

@@ -55,6 +55,11 @@ public class TradeDetailController {
             TradeDetailToShow tradeDetailToShow = new TradeDetailToShow();
             tradeDetailToShow.tradeDetail = TradeDetailList.get(i);
             Product product = productService.findProductByProductID((long)TradeDetailList.get(i).getProductId());
+            if(product == null){
+                tradeDetailToShow.Name = "undercarriage";
+                tradeDetailToShows.add(tradeDetailToShow);
+                continue;
+            }
             tradeDetailToShow.Name = product.getProductName();
             tradeDetailToShows.add(tradeDetailToShow);
         }

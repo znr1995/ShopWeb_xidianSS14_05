@@ -55,6 +55,44 @@
     <br>
     <br>
     <br>
+
+
+    <div class="panel panel-primary">
+        <input type="text" name="shopname" id="input1">shopname</input>
+
+        <button onclick=search()>Search</button>
+
+        <table class="table">
+
+            <caption style="background: #bee5eb">Search result</caption>
+            <thead>
+            <tr>
+                <th>picture</th>
+                <th>Shop Name</th>
+                <th>Shop Owner</th>
+                <th>Email</th>
+                <th>Category</th>
+                <th>address</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${searchList}">
+                <tr>
+                    <td ><img th:src="${p.sculpture}" style="height: 100px; width: 100px;"></td>
+                    <td th:text="${p.shopname}"></td>
+                    <td th:text="${p.username}"></td>
+                    <td th:text="${p.email}"></td>
+                    <td th:text="${p.catogery}"></td>
+                    <td th:text="${p.address}"></td>
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+
+
     <!--商铺申请管理-->
     <div class="panel panel-primary">
         <div class="panel-heading" style="background: #83848e">
@@ -77,7 +115,7 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusNoList}">
                 <tr>
-                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
+                    <td ><img th:src="${p.sculpture}" style="height: 100px; width: 100px;"></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.catogery}"></td>
@@ -104,11 +142,13 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusList}">
                 <tr>
-                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
+                    <td ><img th:src="${p.sculpture}"  style="height: 100px; width: 100px;"></td>
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button style="background: #343434;border-radius: 8px;" class="btn-default" th:onclick="'black('+${p.sellerId}+')'">Black</button></td>
+                    <td><button th:onclick="'black('+${p.sellerId}+')'">✔</button></td>
+                    <td><button th:onclick="'delete('+${p.sellerId}+')'"> delete</button></td>
+
                 </tr>
 
             </th:block>
@@ -116,7 +156,8 @@
         </table>
 
         <table class="table">
-            <caption style="background: #e2b974"> Blacklist</caption>
+            <caption style="background: #bee5eb">Black List</caption>
+
             <thead>
             <tr>
                 <th>Picture</th>
@@ -127,9 +168,10 @@
             <tbody>
             <th:block th:each="p,index:${sellerStatusBlackList}">
                 <tr>
-                    <td ><div class="pic"><img th:src="${p.sculpture}"></div></td>
+                    <td ><img th:src="${p.sculpture}"  style="height: 100px; width: 100px;"></td>
                     <td th:text="${p.shopname}"></td>
-                    <td><button style="background: #5ff00b;border-radius: 8px;" class="btn-default" th:onclick="'unblack('+${p.sellerId}+')'">Whitelist</button></td>
+                    <td><button th:onclick="'unblack('+${p.sellerId}+')'">✖</button></td>
+                    <td><button th:onclick="'delete('+${p.sellerId}+')'"> delete</button></td>
                 </tr>
 
             </th:block>
@@ -183,7 +225,6 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-</body>
 <script>
     function shopagreeOne(id){
         window.location.href="/admin/agreeSellerApply?sellerId="+id;
@@ -197,5 +238,11 @@
     function unblack(id){
         window.location.href="/admin/unblack?sellerId="+id;
     }
+    function search(){
+        var name=document.getElementById('input1');
+        window.location.href="/admin/search?shopname="+name.value;
+    }
 </script>
+</body>
+
 </html>

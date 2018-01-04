@@ -1,11 +1,9 @@
 package com.project_management.shoppingweb.controller.User;
 
 
-import com.project_management.shoppingweb.domain.Address;
-import com.project_management.shoppingweb.domain.ShoppingCart;
-import com.project_management.shoppingweb.domain.Trade;
-import com.project_management.shoppingweb.domain.TradeDetail;
+import com.project_management.shoppingweb.domain.*;
 import com.project_management.shoppingweb.service.AddressService;
+import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
 import com.project_management.shoppingweb.service.User.User_TradeDetailService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
@@ -33,6 +31,8 @@ public class PayController {
     private User_ShoppingCartService shoppingCartService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private User_ProductService productService;
 
 
     @RequestMapping(value = "/Pay",method = RequestMethod.POST)
@@ -54,6 +54,29 @@ public class PayController {
         int number = AddressList.size();
 
         model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
+
+        Product product = productService.findProductByProductID(Long.parseLong(ProductID));
+        if(product == null){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
+            return "/User/productoops";
+        }
+        if(Integer.parseInt(ProductAmount) > product.getProductStock()){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("ProductID", ProductID);
+            model.addAttribute("ShopID", ShopID);
+            model.addAttribute("UnitPrice", UnitPrice);
+            model.addAttribute("ProductAmount", ProductAmount);
+            model.addAttribute("Total", Total);
+            model.addAttribute("account", account);
+            model.addAttribute("password", password);
+            model.addAttribute("SellerName", SellerName);
+            model.addAttribute("ProductName", ProductName);
+            if(AddressList.size() == 0)
+                return "/User/PayNew";
+            model.addAttribute("AddressList",AddressList);
+            return "/User/PayNew";
+        }
 
         if(account.equals("") || password.equals("") || address.equals("")){
             model.addAttribute("UserID", UserID);
@@ -148,6 +171,10 @@ public class PayController {
         newTradeDetail.setProductTradePrice(Double.parseDouble(Total));
 
         tradeDetailService.save(newTradeDetail);
+
+        int result =product.getProductStock() - Integer.parseInt(ProductAmount);
+        product.setProductStock(result);
+        productService.save(product);
 
         model.addAttribute("UserID", UserID);
         String IsFromShoppingCart = request.getParameter("IsFromShoppingCart");
