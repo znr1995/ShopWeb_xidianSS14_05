@@ -72,10 +72,13 @@
             </p>
                 <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerInformation/ModifySellerInformation}"  method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-                    <div class="col-lg-4 text-right">
-                    <img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">
+                    <div style="width: 400px;height: 400px;margin: 10px;margin-left: 50%">
+                        <img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">
                     </div>
-                    <br><br><br><br><br><br><br><br><br>
+                    <!--<div class="col-lg-4 text-right">-->
+                    <!--<img src="./bootstrap/picture/015062.png" id="photo" th:src="*{Sculpture}" class="img-rounded">-->
+                    <!--</div>-->
+
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Shopname:</label>
                         <div class="col-lg-3">
