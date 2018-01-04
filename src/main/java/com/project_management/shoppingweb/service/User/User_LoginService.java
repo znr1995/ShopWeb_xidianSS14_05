@@ -56,7 +56,7 @@ public class User_LoginService {
 
     public long userLoginByUsername(String username,String password)
     {
-        User user = userRepository.findByEmail(username);
+        User user = userRepository.findByUsername(username);
         if(user == null)
             return -1;
         if(user.getPassword().equals(password))

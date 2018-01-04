@@ -1,8 +1,12 @@
 package com.project_management.shoppingweb.controller.User;
 
 
+import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductCollection;
+import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
+import com.project_management.shoppingweb.service.User.User_ProductService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,47 +21,93 @@ import java.util.List;
 public class AddIntoFavoritePController {
     @Autowired
     private User_ProductCollectionService productCollectionService;
-    @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.GET)
+    @Autowired
+    private User_ProductService productService;
+    @Autowired
+    private UserService userService;
+
+
+
+    @RequestMapping(value = "/AddIntoFavoriteP",method = RequestMethod.POST)
     public String AddIntoFavoriteP(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
-        String ShopID = request.getParameter("ShopID");
         String ProductID = request.getParameter("ProductID");
-        String UnitPrice = request.getParameter("UnitPrice");
+        Product product = productService.findProductByProductID(Long.parseLong(ProductID));
+        String ProductName = product.getProductName();
 
-        if(UserID.equals("")){
+        if(UserID.equals("-1")){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            System.out.println("no");
+//            model.addAttribute("ProductName", ProductName);
+//
+//            return "/User/productdetial";
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("ProductID", ProductID);
-            System.out.println("no");
-            model.addAttribute("UnitPrice", UnitPrice);
-            return "/User/productdetial";
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
         }
 
         List<ProductCollection> GlobalFavorites = new ArrayList<ProductCollection>();
         GlobalFavorites = productCollectionService.findAllByUserId(Long.parseLong(UserID));
         for(int i = 0; i < GlobalFavorites.size(); i++){
             if(GlobalFavorites.get(i).getProductId()==Long.parseLong(ProductID)){
+//                model.addAttribute("UserID", UserID);
+//                model.addAttribute("ProductID", ProductID);
+//                System.out.println("no");
+//                model.addAttribute("ProductName", ProductName);
+//                return "/User/productdetial";
+                boolean isnull = false;
+                if(product == null) isnull = true;
+                model.addAttribute("productdetail", product);
+                model.addAttribute("proisnull", isnull);
+                long UserIDD = Long.parseLong(request.getParameter("UserID"));
                 model.addAttribute("UserID", UserID);
-                model.addAttribute("ShopID", ShopID);
-                model.addAttribute("ProductID", ProductID);
-                System.out.println("no");
-                model.addAttribute("UnitPrice", UnitPrice);
-                return "/User/productdetial";
+                if(UserIDD == -1){
+                    model.addAttribute("UserName", "UserName");
+                }
+                else{
+                    User user = userService.findByUserId(UserIDD);
+                    model.addAttribute("UserName", user.getUsername());
+                }
+                return "/User/ProductDetail";
             }
         }
 
         ProductCollection favorite = new ProductCollection();
         favorite.setUserId(Long.parseLong(UserID));
-        //favorite.setCollectionId((long)1);
         favorite.setProductId(Long.parseLong(ProductID));
 
         productCollectionService.save(favorite);
 
-        System.out.println("ok");
+//        System.out.println("ok");
+//        model.addAttribute("UserID", UserID);
+//        model.addAttribute("ProductID", ProductID);
+//        model.addAttribute("ProductName", ProductName);
+//        return "/User/productdetial";
+        boolean isnull = false;
+        if(product == null) isnull = true;
+        model.addAttribute("productdetail", product);
+        model.addAttribute("proisnull", isnull);
+        long UserIDD = Long.parseLong(request.getParameter("UserID"));
         model.addAttribute("UserID", UserID);
-        model.addAttribute("ProductID", ProductID);
-        model.addAttribute("ShopID", ShopID);
-        model.addAttribute("UnitPrice", UnitPrice);
-        return "/User/productdetial";
+        if(UserIDD == -1){
+            model.addAttribute("UserName", "UserName");
+        }
+        else{
+            User user = userService.findByUserId(UserIDD);
+            model.addAttribute("UserName", user.getUsername());
+        }
+        return "/User/ProductDetail";
     }
 }

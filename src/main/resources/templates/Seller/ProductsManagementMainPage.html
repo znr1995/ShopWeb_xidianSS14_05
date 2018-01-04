@@ -8,6 +8,30 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 24px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 9px #999;
+        }
+
+        .button:hover {background-color: #3e8e41}
+
+        .button:active {
+            background-color: #3e8e41;
+            box-shadow: 0 5px #666;
+            transform: translateY(4px);
+        }
+    </style>
 </head>
 <body>
 <div class="header">header</div>
@@ -24,17 +48,17 @@
                     <li class="sidebar-brand">
 
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                    <li>
+                        <a th:href="@{'/Seller/FastJump/ProductsManagementHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                        <a th:href="@{'/Seller/FastJump/ModifySellerAdvertisementHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
+                        <a th:href="@{'/Seller/FastJump/ViewIncomeHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
+                        <a th:href="@{'/Seller/FastJump/ViewTransactionHandler?SellerID='+${SellerID}}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
                     </li>
                 </ul>
             </nav>
@@ -43,44 +67,49 @@
 
 
     <div class="col-lg-10">
-        <div class="row">
             <br><br>
-
             <form th:action="@{/Seller/ProductsManagement/AddProduct}" method="get">
-                <button type="submit" class="btn-default" style="background: #9acfea">Add New Product</button>
+                <button class="button">Add New Product</button>
             </form>
+            <br><br>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h1 class="panel-title">
+                        <h2><b>Products  List</b></h2>
+                    </h1>
+                </div>
+                <div class="panel-body">
+                    <form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
+                        <table class="table table-striped">
 
-            <form th:action="@{/Seller/ProductsManagement/ProductsHandler}">
-                <table class="table table-striped">
-                    <caption> <h1><b>Products  List</b></h1> </caption>
-                    <thead>
+                            <thead>
 
-                    <th>Product Name</th>
-                    <th>Price</th>
-                    <th>Quantity</th>
-                    <th>Operation1</th>
-                    <th>Operation2</th>
-                    </thead>
-                    <tbody>
+                            <th>Product Name</th>
+                            <th>Market Price</th>
+                            <th>Quantity</th>
+                            <th>Operation1</th>
+                            <th>Operation2</th>
+                            </thead>
+                            <tbody>
 
-                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
 
-                    <tr th:each="prod : ${products}">
-                        <td th:text="${prod.productName}">productName</td>
-                        <td th:text="${prod.productPrice}">0.0</td>
-                        <td th:text="${prod.productStock}">0</td>
-                        <td><button type="submit" style="background:#9acfea" class="btn-default" name="delete"  th:value="${prod.productId}">delete</button></td>
-                        <td>
-                            <button type="submit" style="background:#9acfea" class="btn-default" name="modify"  th:value="${prod.productId}">modify</button>
-                        </td>
-                        <input type="hidden" name="ProductID" th:value="${prod.productId}" />
-                    </tr>
+                            <tr th:each="prod : ${products}">
+                                <td th:text="${prod.productName}">productName</td>
+                                <td th:text="'HK$  '+${prod.productPrice}">0.0</td>
+                                <td th:text="${prod.productStock}">0</td>
+                                <td><button type="submit" style="background: #F04243;border-radius: 8px;" class="btn-default" name="delete"  th:value="${prod.productId}">delete</button></td>
+                                <td>
+                                    <button type="submit" style="background:#9acfea;border-radius: 8px;" class="btn-default" name="modify"  th:value="${prod.productId}">modify</button>
+                                </td>
+                                <input type="hidden" name="ProductID" th:value="${prod.productId}" />
+                            </tr>
 
-                    </tbody>
-                </table>
-            </form>
-        </div>
-
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+            </div>
     </div>
 </div>
 </div>
@@ -99,8 +128,8 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
-                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                <li><a th:href="@{'/Seller/FastJump/ModifySellerInformationHandler?SellerID='+${SellerID}}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px;" onclick="Logout">
                     Log out
                 </button>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">

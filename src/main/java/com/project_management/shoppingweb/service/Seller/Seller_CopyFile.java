@@ -12,8 +12,10 @@ import java.util.Random;
 
 public class Seller_CopyFile {
 
+
+    private String BASEPATH = "C:\\Users\\Public\\Pictures\\";
+
     private String FINDPATH = "http://localhost:8888/images/";
-    private String BASEPATH = "C:\\Users\\znr91\\Desktop\\ShopWeb_xidianSS14_05\\src\\main\\resources\\static\\";
 
     private static Seller_CopyFile seller_copyFile = null;
 

@@ -104,9 +104,13 @@ public class Seller_SellerService {
     public List<Trade> getTradeList(long sellerID, int statue)
     {
 
-        if(statue == 3)
+        if(statue == 9)
         {
             LinkedList<Trade> retTrades = new LinkedList<Trade>();
+            retTrades.addAll(getTradeList(sellerID,5));
+            retTrades.addAll(getTradeList(sellerID,4));
+            retTrades.addAll(getTradeList(sellerID,3));
+            retTrades.addAll(getTradeList(sellerID,2));
             retTrades.addAll(getTradeList(sellerID,1));
             retTrades.addAll(getTradeList(sellerID,0));
             return retTrades;
@@ -119,12 +123,51 @@ public class Seller_SellerService {
         return tradeRepository.findByTradeId(trade);
     }
 
+    //查看订单看开始时间
     public List<Trade> getTradeListByTime(long sellerID, int statue, Date startDate, Date endDate)
+    {
+        if(startDate == null)
+        {
+            if(endDate == null)
+            {
+                return getTradeList(sellerID,statue);
+            }
+            else
+                return getTradeListBeforeEndDate(sellerID, statue, endDate);
+        }
+        else
+            if(endDate == null)
+                return getTradeListAfterStartDate(sellerID, statue, startDate);
+        List<Trade> reTrade = new LinkedList<Trade>();
+        for(Trade trade : getTradeList(sellerID, statue))
+        {
+            if( trade.getTradeCreateTime() != null && endDate.after(trade.getTradeCreateTime()) && startDate.before(trade.getTradeCreateTime()))
+            {
+                reTrade.add(trade);
+            }
+        }
+        return reTrade;
+    }
+
+    public List<Trade> getTradeListAfterStartDate(long sellerID, int statue, Date startDate)
     {
         List<Trade> reTrade = new LinkedList<Trade>();
         for(Trade trade : getTradeList(sellerID, statue))
         {
-            if(endDate.after(trade.getTradeFinishTime()) && startDate.before(trade.getTradeFinishTime()))
+            if( trade.getTradeCreateTime() != null  && startDate.before(trade.getTradeCreateTime()))
+            {
+                reTrade.add(trade);
+            }
+        }
+        return reTrade;
+    }
+
+    public List<Trade> getTradeListBeforeEndDate(long sellerID, int statue,  Date endDate)
+    {
+        List<Trade> reTrade = new LinkedList<Trade>();
+        for(Trade trade : getTradeList(sellerID, statue))
+        {
+            if( trade.getTradeCreateTime() != null && endDate.after(trade.getTradeCreateTime()))
             {
                 reTrade.add(trade);
             }
@@ -142,12 +185,64 @@ public class Seller_SellerService {
         return sum;
     }
 
+
     public List<TradeDetail> getTradeList(long tradeID)
     {
         return tradeDetailRepository.findByTradeId(tradeID);
     }
 
+    //查看收入的订单
+    public List<Trade> getTradeListByFindedTime(long sellerID, Date startDate, Date endDate)
+    {
+        List<Trade> reTrade = new LinkedList<Trade>();
+        if(startDate == null)
+        {
+            if(endDate == null)
+            {
+                //get all date
+                return getTradeList(sellerID, 3);
+            }else{
+                //before end date
+                for(Trade trade : getTradeList(sellerID, 3))
+                {
+                    if( trade.getTradeFinishTime() != null && endDate.after(trade.getTradeFinishTime()))
+                    {
+                        reTrade.add(trade);
+                    }
+                }
+                return reTrade;
+            }
+        }
+        else
+        {
+            if(endDate == null)
+            {
+                //after start date
+                for(Trade trade : getTradeList(sellerID, 3))
+                {
+                    if( trade.getTradeFinishTime() != null && startDate.before(trade.getTradeFinishTime()))
+                    {
+                        reTrade.add(trade);
+                    }
+                }
+                return reTrade;
+            }
+        }
 
+        for(Trade trade : getTradeList(sellerID, 3))
+        {
+            if( trade.getTradeFinishTime() != null && endDate.after(trade.getTradeFinishTime()) && startDate.before(trade.getTradeFinishTime()))
+            {
+                reTrade.add(trade);
+            }
+        }
+        return reTrade;
+    }
+
+    public void writeInTrade(Trade trade)
+    {
+        tradeRepository.save(trade);
+    }
 
 
     //广告相关的接口
@@ -215,18 +310,37 @@ public class Seller_SellerService {
         sellerAdvertisementRepository.save(sellerAdvertisement);
     }
 
+    public boolean hasCorrentPrice()
+    {
+        try{
+            List<Price> prices = priceRepository.findAll();
+            if(prices.isEmpty())
+                return false;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+        return true;
+    }
+
     public double getProductListAdvertisementPrice()
     {
-        return priceRepository.findAll().get(0).getProductHighAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getProductHighAdvertisementPrice();
     }
 
     public double getProductRollAdvertisementPrice()
     {
-        return priceRepository.findAll().get(0).getProductLowAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getProductLowAdvertisementPrice();
     }
 
     public double getSellerListAdvertisementPrice()
     {
-        return priceRepository.findAll().get(0).getSellerListAdvertisementPrice();
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getSellerListAdvertisementPrice();
+    }
+
+    public double getShopPrice()
+    {
+        return priceRepository.findAll().get(priceRepository.findAll().size()-1).getShopPrice();
     }
 }

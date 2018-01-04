@@ -12,7 +12,7 @@ public class User_ProductAdvertisementService {
     @Autowired
     ProductAdvertisementRepository productAdvertisementRepository;
 
-    public List<ProductAdvertisement> findAllByType(Integer type){
-        return  productAdvertisementRepository.findAllByType(type);
+    public List<ProductAdvertisement> findAllByType(Integer type, Integer status){
+        return  productAdvertisementRepository.findAllByTypeAndStatus(type, status);
     }
 }

@@ -11,118 +11,140 @@
 </head>
 <body style="background: #9acfea">
 <div class="header">header</div>
-<div class="content">
+    <div class="content">
+        <p>
+            <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+        </p>
+        <div class="col-lg-2">
+            <div id="wrapper">
+                <!-- Sidebar -->
+                <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+                    <ul class="nav sidebar-nav">
+                        <li class="sidebar-brand">
 
-    <p>
-        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-    </p>
-    <div class="col-lg-2">
-        <div id="wrapper">
-            <!-- Sidebar -->
-            <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
-                <ul class="nav sidebar-nav">
-                    <li class="sidebar-brand">
-
-                    </li>
-                    <li>
-                        <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income Management</a>
-                    </li>
-                    <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order Management</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
-
-
-    <div class="col-lg-10">
-        <div class="row">
-            <br><br>
-            <div class="row col-lg-8">
-                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
-                    <input type="hidden" name="SellerID" th:value="*{SellerID}" />
-                    <input type="hidden" name="ProductID" th:value="*{ProductID}" />
-
-                    <div class="form-group">
-                        <label class="col-lg-4 text-right">Product Name:</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
-                        </div>
-                    </div>
-
-                    <div class="form-group ">
-                        <label class="col-lg-4 text-right">Product Stock:</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
-                        </div>
-                    </div>
-
-                    <div class="from-group">
-                        <label class="col-lg-4 text-right">Brand Name:</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="brandName" th:value="*{brandName}"></input>
-                        </div>
-                    </div>
-                    <br>
-                    <br>
-
-                    <div class="form-group">
-                        <label class="col-lg-4 text-right">Product Market Price:</label>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"></input>
-                        </div>
-                    </div>
-                    <div class="form-group">
-
-                        <label class="col-lg-4 text-right">Product Brief Information:</label>
-                        <div class="col-lg-3">
-                            <input class="form-control" name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-4 text-right">Product Photo:</label>
-                        <div class="col-lg-3">
-                            <input type="file" id="productPhoto" name="productPhoto"></input>
-                        </div>
-                    </div>
-                    <br>
-                    <div class="form-group">
-                        <label class="col-lg-4 text-right">Product Attribute:</label>
-                        <div class="col-lg-8">
-                            <table class="table table-striped" id="otherAttributes">
-                                <tr>
-                                    <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
-                                </tr>
-                                <tr>
-                                    <th>Attribute Name</th>
-                                    <th>Attribute Value</th>
-                                    <th>Modify</th>
-                                    <th>Delete</th>
-                                </tr>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-                        <button type="submit" class="btn-default">OK</button>
-                    </div>
-                </form>
-            </div>
-            <div class="col-lg-4 text-left">
-                <input type="hidden" id="srcPath" th:value="${productPhoto}"/>
-                <img id="photo"  style="display: block;" th:src="${productPhoto}" height="200" width="300" alt="default" />
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income Management</a>
+                        </li>
+                        <li>
+                            <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order Management</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
+        <div class="col-lg-10">
+            <div class="row">
+                <br><br>
+                <div class="row col-lg-8">
+                    <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
+                        <input type="hidden" name="SellerID" th:value="*{SellerID}" />
+                        <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Name:</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group ">
+                            <label class="col-lg-4 text-right">Product Stock:</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
+                            </div>
+                        </div>
+
+                        <div class="from-group">
+                            <label class="col-lg-4 text-right">Catogery:</label>
+                            <div class="col-lg-4">
+                                <form role="form">
+                                <div class="form-group">
+                                    <input type="hidden" id="brandName"  th:value="${brandName}" />
+                                    <select class="form-control" name="brandName" id="brandNameSelect">
+                                        <option value="TV">TV</option>
+                                        <option value="HomeTheater">Home Theater</option>
+                                        <option value="Computers">Computers</option>
+                                        <option value="Tablets">Tablets</option>
+                                        <option value="CellPhones">Cell Phones</option>
+                                        <option value="Cameras">Cameras</option>
+                                        <option value="Camcorders">Camcorders</option>
+                                        <option value="Audio">Audio</option>
+                                        <option value="CarElectronics">Car Electronics</option>
+                                        <option value="GPS">GPS</option>
+                                        <option value="Video">Video</option>
+                                        <option value="Games">Games</option>
+                                        <option value="Movies">Movies</option>
+                                        <option value="Music">Music</option>
+                                        <option value="Health">Health</option>
+                                        <option value="Fitness">Fitness</option>
+                                        <option value="Sports">Sports</option>
+                                        <option value="Home">Home</option>
+                                        <option value="Office">Office</option>
+                                    </select>
+                                </div>
+                            </form>
+                            </div>
+                        </div>
+
+                        <br><br><br><br>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Market Price:(HK$)</label>
+                            <div class="col-lg-3">
+                                <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <label class="col-lg-4 text-right">Product Brief Information:</label>
+                            <div class="col-lg-3">
+                                <input class="form-control" name="productBriefInfo" id="productBriefInfo" th:value="*{productBriefInfo}"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Photo:</label>
+                            <div class="col-lg-3">
+                                <input type="file" id="productPhoto" name="productPhoto"></input>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="form-group">
+                            <label class="col-lg-4 text-right">Product Attribute:</label>
+                            <div class="col-lg-8">
+                                <table class="table table-striped" id="otherAttributes">
+                                    <tr>
+                                        <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
+                                    </tr>
+                                    <tr>
+                                        <th>Attribute Name</th>
+                                        <th>Attribute Value</th>
+                                        <th>Modify</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row text-center">
+                            <button type="submit" class="btn-default">OK</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-4 text-left">
+                    <input type="hidden" id="srcPath" th:value="${productPhoto}"/>
+                    <img id="photo"  style="display: block;" th:src="${productPhoto}" height="200" width="300" alt="default" />
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
 </div>
 <div class="footer"></div>
 <nav class="navbar navbar-inverse navbar-fixed-top">
@@ -139,7 +161,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <li><a th:href="@{'/Seller/FastJump/ModifySellerInformationHandler?SellerID='+${SellerID}}">Personal Infomation</a></li>
                 <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
                     Log out
                 </button>
@@ -173,33 +195,12 @@
     </div>
 </nav>
 <script>
-//    var menuLeft = document.getElementById( 'cbp-spmenu-s1' ),
-//
-//        showLeftPush = document.getElementById( 'showLeftPush' ),
-//
-//        body = document.body;
-//
-//
-//    showLeftPush.onclick = function() {
-//        classie.toggle( this, 'active' );
-//        classie.toggle( body, 'cbp-spmenu-push-toright' );
-//        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-//        disableOther( 'showLeftPush' );
-//    };
-//
-//
-//    function disableOther( button ) {
-//
-//        if( button !== 'showLeftPush' ) {
-//            classie.toggle( showLeftPush, 'disabled' );
-//        }
-//
-//    }
-</script>
-<script>
 
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById("photo");
+    var brandNameInput = document.getElementById('brandName'),
+        brandNameSelect = document.getElementById('brandNameSelect');
+    brandNameSelect.value = brandNameInput.value;
     fileInput.addEventListener('change', function () {
         // 检查文件是否选择:
         if (!fileInput.value) {
@@ -328,4 +329,5 @@
 
 </script>
 </body>
+
 </html>

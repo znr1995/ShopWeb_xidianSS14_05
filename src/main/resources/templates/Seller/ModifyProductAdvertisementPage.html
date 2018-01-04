@@ -28,15 +28,15 @@
                         <a th:href="@{/Seller/FastJump/ProductsManagementHandler}"><i class="fa fa-fw fa-map-signs"></i>Product
                             Management</a>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-fw fa-folder"></i>Ads Management</a>
+                    <li>
+                        <a th:href="@{/Seller/FastJump/ModifySellerAdvertisementHandler}"><i class="fa fa-fw fa-adn"></i>Ads Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-users"></i>Income
+                        <a th:href="@{/Seller/FastJump/ViewIncomeHandler}"><i class="fa fa-fw fa-folder"></i>Income
                             Management</a>
                     </li>
                     <li>
-                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-line-chart"></i>Order
+                        <a th:href="@{/Seller/FastJump/ViewTransactionHandler}"><i class="fa fa-fw fa-clipboard"></i>Order
                             Management</a>
                     </li>
                 </ul>
@@ -48,8 +48,6 @@
     <div class="col-lg-10">
         <div class="container" style="col-lg-10">
             <br><br>
-
-
             <div class="row col-lg-8" >
                 <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
@@ -62,63 +60,63 @@
                     <input type="hidden" name="status" id="status" th:value="*{status}" />
 
                     <div class="form-group">
-                        <label class="col-lg-5 text-right">advertisement type:</label>
+                        <label class="col-lg-5 text-right">Advertisement Type:</label>
                         <div id="advertisementTypeLabelDiv">
                             <label id="advertisementTypeLabel"  th:text="*{advertisementType}"></label>
                         </div>
                     </div>
 
-                    <div class="form-group" id="productIDDiv">
-                        <label class="col-lg-5 text-right">ProductName:</label>
-                        <div id="productIDLableDiv">
-                            <label id="productIDLable" th:text="*{ProductName}" ></label>
-                        </div>
-                    </div>
-
                     <div class="form-group" id="locationDiv">
-                        <label class="col-lg-5 text-right" >location type:</label>
+                        <label class="col-lg-5 text-right" >Location Type:</label>
                         <div id="localTypeLableDiv">
                             <label id="localTypeLable" th:text="*{type}"></label>
                         </div>
                     </div>
 
+                    <div class="form-group" id="productIDDiv">
+                        <label class="col-lg-5 text-right">Product Name:</label>
+                        <div id="productIDLableDiv">
+                            <label id="productIDLable" th:text="*{ProductName}" ></label>
+                        </div>
+                    </div>
+
                     <div class="from-group">
-                        <label class="col-lg-5 text-right">startDate:</label>
+                        <label class="col-lg-5 text-right">Start Date:</label>
                         <div id="startDateLabelDiv">
                             <label id="startDateLabel"  th:text="*{startDate}"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-5 text-right">endDate:</label>
+                        <label class="col-lg-5 text-right">End Date:</label>
                         <div id="endDateLabelDiv">
                             <label id="endDateLabel"  th:text="*{endDate}"></label>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-5 text-right">pictureUrl:</label>
+                        <label class="col-lg-5 text-right">Picture Url:</label>
                         <div class="col-lg-3">
                             <input type="file" id="pictureUrl" name="pictureUrl" ></input>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-lg-5 text-right">description:</label>
+                        <label class="col-lg-5 text-right">Description:</label>
                         <div class="col-lg-3">
                             <textarea class="form-control" rows="3" id="description" name="description" th:text="*{description}"></textarea>
                         </div>
                     </div>
                     <br>
                     <div class="form-group " id="statusDiv">
-                        <label class="col-lg-5 text-right">status:</label>
+                        <label class="col-lg-5 text-right">Status:</label>
                         <div class="col-lg-3">
                             <label type="text" class="form-control"th:text="*{status}"></label></p>
                         </div>
                     </div>
 
                     <div class="row text-center">
-                        <button type="submit" id="submitBtn" class="btn-default" >modify</button>
+                        <button type="submit" id="submitBtn" style="background: #258ecd;border-radius: 8px;">modify</button>
                     </div>
                 </form>
             </div>
@@ -147,7 +145,7 @@
         </div>
         <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/Seller/FastJump/ModifySellerInformationHandler}">Personal Infomation</a></li>
+                <li><a th:href="@{'/Seller/FastJump/ModifySellerInformationHandler?SellerID='+${SellerID}}">Personal Infomation</a></li>
                 <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px"
                         onclick="Logout">
                     Log out
@@ -255,4 +253,5 @@
     }
 </script>
 </body>
+>>>>>>> origin/dev
 </html>

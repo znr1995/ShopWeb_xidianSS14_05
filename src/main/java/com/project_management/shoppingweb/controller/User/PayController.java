@@ -2,9 +2,14 @@ package com.project_management.shoppingweb.controller.User;
 
 
 import com.project_management.shoppingweb.domain.Address;
+import com.project_management.shoppingweb.domain.ShoppingCart;
 import com.project_management.shoppingweb.domain.Trade;
+import com.project_management.shoppingweb.domain.TradeDetail;
 import com.project_management.shoppingweb.service.AddressService;
+import com.project_management.shoppingweb.service.User.User_ShoppingCartService;
+import com.project_management.shoppingweb.service.User.User_TradeDetailService;
 import com.project_management.shoppingweb.service.User.User_TradeService;
+import com.project_management.shoppingweb.service.UserService;
 import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +27,15 @@ public class PayController {
     private User_TradeService tradeService;
     @Autowired
     private AddressService addressService;
-    @RequestMapping(value = "/Pay",method = RequestMethod.GET)
+    @Autowired
+    private User_TradeDetailService tradeDetailService;
+    @Autowired
+    private User_ShoppingCartService shoppingCartService;
+    @Autowired
+    private UserService userService;
+
+
+    @RequestMapping(value = "/Pay",method = RequestMethod.POST)
     public String Pay(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");
@@ -34,9 +47,13 @@ public class PayController {
         String password = request.getParameter("password");
         String address = request.getParameter("address");
         String PayWay = request.getParameter("PayWay");
+        String SellerName = request.getParameter("SellerName");
+        String ProductName = request.getParameter("ProductName");
         List<Address> AddressList = new ArrayList<Address>();
         AddressList = addressService.findAllByUserId(Long.parseLong(UserID));
         int number = AddressList.size();
+
+        model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
         if(account.equals("") || password.equals("") || address.equals("")){
             model.addAttribute("UserID", UserID);
@@ -47,10 +64,12 @@ public class PayController {
             model.addAttribute("Total", Total);
             model.addAttribute("account", account);
             model.addAttribute("password", password);
+            model.addAttribute("SellerName", SellerName);
+            model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         try {
@@ -65,10 +84,12 @@ public class PayController {
             model.addAttribute("Total", Total);
             model.addAttribute("account", account);
             model.addAttribute("password", password);
+            model.addAttribute("SellerName", SellerName);
+            model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         int b = Integer.parseInt(address);
@@ -82,10 +103,12 @@ public class PayController {
             model.addAttribute("Total", Total);
             model.addAttribute("account", account);
             model.addAttribute("password", password);
+            model.addAttribute("SellerName", SellerName);
+            model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
         if(number == 0){
@@ -97,30 +120,48 @@ public class PayController {
             model.addAttribute("Total", Total);
             model.addAttribute("account", account);
             model.addAttribute("password", password);
+            model.addAttribute("SellerName", SellerName);
+            model.addAttribute("ProductName", ProductName);
             if(AddressList.size() == 0)
-                return "/User/Pay";
+                return "/User/PayNew";
             model.addAttribute("AddressList",AddressList);
-            return "/User/Pay";
+            return "/User/PayNew";
         }
 
 
         Trade newTrade = new Trade();
-        //newTrade.setTradeId((long)1);//赋值默认
-        newTrade.setAddressId(address);
+        newTrade.setAddressId(String.valueOf(AddressList.get(Integer.parseInt(address) - 1).getAddressId()));
         newTrade.setFeedbackRemarks("");
         Date now = new Date();
         newTrade.setTradeCreateTime(now);
-        newTrade.setTradeFinishTime(now);
         newTrade.setTradeStatus(0);
         newTrade.setTradeTotalMoney(Double.parseDouble(Total));
         newTrade.setUserId(Long.parseLong(UserID));
         newTrade.setSellerId(Long.parseLong(ShopID));
         newTrade.setTradePayWay(PayWay);
 
-        tradeService.save(newTrade);
 
+        TradeDetail newTradeDetail = new TradeDetail();
+        newTradeDetail.setTradeId(tradeService.save(newTrade).getTradeId());
+        newTradeDetail.setProductAmount(Integer.parseInt(ProductAmount));
+        newTradeDetail.setProductId(Integer.parseInt(ProductID));
+        newTradeDetail.setProductTradePrice(Double.parseDouble(Total));
+
+        tradeDetailService.save(newTradeDetail);
 
         model.addAttribute("UserID", UserID);
-        return "/User/Success";
+        String IsFromShoppingCart = request.getParameter("IsFromShoppingCart");
+        if(IsFromShoppingCart.equals("1")){
+            List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
+            shoppingCarts = shoppingCartService.findAllByUserId(Long.parseLong(UserID));
+            ShoppingCart target = new ShoppingCart();
+            for(int i = 0; i < shoppingCarts.size(); i++){
+                if(shoppingCarts.get(i).getProductId() == Long.parseLong(ProductID)){
+                    target = shoppingCarts.get(i);break;
+                }
+            }
+            shoppingCartService.delete(target);
+        }
+        return "/User/SuccessNew";
     }
 }

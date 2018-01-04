@@ -19,4 +19,12 @@ public class User_ShoppingCartService {
     public List<ShoppingCart> findAllByUserId(Long UserID){
         return shoppingCartRepository.findAllByUserId(UserID);
     }
+
+    public List<ShoppingCart> findAllByShoppingcartId(Long ShoppingCartID){
+        return shoppingCartRepository.findAllByShoppingcartId(ShoppingCartID);
+    }
+
+    public void delete(ShoppingCart shoppingCart){
+         shoppingCartRepository.delete(shoppingCart);
+    }
 }
