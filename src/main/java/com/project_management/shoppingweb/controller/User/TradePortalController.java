@@ -23,6 +23,18 @@ public class TradePortalController {
     public String TradePortal(HttpServletRequest request, Model model){
         String ID = request.getParameter("ProductID");
         Product product = userProductService.findProductByProductID(Long.parseLong(ID));
+        if(product == null){
+            Long UserID = Long.parseLong(request.getParameter("UserID"));
+            model.addAttribute("UserID", UserID);
+            if(UserID == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserID);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/productoops";
+        }
         boolean isnull = false;
         if(product == null) isnull = true;
         model.addAttribute("productdetail", product);

@@ -37,11 +37,36 @@ public class BalanceController {
 
         List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
         shoppingCarts = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
+        Product product = productService.findProductByProductID(shoppingCarts.get(0).getProductId());
+        if(product == null){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName", user.getUsername());
+            return "/User/productoops";
+        }
 
+        if(shoppingCarts.get(0).getProductAmount() > product.getProductStock()){
+
+            List<ShoppingCart> ShoppingCartList = new ArrayList<ShoppingCart>();
+            ShoppingCartList = shoppingCartService.findAllByShoppingcartId(Long.parseLong(ShoppingCartID));
+
+            if(ShoppingCartList.size() != 0){
+                String Amount = String.valueOf(ShoppingCartList.get(0).getProductAmount());
+                model.addAttribute("Amount", Amount);
+            }
+
+
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("ShoppingCartID", ShoppingCartID);
+            model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
+
+            return "/User/ShoppingCartAmountNew";
+
+
+        }
         model.addAttribute("UserID", UserID);
         model.addAttribute("IsFromShoppingCart", "1");
         if(shoppingCarts.size() != 0) {
-            Product product = productService.findProductByProductID(shoppingCarts.get(0).getProductId());
+
             model.addAttribute("ProductID", product.getProductId());
             Seller seller = sellerService.findBySellerId(product.getSellerId());
             model.addAttribute("ShopID", seller.getSellerId());

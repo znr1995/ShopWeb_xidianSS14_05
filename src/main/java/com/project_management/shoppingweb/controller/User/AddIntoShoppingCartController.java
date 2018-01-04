@@ -34,7 +34,6 @@ public class AddIntoShoppingCartController {
         String ProductID = request.getParameter("ProductID");
         String ShopID = request.getParameter("ShopID");
         Product product = productService.findProductByProductID(Long.parseLong(ProductID));
-        String ProductName = product.getProductName();
 
         if(UserID.equals("-1")){
 //            model.addAttribute("UserID", UserID);

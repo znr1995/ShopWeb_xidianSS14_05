@@ -61,6 +61,11 @@ public class MyShoppingCartController {
             ShoppingCartToShow shoppingCartToShow = new ShoppingCartToShow();
             shoppingCartToShow.shoppingCart = GlobalShoppingCart.get(i);
             Product product = productService.findProductByProductID(GlobalShoppingCart.get(i).getProductId());
+            if(product == null){
+                shoppingCartToShow.Name = "undercarriage";
+                shoppingCartToShowList.add(shoppingCartToShow);
+                continue;
+            }
             shoppingCartToShow.Name = product.getProductName();
             shoppingCartToShowList.add(shoppingCartToShow);
         }
