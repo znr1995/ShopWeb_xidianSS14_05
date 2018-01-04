@@ -38,7 +38,7 @@ public class LoginController {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
         String pattern = "[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+";
-        long id;
+        long id = -1;
 
 
         //有bug,用户名和邮箱一样呢
@@ -79,8 +79,8 @@ public class LoginController {
     public String userLogin(HttpServletRequest httpServletRequest, RedirectAttributes attributes) {
         String account = httpServletRequest.getParameter("account_login");
         String password = httpServletRequest.getParameter("password_login");
-        String pattern = ".*@*.com.*";
-        long id;
+        String pattern = "[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+";
+        long id = -1;
         //TODO:有bug,用户名和邮箱一样呢
 
         //以邮箱方式登录
