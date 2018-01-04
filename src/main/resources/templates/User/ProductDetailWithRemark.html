@@ -223,16 +223,31 @@
                         </form>
                     </div>
                     <div class="btn_form">
-                        <form th:action="@{/ExtendRemarks}" method="post">
-                            <!--展开评论-->
+                        <form th:action="@{/retractRemarks}" method="post">
+                            <!--收起评论-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
-                            <input type="submit" value="extendremarks" title="" name="extendremarks" id="extendremarks">
+                            <input type="submit" value="retractRemarks" title="" name="retractRemarks" id="retractRemarks">
                         </form>
                     </div>
 
                     <p class="m_text2" th:text="${productdetail.productBriefInfo}">productBriefInfo</p>
                     <span class="m_link"><a id="see" th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
+
+                    <div class="btn_form" style="width:800px; height:400px; overflow:scroll; overflow-x:hidden;">
+                        <table>
+                            <tr>
+                                <td width="100px" height="60px"><strong>UserName</strong></td>
+                                <td width="300px" height="60px"><strong>Time</strong></td>
+                                <td width="400px" height="60px"><strong>Remark</strong></td>
+                            </tr>
+                            <tr th:each="remarkToShows : ${remarkToShows}">
+                                <td width="150px" height="60px" name="UserName" th:text="*{remarkToShows.UserName}">Onions</td>
+                                <td width="250px" height="60px" name="Time" th:text="*{remarkToShows.Time}">Onions</td>
+                                <td width="400px" height="60px" name="Remark" th:text="*{remarkToShows.Remark}">Oinons</td>
+                            </tr>
+                        </table>
+                    </div>
 
                 </div>
                 <div class="clear"></div>
@@ -286,8 +301,8 @@
             </div>
         </div>
 
-        </div>
     </div>
+</div>
 </div>
 
 <script type="text/javascript">
@@ -297,5 +312,3 @@
 </script>
 </body>
 </html>
-
-

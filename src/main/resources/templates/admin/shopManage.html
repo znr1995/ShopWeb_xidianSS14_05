@@ -55,12 +55,14 @@
     <br>
     <br>
     <br>
+    <h3>Find shop with shopname </h3>
+    <input type="text" style="width: 200px" name="shopname" id="input1"/>
 
-
+    <button style="background: #f0ef11;border-radius: 8px;" onclick=search()>Search</button>
+    <br>
+    <br>
     <div class="panel panel-primary">
-        <input type="text" name="shopname" id="input1">shopname</input>
 
-        <button onclick=search()>Search</button>
 
         <table class="table">
 
@@ -146,8 +148,8 @@
                     <td th:text="${p.shopname}"></td>
                     <td th:text="${p.username}"></td>
                     <td th:text="${p.address}"></td>
-                    <td><button th:onclick="'black('+${p.sellerId}+')'">✔</button></td>
-                    <td><button th:onclick="'delete('+${p.sellerId}+')'"> delete</button></td>
+                    <td><button style="background: #857657;border-radius: 8px;" th:onclick="'black('+${p.sellerId}+')'">✔</button></td>
+                    <td><button style="background: #F04243;border-radius: 8px;" th:onclick="'delete('+${p.sellerId}+')'"> delete</button></td>
 
                 </tr>
 
