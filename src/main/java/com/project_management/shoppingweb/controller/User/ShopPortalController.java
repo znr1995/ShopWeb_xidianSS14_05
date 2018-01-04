@@ -27,6 +27,19 @@ public class ShopPortalController {
     @RequestMapping(value = "/SPortal", method = RequestMethod.POST)
     public String ShopProtal(HttpServletRequest request, Model model){
         String SellerID = request.getParameter("SellerID");
+        Seller seller = sellerService.findBySellerId(Long.parseLong(SellerID));
+        if(seller == null){
+            Long UserID = Long.parseLong(request.getParameter("UserID"));
+            model.addAttribute("UserID", UserID);
+            if(UserID == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserID);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/shopoops";
+        }
         String UserID = request.getParameter("UserID");
         List<Product> products =
                 userProductService.findAllBySellerID(Long.parseLong(SellerID));
@@ -36,7 +49,6 @@ public class ShopPortalController {
         model.addAttribute("UserID", UserID);
         model.addAttribute("products",products);
         model.addAttribute("ShopID", SellerID);
-        Seller seller = sellerService.findBySellerId(Long.parseLong(SellerID));
         model.addAttribute("seller", seller);
         model.addAttribute("pro_isnull", pro_isnull);
         if(UserIDD == -1){
