@@ -62,7 +62,7 @@ public class ExtendRemarksController {
         List<RemarkToShow> remarkToShows = new ArrayList<RemarkToShow>();
         for(int i = 0; i < tradeDetails.size(); i++){
             Trade trade = tradeService.findByTradeId(tradeDetails.get(i).getTradeId()).get(0);
-            if(trade.getFeedbackRemarks().equals("")){continue;}
+            if(trade.getFeedbackRemarks().equals("")||trade.getFeedbackRemarks() == null){continue;}
             RemarkToShow remarkToShow = new RemarkToShow();
             remarkToShow.Remark = trade.getFeedbackRemarks();
             remarkToShow.Time = trade.getTradeFinishTime();
