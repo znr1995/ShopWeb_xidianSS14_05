@@ -111,7 +111,7 @@ public class AdminManagementController {
 		priceService.updatePrice(price);
 		
     	
-		return "redirect:/admin/adsManagement";//返回页面 -- 
+		return "redirect:/admin/commission";//返回页面 --
 	}
 	
 	@GetMapping("/agreeShopApply")
@@ -292,7 +292,16 @@ public class AdminManagementController {
 
 	@GetMapping("/commission")
 	public String commission(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+		List<Price> list = priceRepository.findAll();
+		if(list.size() == 0) {
+			model.addAttribute("price", new Price());
+		}else {
+			model.addAttribute("price", list.get(list.size()-1));
+		}
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("adminId", admin.getAdminId());
 		model.addAttribute("adminUserName", username);
+
 		List<ProductAdvertisement> advertisementList =  productAdvertisementService.findAllByStatus(1);
 		model.addAttribute("advertisementList", advertisementList);
 		
