@@ -33,13 +33,34 @@ public class ModifyProductInformationController {
     {
         long productID = Long.valueOf(request.getParameter("ProductID"));
         Product newProduct = sellerSellerService.getProduct(productID);
-        if(newProduct == null)
+        if(newProduct==null)
         {
             attributes.addAttribute("errorMessage","productId is wrong!");
             return "redirect:/error/errorHandler";
         }
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
         //TODO:保证每一个值都不能为空,并且合法
+        if(Integer.valueOf(request.getParameter("productStock"))<0){
+            attributes.addAttribute("errorMessage","productStock is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        if (Double.valueOf(request.getParameter("productPrice"))<=0){
+            attributes.addAttribute("errorMessage","productPrice is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        if(request.getParameter("productName").isEmpty()){
+            attributes.addAttribute("errorMessage","productName can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+        if(request.getParameter("productBriefInfo").isEmpty()){
+            attributes.addAttribute("errorMessage","productBriefInfo can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+        if(file.isEmpty()){
+            attributes.addAttribute("errorMessage","photo can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+
         if(file != null && file.getSize() > 0)
             newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
