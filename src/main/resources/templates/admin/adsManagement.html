@@ -8,7 +8,7 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
-    <style>
+    <style type="text/css">
         .pic{
             width: 60px;
             height: 60px;
@@ -18,6 +18,9 @@
             width: 100%;
             height: 100%;
         }
+        
+    	.content_break{word-wrap:break-word;}
+ 
     </style>
 </head>
 <body>
@@ -116,7 +119,7 @@
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td th:text="${p.sellerName}">1</td>
                                     <td>
-                                       <div style="width:140px;" th:text="${p.description}"></div>
+                                       <div style="width:140px;" class="content_break" th:text="${p.description}"></div>
                                     </td>
                                     <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                     <td th:text="${p.price}">$50</td>
@@ -161,7 +164,7 @@
 
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td>
-                                        <div style="width:140px;" th:text="${p.description}"></div>
+                                        <div style="width:140px;" class="content_break" th:text="${p.description}"></div>
                                     </td>
                                     <td th:text="${p.sellerName}">Anna</td>
                                     <td th:text="${p.type}">1</td>
@@ -209,7 +212,7 @@
                             <tr>
                                 <td th:text="${p.advertisementId}">a001</td>
                                 <td>
-                                    <div style="width:140px;" th:text="${p.description}"></div>
+                                    <div style="width:140px;" class="content_break" th:text="${p.description}"></div>
                                 </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.price}">1</td>
@@ -243,7 +246,7 @@
                                 <td th:text="${p.advertisementId}">a001</td>
                                 <td>
                                    <!-- <textarea style="width:140px;height:60px;" th:text="${p.description}">iWatch</textarea> --> 
-                                   <div style="width:140px;" th:text="${p.description}"></div>
+                                   <div style="width:140px;" class="content_break" th:text="${p.description}"></div>
                                 </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.type}">1</td>
