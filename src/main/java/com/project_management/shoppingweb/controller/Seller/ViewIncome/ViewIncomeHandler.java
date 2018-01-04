@@ -115,7 +115,8 @@ public class ViewIncomeHandler {
         List<Trade> trades = seller_sellerService.getTradeList(sellerId,0);
         trades.addAll(seller_sellerService.getTradeList(sellerId,3));
 
-        model.addAttribute("totlePrice",seller_sellerService.getTradeSum(trades));
+        //2%给管理员
+        model.addAttribute("totlePrice",seller_sellerService.getTradeSum(trades) * 0.98);
         LinkedList<PageDetail> details = new LinkedList<PageDetail>();
         for(Trade trade : trades)
         {

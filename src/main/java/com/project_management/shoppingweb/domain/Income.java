@@ -10,7 +10,7 @@ public class Income {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private  Long id;
     private Date date;
-    private Long commission;
+    private Double commission;
     private Long sellerId;
     private String sellerName;
     private String type; //"rate"佣金，“shop”开店，“advertisement”广告
@@ -23,11 +23,12 @@ public class Income {
         this.date = date;
     }
 
-    public Long getCommission() {
+
+    public Double getCommission() {
         return commission;
     }
 
-    public void setCommission(Long commission) {
+    public void setCommission(Double commission) {
         this.commission = commission;
     }
 
