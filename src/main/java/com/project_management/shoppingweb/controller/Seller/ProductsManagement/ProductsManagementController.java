@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.Seller.ProductsManagement;
 
 
 import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,10 +80,20 @@ public class ProductsManagementController {
         {
             if(curProduct.getProductId() == productId)
             {
-                    sellerSellerService.deleteProduct(productId);
-                    products.remove(curProduct);
-                    attributes.addAttribute("SellerID",sellerID);
-                    return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
+                //如果商品有订单未处理，则不允许下架
+                List<Trade> tradeList=sellerSellerService.getNotFinishedTradeList(sellerID);
+                for (Trade t:tradeList)
+                {
+                    if(sellerSellerService.getTradeDetail(t.getTradeId()).getProductId()==curProduct.getProductId()){
+                        attributes.addAttribute("errorMessage","Product can't be delete.We have some trade about it not finished");
+                        return "redirect:/error/errorHandler";
+                    }
+                }
+
+                sellerSellerService.deleteProduct(productId);
+                products.remove(curProduct);
+                attributes.addAttribute("SellerID",sellerID);
+                return "redirect:/Seller/ProductsManagement/ProductsManagementHandler";
             }
         }
 

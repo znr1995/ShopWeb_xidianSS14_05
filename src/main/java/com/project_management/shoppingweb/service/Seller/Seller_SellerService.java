@@ -118,6 +118,20 @@ public class Seller_SellerService {
         return tradeRepository.findBySellerIdAndTradeStatus(sellerID,statue);
     }
 
+    public List<Trade> getNotFinishedTradeList(long sellerID)
+    {
+        LinkedList<Trade> retTrades = new LinkedList<Trade>();
+        retTrades.addAll(getTradeList(sellerID,4));
+        retTrades.addAll(getTradeList(sellerID,2));
+        retTrades.addAll(getTradeList(sellerID,1));
+        retTrades.addAll(getTradeList(sellerID,0));
+        return retTrades;
+    }
+
+    public TradeDetail getTradeDetail(Long tradeId){
+        return tradeDetailRepository.findAllBytradeId(tradeId);
+    }
+
     public Trade getTrade(long trade)
     {
         return tradeRepository.findByTradeId(trade);
