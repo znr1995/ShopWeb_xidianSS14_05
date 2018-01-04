@@ -25,6 +25,7 @@ public class SellerService {
 	public Seller findBySellerId(Long sellerId){
 		return sellerRepository.findBySellerId(sellerId);
 	}
+	public List<Seller> findAllByShopnameLike(String shopname){return sellerRepository.findAllByShopnameLike(shopname);}
 	public Seller save(Seller seller){
 		return sellerRepository.save(seller);
 	}
