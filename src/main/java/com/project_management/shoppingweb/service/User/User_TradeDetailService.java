@@ -22,4 +22,7 @@ public class User_TradeDetailService {
     public TradeDetail findByTradeDetailId(Long TradeDetailID){
         return tradeDetailRepository.findByTradeDetailId(TradeDetailID);
     }
+    public List<TradeDetail> findAllByProductId(int ProductID){
+        return tradeDetailRepository.findByproductId(ProductID);
+    }
 }
