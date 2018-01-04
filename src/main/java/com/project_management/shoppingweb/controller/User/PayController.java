@@ -35,7 +35,7 @@ public class PayController {
     private User_ProductService productService;
 
 
-    @RequestMapping(value = "/Pay",method = RequestMethod.POST)
+    @RequestMapping(value = "/Pay",params = "Pay=Pay")
     public String Pay(HttpServletRequest request, Model model){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");
@@ -190,5 +190,82 @@ public class PayController {
             shoppingCartService.delete(target);
         }
         return "/User/SuccessNew";
+    }
+
+    @RequestMapping(value = "/Pay",params = "addAddress=addAddress")
+    String addAddressBefore(HttpServletRequest request,Model model)
+    {
+        long UserID =Long.valueOf( request.getParameter("UserID"));
+        boolean IsFromShoppingCart = Boolean.valueOf(request.getParameter("IsFromShoppingCart"));
+        long ShopID = Long.valueOf(request.getParameter("ShopID"));
+        long ProductID = Long.valueOf(request.getParameter("ProductID"));
+
+        String SellerName = request.getParameter("SellerName");
+        String ProductName = request.getParameter("ProductName");
+        long ProductAmount = Long.valueOf(request.getParameter("ProductAmount"));
+        double UnitPrice = Double.valueOf(request.getParameter("UnitPrice"));
+        double TotalPay = Double.valueOf(request.getParameter("TotalPay"));
+
+        model.addAttribute("UserID",UserID);
+        model.addAttribute("IsFromShoppingCart",IsFromShoppingCart);
+        model.addAttribute("ShopID",ShopID);
+        model.addAttribute("ProductID",ProductID);
+        model.addAttribute("SellerName",SellerName);
+        model.addAttribute("ProductName",ProductName);
+        model.addAttribute("ProductAmount",ProductAmount);
+        model.addAttribute("UnitPrice",UnitPrice);
+        model.addAttribute("TotalPay",TotalPay);
+
+        return "/User/addAddressPage";
+    }
+
+    @RequestMapping("/Pay/addAddressAfter")
+    String addAddressAfter(HttpServletRequest request,Model model)
+    {
+        long UserID =Long.valueOf( request.getParameter("UserID"));
+        boolean IsFromShoppingCart = Boolean.valueOf(request.getParameter("IsFromShoppingCart"));
+        long ShopID = Long.valueOf(request.getParameter("ShopID"));
+        long ProductID = Long.valueOf(request.getParameter("ProductID"));
+
+        String SellerName = request.getParameter("SellerName");
+        String ProductName = request.getParameter("ProductName");
+        long ProductAmount = Long.valueOf(request.getParameter("ProductAmount"));
+        double UnitPrice = Double.valueOf(request.getParameter("UnitPrice"));
+        double TotalPay = Double.valueOf(request.getParameter("TotalPay"));
+
+
+        //add address
+        String addressName = request.getParameter("addressName");
+        String province = request.getParameter("province");
+        String city = request.getParameter("city");
+        String detailAddress = request.getParameter("detailAddress");
+        String district = request.getParameter("district");
+        String tel = request.getParameter("tel");
+        String postcode = request.getParameter("postcode");
+
+        Address address = new Address();
+        address.setAddressName(addressName);
+        address.setProvince(province);
+        address.setCity(city);
+        address.setDetailAddress(detailAddress);
+        address.setDistrict(district);
+        address.setTel(tel);
+        address.setPostcode(Integer.valueOf(postcode));
+        address.setUserId(UserID);
+        address.setIsDefaultAddress(false);
+        addressService.save(address);
+
+
+        model.addAttribute("UserID",UserID);
+        model.addAttribute("IsFromShoppingCart",IsFromShoppingCart);
+        model.addAttribute("ShopID",ShopID);
+        model.addAttribute("ProductID",ProductID);
+        model.addAttribute("SellerName",SellerName);
+        model.addAttribute("ProductName",ProductName);
+        model.addAttribute("ProductAmount",ProductAmount);
+        model.addAttribute("UnitPrice",UnitPrice);
+        model.addAttribute("TotalPay",TotalPay);
+        model.addAttribute("AddressList",addressService.findAllByUserId(UserID));
+        return "/User/PayNew";
     }
 }

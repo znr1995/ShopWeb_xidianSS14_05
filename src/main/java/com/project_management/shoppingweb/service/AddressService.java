@@ -19,4 +19,7 @@ public class AddressService {
         return addressRepository.findAllByAddressId(AddressID);
     }
 
+    public Address save(Address adress) {
+        return addressRepository.save(adress);
+    }
 }

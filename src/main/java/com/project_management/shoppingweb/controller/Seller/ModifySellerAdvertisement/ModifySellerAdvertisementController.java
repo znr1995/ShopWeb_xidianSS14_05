@@ -2,6 +2,7 @@ package com.project_management.shoppingweb.controller.Seller.ModifySellerAdverti
 
 
 
+import com.project_management.shoppingweb.domain.Income;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
 import com.project_management.shoppingweb.service.Seller.Seller_CopyFile;
@@ -420,6 +421,15 @@ public class ModifySellerAdvertisementController {
             productAdvertisement.setStartDate(startDate);
             productAdvertisement.setEndDate(endDate);
             productAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
+
+            //添加income
+            Income income = new Income();
+            income.setCommission(sellerSellerService.getProductRollAdvertisementPrice());
+            income.setDate(new Date());
+            income.setSellerId(sellerID);
+            income.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
+            income.setType("advertisement");
+            sellerSellerService.writeInIncome(income);
         }
         else
         {
@@ -503,6 +513,15 @@ public class ModifySellerAdvertisementController {
             sellerAdvertisement.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
             sellerAdvertisement.setSellerId(sellerID);
             sellerAdvertisement.setStatus(notPayStatus);
+
+            //添加income
+            Income income = new Income();
+            income.setCommission(sellerSellerService.getSellerListAdvertisementPrice());
+            income.setDate(new Date());
+            income.setSellerId(sellerID);
+            income.setSellerName(sellerSellerService.getSellerById(sellerID).getUsername());
+            income.setType("advertisement");
+            sellerSellerService.writeInIncome(income);
 
         }
         else

@@ -66,7 +66,7 @@
             float: right;
         }
         #payway{
-           float: right;
+            float: right;
             margin-right: 5%;
             border: none;
             color: white;
@@ -243,7 +243,12 @@
         <div class="clear"></div>
     </div>
 </div >
-<form name="form1" th:action="@{/Pay}" method="post">
+<form name="form1" th:action="@{/Pay/addAddressAfter}" method="post">
+    <input type="hidden" name="SellerName" th:value="${SellerName}" style="display: none">
+    <input type="hidden" name="ProductName" th:value="${ProductName}" style="display: none">
+    <input type="hidden" name="ProductAmount" th:value="${ProductAmount}" style="display: none">
+    <input type="hidden" name="UnitPrice" th:value="${UnitPrice}" style="display: none">
+    <input type="hidden" name="TotalPay" th:value="${TotalPay}" style="display: none">
     <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
     <input type="hidden" name="IsFromShoppingCart" th:value="${IsFromShoppingCart}" style="display: none">
     <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" style="display: none" />
@@ -252,59 +257,39 @@
         <div id="left">
             <table id="left_infor">
                 <tr>
-                    <td><strong>ShopName:</strong></td>
-                    <td><input type="text" name="SellerName"  th:value="${SellerName}" readonly="readonly" /></td>
+                    <td><strong>addressName:</strong></td>
+                    <td> <input placeholder="please input addressName" type="text" name="addressName"/></td>
                 </tr>
                 <tr>
-                    <td><strong>ProductName:</strong></td>
-                    <td><input type="text" name="ProductName" th:value="${ProductName}" readonly="readonly" /></td>
+                    <td><strong>province:</strong></td>
+                    <td> <input placeholder="please input province" type="text" name="province"/></td>
                 </tr>
                 <tr>
-                    <td><strong>ProductAmount:</strong></td>
-                    <td><input type="text" name="ProductAmount" th:value="${ProductAmount}"  readonly="readonly"></td>
+                    <td><strong>city:</strong></td>
+                    <td> <input placeholder="please input city" type="text" name="city"/></td>
                 </tr>
                 <tr>
-                    <td><strong>UnitPrice:</strong></td>
-                    <td><input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly"  /></td>
+                    <td><strong>detailAddress:</strong></td>
+                    <td> <input placeholder="please input detailAddress" type="text" name="detailAddress"/></td>
                 </tr>
                 <tr>
-                    <td><strong>TotalPay:</strong></td>
-                    <td><input type="text" name="Total" th:value="${Total}" readonly="readonly" /></td>
+                    <td><strong>district:</strong></td>
+                    <td> <input placeholder="please input district" type="text" name="district"/></td>
+                </tr>
+                <tr>
+                    <td><strong>tel:</strong></td>
+                    <td> <input placeholder="please input tel" type="text" name="tel"/></td>
+                </tr>
+                <tr>
+                    <td><strong>postcode:</strong></td>
+                    <td> <input placeholder="please input PostCode" type="text" name="postcode"/></td>
                 </tr>
 
             </table>
 
-
-
-        </div>
-        <div id="right">
-            <table id="right_infor">
-                <td>
-                    <img src="alipay.JPG"/>
-                </td>
-                <td>
-                    <img src="wechatpay.JPG"/>
-                </td>
-            </table>
-
-        </div>
-
     </div>
-    <div id="main_table" style="margin: 10px 0px 20px 0px">
-        <select name="address">
-            <div th:each="address : ${AddressList}">
-                <option  th:value="*{address.addressId}" th:text="*{address.addressName}"></option>
-            </div>
-        </select>
-        <button type="submit" name="addAddress" value="addAddress">add new Address</button>
-        <select id="payway" name="PayWay">
-            <option th:value="AliPay" style="color: white">AliPay</option>
-            <option th:value="WeChatPay" style="color: white">WePay</option>
-        </select>
+    <button id="pay" type="submit" >add</button>
     </div>
-
-        <button id="pay" type="submit" name="Pay" value="Pay">pay</button>
-
 </form>
 
 </body>

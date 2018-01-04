@@ -38,6 +38,9 @@ public class Seller_SellerService {
     @Resource
     private PriceRepository priceRepository;
 
+    @Resource
+    private  IncomeRepository incomeRepository;
+
 
 
     public Seller getSellerById(long sellerId)
@@ -59,6 +62,11 @@ public class Seller_SellerService {
         return false;
     }
 
+    //income相关
+    public void writeInIncome(Income income)
+    {
+        incomeRepository.save(income);
+    }
 
 
 

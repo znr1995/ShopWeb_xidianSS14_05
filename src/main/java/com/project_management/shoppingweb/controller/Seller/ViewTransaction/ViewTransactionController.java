@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller.Seller.ViewTransaction;
 
+import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.domain.TradeDetail;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
@@ -252,6 +253,17 @@ public class ViewTransactionController {
 
         // 0 - 待处理订单 1-等待发货 2-等待收货 3-完成 4-发起退货等待确认 5-退货成功 6-申诉
         // 0,1,4需要确认
+        //如果状态是4，需要把对应的商品数量加上
+        if(status == 4)
+        {
+            List<TradeDetail> tradeDetails = seller_sellerService.getTradeList(tradeId);
+            for(TradeDetail tradeDetail : tradeDetails)
+            {
+                Product product = seller_sellerService.getProduct(tradeDetail.getProductId());
+                product.setProductStock(product.getProductStock() + tradeDetail.getProductAmount());
+            }
+        }
+
        trade.setTradeStatus(status+1);
        seller_sellerService.writeInTrade(trade);
        attributes.addAttribute("SellerID",sellerId);

@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.controller;
 
 
+import com.project_management.shoppingweb.domain.Income;
 import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.Seller.Seller_SellerService;
@@ -45,7 +46,7 @@ public class RegisterController {
     {
         if(!seller_sellerService.hasCorrentPrice())
         {
-            attributes.addAttribute("error","the shop price has not know,the admin not add it.try register later");
+            attributes.addAttribute("errorMessage","the shop price has not know,the admin not add it.try register later");
             return  "redirect:/error/errorHandler";
         }
 
@@ -60,7 +61,7 @@ public class RegisterController {
         String phone = httpServletRequest.getParameter("phone_number");
         String password = httpServletRequest.getParameter("password_register");
         String shopName = httpServletRequest.getParameter("Shopname");
-        String catogery = httpServletRequest.getParameter("Catogery");
+        String catogery = httpServletRequest.getParameter("catogery");
 
         if(userRegisterService.sellerVaildEmail(email) && userRegisterService.sellerVaildUsername(username))
         {
@@ -148,7 +149,17 @@ public class RegisterController {
                 return "redirect:/error/errorHandler";
             }
 
-            userRegisterService.sellerRegister(seller);
+            //注册成功，加入注册信息
+           long sellerId =  userRegisterService.sellerRegister(seller);
+
+            Income income = new Income();
+            income.setCommission(seller_sellerService.getShopPrice());
+            income.setDate(new Date());
+            income.setSellerId(sellerId);
+            income.setSellerName(seller_sellerService.getSellerById(sellerId).getUsername());
+            income.setType("shop");
+            seller_sellerService.writeInIncome(income);
+
             return "redirect:/Seller/login";
         }
         else
