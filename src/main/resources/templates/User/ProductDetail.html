@@ -222,9 +222,18 @@
                             <input type="submit" value="addintocart" title="" name="addintocart" id="addintocart">
                         </form>
                     </div>
+                    <div class="btn_form">
+                        <form th:action="@{/ExtendRemarks}" method="post">
+                            <!--展开评论-->
+                            <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
+                            <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
+                            <input type="submit" value="extendremarks" title="" name="extendremarks" id="extendremarks">
+                        </form>
+                    </div>
 
                     <p class="m_text2" th:text="${productdetail.productBriefInfo}">productBriefInfo</p>
                     <span class="m_link"><a id="see" th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
+
                 </div>
                 <div class="clear"></div>
                 <script type="text/javascript">

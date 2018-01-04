@@ -57,30 +57,8 @@
 
 
     <div class="col-lg-10">
-
         <br>
         <br>
-        <br>
-        <!--广告收费调整-->
-        <div class="well" style="background: #c1ecd7">
-            <form action="/admin/updatePrice" method="post">
-                <input class="hidden" name="adminId" th:value="${adminId}"/>
-                Product Ads HighPrice
-                <input id="productHighAdvertisementPrice" name="productHighAdvertisementPrice" type="text" th:value="${price.productHighAdvertisementPrice}"><br><br>
-                Product Ads LowPrice
-                <input id="productLowAdvertisementPrice" name="productLowAdvertisementPrice" type="text" th:value="${price.productLowAdvertisementPrice}"><br><br>
-                Shop Ads Price
-                <input id="sellerListAdvertisementPrice" name="sellerListAdvertisementPrice" type="text" th:value="${price.sellerListAdvertisementPrice}"><br><br>
-                Product commission Price
-                <input id="productRate" name="productRate" type="text" th:value="${price.productRate}"><br><br>
-                Shop Price 
-                <input id="shopPrice" name="shopPrice" type="text" th:value="${price.shopPrice}"><br><br>
-                <div style="width: 800px; float: right">
-                    <button style="background: #5ff00b;border-radius: 8px;" class="btn-default" type="submit" value="submit">Submit</button>
-                </div>
-                <br>
-            </form>
-        </div>
         <br>
         <br>
         <!--广告申请处理-->

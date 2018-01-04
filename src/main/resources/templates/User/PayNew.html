@@ -279,53 +279,31 @@
         </div>
         <div id="right">
             <table id="right_infor">
-                <tr>
-                    <td><strong>account:</strong></td>
-                    <td> <input placeholder="please input account" type="text" name="account" th:value="${account}"/></td>
-                </tr>
-                <tr>
-                    <td><strong>password:</strong></td>
-                    <td><input placeholder="please input password" type="password" name="password" th:value="${password}"/></td>
-                </tr>
-                <tr>
-                    <td><strong>addressID:</strong></td>
-                    <td> <input placeholder="please input addressID" type="text" name="address" th:value="${address}"/></td>
-                </tr>
-
-
+                <td>
+                    <img src="alipay.JPG"/>
+                </td>
+                <td>
+                    <img src="wechatpay.JPG"/>
+                </td>
             </table>
 
         </div>
 
     </div>
     <div id="main_table" style="margin: 10px 0px 20px 0px">
-        <table id="table" >
-            <tr  style="margin: 0 auto;text-align: center">
-                <td width="250px" height="60px"><strong>City</strong></td>
-                <td width="250px" height="60px"><strong>DetailAddress</strong></td>
-                <td width="250px" height="60px"><strong>District</strong></td>
-                <td width="250px" height="60px"><strong>IsDefaultAddress</strong></td>
-                <td width="250px" height="60px"><strong>Tel</strong></td>
-                <td width="250px" height="60px"><strong>PostCode</strong></td>
-                <td width="250px" height="60px"><strong>Province</strong></td>
-            </tr>
-            <tr th:each="AddressList : ${AddressList}"style="border-bottom: 1px lightgray solid"  style="text-align: center">
-                <td width="250px" height="60px" th:text="*{AddressList.city}" style="border-bottom: 1px lightgray solid;">Onions</td>
-                <td width="250px" height="60px" th:text="*{AddressList.detailAddress}" style="border-bottom: 1px lightgray solid">Onions</td>
-                <td width="250px" height="60px" th:text="*{AddressList.district}" style="border-bottom: 1px lightgray solid">Onions</td>
-                <td width="250px" height="60px" th:text="*{AddressList.isDefaultAddress}" style="border-bottom: 1px lightgray solid">Oinons</td>
-                <td width="250px" height="60px" th:text="*{AddressList.tel}" style="border-bottom: 1px lightgray solid">Onions</td>
-                <td width="250px" height="60px" th:text="*{AddressList.postcode}" style="border-bottom: 1px lightgray solid">Onions</td>
-                <td width="250px" height="60px" th:text="*{AddressList.province}" style="border-bottom: 1px lightgray solid">Onions</td>
-            </tr>
-        </table>
+        <select name="address">
+            <div th:each="address : ${AddressList}">
+                <option  th:value="*{address.addressId}" th:text="*{address.addressName}"></option>
+            </div>
+        </select>
+        <button type="submit" name="addAddress" value="addAddress">add new Address</button>
         <select id="payway" name="PayWay">
             <option th:value="AliPay" style="color: white">AliPay</option>
             <option th:value="WeChatPay" style="color: white">WePay</option>
         </select>
     </div>
 
-        <button id="pay" type="submit" name="Pay" th:value="支付">pay</button>
+        <button id="pay" type="submit" name="Pay" value="Pay">pay</button>
 
 </form>
 

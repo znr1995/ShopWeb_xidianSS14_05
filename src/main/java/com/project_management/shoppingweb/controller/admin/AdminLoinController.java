@@ -1,6 +1,7 @@
 package com.project_management.shoppingweb.controller.admin;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.Null;
 
 import com.project_management.shoppingweb.domain.*;
 import com.project_management.shoppingweb.service.SellerService;
@@ -98,6 +100,9 @@ public class AdminLoinController {
 		Admin admin = adminService.findByUsername(username);
 		model.addAttribute("adminId", admin.getAdminId());
 		model.addAttribute("adminUserName", username);
+
+		//List<Seller> searchList= new ArrayList<>();
+		//model.addAttribute("searchList", searchList);
 
 		List<Seller> statusList=sellerService.findAllByApplyState(1);
 		model.addAttribute("sellerStatusList", statusList);

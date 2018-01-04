@@ -37,6 +37,11 @@ public class BuyController {
         String ProductID = request.getParameter("ProductID");
         String UnitPrice = request.getParameter("UnitPrice");
         Product product = productService.findProductByProductID(Long.parseLong(ProductID));
+        if(product == null){
+            model.addAttribute("UserID", UserID);
+            model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
+            return "/User/productoops";
+        }
         String ProductName = product.getProductName();
         Seller seller = sellerService.findBySellerId(Long.parseLong(ShopID));
         String SellerName = seller.getShopname();
@@ -138,6 +143,23 @@ public class BuyController {
             return "/User/ProductDetail";
         }
 
+        if(Integer.parseInt(ProductAmount) > product.getProductStock()){
+            boolean isnull = false;
+            if(product == null) isnull = true;
+            model.addAttribute("productdetail", product);
+            model.addAttribute("proisnull", isnull);
+            long UserIDD = Long.parseLong(request.getParameter("UserID"));
+            model.addAttribute("UserID", UserID);
+            if(UserIDD == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserIDD);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductDetail";
+        }
+
         double UP = Double.valueOf(UnitPrice);
         double PA = Double.valueOf(ProductAmount);
         double t = UP * PA;
@@ -163,4 +185,5 @@ public class BuyController {
 
         return "/User/PayNew";
     }
+
 }
