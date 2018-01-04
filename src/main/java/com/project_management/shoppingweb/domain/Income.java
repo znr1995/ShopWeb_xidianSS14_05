@@ -10,7 +10,9 @@ public class Income {
     String year;
     String month;
     String day;
+    String type; //"rate"佣金，“shop”开店，“advertisement”广告
     Long commission;
     Long sellerId;
     Long sellerName;
+
 }
