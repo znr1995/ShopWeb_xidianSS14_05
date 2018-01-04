@@ -116,7 +116,7 @@
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td th:text="${p.sellerName}">1</td>
                                     <td>
-                                        <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                       <div style="width:140px;" th:text="${p.description}"></div>
                                     </td>
                                     <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                     <td th:text="${p.price}">$50</td>
@@ -161,7 +161,7 @@
 
                                     <td th:text="${p.advertisementId}">a001</td>
                                     <td>
-                                        <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                        <div style="width:140px;" th:text="${p.description}"></div>
                                     </td>
                                     <td th:text="${p.sellerName}">Anna</td>
                                     <td th:text="${p.type}">1</td>
@@ -209,14 +209,14 @@
                             <tr>
                                 <td th:text="${p.advertisementId}">a001</td>
                                 <td>
-                                    <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                    <div style="width:140px;" th:text="${p.description}"></div>
                                 </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.price}">1</td>
                                 <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
-                                <td><button type="submit" style="background: #F04243;border-radius: 8px;" class="btn-default" name="delete">delete</button></td>
+                                <td><button  style="background: #F04243;border-radius: 8px;" class="btn-default" name="delete" th:onclick="'shopdelete('+${p.advertisementId}+')'">delete</button></td>
 
                             </tr>
                         </th:block>
@@ -242,7 +242,8 @@
                             <tr>
                                 <td th:text="${p.advertisementId}">a001</td>
                                 <td>
-                                    <textarea style="width:140px;height:60px;" th:value="${p.description}">iWatch</textarea>
+                                   <!-- <textarea style="width:140px;height:60px;" th:text="${p.description}">iWatch</textarea> --> 
+                                   <div style="width:140px;" th:text="${p.description}"></div>
                                 </td>
                                 <td th:text="${p.sellerName}">Anna</td>
                                 <td th:text="${p.type}">1</td>
@@ -250,7 +251,7 @@
                                 <td><div class="pic"><img th:src="${p.pictureUrl}"></div></td>
                                 <td th:text="${p.startDate}">1</td>
                                 <td th:text="${p.endDate}">1</td>
-                                <td><button type="submit" style="background: #F04243;border-radius: 8px;" class="btn-default" name="delete">delete</button></td>
+                                <td><button  style="background: #F04243;border-radius: 8px;" class="btn-default" name="delete" th:onclick="'productdelete('+${p.advertisementId}+')'">delete</button></td>
                             </tr>
                         </th:block>
                         </tbody>
@@ -323,6 +324,12 @@
     }
     function productreject(id){
         window.location.href="/admin/rejectProductApply?advertisementId="+id;
+    }
+    function shopdelete(id){
+        window.location.href="/admin/deleteShopApply?advertisementId="+id;
+    }
+    function productdelete(id){
+        window.location.href="/admin/deleteProductApply?advertisementId="+id;
     }
 </script>
 </html>

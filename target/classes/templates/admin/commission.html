@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
     <title>Commission</title>
@@ -43,8 +43,45 @@
     <br>
     <br>
     <br>
+    <!--按照时间查看收入情况-->
+    <div class="panel panel-default">
+        <div class="panel-heading"  style="background: #7f9c7d">
+            <h3 class="panel-title">
+                Check commission
+            </h3>
+        </div>
+        <div class="panel-body">
+            <select class="form-control" name="#####选择查看区间">
+                <option value="Daily">Daily</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Monthly">Monthly</option>
+                <option value="Yearly">Yearly</option>
+            </select>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Sales commission</th>
+                    <th>Shop ads pay</th>
+                    <th>Product ads pay</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Shop1:200HKD</td>
+                    <td>Shop1:300HKD</td>
+                    <td>Product1:20HKD</td>
+                </tr>
+                </tbody>
+            </table>
+            <br><br>
+            <h5>Total commission</h5>
+            <hr style="height:3px;border:none;border-top:3px double red;" />
+            <text>2000000.00HKD</text>
+
+        </div>
+    </div>
     <!--广告收入统计-->
-    <h1>Ads Commission</h1>
+    <h3>Ads Commission</h3>
     <table class="table">
         <thead>
         <tr>
@@ -65,18 +102,8 @@
         </tbody>
     </table><br><br>
 
-    <h1>Catogery Commission</h1>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">
-                Season commission
-            </h3>
-        </div>
-        <div class="panel-body">
-            <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
-        </div>
-    </div>
-    <h1>Ananul</h1>
+
+    <!--<h1>Ananul</h1>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">
@@ -90,7 +117,7 @@
             </canvas>
         </p>
         </div>
-    </div>
+    </div>-->
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
