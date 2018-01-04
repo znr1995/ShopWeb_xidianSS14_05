@@ -60,7 +60,7 @@ public class RegisterController {
         String phone = httpServletRequest.getParameter("phone_number");
         String password = httpServletRequest.getParameter("password_register");
         String shopName = httpServletRequest.getParameter("Shopname");
-        String catogery = httpServletRequest.getParameter("Catogery");
+        String catogery = httpServletRequest.getParameter("catogery");
 
         if(userRegisterService.sellerVaildEmail(email) && userRegisterService.sellerVaildUsername(username))
         {
