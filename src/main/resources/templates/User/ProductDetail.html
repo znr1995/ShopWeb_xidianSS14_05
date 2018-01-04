@@ -44,6 +44,18 @@
             $('#img1,#img2,#img3,#img4').zoome({showZoomState:true,magnifierSize:[250,250]});
         });
     </script>
+    <style type="text/css">
+
+        #buy{
+            margin-top: 10px;
+        }
+        #see{
+            font-size: 18px;
+        }
+        #see :hover{
+            color: orange;
+        }
+    </style>
 </head>
 <body>
 <div class="header-top">
@@ -186,7 +198,7 @@
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
                             <input type="hidden" name="UnitPrice" th:value="${productdetail.productPrice}" style="display: none">
                             <input type="text" name="ProductAmount" th:value="0" onkeyup="KeyP4(this);" />ProductAmount<br/>
-                            <input type="submit" value="buy" title="" name="buy">
+                            <input type="submit" value="buy" title="" name="buy" id="buy">
                         </form>
                     </div>
                     <!-- 加入购物车/收藏夹 -->
@@ -197,7 +209,7 @@
                             <!--加入收藏夹-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
-                            <input type="submit" value="addintofavorite" title="" name="addintofavorite">
+                            <input type="submit" value="addintofavorite" title="" name="addintofavorite" id="addintofavorite">
                         </form>
                     </div>
                     <div class="btn_form">
@@ -207,12 +219,12 @@
                             <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
                             <input type="hidden" name="ProductAmount" th:value="0" style="display: none" id="txt15" />
-                            <input type="submit" value="addintocart" title="" name="addintocart">
+                            <input type="submit" value="addintocart" title="" name="addintocart" id="addintocart">
                         </form>
                     </div>
 
                     <p class="m_text2" th:text="${productdetail.productBriefInfo}">productBriefInfo</p>
-                    <span class="m_link"><a th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
+                    <span class="m_link"><a id="see" th:href="@{'/shop/'+${productdetail.sellerId}+'?UserID='+${UserID}}">See More Seller's Products</a></span>
                 </div>
                 <div class="clear"></div>
                 <script type="text/javascript">

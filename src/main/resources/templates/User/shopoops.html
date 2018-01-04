@@ -1,17 +1,18 @@
+
 <!DOCTYPE HTML>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Register</title>
+    <title>Paysuccess</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link href="/css/style_user.css" rel="stylesheet" type="text/css" media="all" />
+    <link href="css/style_user.css" rel="stylesheet" type="text/css" media="all" />
     <link href='http://fonts.googleapis.com/css?family=Exo+2' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src="/js/jquery1.min_user.js"></script>
+    <script type="text/javascript" src="js/jquery1.min_user.js"></script>
     <!-- start menu -->
-    <link href="/css/megamenu_user.css" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" src="/js/megamenu_user.js"></script>
+    <link href="css/megamenu_user.css" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" src="js/megamenu_user.js"></script>
     <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
-    <script src="/js/jquery.easydropdown_user.js"></script>
+    <script src="js/jquery.easydropdown_user.js"></script>
 </head>
 <body>
 <div class="header-top">
@@ -28,7 +29,7 @@
         <div class="cssmenu">
             <ul>
 
-                <li><a th:href="@{/User/login.html}">Log In</a></li> |
+                <li><a th:text="${UserName}">UserName</a></li> |
                 <li><a th:href="@{/User/register.html}">Sign Up</a></li>
             </ul>
         </div>
@@ -39,15 +40,68 @@
     <div class="wrap">
         <div class="header-bottom-left">
             <div class="logo">
-                <a href="/homepage"><img src="/images/logo.png" alt=""/></a>
+                <a href="homepage1.html"><img src="./images/logo.png" alt=""/></a>
             </div>
             <div class="menu">
                 <ul class="megamenu skyblue">
-                    <li class="active grid"><a th:href="@{/homepage}">Home</a></li>
-                    <li><a class="color5" th:href="@{/User/login.html}">History</a>
+                    <li class="active grid"><a th:href="@{'/User/Main?UserID='+${UserID}}">Home</a></li>
+                    <!--此处为商品目录，信息自己修改-->
+                    <li><a class="color4" href="#">Category</a>
+                        <div class="megapanel">
+                            <div class="row">
+                                <div class="col1">
+                                    <!--更改目录-->
+                                    <div class="h_nav">
+                                        <h4>Electronic</h4>
+                                        <ul>
+                                            <li><a th:href="@{'/search/type?producttype=TV&UserID='+${UserID}}">TV</a>
+                                                <a th:href="@{'/search/type?producttype=HomeTheater&UserID='+${UserID}}">HomeTheater</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Computers&UserID='+${UserID}}">Computers</a>
+                                                <a th:href="@{'/search/type?producttype=Tables&UserID='+${UserID}}">Tables</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=CellPhones&UserID='+${UserID}}">CellPhones</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Camera&UserID='+${UserID}}">Camera</a>
+                                                <a th:href="@{'/search/type?producttype=Camcorders&UserID='+${UserID}}">Camcorders</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Audio&UserID='+${UserID}}">Audio</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=CarElectronics&UserID='+${UserID}}">CarElectronics</a>
+                                                <a th:href="@{'/search/type?producttype=GPS&UserID='+${UserID}}">GPS</a>
+                                            </li>
+                                            <li><a th:href="@{'/search/type?producttype=Video&UserID='+${UserID}}">Video</a>
+                                                <a th:href="@{'/search/type?producttype=Game&UserID='+${UserID}}">Game</a>
+                                                <a th:href="@{'/search/type?producttype=Movie&UserID='+${UserID}}">Movie</a>
+                                                <a th:href="@{'/search/type?producttype=Music&UserID='+${UserID}}">Music</a>
+                                            </li>
+
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Health</h4>
+                                        <ul>
+                                            <li><a href="category.html">Health, Fintiness & Sports</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="col1">
+                                    <div class="h_nav">
+                                        <h4>Office</h4>
+                                        <ul>
+                                            <li><a href="category.html">Home & Office</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </li>
-                    <li><a class="color6" th:href="@{/User/login.html}"}>Cart</a></li>
-                    <li><a class="color7" th:href="@{/User/login.html}">Favorite</a></li>
+                    <li><a class="color5" th:href="@{'/MyOrder?UserID='+${UserID}}">History</a>
+                    </li>
+                    <li><a class="color6" th:href="@{'/MyShoppingCart?UserID='+${UserID}}">Cart</a></li>
+                    <li><a class="color7" th:href="@{'/MyFavorite?UserID='+${UserID}}">Favorite</a></li>
                 </ul>
             </div>
         </div>
@@ -55,41 +109,39 @@
             <div class="search">
                 <form th:action="@{/search/name}" method="get">
                     <input type="text" name="productname" class="textbox" value="Search" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Search';}">
-                    <input type="hidden" name="UserID" th:value="${'-1'}" style="display: none" />
+                    <input type="hidden" name="UserID" th:value="${UserID}" style="display: none" />
                     <input type="submit" value="Subscribe" id="submit" name="submit">
                 </form>
                 <div id="response"> </div>
+            </div>
+            <div class="tag-list">
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c1" href="#"> </a>
+                        <ul class="sub-icon1 list">
+                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
+                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="icon1 sub-icon1 profile_img">
+                    <li><a class="active-icon c2" href="#"> </a>
+                        <ul class="sub-icon1 list">
+                            <li><h3>No Products</h3><a href=""></a></li>
+                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
             </div>
         </div>
         <div class="clear"></div>
     </div>
 </div >
-<div class="register_account">
+<div class="login">
     <div class="wrap">
-        <h4 class="title">Create an Account</h4>
-        <form action="/userRegister" method="post">
-            <div class="col_1_of_2 span_1_of_2">
-                <div><input name="username" type="text" value="Name" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Name';}"></div>
-                <div><input name="phone_number" type="text"  value="phone_number" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'phone_number';}" ></div>
-                <div><input type="text" name="email" value="E-Mail" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'E-Mail';}"></div>
-                <div><input type="password" name="password_register" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}"></div>
-            </div>
-            <div class="col_1_of_2 span_1_of_2">
-                <h1 style="color: gray">
-                        Welcome to PARKNSHOP!
-                </h1>
-                <!--<div><input type="text" value="Address" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Address';}"></div>-->
-
-                <!--<div><input type="text" value="City" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'City';}"></div>-->
-                <!--<div>-->
-                <!--</div>-->
-                <!--<input type="text" value="" class="code"> - <input type="text" value="" class="number">-->
-                <!--<p class="code">Country Code + Phone Number</p>-->
-            </div>
-            <button class="grey">Submit</button>
-            <p class="terms">By clicking 'Create Account' you agree to the <a href="#">Terms &amp; Conditions</a>.</p>
-            <div class="clear"></div>
-        </form>
+        <div class="page-not-found">
+            <h1>ShopMissed</h1>
+        </div>
     </div>
 </div>
 <div class="footer">
@@ -202,7 +254,7 @@
                     <li class="active"><a href="about.html">About Us</a></li> |
                     <li><a href="delivery.html">Delivery & Returns</a></li> |
                     <li><a href="delivery.html">Terms & Conditions</a></li> |
-                    <li><a href="remark.html">Contact Us</a></li>
+                    <li><a href="#">Contact Us</a></li>
                 </ul>
             </div>
             <div class="clear"></div>

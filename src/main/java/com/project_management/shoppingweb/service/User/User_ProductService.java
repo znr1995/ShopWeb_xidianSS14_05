@@ -32,4 +32,8 @@ public class User_ProductService {
     public Product findProductByProductID(Long id){
         return productRepository.findProductByProductId(id);
     }
+
+    public Product save(Product product){
+        return productRepository.save(product);
+    }
 }

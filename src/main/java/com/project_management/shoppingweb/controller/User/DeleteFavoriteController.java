@@ -58,8 +58,15 @@ public class DeleteFavoriteController {
                 FavoriteToShow favoriteToShow = new FavoriteToShow();
                 favoriteToShow.ID = String.valueOf(FavoritelistP.get(i).getCollectionId());
                 favoriteToShow.PID = String.valueOf(FavoritelistP.get(i).getProductId());
-                favoriteToShow.SID = String.valueOf(productService.findProductByProductID(FavoritelistP.get(i).getProductId()).getSellerId());
                 Product product = productService.findProductByProductID(FavoritelistP.get(i).getProductId());
+                if(product == null){
+                    favoriteToShow.SID = "-1";
+                    favoriteToShow.NameP = "undercarriage";
+                    favoriteToShow.NameS = "Missed";
+                    FavoriteProduct.add(favoriteToShow);
+                    continue;
+                }
+                favoriteToShow.SID = String.valueOf(product.getSellerId());
                 favoriteToShow.NameP = product.getProductName();
                 favoriteToShow.NameS = sellerService.findBySellerId(Long.parseLong(favoriteToShow.SID)).getShopname();
                 FavoriteProduct.add(favoriteToShow);

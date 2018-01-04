@@ -59,6 +59,12 @@ public class DeleteShoppingCartController {
 
             Product product = productService.findProductByProductID(GlobalShoppingCart.get(i).getProductId());
 
+            if(product == null){
+                shoppingCartToShow.Name = "undercarriage";
+                shoppingCartToShowList.add(shoppingCartToShow);
+                continue;
+            }
+
             shoppingCartToShow.Name = product.getProductName();
 
             shoppingCartToShowList.add(shoppingCartToShow);
