@@ -3,12 +3,12 @@
 <head>
     <title>ShoppingCart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link th:href="'css/foot.css'" rel="stylesheet" type="text/css" media="all">
     <link href="/css/foot.css" rel="stylesheet" type="text/css" media="all">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link th:href="'css/style_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'http://fonts.googleapis.com/css?family=Exo+2'" rel='stylesheet' type='text/css'>
+    <link th:href="'css/foot.css'" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" th:src="'js/jquery1.min_user.js'"></script>
     <!-- start menu -->
     <link th:href="'css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
@@ -28,7 +28,7 @@
         }
         button{
             height: 40px;
-            width: 100px;
+
             font-size: 18px;
             background-color: rgb(116,176,200);
             color: #FFFFFF;
@@ -37,7 +37,7 @@
             outline: none;
             margin: 10px auto;
         }
-        button:active{
+        button:hover{
             background-color: dodgerblue;
         }
         td{
@@ -147,23 +147,6 @@
                 <div id="response"> </div>
             </div>
             <div class="tag-list">
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c1" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c2" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>No Products</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
             </div>
         </div>
         <div class="clear"></div>
@@ -184,28 +167,28 @@
             <form th:action="@{/DeleteShoppingCart}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
+                <td style="width: 120px"><button style="width: 80px;" type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
             </form>
             <form th:action="@{/ModifyAmount}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
+                <td style="width: 120px"><button style="width: 80px" type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
             </form>
             <form th:action="@{/balance}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="Balance" th:value="结算" >Settlement</button></td>
+                <td style="width: 120px"><button style="width: 120px" type="submit" name="Balance" th:value="结算" >Settlement</button></td>
             </form>
             <form th:action="@{/CartPortal}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
+                <td style="width: 120px"><button style="width: 80px" type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
             </form>
         </tr>
     </table>
 </div>
 
-<div style="background-color: rgb(116,176,200);width: 100%;height: 50px;margin-top: 100px">
+<div style="background-color: rgb(116,176,200);width: 100%;height: 50px;margin-top: 200px">
     <h3>
 
     </h3>
@@ -257,8 +240,3 @@
 </div>
 </body>
 </html>
-
-
-
-
-
