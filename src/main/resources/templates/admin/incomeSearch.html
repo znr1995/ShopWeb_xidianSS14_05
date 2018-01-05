@@ -1,0 +1,141 @@
+    <title>incomeSearch</title>
+    <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
+    <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
+    <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
+    <link rel="stylesheet" th:href="'/css/style.css'">
+    <script th:src="'/js/index.js'"></script>
+</head>
+<body>
+
+<div class="col-lg-2">
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" id="sidebar-wrapper" role="navigation">
+            <ul class="nav sidebar-nav">
+                <li class="sidebar-brand">
+
+                </li>
+                <li>
+
+                    <a th:href="@{adsManagement}"><i class="fa fa-fw fa-folder"></i>AdsManagement</a>
+                </li>
+                <li>
+                    <a th:href="@{shopManage}"><i class="fa fa-fw fa-map-signs"></i>ShopManage</a>
+                </li>
+                <li>
+                    <a th:href="@{customerManage}"><i class="fa fa-fw fa-users"></i>CustomerManage</a>
+                </li>
+                <li>
+                    <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
+                </li>
+                <li>
+                    <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="col-lg-10">
+    <br>
+    <br>
+    <br>
+
+
+    <div class="panel panel-primary">
+        <input type="text" name="shopname" id="input1">date</input>
+
+        <button onclick=search()>Search</button>
+
+        <table class="table">
+
+            <caption style="background: #bee5eb">Search result</caption>
+            <thead>
+            <tr>
+                <th>date</th>
+                <th>seller_id</th>
+                <th>sell_name</th>
+                <th>type</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${searchList}">
+                <tr>
+                	<td th:text="${p.date}"></td>
+                    <td th:text="${p.sellerId}"></td>
+                    <td th:text="${p.sellerName}"></td>
+                    <td th:text="${p.type}"></td>
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+
+<div class="footer"></div>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <span class="navbar-brand" th:text="${adminUserName}">Anna</span>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a th:href="@{personalInformation}">Personal Infomation</a></li>
+                <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    Log out
+                </button>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    &times;
+                                </button>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    Sure to Log Out
+                                </h4>
+                            </div>
+                            <div class="modal-body" >
+                                Log Out
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Leave
+                                </button>
+                                <a href="/admin/logout"><button type="button" class="btn btn-primary">
+                                    Sure
+                                </button></a>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div><!-- /.modal -->
+                </div>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<script>
+    function shopagreeOne(id){
+        window.location.href="/admin/agreeSellerApply?sellerId="+id;
+    }
+    function shoprejectOne(id){
+        window.location.href="/admin/rejectSellerApply?sellerId="+id;
+    }
+    function black(id){
+        window.location.href="/admin/black?sellerId="+id;
+    }
+    function unblack(id){
+        window.location.href="/admin/unblack?sellerId="+id;
+    }
+    function search(){
+        var name=document.getElementById('input1');
+        window.location.href="/admin/searchIncome?name="+name.value;
+    }
+</script>
+</body>
+
+</html>

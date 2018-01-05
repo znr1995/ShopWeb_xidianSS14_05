@@ -1,5 +1,7 @@
 package com.project_management.shoppingweb.controller.admin;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -30,6 +32,7 @@ import com.project_management.shoppingweb.domain.User;
 
 import com.project_management.shoppingweb.repository.SellerAdvertisementRepository;
 import com.project_management.shoppingweb.repository.AdminRepository;
+import com.project_management.shoppingweb.repository.IncomeRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
@@ -37,6 +40,9 @@ import com.project_management.shoppingweb.repository.SellerRepository;
 import com.project_management.shoppingweb.repository.UserRepository;
 import com.project_management.shoppingweb.service.SellerAdvertisementService;
 import com.project_management.shoppingweb.service.UserService;
+
+import groovyjarjarcommonscli.ParseException;
+
 import com.project_management.shoppingweb.service.AdminService;
 import com.project_management.shoppingweb.service.PriceService;
 import com.project_management.shoppingweb.service.ProductAdvertisementService;
@@ -72,7 +78,8 @@ public class AdminManagementController {
 	private UserService userService;
 	@Resource
 	private UserRepository userRepository;
-	
+	@Resource
+	 private  IncomeRepository incomeRepository;
 
 	@GetMapping("/backUp")
 	public String backUp() {
@@ -337,5 +344,30 @@ public class AdminManagementController {
 		model.addAttribute("sellerApplyStatusList", statusList);
 		//拉出未通过审核的商店
 		return "/admin/shopManageSearch";
+	}
+	@GetMapping("/searchIncome")
+	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		//Date date = sdf.parse( name);
+
+		List<Income> List = incomeRepository.findAll();
+		List<Income> searchList = new ArrayList();
+		for(int i = 0; i < List.size() ; i++)
+		{	
+			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getDate());
+			String str="";
+			String a="";
+			String b="";
+			str=dateStr.substring(0,4);
+			a=dateStr.substring(5,7);
+			b=dateStr.substring(8, 10);
+			if(name.equals(str) ||name.equals(a) ||name.equals(b))
+			{
+				searchList.add(List.get(i));
+			}
+		}	
+		model.addAttribute("searchList", searchList);
+		//拉出未通过审核的商店
+		return "/admin/incomeSearch";
 	}
 }

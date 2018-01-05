@@ -43,6 +43,12 @@
     <br>
     <br>
     <br>
+    <h3>Find income with date </h3>
+    <input type="text" style="width: 200px" name="shopname" id="input1"/>
+
+    <button style="background: #f0ef11;border-radius: 8px;" onclick=search()>Search</button>
+     <br>
+     <br>
     <!--广告收费调整-->
     <div class="well" style="background: #c1ecd7">
         <form action="/admin/updatePrice" method="post">
@@ -301,10 +307,14 @@
             //绘制饼图
             //比例数据和颜色
             var data_arr = [0.05, 0.25, 0.6, 0.1];
-            var color_arr = ["#00FF21", "#FFAA00", "#00AABB", "#FF4400"];
+            var color_arr = ["#00FF21", "#FFAA00", "#00'AABB", "#FF4400"];
             var text_arr = ["第一季度", "第二季度", "第三季度", "第四季度"];
 
             drawCircle("canvas_circle", data_arr, color_arr, text_arr);
+        }
+        function search(){
+        	var name=document.getElementById('input1');
+            window.location.href="/admin/searchIncome?name="+name.value;
         }
 
         //页面加载时执行init()函数
