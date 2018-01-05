@@ -155,12 +155,14 @@
 <div id="out_table">
     <table id="inside_table">
         <tr>
+            <td width="170px" height="60px"><strong>Product Photo</strong></td>
             <td width="250px" height="60px"><strong>Product Name</strong></td>
             <td width="250px" height="60px"><strong>Product Number</strong></td>
             <td width="250px" height="60px"><strong>Create Time</strong></td>
         </tr>
         <tr th:each="GlobalShoppingCart :${GlobalShoppingCart}">
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productId}" style="display: none"></td>
+            <td width="170px" height="140px" ><img class="a" th:src="*{GlobalShoppingCart.Photo}" width="170px" height="140px" alt="2333333333"/></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.Name}" ></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productAmount}"></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.createtime}" ></td>

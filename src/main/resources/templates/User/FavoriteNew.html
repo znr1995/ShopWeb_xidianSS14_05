@@ -29,7 +29,7 @@
             color: gray;
         }
         #favorite{
-            width: 700px;
+            width: 100%;
             border: 1px rgb(116,176,200) solid;
             border-radius: 8px;
             box-shadow: 3px 3px lightblue;
@@ -179,11 +179,13 @@
 <div  id="favorite">
     <table id="favorite_table1" >
         <tr>
-            <td width="250px" height="60px"><strong>ProductName</strong></td>
-            <td width="250px" height="60px"><strong>ShopName</strong></td>
+            <td width="170px" height="60px"><strong>ProductPhoto</strong></td>
+            <td width="200px" height="60px"><strong>ProductName</strong></td>
+            <td width="200px" height="60px"><strong>ShopName</strong></td>
         </tr>
         <tr th:each="ProductList : ${ProductList}">
             <td width="200px" height="60px" th:text="*{ProductList.PID}" style="display: none" >Onions</td>　
+            <td width="170px" height="140px" ><img class="a" th:src="*{ProductList.Photo}" width="170px" height="140px" alt="2333333333"/></td>
             <td width="200px" height="60px" th:text="*{ProductList.NameP}" >Onions</td>
             <td width="200px" height="60px" th:text="*{ProductList.NameS}" >Onions</td>
             <form th:action="@{/deletefavorite}" method="post">
@@ -206,10 +208,12 @@
 
     <table id="favorite_table2" >
         <tr>
-            <td width="250px" height="60px"><strong>ShopName</strong></td>
+            <td width="170px" height="150px"><strong>ShopPhoto</strong></td>
+            <td width="200px" height="60px"><strong>ShopName</strong></td>
         </tr>
         <tr th:each="ShopList : ${ShopList}">
             <td width="200px" height="60px" th:text="*{ShopList.SID}" style="display: none" >Onions</td>　
+            <td width="170px" height="140px" ><img class="a" th:src="*{ShopList.Photo}" width="170px" height="140px" alt="2333333333"/></td>
             <td width="200px" height="60px" th:text="*{ShopList.NameS}" >Onions</td>
             <form th:action="@{/deletefavoriteShop}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>

@@ -79,10 +79,12 @@ public class UploadSCAmountController {
             Product product = productService.findProductByProductID(GlobalShoppingCart.get(i).getProductId());
             if(product == null){
                 shoppingCartToShow.Name = "undercarriage";
+                shoppingCartToShow.Photo = "233";
                 shoppingCartToShowList.add(shoppingCartToShow);
                 continue;
             }
             shoppingCartToShow.Name = product.getProductName();
+            shoppingCartToShow.Photo = product.getProductPhoto();
             shoppingCartToShowList.add(shoppingCartToShow);
         }
 
