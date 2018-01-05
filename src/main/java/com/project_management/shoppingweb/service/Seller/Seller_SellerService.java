@@ -41,7 +41,14 @@ public class Seller_SellerService {
     @Resource
     private  IncomeRepository incomeRepository;
 
+    @Resource
+    private  AddressRepository addressRepository;
 
+
+    public String getAddressString(long addressId){
+        Address address = addressRepository.findByAddressId(addressId);
+        return address.getProvince() + "  " + address.getCity() +  "  " + address.getDistrict() +  "  " + address.getDetailAddress() ;
+    }
 
     public Seller getSellerById(long sellerId)
     {

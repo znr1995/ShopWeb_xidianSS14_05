@@ -4,21 +4,21 @@
     <title>favorite</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link th:href="'css/style_user.css'" rel="stylesheet" type="text/css" media="all" />
-    <link th:href="'css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="'/css/style_user.css'" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="'/css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'http://fonts.googleapis.com/css?family=Exo+2'" rel='stylesheet' type='text/css'>
-    <script type="text/javascript" th:src="'js/jquery1.min_user.js'"></script>
+    <script type="text/javascript" th:src="'/js/jquery1.min_user.js'"></script>
     <!-- start menu -->
-    <link th:href="'css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
-    <script type="text/javascript" th:src="'js/megamenu_user.js'"></script>
+    <link th:href="'/css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
+    <script type="text/javascript" th:src="'/js/megamenu_user.js'"></script>
     <script>$(document).ready(function(){$(".megamenu").megamenu();});</script>
     <!--start slider -->
-    <link rel="stylesheet" th:href="'css/fwslider_user.css'" media="all">
-    <script th:src="'js/jquery-ui.min_user.js'"></script>
-    <script th:src="'js/css3-mediaqueries_user.js'"></script>
-    <script th:src="'js/fwslider_user.js'"></script>
+    <link rel="stylesheet" th:href="'/css/fwslider_user.css'" media="all">
+    <script th:src="'/js/jquery-ui.min_user.js'"></script>
+    <script th:src="'/js/css3-mediaqueries_user.js'"></script>
+    <script th:src="'/js/fwslider_user.js'"></script>
     <!--end slider -->
-    <script th:src="'js/jquery.easydropdown_user.js'"></script>
+    <script th:src="'/js/jquery.easydropdown_user.js'"></script>
     <style type="text/css">
         #left {
             width: 45%;
@@ -146,7 +146,7 @@
     <div class="wrap">
         <div class="header-bottom-left">
             <div class="logo">
-                <a href="homepage1.html"><img src="./images/logo.png" alt=""/></a>
+                <a href="homepage1.html"><img src="/images/logo.png" alt=""/></a>
             </div>
             <div class="menu">
                 <ul class="megamenu skyblue">
@@ -279,12 +279,17 @@
         </div>
         <div id="right">
             <table id="right_infor">
-                <td>
-                    <img src="alipay.JPG"/>
-                </td>
-                <td>
-                    <img src="wechatpay.JPG"/>
-                </td>
+                <div>
+                    <td>
+                        <img src="/alipay.JPG"/>
+                    </td>
+                    <td>
+                        <label></label>
+                    </td>
+                    <td>
+                        <img src="/wechatpay.JPG"/>
+                    </td>
+                </div>
             </table>
 
         </div>

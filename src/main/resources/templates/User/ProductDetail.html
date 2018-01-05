@@ -191,7 +191,10 @@
                     <p class="m_5" th:text="'$ '+${productdetail.productPrice}">productPrice</p><!--<span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p>-->
                     <!--<p class="m-5" th:text="'stack:'+${productdetail.productStock}">Stack : Unknown</p>-->
                     <div class="btn_form">
-                        <form th:action="@{/Buy}" method="post">
+                        <form th:if = "${UserID == -1 || UserID == null}"  th:action="@{/User/login.html}"  >
+                            <input type="submit" value="buy" title="" name="buy" id="buy" ></input>
+                        </form>
+                        <form th:if = "${UserID != -1 && UserID != null}"  th:action="@{/Buy}" method="post">
                             <!--立即购买按钮-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
@@ -205,7 +208,10 @@
                     <!--<span class="m_link"><a href="#">add in cart</a> </span>
                     <span class="m_link"><a href="#">add in collection</a> </span>-->
                     <div class="btn_form">
-                        <form th:action="@{/AddIntoFavoriteP}" method="post">
+                        <form th:if = "${UserID == -1 || UserID == null}"  th:action="@{/User/login.html}"  >
+                            <input type="submit" value="addintofavorite" title="" name="addintofavorite" id="addintofavorite">
+                        </form>
+                        <form th:if = "${UserID != -1 && UserID != null}" th:action="@{/AddIntoFavoriteP}" method="post">
                             <!--加入收藏夹-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ProductID" th:value="${productdetail.productId}" style="display: none">
@@ -213,7 +219,10 @@
                         </form>
                     </div>
                     <div class="btn_form">
-                        <form th:action="@{/AddIntoShoppingCart}" method="post">
+                        <form th:if = "${UserID == -1 || UserID == null}"  th:action="@{/User/login.html}"  >
+                            <input type="submit" value="addintocart" title="" name="addintocart" id="addintocart">
+                        </form>
+                        <form th:if = "${UserID != -1 && UserID != null}" th:action="@{/AddIntoShoppingCart}" method="post">
                             <!--加入购物车-->
                             <input type="hidden" name="UserID" th:value="${UserID}" style="display: none">
                             <input type="hidden" name="ShopID" th:value="${productdetail.sellerId}" style="display: none">
@@ -290,10 +299,17 @@
     </div>
 </div>
 
+<script>
+    function loginAlter() {
+        alter("please login first!");
+        return false;
+    }
+</script>
 <script type="text/javascript">
     function KeyP4(v){
         document.getElementById("txt15").value = v.value;
     }
+
 </script>
 </body>
 </html>

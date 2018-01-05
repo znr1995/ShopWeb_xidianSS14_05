@@ -205,7 +205,7 @@ public class ViewTransactionController {
         model.addAttribute("userName",seller_sellerService.getSellerById(trade.getSellerId()).getUsername());
         model.addAttribute("tradePayWay",trade.getTradePayWay());
         model.addAttribute("tradeTotalMoney",trade.getTradeTotalMoney());
-        model.addAttribute("address",trade.getAddressId());
+        model.addAttribute("address",seller_sellerService.getAddressString(Long.valueOf(trade.getAddressId())));
         model.addAttribute("feedbackRemarks",trade.getFeedbackRemarks());
         model.addAttribute("tradeID",trade.getTradeId());
         try {

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -35,23 +36,26 @@ public class PayController {
     private User_ProductService productService;
 
 
-    @RequestMapping(value = "/Pay",params = "Pay=Pay")
-    public String Pay(HttpServletRequest request, Model model){
+    @RequestMapping(value = "/Pay",method = RequestMethod.POST,params = "Pay=Pay")
+    public String Pay(HttpServletRequest request, Model model, RedirectAttributes attributes){
         String UserID = request.getParameter("UserID");
         String ShopID = request.getParameter("ShopID");
         String ProductID = request.getParameter("ProductID");
         String UnitPrice = request.getParameter("UnitPrice");
         String ProductAmount = request.getParameter("ProductAmount");
         String Total = request.getParameter("Total");
-        String account = request.getParameter("account");
-        String password = request.getParameter("password");
-        String address = request.getParameter("address");
+        long address = -1;
+        try {
+            address = Long.valueOf(request.getParameter("address"));
+        }catch (Exception e){
+            attributes.addAttribute("errorMessage","address is null,add it first!");
+            return "redirect:/error/errorHandler";
+        }
+
         String PayWay = request.getParameter("PayWay");
         String SellerName = request.getParameter("SellerName");
         String ProductName = request.getParameter("ProductName");
-        List<Address> AddressList = new ArrayList<Address>();
-        AddressList = addressService.findAllByUserId(Long.parseLong(UserID));
-        int number = AddressList.size();
+
 
         model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
 
@@ -62,98 +66,59 @@ public class PayController {
             return "/User/productoops";
         }
         if(Integer.parseInt(ProductAmount) > product.getProductStock()){
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductAmount", ProductAmount);
-            model.addAttribute("Total", Total);
-            model.addAttribute("account", account);
-            model.addAttribute("password", password);
-            model.addAttribute("SellerName", SellerName);
-            model.addAttribute("ProductName", ProductName);
-            if(AddressList.size() == 0)
-                return "/User/PayNew";
-            model.addAttribute("AddressList",AddressList);
-            return "/User/PayNew";
+            attributes.addAttribute("errorMessage","productAmount > product stock, prodcut stock is " + product.getProductStock());
+            return "redirect:/error/errorHandler";
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductAmount", ProductAmount);
+//            model.addAttribute("Total", Total);
+//            model.addAttribute("SellerName", SellerName);
+//            model.addAttribute("ProductName", ProductName);
+//            model.addAttribute("AddressList",addressService.findAllByUserId(Long.valueOf(UserID)));
+//            return "/User/PayNew";
         }
 
-        if(account.equals("") || password.equals("") || address.equals("")){
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductAmount", ProductAmount);
-            model.addAttribute("Total", Total);
-            model.addAttribute("account", account);
-            model.addAttribute("password", password);
-            model.addAttribute("SellerName", SellerName);
-            model.addAttribute("ProductName", ProductName);
-            if(AddressList.size() == 0)
-                return "/User/PayNew";
-            model.addAttribute("AddressList",AddressList);
-            return "/User/PayNew";
-        }
 
-        try {
-            int a = Integer.parseInt(address);
-        }
-        catch (Exception e){
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductAmount", ProductAmount);
-            model.addAttribute("Total", Total);
-            model.addAttribute("account", account);
-            model.addAttribute("password", password);
-            model.addAttribute("SellerName", SellerName);
-            model.addAttribute("ProductName", ProductName);
-            if(AddressList.size() == 0)
-                return "/User/PayNew";
-            model.addAttribute("AddressList",AddressList);
-            return "/User/PayNew";
-        }
 
-        int b = Integer.parseInt(address);
 
-        if(b > number || Integer.parseInt(address)<= 0){
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductAmount", ProductAmount);
-            model.addAttribute("Total", Total);
-            model.addAttribute("account", account);
-            model.addAttribute("password", password);
-            model.addAttribute("SellerName", SellerName);
-            model.addAttribute("ProductName", ProductName);
-            if(AddressList.size() == 0)
-                return "/User/PayNew";
-            model.addAttribute("AddressList",AddressList);
-            return "/User/PayNew";
-        }
 
-        if(number == 0){
-            model.addAttribute("UserID", UserID);
-            model.addAttribute("ProductID", ProductID);
-            model.addAttribute("ShopID", ShopID);
-            model.addAttribute("UnitPrice", UnitPrice);
-            model.addAttribute("ProductAmount", ProductAmount);
-            model.addAttribute("Total", Total);
-            model.addAttribute("account", account);
-            model.addAttribute("password", password);
-            model.addAttribute("SellerName", SellerName);
-            model.addAttribute("ProductName", ProductName);
-            if(AddressList.size() == 0)
-                return "/User/PayNew";
-            model.addAttribute("AddressList",AddressList);
-            return "/User/PayNew";
-        }
+//        int b = Integer.parseInt(address);
+//
+//        if(b > number || Integer.parseInt(address)<= 0){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductAmount", ProductAmount);
+//            model.addAttribute("Total", Total);
+//            model.addAttribute("SellerName", SellerName);
+//            model.addAttribute("ProductName", ProductName);
+//            if(AddressList.size() == 0)
+//                return "/User/PayNew";
+//            model.addAttribute("AddressList",AddressList);
+//            return "/User/PayNew";
+//        }
+//
+//        if(number == 0){
+//            model.addAttribute("UserID", UserID);
+//            model.addAttribute("ProductID", ProductID);
+//            model.addAttribute("ShopID", ShopID);
+//            model.addAttribute("UnitPrice", UnitPrice);
+//            model.addAttribute("ProductAmount", ProductAmount);
+//            model.addAttribute("Total", Total);
+//            model.addAttribute("SellerName", SellerName);
+//            model.addAttribute("ProductName", ProductName);
+//            if(AddressList.size() == 0)
+//                return "/User/PayNew";
+//            model.addAttribute("AddressList",AddressList);
+//            return "/User/PayNew";
+//        }
 
 
         Trade newTrade = new Trade();
-        newTrade.setAddressId(String.valueOf(AddressList.get(Integer.parseInt(address) - 1).getAddressId()));
+        newTrade.setAddressId(String.valueOf(address));
         newTrade.setFeedbackRemarks("");
         Date now = new Date();
         newTrade.setTradeCreateTime(now);
@@ -192,7 +157,7 @@ public class PayController {
         return "/User/SuccessNew";
     }
 
-    @RequestMapping(value = "/Pay",params = "addAddress=addAddress")
+    @RequestMapping(value = "/Pay",method = RequestMethod.POST,params = "addAddress=addAddress")
     String addAddressBefore(HttpServletRequest request,Model model)
     {
         long UserID =Long.valueOf( request.getParameter("UserID"));
@@ -204,7 +169,7 @@ public class PayController {
         String ProductName = request.getParameter("ProductName");
         long ProductAmount = Long.valueOf(request.getParameter("ProductAmount"));
         double UnitPrice = Double.valueOf(request.getParameter("UnitPrice"));
-        double TotalPay = Double.valueOf(request.getParameter("TotalPay"));
+        double Total = Double.valueOf(request.getParameter("Total"));
 
         model.addAttribute("UserID",UserID);
         model.addAttribute("IsFromShoppingCart",IsFromShoppingCart);
@@ -214,12 +179,12 @@ public class PayController {
         model.addAttribute("ProductName",ProductName);
         model.addAttribute("ProductAmount",ProductAmount);
         model.addAttribute("UnitPrice",UnitPrice);
-        model.addAttribute("TotalPay",TotalPay);
-
+        model.addAttribute("Total",Total);
+        model.addAttribute("UserName", userService.findByUserId(UserID).getUsername());
         return "/User/addAddressPage";
     }
 
-    @RequestMapping("/Pay/addAddressAfter")
+    @RequestMapping(value = "/Pay/addAddressAfter",method = RequestMethod.POST)
     String addAddressAfter(HttpServletRequest request,Model model)
     {
         long UserID =Long.valueOf( request.getParameter("UserID"));
@@ -231,7 +196,7 @@ public class PayController {
         String ProductName = request.getParameter("ProductName");
         long ProductAmount = Long.valueOf(request.getParameter("ProductAmount"));
         double UnitPrice = Double.valueOf(request.getParameter("UnitPrice"));
-        double TotalPay = Double.valueOf(request.getParameter("TotalPay"));
+        double Total = Double.valueOf(request.getParameter("Total"));
 
 
         //add address
@@ -264,8 +229,9 @@ public class PayController {
         model.addAttribute("ProductName",ProductName);
         model.addAttribute("ProductAmount",ProductAmount);
         model.addAttribute("UnitPrice",UnitPrice);
-        model.addAttribute("TotalPay",TotalPay);
+        model.addAttribute("Total",Total);
         model.addAttribute("AddressList",addressService.findAllByUserId(UserID));
+        model.addAttribute("UserName", userService.findByUserId(UserID).getUsername());
         return "/User/PayNew";
     }
 }
