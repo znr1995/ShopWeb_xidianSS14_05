@@ -67,12 +67,14 @@ public class FavoriteInHomeController {
                     favoriteToShow.SID = "-1";
                     favoriteToShow.NameP = "undercarriage";
                     favoriteToShow.NameS = "Missed";
+                    favoriteToShow.Photo = "233";
                     FavoriteProduct.add(favoriteToShow);
                     continue;
                 }
                 favoriteToShow.SID = String.valueOf(product.getSellerId());
                 favoriteToShow.NameP = product.getProductName();
                 favoriteToShow.NameS = sellerService.findBySellerId(Long.parseLong(favoriteToShow.SID)).getShopname();
+                favoriteToShow.Photo = product.getProductPhoto();
                 FavoriteProduct.add(favoriteToShow);
             }
             model.addAttribute("ProductList", FavoriteProduct);
@@ -91,6 +93,7 @@ public class FavoriteInHomeController {
                 favoriteToShow.ID = String.valueOf(FavoriteShop.get(i).getId());
                 favoriteToShow.SID = String.valueOf(FavoriteShop.get(i).getSellerId());
                 favoriteToShow.NameS = sellerService.findBySellerId(FavoriteShop.get(i).getSellerId()).getShopname();
+                favoriteToShow.Photo = sellerService.findBySellerId(FavoriteShop.get(i).getSellerId()).getSculpture();
                 FavoriteShops.add(favoriteToShow);
             }
             model.addAttribute("ShopList", FavoriteShops);

@@ -61,11 +61,13 @@ public class DeleteShoppingCartController {
 
             if(product == null){
                 shoppingCartToShow.Name = "undercarriage";
+                shoppingCartToShow.Photo = "233";
                 shoppingCartToShowList.add(shoppingCartToShow);
                 continue;
             }
 
             shoppingCartToShow.Name = product.getProductName();
+            shoppingCartToShow.Photo = product.getProductPhoto();
 
             shoppingCartToShowList.add(shoppingCartToShow);
         }
