@@ -8,7 +8,6 @@
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
     <link rel="stylesheet" th:href="'/css/style.css'">
     <script th:src="'/js/index.js'"></script>
-    
 </head>
 <body>
 
@@ -48,7 +47,13 @@
     <br>
     <br>
     <br>
+	<h3>Find Customer with Customer Username </h3>
+    <input type="text" style="width: 200px" name="username" id="input1"/>
 
+    <button style="background: #f0ef11;border-radius: 8px;" onclick=search()>Search</button>
+    <br>
+    <br>
+    
      <div class="panel-group">
                        <div class="panel panel-primary">
                            <div class="panel-heading" style="background: #c8ecb4 ">
@@ -177,6 +182,10 @@ function customerrecover(id){
 }
 function customerdelete(id){
 	window.location.href="/admin/deleteCustomer?userId="+id;
+}
+function search(){
+    var name=document.getElementById('input1');
+    window.location.href="/admin/searchCustomer?username="+name.value;
 }
 </script>
 </html>

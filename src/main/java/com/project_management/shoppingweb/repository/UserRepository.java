@@ -9,6 +9,7 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -28,5 +29,5 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 	User findByUserId(Long userId);
 	List<User> findAllByState(Integer state);
-
+	List<User> findAllByUsernameLike(@Param("username") String username);
 }

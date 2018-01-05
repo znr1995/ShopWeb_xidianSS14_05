@@ -390,10 +390,17 @@ public class ModifySellerAdvertisementController {
             //新建商品广告
             productAdvertisement = new ProductAdvertisement();
 
-            //判断起止日期是否合法
-            if(startDate.after(endDate))
+            //判断起止日期是否合法1
+            if(startDate.compareTo(endDate)!=-1)
             {
                 attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
+                return "redirect:/error/errorHandler";
+            }
+
+            //判断开始时间是否合法2
+            Date currentDate=new Date();
+            if(currentDate.compareTo(startDate)!=-1){
+                attributes.addAttribute("errorMessage","startDate can't be set too early!!");
                 return "redirect:/error/errorHandler";
             }
 
@@ -475,10 +482,17 @@ public class ModifySellerAdvertisementController {
             sellerAdvertisement = new SellerAdvertisement();
 
 
-            //判断起止日期是否合法
-            if(startDate.after(endDate))
+            //判断起止日期是否合法1
+            if(startDate.compareTo(endDate)!=-1)
             {
                 attributes.addAttribute("errorMessage","endDate <= startDate ,not allow!!");
+                return "redirect:/error/errorHandler";
+            }
+
+            //判断开始时间是否合法2
+            Date currentDate=new Date();
+            if(currentDate.compareTo(startDate)!=-1){
+                attributes.addAttribute("errorMessage","startDate can't be set too early!!");
                 return "redirect:/error/errorHandler";
             }
 

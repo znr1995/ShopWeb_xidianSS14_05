@@ -3,10 +3,12 @@
 <head>
     <title>ShoppingCart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="/css/foot.css" rel="stylesheet" type="text/css" media="all">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <link th:href="'css/style_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'http://fonts.googleapis.com/css?family=Exo+2'" rel='stylesheet' type='text/css'>
+    <link th:href="'css/foot.css'" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" th:src="'js/jquery1.min_user.js'"></script>
     <!-- start menu -->
     <link th:href="'css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
@@ -26,7 +28,7 @@
         }
         button{
             height: 40px;
-            width: 100px;
+
             font-size: 18px;
             background-color: rgb(116,176,200);
             color: #FFFFFF;
@@ -35,7 +37,7 @@
             outline: none;
             margin: 10px auto;
         }
-        button:active{
+        button:hover{
             background-color: dodgerblue;
         }
         td{
@@ -145,23 +147,6 @@
                 <div id="response"> </div>
             </div>
             <div class="tag-list">
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c1" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c2" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>No Products</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
             </div>
         </div>
         <div class="clear"></div>
@@ -182,28 +167,76 @@
             <form th:action="@{/DeleteShoppingCart}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
+                <td style="width: 120px"><button style="width: 80px;" type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
             </form>
             <form th:action="@{/ModifyAmount}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
+                <td style="width: 120px"><button style="width: 80px" type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
             </form>
             <form th:action="@{/balance}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="Balance" th:value="结算" >Settlement</button></td>
+                <td style="width: 120px"><button style="width: 120px" type="submit" name="Balance" th:value="结算" >Settlement</button></td>
             </form>
             <form th:action="@{/CartPortal}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
+                <td style="width: 120px"><button style="width: 80px" type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
             </form>
         </tr>
     </table>
 </div>
 
+<div style="background-color: rgb(116,176,200);width: 100%;height: 50px;margin-top: 200px">
+    <h3>
 
+    </h3>
+</div>
 
+<div id="foot">
+    <div id="foot-1">
+        <h1>PARKnSHOP</h1>
+    </div>
+    <div id="foot-left">
+        <h2>About Us</h2>
+        <ul>
+            <li>About PARknSHOP</li>
+            <li>Quality appraisal department</li>
+            <li>Corporate social responsibility</li>
+            <li>General problems</li>
+            <li>Privacy policy</li>
+            <li>Online shopping terms and conditions</li>
+            <li>Free statement</li>
+            <li>Corporate Information</li>
+        </ul>
 
+    </div>
+    <div id="foot-center">
+        <h2>Online Shopping</h2>
+        <ul>
+            <li>Online shopping guide</li>
+            <li>Delivery service</li>
+            <li>Payment method</li>
+            <li>Refund / Return Guarantee</li>
+        </ul>
+    </div>
+    <div id="foot-right">
+        <h2>Contact Us</h2>
+        <p>
+            If you have any problems, please contact us by email or phone.
+        </p>
+        <p>
+            phone:137-7207-7200.
+        </p>
+        <p>
+            email:870953206@qq.com
+        </p>
+    </div>
 
+</div>
+<div id="footer-bottom">
+    <p >@2017 by fifth team</p>
+</div>
+</body>
+</html>

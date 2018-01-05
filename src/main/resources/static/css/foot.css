@@ -1,0 +1,39 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+#foot-1{
+
+    margin-left: 3%;
+}
+#foot div{
+    margin-top: 20px;
+    float: left;
+    width: 23%;
+    margin-bottom: 20px;
+
+}
+h1,h2{
+    color: white;
+}
+#foot{
+    width: 100%;
+    float: left;
+    background-color: rgb(101,159,183);
+    margin: 0 auto;
+}
+ul li{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+div p{
+    color: white;
+}
+#footer-bottom{
+    background-color: rgb(45,76,90);
+
+}
+#footer-bottom p{
+    margin-left: 3%;
+}

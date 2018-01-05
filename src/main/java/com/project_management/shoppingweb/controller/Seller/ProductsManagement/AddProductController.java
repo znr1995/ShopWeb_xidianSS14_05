@@ -60,6 +60,27 @@ public class AddProductController {
         double productMarkPrice;
         Product newProduct = new Product();
         //TODO:product 属性是否全
+        if(Integer.valueOf(request.getParameter("productStock"))<0){
+            attributes.addAttribute("errorMessage","productStock is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        if (Double.valueOf(request.getParameter("productPrice"))<=0){
+            attributes.addAttribute("errorMessage","productPrice is wrong!");
+            return "redirect:/error/errorHandler";
+        }
+        if(request.getParameter("productName").isEmpty()){
+            attributes.addAttribute("errorMessage","productName can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+        if(request.getParameter("productBriefInfo").isEmpty()){
+            attributes.addAttribute("errorMessage","productBriefInfo can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+        if(file.isEmpty()){
+            attributes.addAttribute("errorMessage","photo can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+
         newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setBrandName(request.getParameter("brandName"));
         newProduct.setProductBriefInfo(request.getParameter("productBriefInfo"));
