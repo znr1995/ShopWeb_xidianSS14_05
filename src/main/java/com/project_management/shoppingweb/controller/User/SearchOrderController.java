@@ -48,7 +48,7 @@ public class SearchOrderController {
             try{
                 Date SD = df.parse(StartDate);
                 Date ED = df.parse(EndDate);
-                if(SD.getTime() > ED.getTime()){
+                if(SD.getTime() >= ED.getTime()){
                     return "/User/SB";
                 }
             }
