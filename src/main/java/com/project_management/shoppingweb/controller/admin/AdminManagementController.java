@@ -36,7 +36,7 @@ import com.project_management.shoppingweb.repository.IncomeRepository;
 import com.project_management.shoppingweb.repository.PriceRepository;
 import com.project_management.shoppingweb.repository.ProductAdvertisementRepository;
 import com.project_management.shoppingweb.repository.SellerRepository;
-
+import com.project_management.shoppingweb.repository.TradeRepository;
 import com.project_management.shoppingweb.repository.UserRepository;
 import com.project_management.shoppingweb.service.SellerAdvertisementService;
 import com.project_management.shoppingweb.service.UserService;
@@ -80,7 +80,8 @@ public class AdminManagementController {
 	private UserRepository userRepository;
 	@Resource
 	 private  IncomeRepository incomeRepository;
-
+	@Resource
+	 private TradeRepository tradeRepository;
 	@GetMapping("/backUp")
 	public String backUp() {
 		return "admin/backUp";
@@ -333,31 +334,7 @@ public class AdminManagementController {
 		//拉出未通过审核的商店
 		return "/admin/shopManageSearch";
 	}
-	@GetMapping("/searchIncome")
-	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-		//Date date = sdf.parse( name)
-		System.out.println(name);
-		List<Income> List = incomeRepository.findAll();
-		List<Income> searchList = new ArrayList();
-		for(int i = 0; i < List.size() ; i++)
-		{	
-			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getDate());
-			String str="";
-			String a="";
-			String b="";
-			str=dateStr.substring(0,4);
-			a=dateStr.substring(5,7);
-			b=dateStr.substring(8,10);
-			if(name.equals(str)||name.equals(a) ||name.equals(b))
-			{
-				searchList.add(List.get(i));
-			}
-		}	
-		model.addAttribute("searchList", searchList);
-		//拉出未通过审核的商店
-		return "/admin/incomeSearch";
-	}
+
 	@GetMapping("/searchCustomer")
 	public String searchCustomer(@RequestParam("username") String username,Model model) {
 		List<User> searchList = userService.findAllByUsernameLike(username);
@@ -370,5 +347,98 @@ public class AdminManagementController {
 
 		return "admin/customerManageSearch";
 
+	}
+	@GetMapping("/searchIncome")
+	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
+		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
+		//Date date = sdf.parse( name);
+		
+		List<Income> List = incomeRepository.findAll();
+		List<Income> searchList = new ArrayList();
+		List<Income> rateList = new ArrayList();
+		List<Income> shopList = new ArrayList();
+		List<Income> advertisementList = new ArrayList();
+		double x = 0;
+		double y = 0;
+		double z = 0;
+		for(int i = 0; i < List.size() ; i++)
+		{	
+			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getDate());
+			String str="";
+			String a="";
+			String b="";
+			String c="";
+			String d="";
+			String e="";
+			str=dateStr.substring(0,4);//year
+			a=dateStr.substring(5,7);//month
+			b=dateStr.substring(8, 10);//day
+			c=name.substring(0,4);//year
+			d=name.substring(5,7);//month
+			e=name.substring(8, 10);//day
+			if(c.equals(str) ||d.equals(a) ||e.equals(b))
+			{
+				searchList.add(List.get(i));
+			}
+			
+		}
+		for(int i = 0;i < searchList.size(); i++)
+		{
+				if(searchList.get(i).getType().equals("rate"))	
+				{
+					x = x + searchList.get(i).getCommission();
+					rateList.add(searchList.get(i));
+				}
+				if(searchList.get(i).getType().equals("shop"))	
+				{
+					y = y + searchList.get(i).getCommission();
+					shopList.add(searchList.get(i));
+				}
+				if(searchList.get(i).getType().equals("advertisement"))	
+				{
+					z = z + searchList.get(i).getCommission();
+					advertisementList.add(searchList.get(i));
+				}
+				
+		}
+		System.out.print(x+" "+y+" "+z);
+		model.addAttribute("searchList", searchList);
+		model.addAttribute("rateList", rateList);
+		model.addAttribute("shopList", shopList);
+		model.addAttribute("advertisementList", advertisementList);
+		//拉出未通过审核的商店
+		return "/admin/incomeSearch";
+	}
+	@GetMapping("/searchTrade")
+	public String searchTrade(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
+		List<Trade> List = tradeRepository.findAll();
+		List<Trade> searchList = new ArrayList();
+		double x=0;
+		for(int i = 0; i < List.size() ; i++)
+		{	
+			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getTradeFinishTime());
+			String str="";
+			String a="";
+			String b="";
+			String c="";
+			String d="";
+			String e="";
+			str=dateStr.substring(0,4);
+			a=dateStr.substring(5,7);
+			b=dateStr.substring(8, 10);
+			c=name.substring(0,4);//year
+			d=name.substring(5,7);//month
+			e=name.substring(8, 10);//day
+			if(c.equals(str) ||d.equals(a) ||e.equals(b))
+			{
+				searchList.add(List.get(i));
+				x = searchList.get(i).getTradeTotalMoney()*0.2;
+			}
+			System.out.print(searchList.size()+"啦啦啦啦啦"+"name "+name);
+		}	
+		
+		model.addAttribute("searchList", searchList);
+		//拉出未通过审核的商店
+		return "/admin/tradeSearch";
 	}
 }
