@@ -52,6 +52,15 @@
     </div>
      <br>
      <br>
+      <h3>Find trade with date </h3>
+    <div>
+        <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year" maxlength="4"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')"></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search1()>Search</button>
+    </div>
+     <br>
+     <br>
     <!--广告收费调整-->
     <div class="well" style="background: #c1ecd7">
         <form action="/admin/updatePrice" method="post">
@@ -265,6 +274,13 @@
             if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
             if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
             window.location.href="/admin/searchIncome?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value;
+        }
+        function search1(){
+
+            if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
+            if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
+            if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
+            window.location.href="/admin/searchTrade?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value;
         }
 
         //页面加载时执行init()函数
