@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.repository;
 
+import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
 
 
@@ -9,6 +10,7 @@ import java.util.List;
 
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
@@ -29,5 +31,7 @@ public interface UserRepository extends JpaRepository<User,Long> {
 
 	User findByUserId(Long userId);
 	List<User> findAllByState(Integer state);
+    @Query(value = "select p from User p where p.username like  CONCAT('%',:username,'%')")
 	List<User> findAllByUsernameLike(@Param("username") String username);
+
 }

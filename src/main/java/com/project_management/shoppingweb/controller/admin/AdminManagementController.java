@@ -220,19 +220,7 @@ public class AdminManagementController {
 
 	}
 	
-	@GetMapping("/searchCustomer")
-	public String searchCustomer(@RequestParam("username") String username,Model model) {
-		List<User> searchList = userService.findAllByUsernameLike(username);
-		model.addAttribute("searchList", searchList);
 
-		List<User> availableUserList = userService.findAllByState(1);
-		model.addAttribute("availableFindAll", availableUserList);
-		List<User> blacklistUserList = userService.findAllByState(2);
-		model.addAttribute("blacklistUserList", blacklistUserList);
-
-		return "admin/customerManageSearch";
-
-	}
 	
 	@RequestMapping(value = "/updateAdmin", method = RequestMethod.POST)
 	public String updataAdmin(HttpServletRequest request,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
@@ -348,8 +336,8 @@ public class AdminManagementController {
 	@GetMapping("/searchIncome")
 	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-		//Date date = sdf.parse( name);
-
+		//Date date = sdf.parse( name)
+		System.out.println(name);
 		List<Income> List = incomeRepository.findAll();
 		List<Income> searchList = new ArrayList();
 		for(int i = 0; i < List.size() ; i++)
@@ -360,8 +348,8 @@ public class AdminManagementController {
 			String b="";
 			str=dateStr.substring(0,4);
 			a=dateStr.substring(5,7);
-			b=dateStr.substring(8, 10);
-			if(name.equals(str) ||name.equals(a) ||name.equals(b))
+			b=dateStr.substring(8,10);
+			if(name.equals(str)||name.equals(a) ||name.equals(b))
 			{
 				searchList.add(List.get(i));
 			}
@@ -369,5 +357,18 @@ public class AdminManagementController {
 		model.addAttribute("searchList", searchList);
 		//拉出未通过审核的商店
 		return "/admin/incomeSearch";
+	}
+	@GetMapping("/searchCustomer")
+	public String searchCustomer(@RequestParam("username") String username,Model model) {
+		List<User> searchList = userService.findAllByUsernameLike(username);
+		model.addAttribute("searchList", searchList);
+
+		List<User> availableUserList = userService.findAllByState(1);
+		model.addAttribute("availableFindAll", availableUserList);
+		List<User> blacklistUserList = userService.findAllByState(2);
+		model.addAttribute("blacklistUserList", blacklistUserList);
+
+		return "admin/customerManageSearch";
+
 	}
 }
