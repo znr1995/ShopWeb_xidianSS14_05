@@ -212,6 +212,21 @@ public class AdminManagementController {
 		return "redirect:/admin/customerManage";
 
 	}
+	
+	@GetMapping("/searchCustomer")
+	public String searchCustomer(@RequestParam("username") String username,Model model) {
+		List<User> searchList = userService.findAllByUsernameLike(username);
+		model.addAttribute("searchList", searchList);
+
+		List<User> availableUserList = userService.findAllByState(1);
+		model.addAttribute("availableFindAll", availableUserList);
+		List<User> blacklistUserList = userService.findAllByState(2);
+		model.addAttribute("blacklistUserList", blacklistUserList);
+
+		return "admin/customerManageSearch";
+
+	}
+	
 	@RequestMapping(value = "/updateAdmin", method = RequestMethod.POST)
 	public String updataAdmin(HttpServletRequest request,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 
