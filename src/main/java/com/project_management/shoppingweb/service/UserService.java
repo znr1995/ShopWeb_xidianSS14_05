@@ -21,4 +21,8 @@ public class UserService {
 	public List<User> findAllByState(Integer state) {
 		return userRepository.findAllByState(state);
 	}
+	
+	public List<User> findAllByUsernameLike(String username) {
+		return userRepository.findAllByUsernameLike(username);
+	}
 }
