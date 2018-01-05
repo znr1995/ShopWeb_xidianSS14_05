@@ -44,9 +44,21 @@
     <br>
     <br>
     <h3>Find income with date </h3>
-    <input type="text" style="width: 200px" name="shopname" id="input1"/>
-
-    <button style="background: #f0ef11;border-radius: 8px;" onclick=search()>Search</button>
+    <div>
+        <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year" maxlength="4"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')"></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search()>Search</button>
+    </div>
+     <br>
+     <br>
+      <h3>Find trade with date </h3>
+    <div>
+        <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year" maxlength="4"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')"></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search1()>Search</button>
+    </div>
      <br>
      <br>
     <!--广告收费调整-->
@@ -72,63 +84,7 @@
     <br>
     <br>
     <!--按照时间查看收入情况-->
-    <div class="panel panel-default">
-        <div class="panel-heading"  style="background: #7f9c7d">
-            <h3 class="panel-title">
-                Check commission
-            </h3>
-        </div>
-        <div class="panel-body">
-            <select class="form-control" name="#####选择查看区间">
-                <option value="Daily">Daily</option>
-                <option value="Weekly">Weekly</option>
-                <option value="Monthly">Monthly</option>
-                <option value="Yearly">Yearly</option>
-            </select>
-            <table class="table">
-                <thead>
-                <tr>
-                    <th>Sales commission</th>
-                    <th>Shop ads pay</th>
-                    <th>Product ads pay</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>Shop1:200HKD</td>
-                    <td>Shop1:300HKD</td>
-                    <td>Product1:20HKD</td>
-                </tr>
-                </tbody>
-            </table>
-            <br><br>
-            <h5>Total commission</h5>
-            <hr style="height:3px;border:none;border-top:3px double red;" />
-            <text>2000000.00HKD</text>
 
-        </div>
-    </div>
-    <!--广告收入统计-->
-    <h3>Ads Commission</h3>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>Ads ID</th>
-            <th>Ads Start/End</th>
-            <th>Ads Pay</th>
-            <th></th>
-        </tr>
-        </thead>
-        <tbody>  
-        <th:block th:each="u,index:${advertisementList}">
-                               <tr>
-                                   <td th:text="${u.advertisementId}"></td>
-                                   <td th:text="${u.sellerName}"></td>
-                                   <td th:text="${u.price}"></td>                           
-     			</tr>
-     	</th:block>		
-        </tbody>
-    </table><br><br>
 
 
     <!--<h1>Ananul</h1>
@@ -313,8 +269,18 @@
             drawCircle("canvas_circle", data_arr, color_arr, text_arr);
         }
         function search(){
-        	var name=document.getElementById('input1');
-            window.location.href="/admin/searchIncome?name="+name.value;
+
+            if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
+            if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
+            if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
+            window.location.href="/admin/searchIncome?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value;
+        }
+        function search1(){
+
+            if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
+            if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
+            if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
+            window.location.href="/admin/searchTrade?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value;
         }
 
         //页面加载时执行init()函数

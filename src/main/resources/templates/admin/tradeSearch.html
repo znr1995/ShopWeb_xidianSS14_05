@@ -3,7 +3,7 @@
 <html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
-    <title>shopManage</title>
+    <title>tradeSearch</title>
     <link rel="stylesheet" th:href="'/bootstrap/css/bootstrap.min.css'">
     <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
     <script th:src="'/bootstrap/js/bootstrap.min.js'"></script>
@@ -47,33 +47,35 @@
 
 
     <div class="panel panel-primary">
-        <div>
-            <input type="text" style="width: 400px;height: 50px;font-size: 50px;border-radius: 8px;" id="input1"></input>
-            <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search()>Search</button>
-        </div>
+      <h3>Find trade with date </h3>
+    <div>
+        <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year" maxlength="4"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')"></input>
+        <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
+        <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search1()>Search</button>
+    </div>
+     <br>
+     <br>
 
         <table class="table">
 
             <caption style="background: #bee5eb">Search result</caption>
             <thead>
             <tr>
-                <th>picture</th>
-                <th>Shop Name</th>
-                <th>Shop Owner</th>
-                <th>Email</th>
-                <th>Category</th>
-                <th>address</th>
+                <th>userId</th>
+                <th>tradeId</th>
+                <th>tradePayWay</th>
+                <th>Commission</th>
+               
             </tr>
             </thead>
             <tbody>
             <th:block th:each="p,index:${searchList}">
-                <tr>
-                    <td ><img th:src="${p.sculpture}" style="height: 100px; width: 100px;"></td>
-                    <td th:text="${p.shopname}"></td>
-                    <td th:text="${p.username}"></td>
-                    <td th:text="${p.email}"></td>
-                    <td th:text="${p.catogery}"></td>
-                    <td th:text="${p.address}"></td>
+                <tr>  
+                    <td th:text="${p.userId}"></td>
+                    <td th:text="${p.tradeId}"></td>
+                    <td th:text="${p.tradePayWay}"></td>
+                    <td th:text="${p.tradeTotalMoney*0.2}"></td>    
                 </tr>
 
             </th:block>
@@ -141,10 +143,14 @@
     function unblack(id){
         window.location.href="/admin/unblack?sellerId="+id;
     }
-    function search(){
-        var name=document.getElementById('input1');
-        window.location.href="/admin/search?shopname="+name.value;
+    function search1(){
+
+        if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
+        if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
+        if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
+        window.location.href="/admin/searchTrade?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value;
     }
+
 </script>
 </body>
 
