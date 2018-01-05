@@ -349,7 +349,7 @@ public class AdminManagementController {
 	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
 		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
 		//Date date = sdf.parse( name);
-		
+
 		List<Income> List = incomeRepository.findAll();
 		List<Income> searchList = new ArrayList();
 		for(int i = 0; i < List.size() ; i++)
@@ -365,8 +365,7 @@ public class AdminManagementController {
 			{
 				searchList.add(List.get(i));
 			}
-		}
-		
+		}	
 		model.addAttribute("searchList", searchList);
 		//拉出未通过审核的商店
 		return "/admin/incomeSearch";
