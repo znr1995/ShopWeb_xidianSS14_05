@@ -215,7 +215,7 @@
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS0.trade.sellerId}">Onions</td>
                     <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS0.SellerName}">Onions</td>
-                    <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS0.trade.tradeTotalMoney}">Onions</td>
+                    <td width="220px" height="60px" name="TotalMoney" th:text="'HK$'"+"*{MyOrderS0.trade.tradeTotalMoney}">Onions</td>
                     <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS0.trade.tradePayWay}">Onions</td>
                     <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS0.trade.tradeCreateTime}">Oinons</td>
                     <td>
@@ -237,7 +237,7 @@
             <tr th:each="MyOrderS12 : ${MyOrderS12}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS12.trade.sellerId}">Onions</td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS12.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
+                <td width="220px" height="60px" name="TotalMoney" th:text="'HK$'"+"*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS12.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS12.trade.tradeCreateTime}">Oinons</td>
                 <form th:action="@{/TradeDetail}" method="post">
@@ -277,7 +277,7 @@
             <tr th:each="MyOrderS3 : ${MyOrderS3}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS3.trade.sellerId}">Onions</td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS3.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS3.trade.tradeTotalMoney}">Onions</td>
+                <td width="220px" height="60px" name="TotalMoney" th:text="'HK$'"+"*{MyOrderS3.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS3.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeCreateTime}">Oinons</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeFinishTime}">Oinons</td>
@@ -310,7 +310,7 @@
             <tr th:each="MyOrderS45 : ${MyOrderS45}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS45.trade.sellerId}">Onions</td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS45.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
+                <td width="220px" height="60px" name="TotalMoney" th:text="'HK$'"+"*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS45.trade.tradePayWay}">Onions</td>
                 <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS45.trade.tradeCreateTime}">Oinons</td>
                 <form th:action="@{/TradeDetail}" method="post">
