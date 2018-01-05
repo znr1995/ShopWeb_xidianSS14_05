@@ -178,20 +178,20 @@
             </div>
             <div class="tag-list">
                 <!--<ul class="icon1 sub-icon1 profile_img">-->
-                    <!--<li><a class="active-icon c1" href="#"> </a>-->
-                        <!--<ul class="sub-icon1 list">-->
-                            <!--<li><h3>sed diam nonummy</h3><a href=""></a></li>-->
-                            <!--<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
+                <!--<li><a class="active-icon c1" href="#"> </a>-->
+                <!--<ul class="sub-icon1 list">-->
+                <!--<li><h3>sed diam nonummy</h3><a href=""></a></li>-->
+                <!--<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>-->
+                <!--</ul>-->
+                <!--</li>-->
                 <!--</ul>-->
                 <!--<ul class="icon1 sub-icon1 profile_img">-->
-                    <!--<li><a class="active-icon c2" href="#"> </a>-->
-                        <!--<ul class="sub-icon1 list">-->
-                            <!--<li><h3>No Products</h3><a href=""></a></li>-->
-                            <!--<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>-->
-                        <!--</ul>-->
-                    <!--</li>-->
+                <!--<li><a class="active-icon c2" href="#"> </a>-->
+                <!--<ul class="sub-icon1 list">-->
+                <!--<li><h3>No Products</h3><a href=""></a></li>-->
+                <!--<li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>-->
+                <!--</ul>-->
+                <!--</li>-->
                 <!--</ul>-->
                 <!--<ul class="last"><li><a href="#">Cart(0)</a></li></ul>-->
             </div>
@@ -200,70 +200,7 @@
     </div>
 </div >
 <div id="content">
-    <div id="process">
-        <h2><strong>Processing Order</strong></h2><br>
-        <table>
-            <tr style="border-bottom: 1px solid lightgray">
-                <td width="220px" height="60px"><strong>Shop Owner</strong></td>
-                <td width="220px" height="60px"><strong>Total Payment</strong></td>
-                <td width="220px" height="60px"><strong>PayWay</strong></td>
-                <td width="220px" height="60px"><strong>Create Time</strong></td>
-            </tr>
-            <tr th:each="MyOrderS0 : ${MyOrderS0}">
-                <form th:action="@{/TradeDetail}" method="post">
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS0.trade.tradeId}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS0.trade.sellerId}">Onions</td>
-                    <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS0.SellerName}">Onions</td>
-                    <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS0.trade.tradeTotalMoney}">Onions</td>
-                    <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS0.trade.tradePayWay}">Onions</td>
-                    <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS0.trade.tradeCreateTime}">Oinons</td>
-                    <td>
-                        <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
-                    </td>
-                </form>
-            </tr>
-        </table>
-    </div>
-    <div id="receive">
-        <h2><strong>To be received</strong></h2><br>
-        <table>
-            <tr>
-                <td width="220px" height="60px"><strong>Shop Owner</strong></td>
-                <td width="220px" height="60px"><strong>Total Payment</strong></td>
-                <td width="220px" height="60px"><strong>PayWay</strong></td>
-                <td width="220px" height="60px"><strong>Create Time</strong></td>
-            </tr>
-            <tr th:each="MyOrderS12 : ${MyOrderS12}">
-                <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS12.trade.sellerId}">Onions</td>
-                <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS12.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
-                <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS12.trade.tradePayWay}">Onions</td>
-                <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS12.trade.tradeCreateTime}">Oinons</td>
-                <form th:action="@{/TradeDetail}" method="post">
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td>
-                        <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
-                    </td>
-                </form>
-                <form th:action="@{/ConfirmReceipt}" method="post">
-                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
-                    <td>
-                        <button type="submit" name="ConfirmReceipt" th:value="确认收货">ConfirmReceipt</button>
-                    </td>
-                </form>
-                <form th:action="@{/StartRefund}" method="post">
-                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS12.trade.tradeId}" readonly="readonly"></td>
-                    <td>
-                        <button type="submit" name="StartRefund" th:value="发起退货">Refund</button>
-                    </td>
-                </form>
-            </tr>
-        </table>
-    </div>
+
     <div id="finish">
         <h2><strong>Finished</strong></h2><br>
         <table>
@@ -274,15 +211,15 @@
                 <td width="220px" height="60px"><strong>Create Time</strong></td>
                 <td width="220px" height="60px"><strong>Finish Time</strong></td>
             </tr>
-            <tr th:each="MyOrderS3 : ${MyOrderS3}">
-                <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS3.trade.sellerId}">Onions</td>
-                <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS3.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS3.trade.tradeTotalMoney}">Onions</td>
-                <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS3.trade.tradePayWay}">Onions</td>
-                <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeCreateTime}">Oinons</td>
-                <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS3.trade.tradeFinishTime}">Oinons</td>
+            <tr th:each="tradeToShows : ${tradeToShows}">
+                <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{tradeToShows.trade.sellerId}">Onions</td>
+                <td width="220px" height="60px" name="SellerName" th:text="*{tradeToShows.SellerName}">Onions</td>
+                <td width="220px" height="60px" name="TotalMoney" th:text="*{tradeToShows.trade.tradeTotalMoney}">Onions</td>
+                <td width="220px" height="60px" name="PayWay" th:text="*{tradeToShows.trade.tradePayWay}">Onions</td>
+                <td width="220px" height="60px" name="CreateTime" th:text="*{tradeToShows.trade.tradeCreateTime}">Oinons</td>
+                <td width="220px" height="60px" name="CreateTime" th:text="*{tradeToShows.trade.tradeFinishTime}">Oinons</td>
                 <form th:action="@{/TradeDetail}" method="post">
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly"></td>
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{tradeToShows.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
@@ -290,34 +227,9 @@
                 </form>
                 <form th:action="@{/feedbackRemarks}" method="post">
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS3.trade.tradeId}" readonly="readonly"></td>
+                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{tradeToShows.trade.tradeId}" readonly="readonly"></td>
                     <td>
                         <button type="submit" name="feedbackRemarks" th:value="评论">Remarks</button>
-                    </td>
-                </form>
-            </tr>
-        </table>
-    </div>
-    <div id="refund">
-        <h2><strong>Refund</strong></h2><br>
-        <table>
-            <tr>
-                <td width="220px" height="60px"><strong>Shop Owner</strong></td>
-                <td width="220px" height="60px"><strong>Total Payment</strong></td>
-                <td width="220px" height="60px"><strong>PayWay</strong></td>
-                <td width="220px" height="60px"><strong>Create Time</strong></td>
-            </tr>
-            <tr th:each="MyOrderS45 : ${MyOrderS45}">
-                <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS45.trade.sellerId}">Onions</td>
-                <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS45.SellerName}">Onions</td>
-                <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
-                <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS45.trade.tradePayWay}">Onions</td>
-                <td width="220px" height="60px" name="CreateTime" th:text="*{MyOrderS45.trade.tradeCreateTime}">Oinons</td>
-                <form th:action="@{/TradeDetail}" method="post">
-                    <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS45.trade.tradeId}" readonly="readonly"></td>
-                    <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
-                    <td>
-                        <button type="submit" name="TradeDetail" th:value="订单详情">TradeDetail</button>
                     </td>
                 </form>
             </tr>
