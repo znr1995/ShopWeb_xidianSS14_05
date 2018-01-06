@@ -60,26 +60,94 @@ public class AddProductController {
         double productMarkPrice;
         Product newProduct = new Product();
         //TODO:product 属性是否全
-        if(Integer.valueOf(request.getParameter("productStock"))<0){
-            attributes.addAttribute("errorMessage","productStock is wrong!");
-            return "redirect:/error/errorHandler";
-        }
-        if (Double.valueOf(request.getParameter("productPrice"))<=0){
-            attributes.addAttribute("errorMessage","productPrice is wrong!");
-            return "redirect:/error/errorHandler";
-        }
+
+        //判断产品名是否为空
         if(request.getParameter("productName").isEmpty()){
             attributes.addAttribute("errorMessage","productName can't be null!");
             return "redirect:/error/errorHandler";
         }
-        if(request.getParameter("productBriefInfo").isEmpty()){
-            attributes.addAttribute("errorMessage","productBriefInfo can't be null!");
+
+        //判断库存为大于等于零的整数
+        try{
+            Integer.valueOf(request.getParameter("productStock"));
+        }
+        catch (Exception e){
+            attributes.addAttribute("errorMessage","productStock must be a integer&&>=0!");
             return "redirect:/error/errorHandler";
         }
+        if(Integer.valueOf(request.getParameter("productStock"))<0){
+            attributes.addAttribute("errorMessage","productStock is wrong!(stock <0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断库存是否为空
+        if(request.getParameter("productStock").isEmpty()){
+            attributes.addAttribute("errorMessage","productStock can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断库存是否为数字
+        int stockLen=0;
+        for (stockLen=0;stockLen<request.getParameter("productStock").length();stockLen++){
+            if(!Character.isDigit(request.getParameter("productStock").charAt(stockLen))){
+                attributes.addAttribute("errorMessage","productStock must be a integer&&>=0!");
+                return "redirect:/error/errorHandler";
+            }
+        }
+        //判断库存是否大于等于零
+        if(Integer.valueOf(request.getParameter("productStock"))<0){
+            attributes.addAttribute("errorMessage","productStock is wrong!(stock<0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断图片是否为空
         if(file.isEmpty()){
             attributes.addAttribute("errorMessage","photo can't be null!");
             return "redirect:/error/errorHandler";
         }
+
+        //判断价格是否为空
+        if(request.getParameter("productPrice").isEmpty()){
+            attributes.addAttribute("errorMessage","productPrice can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断价格为大于零的double
+        try{
+            Double.valueOf(request.getParameter("productPrice"));
+        }
+        catch (Exception e){
+            attributes.addAttribute("errorMessage","productPrice must be a double&&>0!");
+            return "redirect:/error/errorHandler";
+        }
+        if (Double.valueOf(request.getParameter("productPrice"))<=0){
+            attributes.addAttribute("errorMessage","productPrice is wrong!(price <=0.0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断价格是否为数字
+        //int priceLen=0;
+       // for (priceLen=0;priceLen<request.getParameter("productPrice").length();priceLen++){
+           // if(!(Character.isDigit(request.getParameter("productPrice").charAt(priceLen))
+             //       ||request.getParameter("productPrice").charAt(priceLen)=='.')){
+           //     attributes.addAttribute("errorMessage","productPrice must be a double&&price>0!");
+             //   return "redirect:/error/errorHandler";
+         //   }
+       // }
+
+        //判断价格是否大于零
+        if (Double.valueOf(request.getParameter("productPrice"))<=0){
+            attributes.addAttribute("errorMessage","productPrice is wrong!(price <=0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断产品简要信息是否为空
+        if(request.getParameter("productBriefInfo").isEmpty()){
+            attributes.addAttribute("errorMessage","productBriefInfo can't be null!");
+            return "redirect:/error/errorHandler";
+        }
+
+
 
         newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setBrandName(request.getParameter("brandName"));

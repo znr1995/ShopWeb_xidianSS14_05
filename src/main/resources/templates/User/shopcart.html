@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>shopcart</title>
+    <style type="text/css">
+        *{
+            margin: 0;
+        }
+
+        table{
+            margin: 0 auto;
+            border: 1px solid deepskyblue;
+        }
+        td , th{
+            width: 150px;
+            border: 1px solid lightpink;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="shoppingcart">
+        <table>
+            <tr>
+                <th><strong>product Picture</strong></th>
+                <th><strong>Product Name</strong></th>
+                <th><strong>Product Number</strong></th>
+                <th><strong>Unit Price</strong></th>
+                <th><strong>Total Price</strong></th>
+            </tr>
+            <tr>
+                <td>name</td>
+                <td>picture</td>
+                <td>
+                    <label id="jian">-</label>
+                    <input style="width: 20px" id="products" type="text" value="0" readonly/>
+                    <label id="jia">+</label>
+                    <button id="number">ok</button>
+                </td>
+                <td>单价</td>
+                <td>总价</td>
+                <td><button value="delete">删除</button></td>
+                <td><button value="settlement">结算</button></td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+<script src="http://libs.baidu.com/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    var numjia = document.getElementById("jia");
+
+    var numjian = document.getElementById("jian");
+    var inputnum = document.getElementById("products");
+    var numberbutton = document.getElementById("number");
+
+    numjia.onclick = function (ev) {
+        inputnum.value = parseInt(inputnum.value)+1;
+    }
+    numjian.onclick = function (ev) {
+        if(inputnum.value>0) {
+            inputnum.value = parseInt(inputnum.value) - 1;
+        }else {
+            inputnum.value=0;
+        }
+    }
+    numberbutton.onclick = function (ev) {
+
+    }
+
+
+</script>
+</html>

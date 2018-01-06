@@ -46,7 +46,7 @@
             <ul>
 
                 <li><a th:text="${UserName}">UserName</a></li> |
-                <li><a href="register.html">Sign Up</a></li>
+                <li><a th:href="@{/User/register.html}">Sign Up</a></li>
             </ul>
         </div>
         <div class="clear"></div>
@@ -160,3 +160,12 @@
         <button type="submit" name="save" th:value="提交" >upload</button>
     </form>
 </div>
+<div class="login">
+    <div class="wrap">
+        <div class="page-not-found">
+            <h1>The number in your shopping cart is more than product stock, please adjust it.</h1>
+        </div>
+    </div>
+</div>
+</body>
+</html>

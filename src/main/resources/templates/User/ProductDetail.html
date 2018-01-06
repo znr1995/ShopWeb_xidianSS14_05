@@ -190,6 +190,7 @@
                     <h3 class="m_3" th:text="${productdetail.productName}">productName</h3>
                     <p class="m_5" th:text="'HK$ '+${productdetail.productPrice}">productPrice</p><!--<span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p>-->
                     <!--<p class="m-5" th:text="'stack:'+${productdetail.productStock}">Stack : Unknown</p>-->
+                    <p class="m_5" th:text="${productdetail.productStock}">productStock</p>
                     <div class="btn_form">
                         <form th:if = "${UserID == -1 || UserID == null}"  th:action="@{/User/login.html}"  >
                             <input type="submit" value="buy" title="" name="buy" id="buy" ></input>
