@@ -321,6 +321,10 @@ public class AdminManagementController {
 	@GetMapping("/search")
 	public String search(@RequestParam("shopname") String shopname, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+
 		List<Seller> searchList = sellerService.findAllByShopnameLike(shopname);
 		model.addAttribute("searchList", searchList);
 		List<Seller> statusList = sellerService.findAllByApplyState(1);
@@ -336,10 +340,13 @@ public class AdminManagementController {
 	}
 
 	@GetMapping("/searchCustomer")
-	public String searchCustomer(@RequestParam("username") String username,Model model) {
-		List<User> searchList = userService.findAllByUsernameLike(username);
-		model.addAttribute("searchList", searchList);
+	public String searchCustomer(@RequestParam("username") String name,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
+		Admin admin = adminService.findByUsername(name);
+		model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
 
+		List<User> searchList = userService.findAllByUsernameLike(name);
+		model.addAttribute("searchList", searchList);
 		List<User> availableUserList = userService.findAllByState(1);
 		model.addAttribute("availableFindAll", availableUserList);
 		List<User> blacklistUserList = userService.findAllByState(2);
@@ -349,96 +356,104 @@ public class AdminManagementController {
 
 	}
 	@GetMapping("/searchIncome")
-	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
-		//SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss"); 
-		//Date date = sdf.parse( name);
-		
-		List<Income> List = incomeRepository.findAll();
+	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws java.text.ParseException {
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+
+		List<Trade> List_Trade = tradeRepository.findAllByTradeStatus(3);
+		List<Income> List_Income = incomeRepository.findAll();
+
 		List<Income> searchList = new ArrayList();
-		List<Income> rateList = new ArrayList();
 		List<Income> shopList = new ArrayList();
 		List<Income> advertisementList = new ArrayList();
-		double x = 0;
-		double y = 0;
-		double z = 0;
-		for(int i = 0; i < List.size() ; i++)
-		{	
-			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getDate());
-			String str="";
-			String a="";
-			String b="";
-			String c="";
-			String d="";
-			String e="";
-			str=dateStr.substring(0,4);//year
-			a=dateStr.substring(5,7);//month
-			b=dateStr.substring(8, 10);//day
-			c=name.substring(0,4);//year
-			d=name.substring(5,7);//month
-			e=name.substring(8, 10);//day
-			if(c.equals(str) ||d.equals(a) ||e.equals(b))
-			{
-				searchList.add(List.get(i));
+		List<Trade> tradeList = new ArrayList();
+
+		for(int i = 0; i < List_Income.size() ; i++)
+		{
+			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List_Income.get(i).getDate());
+			String tempYear="";
+			String tempMonth="";
+			String tempDay="";
+			String year="";
+			String month="";
+			String day="";
+			tempYear=dateStr.substring(0,4);tempMonth=dateStr.substring(5,7);tempDay=dateStr.substring(8, 10);//day
+			year=name.substring(0,4);month=name.substring(5,7);day=name.substring(8, 10);//day
+			if(year.equals(tempYear)||year.equals("yyyy")) {
+				if(month.equals(tempMonth)||month.equals("mm")){
+					if(day.equals(tempDay)||day.equals("dd")){
+						searchList.add(List_Income.get(i));
+					}
+				}
+
 			}
-			
+
 		}
 		for(int i = 0;i < searchList.size(); i++)
 		{
-				if(searchList.get(i).getType().equals("rate"))	
-				{
-					x = x + searchList.get(i).getCommission();
-					rateList.add(searchList.get(i));
-				}
-				if(searchList.get(i).getType().equals("shop"))	
-				{
-					y = y + searchList.get(i).getCommission();
-					shopList.add(searchList.get(i));
-				}
-				if(searchList.get(i).getType().equals("advertisement"))	
-				{
-					z = z + searchList.get(i).getCommission();
-					advertisementList.add(searchList.get(i));
-				}
-				
+			if(searchList.get(i).getType().equals("shop"))
+			{
+				shopList.add(searchList.get(i));
+			}
+			if(searchList.get(i).getType().equals("advertisement"))
+			{
+				advertisementList.add(searchList.get(i));
+			}
+
 		}
-		System.out.print(x+" "+y+" "+z);
-		model.addAttribute("searchList", searchList);
-		model.addAttribute("rateList", rateList);
+
+
+		for(int i = 0; i < List_Trade.size() ; i++)
+		{
+			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List_Trade.get(i).getTradeFinishTime());
+			String tempYear="";
+			String tempMonth="";
+			String tempDay="";
+			String year="";
+			String month="";
+			String day="";
+			tempYear=dateStr.substring(0,4);tempMonth=dateStr.substring(5,7);tempDay=dateStr.substring(8, 10);//day
+			year=name.substring(0,4);month=name.substring(5,7);day=name.substring(8, 10);//day
+			if(year.equals(tempYear)||year.equals("yyyy")) {
+				System.out.println("year");
+				if(month.equals(tempMonth)||month.equals("mm")){
+					System.out.println("month");
+					if(day.equals(tempDay)||day.equals("dd")){
+						System.out.println("day");
+						tradeList.add(List_Trade.get(i));
+					}
+				}
+
+			}
+		}
+		double shopCommission = 0;
+		double adsCommission = 0;
+		double productCommission = 0;
+
+		for(int i = 0; i < shopList.size();i++)
+		{
+			shopCommission =shopList.get(i).getCommission() + shopCommission;
+		}
+		for(int i = 0; i < advertisementList.size();i++)
+		{
+			adsCommission =advertisementList.get(i).getCommission() + adsCommission;
+		}
+		for(int i = 0; i <tradeList.size();i++)
+		{
+			productCommission  =tradeList.get(i).getTradeTotalMoney()*0.02 + productCommission ;
+		}
+
+		System.out.println(shopCommission);
+		System.out.println(adsCommission);
+		System.out.println(productCommission);
+		model.addAttribute("tradeList", tradeList);
 		model.addAttribute("shopList", shopList);
 		model.addAttribute("advertisementList", advertisementList);
-		//拉出未通过审核的商店
+		model.addAttribute("shopCommission",shopCommission);
+		model.addAttribute("adsCommission",adsCommission);
+		model.addAttribute("productCommission",productCommission);
 		return "/admin/incomeSearch";
 	}
-	@GetMapping("/searchTrade")
-	public String searchTrade(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws ParseException {
-		List<Trade> List = tradeRepository.findAll();
-		List<Trade> searchList = new ArrayList();
-		double x=0;
-		for(int i = 0; i < List.size() ; i++)
-		{	
-			String dateStr = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss").format(List.get(i).getTradeFinishTime());
-			String str="";
-			String a="";
-			String b="";
-			String c="";
-			String d="";
-			String e="";
-			str=dateStr.substring(0,4);
-			a=dateStr.substring(5,7);
-			b=dateStr.substring(8, 10);
-			c=name.substring(0,4);//year
-			d=name.substring(5,7);//month
-			e=name.substring(8, 10);//day
-			if(c.equals(str) ||d.equals(a) ||e.equals(b))
-			{
-				searchList.add(List.get(i));
-				x = searchList.get(i).getTradeTotalMoney()*0.2;
-			}
-			System.out.print(searchList.size()+"啦啦啦啦啦"+"name "+name);
-		}	
-		
-		model.addAttribute("searchList", searchList);
-		//拉出未通过审核的商店
-		return "/admin/tradeSearch";
-	}
+
 }

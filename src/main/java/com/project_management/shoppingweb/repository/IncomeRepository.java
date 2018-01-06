@@ -12,5 +12,6 @@ public interface IncomeRepository extends JpaRepository<Income,Long> {
     Income save(Income income);
     List<Income> getAllBySellerId(long sellerId);
     void  deleteById(long Id);
+    List<Income> findAll();
 
 }

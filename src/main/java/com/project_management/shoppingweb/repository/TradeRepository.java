@@ -17,5 +17,6 @@ public interface TradeRepository extends JpaRepository<Trade,Long>{
     List<Trade> findByTradeId(Long TradeId);
     List<Trade> findAllBySellerId(long sellerId);
     Trade findByTradeId(long tradeId);
+    List<Trade> findAllByTradeStatus(int tradeStatus );
 
 }
