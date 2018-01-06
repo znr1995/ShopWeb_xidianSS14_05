@@ -170,9 +170,9 @@
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td width="250px" height="60px">
-                    <button th:onclick="|jian(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >-</span></button>
-                    <input style="width: 20px;border: none;text-align: center" th:id="|inputid*{GlobalShoppingCart.shoppingCart.productAmount}|" type="text" name="Amount" th:value="*{GlobalShoppingCart.shoppingCart.productAmount}" readonly="readonly"/>
-                    <button th:onclick="|jia(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >+</span></button>
+                    <button type="button" th:onclick="|jian(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >-</span></button>
+                    <input style="width: 20px;border: none;text-align: center" th:id="|inputid*{GlobalShoppingCart.shoppingCart.shoppingcartId}|" type="text" name="Amount" th:value="*{GlobalShoppingCart.shoppingCart.productAmount}" readonly="readonly"/>
+                    <button type="button" th:onclick="|jia(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >+</span></button>
                     <button type="submit" >ok</button>
                 </td>
             </form>
@@ -256,11 +256,14 @@
 <script type="text/javascript">
 
 
-    function jie(id) {
-        alert(id);
-        console.log(id);
+    function jian(id) {
+        var input = document.getElementById("inputid"+id);
+        input.value = parseInt(input.value) - 1;
     }
-
+    function jia(id) {
+        var input = document.getElementById("inputid"+id);
+        input.value = parseInt(input.value) + 1;
+    }
 
 </script>
 </html>
