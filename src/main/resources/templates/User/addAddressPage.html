@@ -8,6 +8,8 @@
     <link th:href="'css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'http://fonts.googleapis.com/css?family=Exo+2'" rel='stylesheet' type='text/css'>
     <script type="text/javascript" th:src="'js/jquery1.min_user.js'"></script>
+    <link th:href="'css/foot.css'" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/foot.css" rel="stylesheet" type="text/css" media="all">
     <!-- start menu -->
     <link th:href="'css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
     <script type="text/javascript" th:src="'js/megamenu_user.js'"></script>
@@ -21,16 +23,15 @@
     <script th:src="'js/jquery.easydropdown_user.js'"></script>
     <style type="text/css">
         #left {
-            width: 45%;
+            width: 60%;
             color: gray;
             display: inline-block;
+
         }
         #left_infor{
-            margin: 10px auto;
+            margin: 0px auto;
         }
-        #right_infor{
-            margin: 10px auto;
-        }
+
         #left_infor td{
             width: 100px;
             height: 30px;
@@ -54,59 +55,20 @@
             font-size: 20px;
             vertical-align: middle;
         }
-        #right{
-            width: 45%;
 
-            display: inline-block;
-        }
         #left_infor tr td:nth-child(1) strong{
             float: right;
         }
         #right_infor tr td:nth-child(1) strong{
             float: right;
         }
-        #payway{
-            float: right;
-            margin-right: 5%;
-            border: none;
-            color: white;
-            background: rgb(116,176,200);
-            border-radius: 8px;
-            font-size: 20px;
-            margin-top: 10px;
-        }
-        #pay{
-            width: 100px;
-            margin-right: 5%;
-            border: none;
-            outline: none;
-            color: white;
-            background: rgb(116,176,200);
-            border-radius: 8px;
-            font-size: 20px;
-            height: 30px;
-            float: right;
-        }
-        #pay:hover{
-            background: dodgerblue;
-        }
-        #payway:hover{
 
-            background: dodgerblue;
-        }
-        #table{
-            float: left;
-            width: 80%;
-            margin-left: 3%;
-            margin-right: 3%;
-        }
+
+
         #table tr td{
             font-size: 20px;
         }
-        #main_table{
-            float: left;
-            width: 100%;
-        }
+
         ::-webkit-input-placeholder{
             opacity: 0.7;
             color: lightgray;
@@ -114,6 +76,14 @@
         }
         td{
             vertical-align: middle;
+        }
+        button{
+            width: 80px;
+            color: white;
+            height: 30px;
+            font-size: 18px;
+            background:rgb(116,176,200);
+            display: inline-block;
         }
 
 
@@ -221,23 +191,7 @@
                 <div id="response"> </div>
             </div>
             <div class="tag-list">
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c1" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c2" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>No Products</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
+
             </div>
         </div>
         <div class="clear"></div>
@@ -253,7 +207,7 @@
     <input type="hidden" name="IsFromShoppingCart" th:value="${IsFromShoppingCart}" style="display: none">
     <input type="text" name="ShopID"  th:value="${ShopID}" readonly="readonly" style="display: none" />
     <input type="text" name="ProductID" th:value="${ProductID}" readonly="readonly" style="display: none" />
-    <div id="content" style="margin: 10px 0px 20px 0px">
+    <div id="content" >
         <div id="left">
             <table id="left_infor">
                 <tr>
@@ -288,9 +242,60 @@
             </table>
 
     </div>
-    <button id="pay" type="submit" >add</button>
+    <button  type="submit" >confirm</button>
     </div>
 </form>
 
+
+<div style="background-color: rgb(116,176,200);width: 100%;height: 50px;margin-top: 80px">
+    <h3>
+
+    </h3>
+</div>
+
+<div id="foot">
+    <div id="foot-1">
+        <h1>PARKnSHOP</h1>
+    </div>
+    <div id="foot-left">
+        <h2>About Us</h2>
+        <ul>
+            <li>About PARknSHOP</li>
+            <li>Quality appraisal department</li>
+            <li>Corporate social responsibility</li>
+            <li>General problems</li>
+            <li>Privacy policy</li>
+            <li>Online shopping terms and conditions</li>
+            <li>Free statement</li>
+            <li>Corporate Information</li>
+        </ul>
+
+    </div>
+    <div id="foot-center">
+        <h2>Online Shopping</h2>
+        <ul>
+            <li>Online shopping guide</li>
+            <li>Delivery service</li>
+            <li>Payment method</li>
+            <li>Refund / Return Guarantee</li>
+        </ul>
+    </div>
+    <div id="foot-right">
+        <h2>Contact Us</h2>
+        <p>
+            If you have any problems, please contact us by email or phone.
+        </p>
+        <p>
+            phone:137-7207-7200.
+        </p>
+        <p>
+            email:870953206@qq.com
+        </p>
+    </div>
+
+</div>
+<div id="footer-bottom">
+    <p >@2017 by fifth team</p>
+</div>
 </body>
 </html>
