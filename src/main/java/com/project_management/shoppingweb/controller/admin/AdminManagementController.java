@@ -219,9 +219,7 @@ public class AdminManagementController {
 		return "redirect:/admin/customerManage";
 
 	}
-	
 
-	
 	@RequestMapping(value = "/updateAdmin", method = RequestMethod.POST)
 	public String updataAdmin(HttpServletRequest request,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 
@@ -300,23 +298,7 @@ public class AdminManagementController {
 		return "redirect:/admin/shopManage";
 	}
 
-	@GetMapping("/commission")
-	public String commission(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
-		List<Price> list = priceRepository.findAll();
-		if(list.size() == 0) {
-			model.addAttribute("price", new Price());
-		}else {
-			model.addAttribute("price", list.get(list.size()-1));
-		}
-		Admin admin = adminService.findByUsername(username);
-		model.addAttribute("adminId", admin.getAdminId());
-		model.addAttribute("adminUserName", username);
 
-		List<ProductAdvertisement> advertisementList =  productAdvertisementService.findAllByStatus(1);
-		model.addAttribute("advertisementList", advertisementList);
-		
-		return "admin/commission";
-	}
 	@GetMapping("/search")
 	public String search(@RequestParam("shopname") String shopname, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
 
@@ -350,6 +332,58 @@ public class AdminManagementController {
 
 		return "admin/customerManageSearch";
 
+	}
+	@GetMapping("/commission")
+	public String commission(@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username,Model model) {
+		List<Price> list = priceRepository.findAll();
+		if(list.size() == 0) {
+			model.addAttribute("price", new Price());
+		}else {
+			model.addAttribute("price", list.get(list.size()-1));
+		}
+		Admin admin = adminService.findByUsername(username);
+		model.addAttribute("adminId", admin.getAdminId());
+		model.addAttribute("adminUserName", username);
+		List<ProductAdvertisement> advertisementList =  productAdvertisementService.findAllByStatus(1);
+		model.addAttribute("advertisementList", advertisementList);
+		List<Trade> List_Trade = tradeRepository.findAllByTradeStatus(3);
+		List<Income> List_Income = incomeRepository.findAll();
+
+		List<Income> shopList = new ArrayList();
+		List<Income> adsList = new ArrayList();
+		List<Trade> tradeList = List_Trade;
+		for(int i = 0;i < List_Income.size(); i++)
+		{
+			if(List_Income.get(i).getType().equals("shop"))
+			{
+				shopList.add(List_Income.get(i));
+			}
+			if(List_Income.get(i).getType().equals("advertisement"))
+			{
+				adsList.add(List_Income.get(i));
+			}
+		}
+		double shopCommission = 0;
+		double adsCommission = 0;
+		double productCommission = 0;
+
+		for(int i = 0; i < shopList.size();i++)
+		{
+			shopCommission =shopList.get(i).getCommission() + shopCommission;
+		}
+		for(int i = 0; i < adsList.size();i++)
+		{
+			adsCommission =adsList.get(i).getCommission() + adsCommission;
+		}
+		for(int i = 0; i <tradeList.size();i++)
+		{
+			productCommission  =tradeList.get(i).getTradeTotalMoney()*0.02 + productCommission ;
+		}
+		model.addAttribute("shopCommission",shopCommission);
+		model.addAttribute("adsCommission",adsCommission);
+		model.addAttribute("productCommission",productCommission);
+
+		return "admin/commission";
 	}
 	@GetMapping("/searchIncome")
 	public String searchIncome(@RequestParam("name") String name, Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) throws java.text.ParseException {
@@ -396,6 +430,7 @@ public class AdminManagementController {
 			{
 				advertisementList.add(searchList.get(i));
 			}
+
 
 		}
 

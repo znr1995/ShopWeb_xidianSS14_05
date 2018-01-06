@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.springframework.org/schema/jdbc">
 <head>
     <meta charset="UTF-8">
@@ -31,9 +31,6 @@
                 </li>
                 <li>
                     <a th:href="@{commission}"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
-                </li>
-                <li>
-                    <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
                 </li>
             </ul>
         </nav>
@@ -208,15 +205,25 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
+  <script>
+        function search(){
+            if(document.getElementById('year').value.length!=4&&document.getElementById('year').value.length!=0) {
+                alert("The year must have four number");
+                return;
+            }
+            if(document.getElementById('month').value.length!=2&&document.getElementById('month').value.length!=0) {
+                alert("The month must have two number");
+                return;
+            }
+            if(document.getElementById('day').value.length!=2&&document.getElementById('day').value.length!=0) {
+                alert("The day must have two number");
+                return;
+            }
+            if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
+            if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
+            if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
+            window.location.href="/admin/searchIncome?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value+"-";
+        }
+  </script>
 </body>
-<script>
-    function search() {
-        if (document.getElementById('year').value == '') document.getElementById('year').value = "yyyy";
-        if (document.getElementById('month').value == '') document.getElementById('month').value = "mm";
-        if (document.getElementById('day').value == '') document.getElementById('day').value = "dd";
-        window.location.href = "/admin/searchIncome?name=" + document.getElementById('year').value + "-" + document.getElementById('month').value + "-" + document.getElementById('day').value + "-";
-    }
-</script>
-
-
 </html>

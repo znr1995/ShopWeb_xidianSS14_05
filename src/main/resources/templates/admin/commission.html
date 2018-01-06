@@ -32,9 +32,6 @@
                 <li class="active">
                     <a href="#"><i class="fa fa-fw fa-line-chart"></i>Commission</a>
                 </li>
-                <li>
-                    <a th:href="@{backUp}"><i class="fa fa-fw fa-database"></i>Back Up</a>
-                </li>
             </ul>
         </nav>
     </div>
@@ -49,6 +46,18 @@
         <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')"></input>
         <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
         <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search()>Search</button>
+    </div>
+    <div style="margin: 20px 0 0 0">
+            <span style="font-size: 20px">Total Shop Commission:  <span>
+            <input type="text" th:value="${shopCommission}" disabled="true" style="border: none;background-color:white;font-size:20px "></input>
+    </div>
+    <div style="margin: 20px 0 0 0">
+            <span style="font-size: 20px">Total Advertisement Commission:  <span>
+            <input type="text" th:value="${adsCommission}" disabled="true"  style="border: none;background-color:white;font-size: 20px"></input>
+    </div>
+    <div style="margin: 20px 0 0 0">
+            <span style="font-size: 20px">Total Product Commission:  <span>
+            <input type="text" th:value="${productCommission}" disabled="true" style="border: none;background-color:white;font-size: 20px"></input>
     </div>
     <br>
 
@@ -139,7 +148,18 @@
     </nav>
     <script>
         function search(){
-
+            if(document.getElementById('year').value.length!=4&&document.getElementById('year').value.length!=0) {
+                alert("The year must have four number");
+                return;
+            }
+            if(document.getElementById('month').value.length!=2&&document.getElementById('month').value.length!=0) {
+                alert("The month must have two number");
+                return;
+            }
+            if(document.getElementById('day').value.length!=2&&document.getElementById('day').value.length!=0) {
+                alert("The day must have two number");
+                return;
+            }
             if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
             if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
             if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
