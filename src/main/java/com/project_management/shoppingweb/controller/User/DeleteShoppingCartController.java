@@ -64,7 +64,6 @@ public class DeleteShoppingCartController {
                 shoppingCartToShow.Photo = "233";
                 shoppingCartToShow.UPrice = "/";
                 shoppingCartToShow.TPrice = "/";
-                shoppingCartToShow.productStock = "0";
                 shoppingCartToShowList.add(shoppingCartToShow);
                 continue;
             }
@@ -72,7 +71,6 @@ public class DeleteShoppingCartController {
             shoppingCartToShow.Photo = product.getProductPhoto();
             shoppingCartToShow.UPrice = String.valueOf(product.getProductPrice());
             shoppingCartToShow.TPrice = String.valueOf(product.getProductPrice() * shoppingCartToShow.shoppingCart.getProductAmount());
-            shoppingCartToShow.productStock = String.valueOf(product.getProductStock());
             shoppingCartToShowList.add(shoppingCartToShow);
         }
 

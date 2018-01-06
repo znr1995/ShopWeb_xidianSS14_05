@@ -58,6 +58,7 @@ public class BalanceController {
             model.addAttribute("UserID", UserID);
             model.addAttribute("ShoppingCartID", ShoppingCartID);
             model.addAttribute("UserName", userService.findByUserId(Long.parseLong(UserID)).getUsername());
+            model.addAttribute("ProductStock", product.getProductStock());
 
             return "/User/ShoppingCartAmountNew";
 

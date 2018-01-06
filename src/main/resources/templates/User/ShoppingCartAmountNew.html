@@ -153,6 +153,10 @@
     </div>
 </div>
 <div>
+    <table>
+        <tr><td width="250px" height="60px"><strong>ProductStock</strong></td></tr>
+        <tr><td width="250px" height="60px" th:text="${ProductStock}"></td></tr>
+    </table>
     <form th:action="@{/uploadAmount}" method="post">
         <input type="hidden" style="display: none" name="UserID" th:value="${UserID}" ><br/>
         <input type="hidden" style="display: none" name="ShoppingCartID" th:value="${ShoppingCartID}" ><br/>

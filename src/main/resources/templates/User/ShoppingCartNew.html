@@ -165,7 +165,6 @@
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productId}" style="display: none"></td>
             <td width="170px" height="140px" ><img class="a" th:src="*{GlobalShoppingCart.Photo}" width="170px" height="140px" alt="2333333333"/></td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.Name}" ></td>
-            <td width="250px" height="60px" th:text="*{GlobalShoppingCart.productStock}" style="display: none"></td>
             <form th:action="@{/ModifyAmount}", method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
@@ -182,11 +181,6 @@
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button style="width: 80px;" type="submit" name="DeleteShoppingCart" th:value="删除" >Delete</button></td>
-            </form>
-            <form th:action="@{/ModifyAmount}" method="post">
-                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
-                <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button style="width: 80px" type="submit" name="ModifyAmount" th:value="修改数量" >Modify</button></td>
             </form>
             <form th:action="@{/balance}" method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
