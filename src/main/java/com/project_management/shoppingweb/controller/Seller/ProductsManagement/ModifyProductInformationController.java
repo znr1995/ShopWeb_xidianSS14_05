@@ -40,28 +40,49 @@ public class ModifyProductInformationController {
         }
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
         //TODO:保证每一个值都不能为空,并且合法
-        if(Integer.valueOf(request.getParameter("productStock"))<0){
-            attributes.addAttribute("errorMessage","productStock is wrong!");
-            return "redirect:/error/errorHandler";
-        }
-        if (Double.valueOf(request.getParameter("productPrice"))<=0){
-            attributes.addAttribute("errorMessage","productPrice is wrong!");
-            return "redirect:/error/errorHandler";
-        }
+        //商品名非空判断
         if(request.getParameter("productName").isEmpty()){
             attributes.addAttribute("errorMessage","productName can't be null!");
             return "redirect:/error/errorHandler";
         }
+
+        //判断库存为大于等于零的整数
+        try{
+            Integer.valueOf(request.getParameter("productStock"));
+        }
+        catch (Exception e){
+            attributes.addAttribute("errorMessage","productStock must be a integer&&>=0!");
+            return "redirect:/error/errorHandler";
+        }
+        if(Integer.valueOf(request.getParameter("productStock"))<0){
+            attributes.addAttribute("errorMessage","productStock is wrong!(stock <0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断价格为大于零的double
+        try{
+            Double.valueOf(request.getParameter("productPrice"));
+        }
+        catch (Exception e){
+            attributes.addAttribute("errorMessage","productPrice must be a double&&>0!");
+            return "redirect:/error/errorHandler";
+        }
+        if (Double.valueOf(request.getParameter("productPrice"))<=0){
+            attributes.addAttribute("errorMessage","productPrice is wrong!(price <=0.0)");
+            return "redirect:/error/errorHandler";
+        }
+
+        //判断商品简介非空
         if(request.getParameter("productBriefInfo").isEmpty()){
             attributes.addAttribute("errorMessage","productBriefInfo can't be null!");
             return "redirect:/error/errorHandler";
         }
-        if(file.isEmpty()){
-            attributes.addAttribute("errorMessage","photo can't be null!");
-            return "redirect:/error/errorHandler";
-        }
+        //if(file.isEmpty()){
+        //    attributes.addAttribute("errorMessage","photo can't be null!");
+         //   return "redirect:/error/errorHandler";
+       // }
 
-        if(file != null && file.getSize() > 0)
+        //if(file != null && file.getSize() > 0)
             newProduct.setProductPhoto(Seller_CopyFile.getInstance().copyFile(file));
         newProduct.setProductStock(Integer.valueOf(request.getParameter("productStock")));
         newProduct.setBrandName(request.getParameter("brandName"));
