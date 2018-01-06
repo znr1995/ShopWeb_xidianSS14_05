@@ -170,10 +170,10 @@
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td width="250px" height="60px">
-                    <button type="button" th:onclick="|jian(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >-</span></button>
+                    <button type="button" style="text-align: center;vertical-align:middle;width: 30px;line-height: 30px;height: 30px;border-radius: 15px" th:onclick="|jian(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >-</span></button>
                     <input style="width: 20px;border: none;text-align: center" th:id="|inputid*{GlobalShoppingCart.shoppingCart.shoppingcartId}|" type="text" name="Amount" th:value="*{GlobalShoppingCart.shoppingCart.productAmount}" readonly="readonly"/>
-                    <button type="button" th:onclick="|jia(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >+</span></button>
-                    <button type="submit" >ok</button>
+                    <button type="button" style="text-align: center;vertical-align:middle;width: 30px;line-height: 30px;height: 30px;border-radius: 15px" th:onclick="|jia(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >+</span></button>
+                    <button type="submit" style="text-align: center;vertical-align:middle;width:60px;height: 30px;line-height: 30px" >ok</button>
                 </td>
             </form>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.UPrice}" ></td>
@@ -258,7 +258,13 @@
 
     function jian(id) {
         var input = document.getElementById("inputid"+id);
-        input.value = parseInt(input.value) - 1;
+        if(input.value>1){
+            input.value = parseInt(input.value) - 1;
+        }
+        else {
+            alert("The minimum number of items is 1 ");
+            input.value = parseInt(input.value);
+        }
     }
     function jia(id) {
         var input = document.getElementById("inputid"+id);
