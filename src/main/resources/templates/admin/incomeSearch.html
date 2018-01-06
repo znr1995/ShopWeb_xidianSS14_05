@@ -39,97 +39,120 @@
         </nav>
     </div>
 </div>
-<br><br><br>
 
+<div class="col-lg-11">
+    <br><br><br>
+    <!--查询框-->
     <div style="margin:0  0 0 220px">
-            <div>
-                <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year" maxlength="4" onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
-                <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month" maxlength="2" onkeyup="value=value.replace(/[^0-9]/,'')"></input>
-                <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day" maxlength="2"  onkeyup="value=value.replace(/[^0-9]/,'')" ></input>
-                <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;" onclick=search()>Search</button>
-            </div>
+        <div>
+            <label>year:</label>
+            <input type="text" style="width: 200px;height: 50px;font-size: 40px;border-radius: 8px;" id="year"
+                   maxlength="4" onkeyup="value=value.replace(/[^0-9]/,'')"/>
+            <label>month:</label>
+            <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="month"
+                   maxlength="2" onkeyup="value=value.replace(/[^0-9]/,'')"/>
+            <label>day:</label>
+            <input type="text" style="width: 100px;height: 50px;font-size: 40px;border-radius: 8px;" id="day"
+                   maxlength="2" onkeyup="value=value.replace(/[^0-9]/,'')"/>
+            <button style="background: #d9edf7;border-radius: 8px;width: 150px;height: 50px;font-size: 39px;"
+                    onclick=search()>Search
+            </button>
         </div>
+    </div>
+    <br>
+    <!--店铺收入-->
     <div style="margin:20px  0 0 220px">
         <table class="table" border="1">
-        <caption style="background: #bee5eb">Commission of opening shop</caption>
-        <thead>
-        <tr>
-            <th>date</th>
-            <th>seller_id</th>
-            <th>sell_name</th>
-            <th>commission<th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="p,index:${shopList}">
+            <caption style="background: #bee5eb">Commission of opening shop</caption>
+            <thead>
             <tr>
-                <td th:text="${p.date}"></td>
-                <td th:text="${p.sellerId}"></td>
-                <td th:text="${p.sellerName}"></td>
-                <td th:text="${p.commission}"></td>
+                <th>date</th>
+                <th>seller_id</th>
+                <th>sell_name</th>
+                <th>commission</th>
             </tr>
-        </th:block>
-    </table>
-        <div>
-            <span style="font-size: 20px">Total Commission:  <span>
-            <input type="text" th:value="${shopCommission}" disabled="true" style="border: none;background-color:white;font-size:20px "></input>
-        </div>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${shopList}">
+                <tr>
+                    <td th:text="${p.date}"></td>
+                    <td th:text="${p.sellerId}"></td>
+                    <td th:text="${p.sellerName}"></td>
+                    <td th:text="${p.commission}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
 
-    </div>
-    <div style="margin:20px 0 0 220px">
-        <table class="table" border="1">
-        <caption style="background: #becceb">Commission of advertising</caption>
-        <thead>
-        <tr>
-            <th>date</th>
-            <th>seller_id</th>
-            <th>sell_name</th>
-            <th>commission<th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="p,index:${advertisementList}">
-            <tr>
-                <td th:text="${p.date}"></td>
-                <td th:text="${p.sellerId}"></td>
-                <td th:text="${p.sellerName}"></td>
-                <td th:text="${p.commission}"></td>
-            </tr>
-        </th:block>
-    </table>
         <div>
-            <span style="font-size: 20px">Total Commission:  <span>
-            <input type="text" th:value="${adsCommission}" disabled="true"  style="border: none;background-color:white;font-size: 20px"></input>
+            <span style="font-size: 20px">Total Commission:  </span>
+            <input type="text" th:value="${shopCommission}" disabled="true"
+                   style="border: none;background-color:white;font-size:20px "/>
         </div>
     </div>
+
+    <!--广告收入-->
+    <br>
+
     <div style="margin:20px 0 0 220px">
         <table class="table" border="1">
-        <caption style="background: #c5beeb">Commission of product</caption>
-        <thead>
-        <tr>
-            <th>time</th>
-            <th>userId</th>
-            <th>tradeId</th>
-            <th>tradePayWay</th>
-            <th>Commission</th>
-        </tr>
-        </thead>
-        <tbody>
-        <th:block th:each="p,index:${tradeList}">
+            <caption style="background: #becceb">Commission of advertising</caption>
+            <thead>
             <tr>
-                <td th:text="${p.tradeFinishTime}"></td>
-                <td th:text="${p.userId}"></td>
-                <td th:text="${p.tradeId}"></td>
-                <td th:text="${p.tradePayWay}"></td>
-                <td th:text="${p.tradeTotalMoney*0.02}"></td>
+                <th>date</th>
+                <th>seller_id</th>
+                <th>sell_name</th>
+                <th>commission</th>
             </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${advertisementList}">
+                <tr>
+                    <td th:text="${p.date}"></td>
+                    <td th:text="${p.sellerId}"></td>
+                    <td th:text="${p.sellerName}"></td>
+                    <td th:text="${p.commission}"></td>
+                </tr>
+            </th:block>
+        </table>
 
-        </th:block>
-        </tbody>
-    </table>
         <div>
-            <span style="font-size: 20px">Total Commission:  <span>
-            <input type="text" th:value="${productCommission}" disabled="true" style="border: none;background-color:white;font-size: 20px"></input>
+            <span style="font-size: 20px">Total Commission:  </span>
+            <input type="text" th:value="${adsCommission}" disabled="true"
+                   style="border: none;background-color:white;font-size: 20px"/>
+        </div>
+    </div>
+
+    <!--商品收入-->
+    <div style="margin:20px 0 0 220px">
+        <table class="table" border="1">
+            <caption style="background: #c5beeb">Commission of product</caption>
+            <thead>
+            <tr>
+                <th>time</th>
+                <th>userId</th>
+                <th>tradeId</th>
+                <th>tradePayWay</th>
+                <th>Commission</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="p,index:${tradeList}">
+                <tr>
+                    <td th:text="${p.tradeFinishTime}"></td>
+                    <td th:text="${p.userId}"></td>
+                    <td th:text="${p.tradeId}"></td>
+                    <td th:text="${p.tradePayWay}"></td>
+                    <td th:text="${p.tradeTotalMoney*0.02}"></td>
+                </tr>
+
+            </th:block>
+            </tbody>
+        </table>
+        <div>
+            <span style="font-size: 20px">Total Commission:  </span>
+            <input type="text" th:value="${productCommission}" disabled="true"
+                   style="border: none;background-color:white;font-size: 20px"/>
         </div>
     </div>
 
@@ -150,10 +173,12 @@
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li><a th:href="@{personalInformation}">Personal Infomation</a></li>
-                    <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px" onclick="Logout">
+                    <button class="btn-link" data-toggle="modal" data-target="#myModal" style="height: 50px"
+                            onclick="Logout">
                         Log out
                     </button>
-                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+                    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+                         aria-hidden="true" data-backdrop="false">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -164,15 +189,17 @@
                                         Sure to Log Out
                                     </h4>
                                 </div>
-                                <div class="modal-body" >
+                                <div class="modal-body">
                                     Log Out
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Leave
                                     </button>
-                                    <a href="/admin/logout"><button type="button" class="btn btn-primary">
-                                        Sure
-                                    </button></a>
+                                    <a href="/admin/logout">
+                                        <button type="button" class="btn btn-primary">
+                                            Sure
+                                        </button>
+                                    </a>
                                 </div>
                             </div><!-- /.modal-content -->
                         </div><!-- /.modal -->
@@ -181,14 +208,15 @@
             </div><!--/.nav-collapse -->
         </div>
     </nav>
-    <script>
-        function search(){
-            if(document.getElementById('year').value=='') document.getElementById('year').value="yyyy";
-            if(document.getElementById('month').value=='') document.getElementById('month').value="mm";
-            if(document.getElementById('day').value=='') document.getElementById('day').value="dd";
-            window.location.href="/admin/searchIncome?name="+document.getElementById('year').value+"-"+document.getElementById('month').value+"-"+document.getElementById('day').value+"-";
-        }
-    </script>
 </body>
+<script>
+    function search() {
+        if (document.getElementById('year').value == '') document.getElementById('year').value = "yyyy";
+        if (document.getElementById('month').value == '') document.getElementById('month').value = "mm";
+        if (document.getElementById('day').value == '') document.getElementById('day').value = "dd";
+        window.location.href = "/admin/searchIncome?name=" + document.getElementById('year').value + "-" + document.getElementById('month').value + "-" + document.getElementById('day').value + "-";
+    }
+</script>
+
 
 </html>
