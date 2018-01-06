@@ -114,7 +114,6 @@ public class AdminManagementController {
 		price.setProductHighAdvertisementPrice(Double.parseDouble(request.getParameter("productHighAdvertisementPrice")));
 		price.setProductLowAdvertisementPrice(Double.parseDouble(request.getParameter("productLowAdvertisementPrice")));
 		price.setSellerListAdvertisementPrice(Double.parseDouble(request.getParameter("sellerListAdvertisementPrice")));
-		price.setProductRate(Double.parseDouble(request.getParameter("productRate")));
 		price.setShopPrice(Double.parseDouble(request.getParameter("shopPrice")));
 		priceService.updatePrice(price);
 		
@@ -340,10 +339,7 @@ public class AdminManagementController {
 	}
 
 	@GetMapping("/searchCustomer")
-	public String searchCustomer(@RequestParam("username") String name,Model model,@SessionAttribute(WebSecurityConfig.SESSION_KEY) String username) {
-		Admin admin = adminService.findByUsername(name);
-		model.addAttribute("adminId", admin.getAdminId());
-		model.addAttribute("adminUserName", username);
+	public String searchCustomer(@RequestParam("username") String name,Model model) {
 
 		List<User> searchList = userService.findAllByUsernameLike(name);
 		model.addAttribute("searchList", searchList);
