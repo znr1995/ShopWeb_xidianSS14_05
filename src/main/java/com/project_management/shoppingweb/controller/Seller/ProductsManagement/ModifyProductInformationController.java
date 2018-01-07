@@ -46,7 +46,7 @@ public class ModifyProductInformationController {
             return "redirect:/error/errorHandler";
         }
 
-        //判断库存为大于等于零的整数
+        //判断库存为大于等于零小于10000的整数
         try{
             Integer.valueOf(request.getParameter("productStock"));
         }
@@ -54,8 +54,8 @@ public class ModifyProductInformationController {
             attributes.addAttribute("errorMessage","productStock must be a integer&&>=0!");
             return "redirect:/error/errorHandler";
         }
-        if(Integer.valueOf(request.getParameter("productStock"))<0){
-            attributes.addAttribute("errorMessage","productStock is wrong!(stock <0)");
+        if(Integer.valueOf(request.getParameter("productStock"))<0||Integer.valueOf(request.getParameter("productStock"))>10000){
+            attributes.addAttribute("errorMessage","productStock is wrong!(stock <0||>10000)");
             return "redirect:/error/errorHandler";
         }
 
