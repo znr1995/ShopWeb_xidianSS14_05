@@ -172,7 +172,6 @@
 <div class="mens">
     <div class="main">
         <div class="wrap">
-
             <div class="cont span_2_of_3">
                 <div class="grid images_3_of_2">
                     <div id="container">
@@ -180,7 +179,10 @@
                             <div id="products">
                                 <div class="slides_container">
                                     <!-- photo -->
-                                    <a class="_blank" th:href="@{${productdetail.productPhoto}}"><img class="a" th:src="@{${productdetail.productPhoto}}" width="450" height="500" alt=""/></a>
+                                    <a class="_blank" th:href="@{${productdetail.productPhoto}}">
+                                        <img class="a" th:src="@{${productdetail.productPhoto}}" width="450" height="500"
+                                             alt=""/>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -188,7 +190,8 @@
                 </div>
                 <div class="desc1 span_3_of_2">
                     <h3 class="m_3" th:text="${productdetail.productName}">productName</h3>
-                    <p class="m_5" th:text="'HK$ '+${productdetail.productPrice}">productPrice</p><!--<span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p>-->
+                    <p class="m_5" th:text="'HK$ '+${productdetail.productPrice}">productPrice</p>
+                    <!--<span class="reducedfrom">Rs. 999</span> <a href="#">click for offer</a></p>-->
                     <!--<p class="m-5" th:text="'stack:'+${productdetail.productStock}">Stack : Unknown</p>-->
                     <p class="m_5" th:text="${productdetail.productStock}">productStock</p>
                     <div class="btn_form">

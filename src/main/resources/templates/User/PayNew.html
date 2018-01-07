@@ -7,6 +7,8 @@
     <link th:href="'/css/style_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'/css/form_user.css'" rel="stylesheet" type="text/css" media="all" />
     <link th:href="'http://fonts.googleapis.com/css?family=Exo+2'" rel='stylesheet' type='text/css'>
+    <link th:href="'css/foot.css'" rel="stylesheet" type="text/css" media="all">
+    <link href="/css/foot.css" rel="stylesheet" type="text/css" media="all">
     <script type="text/javascript" th:src="'/js/jquery1.min_user.js'"></script>
     <!-- start menu -->
     <link th:href="'/css/megamenu_user.css'" rel="stylesheet" type="text/css" media="all" />
@@ -65,46 +67,46 @@
         #right_infor tr td:nth-child(1) strong{
             float: right;
         }
-        #payway{
-           float: right;
-            margin-right: 5%;
+        select{
+           /*float: right;*/
+            outline: none;
             border: none;
             color: white;
             background: rgb(116,176,200);
             border-radius: 8px;
-            font-size: 20px;
-            margin-top: 10px;
+            font-size: 16px;
+
         }
         #pay{
-            width: 100px;
-            margin-right: 5%;
+            width: 80px;
+            margin-right: 8%;
             border: none;
             outline: none;
             color: white;
             background: rgb(116,176,200);
             border-radius: 8px;
-            font-size: 20px;
+            font-size: 16px;
             height: 30px;
-            float: right;
+            /*float: right;*/
         }
         #pay:hover{
             background: dodgerblue;
         }
-        #payway:hover{
+        #payway:active{
 
-            background: dodgerblue;
+            background: orange;
         }
-        #table{
-            float: left;
-            width: 80%;
-            margin-left: 3%;
-            margin-right: 3%;
-        }
+        /*#table{*/
+            /*float: left;*/
+            /*width: 80%;*/
+            /*margin-left: 3%;*/
+            /*margin-right: 3%;*/
+        /*}*/
         #table tr td{
             font-size: 20px;
         }
         #main_table{
-            float: left;
+
             width: 100%;
         }
         ::-webkit-input-placeholder{
@@ -115,6 +117,32 @@
         td{
             vertical-align: middle;
         }
+        input{
+            text-align: center;
+        }
+        .bb{
+            display: inline-block;
+            width: 45%;
+            text-align: right;
+        }
+        #address{
+            width: 140px;
+            margin-right: 8%;
+            border: none;
+            outline: none;
+            color: white;
+            background: rgb(116,176,200);
+            border-radius: 8px;
+            font-size: 16px;
+            height: 30px;
+        }
+        #address:hover{
+            background: dodgerblue;
+        }
+        #address:active{
+            background: orange;
+        }
+
 
 
 
@@ -221,23 +249,7 @@
                 <div id="response"> </div>
             </div>
             <div class="tag-list">
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c1" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>sed diam nonummy</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="icon1 sub-icon1 profile_img">
-                    <li><a class="active-icon c2" href="#"> </a>
-                        <ul class="sub-icon1 list">
-                            <li><h3>No Products</h3><a href=""></a></li>
-                            <li><p>Lorem ipsum dolor sit amet, consectetuer  <a href="">adipiscing elit, sed diam</a></p></li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="last"><li><a href="#">Cart(0)</a></li></ul>
+
             </div>
         </div>
         <div class="clear"></div>
@@ -252,24 +264,43 @@
         <div id="left">
             <table id="left_infor">
                 <tr>
-                    <td><strong>ShopName:</strong></td>
+                    <td><strong>ShopName: </strong></td>
                     <td><input type="text" name="SellerName"  th:value="${SellerName}" readonly="readonly" /></td>
                 </tr>
                 <tr>
-                    <td><strong>ProductName:</strong></td>
+                    <td><strong>ProductName: </strong></td>
                     <td><input type="text" name="ProductName" th:value="${ProductName}" readonly="readonly" /></td>
                 </tr>
                 <tr>
-                    <td><strong>ProductAmount:</strong></td>
+                    <td><strong>ProductAmount: </strong></td>
                     <td><input type="text" name="ProductAmount" th:value="${ProductAmount}"  readonly="readonly"></td>
                 </tr>
                 <tr>
-                    <td><strong>UnitPrice:</strong></td>
+                    <td><strong>UnitPrice: </strong></td>
                     <td><input type="text" name="UnitPrice" th:value="${UnitPrice}" readonly="readonly"  /></td>
                 </tr>
                 <tr>
-                    <td><strong>TotalPay:</strong></td>
+                    <td><strong>TotalPay: </strong></td>
                     <td><input type="text" name="Total" th:value="${Total}" readonly="readonly" /></td>
+                </tr>
+                <tr>
+                    <td><strong>Select address:</strong></td>
+                    <td>
+                        <select name="address">
+                            <div th:each="address : ${AddressList}">
+                                <option  th:value="*{address.addressId}" th:text="*{address.addressName}"></option>
+                            </div>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Select Payway:</strong></td>
+                    <td>
+                        <select id="payway" name="PayWay">
+                            <option th:value="AliPay" style="color: white">AliPay</option>
+                            <option th:value="WeChatPay" style="color: white">WePay</option>
+                        </select>
+                    </td>
                 </tr>
 
             </table>
@@ -296,21 +327,68 @@
 
     </div>
     <div id="main_table" style="margin: 10px 0px 20px 0px">
-        <select name="address">
-            <div th:each="address : ${AddressList}">
-                <option  th:value="*{address.addressId}" th:text="*{address.addressName}"></option>
-            </div>
-        </select>
-        <button type="submit" name="addAddress" value="addAddress">add new Address</button>
-        <select id="payway" name="PayWay">
-            <option th:value="AliPay" style="color: white">AliPay</option>
-            <option th:value="WeChatPay" style="color: white">WePay</option>
-        </select>
+        <div class="bb">
+            <button type="submit" id="address" name="addAddress" value="addAddress">add new Address</button>
+        </div>
+
+
+    <div class="bb">
+        <button id="pay" type="submit" name="Pay" value="Pay">pay</button>
+    </div>
     </div>
 
-        <button id="pay" type="submit" name="Pay" value="Pay">pay</button>
-
 </form>
+
+<div style="background-color: rgb(116,176,200);width: 100%;height: 50px;margin-top: 100px">
+    <h3>
+
+    </h3>
+</div>
+
+<div id="foot">
+    <div id="foot-1">
+        <h1>PARKnSHOP</h1>
+    </div>
+    <div id="foot-left">
+        <h2>About Us</h2>
+        <ul>
+            <li>About PARknSHOP</li>
+            <li>Quality appraisal department</li>
+            <li>Corporate social responsibility</li>
+            <li>General problems</li>
+            <li>Privacy policy</li>
+            <li>Online shopping terms and conditions</li>
+            <li>Free statement</li>
+            <li>Corporate Information</li>
+        </ul>
+
+    </div>
+    <div id="foot-center">
+        <h2>Online Shopping</h2>
+        <ul>
+            <li>Online shopping guide</li>
+            <li>Delivery service</li>
+            <li>Payment method</li>
+            <li>Refund / Return Guarantee</li>
+        </ul>
+    </div>
+    <div id="foot-right">
+        <h2>Contact Us</h2>
+        <p>
+            If you have any problems, please contact us by email or phone.
+        </p>
+        <p>
+            phone:137-7207-7200.
+        </p>
+        <p>
+            email:870953206@qq.com
+        </p>
+    </div>
+
+</div>
+<div id="footer-bottom">
+    <p >@2017 by fifth team</p>
+</div>
 
 </body>
 </html>
