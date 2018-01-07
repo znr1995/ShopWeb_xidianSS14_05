@@ -28,21 +28,28 @@
             font-size: 20px;
             color: gray;
         }
+        th{
+            width: 300px;
+            font-size: 25px;
+        }
         #favorite{
             width: 90%;
             border: 1px rgb(116,176,200) solid;
             border-radius: 8px;
             box-shadow: 3px 3px lightblue;
             margin: 20px auto;
+            padding-left: 20px;
+            padding-bottom: 20px;
         }
         #favorite_table1{
             border: none;
-            margin: 0 auto;
+            border-bottom: 2px dotted lightgray;
+            margin-bottom: 30px;
+
 
         }
         #favorite_table2{
             border: none;
-            margin: 0 auto;
 
 
         }
@@ -177,6 +184,7 @@
 </div >
 <div  id="favorite">
     <table id="favorite_table1" >
+        <th><strong><h1 style="color: #00AEFF;text-align: left">Product favorite</h1></strong></th>
         <tr>
             <td width="170px" height="60px"><strong>ProductPhoto</strong></td>
             <td width="200px" height="60px"><strong>ProductName</strong></td>
@@ -206,8 +214,9 @@
     </table>
 
     <table id="favorite_table2" >
+        <th><strong><h1 style="color: #00AEFF;text-align: left">Shop favorite</h1></strong></th>
         <tr>
-            <td width="170px" height="150px"><strong>ShopPhoto</strong></td>
+            <td width="170px" height="60px"><strong>ShopPhoto</strong></td>
             <td width="200px" height="60px"><strong>ShopName</strong></td>
         </tr>
         <tr th:each="ShopList : ${ShopList}">
