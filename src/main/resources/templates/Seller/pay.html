@@ -130,6 +130,11 @@
     var payPrice = document.getElementById("payPrice");
 
     function setPayTypeAl() {
+        if(payPrice.value == "")
+        {
+            alert("please input your price!");
+            return false;
+        }
         if(parseFloat(payPrice.value)< parseFloat(minPrice.value))
         {
             alert("pay to little!need more!");
@@ -143,6 +148,11 @@
 
     }
     function setPayTypeWe() {
+        if(payPrice.value == "")
+        {
+            alert("please input your price!");
+            return false;
+        }
         if(parseFloat(payPrice.value)< parseFloat(minPrice.value))
         {
             alert("pay to little!need more!");
