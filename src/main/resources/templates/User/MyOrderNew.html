@@ -24,28 +24,31 @@
     <script th:src="'js/jquery.easydropdown_user.js'"></script>
     <style type="text/css">
         #process{
-            margin: 10px;
+            margin: 30px;
             border: 1px rgb(116,176,200) solid;
             border-radius: 10px;
         }
         #finish{
-            margin: 10px;
+            margin: 30px;
             border: 1px rgb(116,176,200) solid;
             border-radius: 10px;
         }
         #receive{
-            margin: 10px;
+            margin: 30px;
             border: 1px rgb(116,176,200) solid;
             border-radius: 10px;
         }
         #refund{
-            margin: 10px;
+            margin: 30px;
             border: 1px rgb(116,176,200) solid;
             border-radius: 10px;
         }
         h2{
             margin: 10px;
             font-size: 20px;
+        }
+        h2 strong{
+            color: #00AEFF;
         }
 
         table{
@@ -70,6 +73,9 @@
             margin: 10px auto;
         }
         button:active{
+            background-color: orange;
+        }
+        button:hover{
             background-color: dodgerblue;
         }
         /*table tr:nth-of-type(n+2):hover{*/
@@ -203,7 +209,7 @@
     <div id="process">
         <h2><strong>Processing Order</strong></h2><br>
         <table>
-            <tr style="border-bottom: 1px solid lightgray">
+            <tr >
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
