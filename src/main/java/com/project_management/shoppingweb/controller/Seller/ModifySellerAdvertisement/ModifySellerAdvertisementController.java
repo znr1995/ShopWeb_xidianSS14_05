@@ -407,6 +407,12 @@ public class ModifySellerAdvertisementController {
             //计算广告投放时间
             int dayNum = getDateDifference(startDate, endDate);
 
+            //广告投放时间不能超过365天
+            if(dayNum>=365){
+                attributes.addAttribute("errorMessage","The ad can't last more than 365 days");
+                return "redirect:/error/errorHandler";
+            }
+
             productAdvertisement.setStatus(notPayStatus);  // 1 - 未判断， 0 - 通过 2 - 未付款
             long productId = Long.valueOf(request.getParameter("productIDs"));
             int locationId = Integer.valueOf(request.getParameter("type"));  // 1-滚动，2-列表广告
@@ -498,6 +504,12 @@ public class ModifySellerAdvertisementController {
 
             //计算广告投放时间
             int dayNum = getDateDifference(startDate, endDate);
+
+            //广告投放时间不能超过365天
+            if(dayNum>=365){
+                attributes.addAttribute("errorMessage","The ad can't last more than 365 days");
+                return "redirect:/error/errorHandler";
+            }
 
 
             //判断数据库是否有price相关的数据

@@ -94,9 +94,9 @@ public class AddProductController {
                 return "redirect:/error/errorHandler";
             }
         }
-        //判断库存是否大于等于零
-        if(Integer.valueOf(request.getParameter("productStock"))<0){
-            attributes.addAttribute("errorMessage","productStock is wrong!(stock<0)");
+        //判断库存是否大于等于零小于一万
+        if(Integer.valueOf(request.getParameter("productStock"))<0||Integer.valueOf(request.getParameter("productStock"))>10000){
+            attributes.addAttribute("errorMessage","productStock is wrong!(stock<0||>10000)");
             return "redirect:/error/errorHandler";
         }
 
