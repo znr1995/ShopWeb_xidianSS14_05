@@ -2,10 +2,12 @@ package com.project_management.shoppingweb.controller;
 
 import java.util.*;
 
+import com.project_management.shoppingweb.domain.Product;
 import com.project_management.shoppingweb.domain.ProductAdvertisement;
 import com.project_management.shoppingweb.domain.SellerAdvertisement;
 import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.User.User_ProductAdvertisementService;
+import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.User.User_SellerAdvertisementService;
 import com.project_management.shoppingweb.service.UserService;
 import org.apache.log4j.Logger;
@@ -26,6 +28,8 @@ public class HomepageController {
     private User_ProductAdvertisementService userProductAdvertisementService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private User_ProductService productService;
 
     private long UserID = -1;
 
@@ -82,15 +86,29 @@ public class HomepageController {
         model.addAttribute("pro_rollad_isnull", pro_rollad_isnull);
 
         List<ProductAdvertisement> pro_ads_list = userProductAdvertisementService.findAllByType(2, 1);
-        List<ProductAdvertisement> del_Product_adv2 = new ArrayList<>();
-        for(ProductAdvertisement pa : pro_ads_list){
-            if(currentDate.after(pa.getEndDate())){
-                del_Product_adv2.add(pa);
-            }
-        }
-        pro_ads_list.removeAll(del_Product_adv2);
+        List<ProductAdvertisement> del_Product_adv2 = new ArrayList<>();//待删除列表
         boolean pro_listad_isnull = false;
-        if(pro_ads_list == null || pro_ads_list.isEmpty())  pro_listad_isnull=true;//如果为空设为true
+        if(pro_ads_list == null || pro_ads_list.isEmpty())  {
+            pro_listad_isnull=true;//如果为空设为true
+        }else{
+            for(int i = 0; i < pro_ads_list.size(); i++){
+                ProductAdvertisement pa= pro_ads_list.get(i);
+                if(currentDate.after(pa.getEndDate())){
+                    del_Product_adv2.add(pa);//广告过期加入删除列表
+                }else{
+                    Product product = productService.findProductByProductID(pa.getProductId());
+                    if(product == null){//商品被删除
+                        del_Product_adv2.add(pa);
+                    }else {
+                        del_Product_adv2.add(pa);
+                        pa.setPrice(product.getProductPrice());
+                        pro_ads_list.add(pa);
+                    }
+                }
+            }
+            pro_ads_list.removeAll(del_Product_adv2);
+        }
+        if(pro_ads_list == null || pro_ads_list.isEmpty()) pro_listad_isnull=true;
         model.addAttribute("pro_ads", pro_ads_list);//商品广告
         model.addAttribute("pro_listad_isnull", pro_listad_isnull);
         model.addAttribute("UserID",UserID);
