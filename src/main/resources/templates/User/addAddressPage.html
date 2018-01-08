@@ -331,7 +331,7 @@
             return false;
         }
 
-        if(parseInt(postcode.value).toString() == "NaN")
+        if(!isPostCode(postcode.value))
         {
             alert("postcode not number!");
             return false;
@@ -342,6 +342,14 @@
 
     function isPhoneNumber(string) {
         var pattern = /^1[34578]\d{9}$/;
+        if (pattern.test(string)) {
+            return true;
+        }
+        console.log('check mobile phone ' + string + ' failed.');
+        return false;
+    };
+    function isPostCode(string) {
+        var pattern = /^\d{6}$/;
         if (pattern.test(string)) {
             return true;
         }
