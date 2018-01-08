@@ -25,7 +25,7 @@ public class CartPortalController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/CartPortal", method = RequestMethod.POST)
+    @RequestMapping(value = "/CartPortal", method = RequestMethod.GET)
     public String CartPortal(HttpServletRequest request, Model model){
         List<ShoppingCart> shoppingCarts = new ArrayList<ShoppingCart>();
         shoppingCarts = shoppingCartService.findAllByShoppingcartId(Long.parseLong(request.getParameter("ShoppingCartID")));

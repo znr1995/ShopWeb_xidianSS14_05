@@ -214,7 +214,11 @@
             </tr>
             <tr th:each="tradeToShows : ${tradeToShows}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{tradeToShows.trade.sellerId}">Onions</td>
-                <td width="170px" height="140px" ><img class="a" th:src="*{tradeToShows.Photo}" width="170px" height="140px" alt="2333333333"/></td>
+                <td width="170px" height="140px" >
+                    <a target="_blank" th:href="@{'/TradeSellerPortal?SellerID='+${tradeToShows.trade.sellerId}+'&UserID='+${UserID}}">
+                        <img class="a" th:src="*{tradeToShows.Photo}" width="170px" height="140px" alt="2333333333"/>
+                    </a>
+                </td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{tradeToShows.SellerName}">Onions</td>
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{tradeToShows.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{tradeToShows.trade.tradePayWay}">Onions</td>

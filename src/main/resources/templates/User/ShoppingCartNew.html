@@ -163,7 +163,11 @@
         </tr>
         <tr th:each="GlobalShoppingCart :${GlobalShoppingCart}">
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.shoppingCart.productId}" style="display: none"></td>
-            <td width="170px" height="140px" ><img class="a" th:src="*{GlobalShoppingCart.Photo}" width="170px" height="140px" alt="2333333333"/></td>
+            <td width="170px" height="140px" >
+                <a target="_blank" th:href="@{'/CartPortal?ShoppingCartID='+${GlobalShoppingCart.shoppingCart.shoppingcartId}+'&UserID='+${UserID}}">
+                    <img class="a" th:src="*{GlobalShoppingCart.Photo}" width="170px" height="140px" alt="2333333333"/>
+                </a>
+            </td>
             <td width="250px" height="60px" th:text="*{GlobalShoppingCart.Name}" ></td>
             <form th:action="@{/ModifyAmount}", method="post">
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
@@ -186,11 +190,6 @@
                 <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td style="width: 120px"><button style="width: 120px" type="submit" name="Balance" th:value="结算" >Settlement</button></td>
-            </form>
-            <form th:action="@{/CartPortal}" method="post">
-                <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly" ></td>
-                <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
-                <td style="width: 120px"><button style="width: 80px" type="submit" name="CartPortal" th:value="传送门" >Portal</button></td>
             </form>
         </tr>
     </table>

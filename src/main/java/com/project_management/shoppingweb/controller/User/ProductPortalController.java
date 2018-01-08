@@ -19,7 +19,7 @@ public class ProductPortalController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/PPortal", method = RequestMethod.POST)
+    @RequestMapping(value = "/PPortal", method = RequestMethod.GET)
     public String ProductPortal(HttpServletRequest request, Model model){
         String ID = request.getParameter("ProductID");
         Product product = userProductService.findProductByProductID(Long.parseLong(ID));

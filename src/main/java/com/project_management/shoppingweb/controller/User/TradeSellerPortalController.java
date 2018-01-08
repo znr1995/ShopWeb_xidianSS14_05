@@ -1,7 +1,9 @@
 package com.project_management.shoppingweb.controller.User;
 
 import com.project_management.shoppingweb.domain.Product;
+import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.User;
+import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
 import com.project_management.shoppingweb.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,19 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
-public class TradePortalController {
+public class TradeSellerPortalController {
     @Autowired
     private User_ProductService userProductService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private SellerService sellerService;
 
-    @RequestMapping(value = "/TradeDetailPortal", method = RequestMethod.GET)
-    public String TradePortal(HttpServletRequest request, Model model){
-        String ID = request.getParameter("ProductID");
-        Product product = userProductService.findProductByProductID(Long.parseLong(ID));
-        if(product == null){
+    @RequestMapping(value = "/TradeSellerPortal", method = RequestMethod.GET)
+    public String TradeSellerPortal(HttpServletRequest request, Model model){
+        String SellerID = request.getParameter("SellerID");
+        Seller seller = sellerService.findBySellerId(Long.parseLong(SellerID));
+        if(seller == null){
             Long UserID = Long.parseLong(request.getParameter("UserID"));
             model.addAttribute("UserID", UserID);
             if(UserID == -1){
@@ -33,21 +38,26 @@ public class TradePortalController {
                 User user = userService.findByUserId(UserID);
                 model.addAttribute("UserName", user.getUsername());
             }
-            return "/User/productoops";
+            return "/User/shopoops";
         }
-        boolean isnull = false;
-        if(product == null) isnull = true;
-        model.addAttribute("productdetail", product);
-        model.addAttribute("proisnull", isnull);
-        long UserID = Long.parseLong(request.getParameter("UserID"));
+        String UserID = request.getParameter("UserID");
+        List<Product> products =
+                userProductService.findAllBySellerID(Long.parseLong(SellerID));
+        boolean pro_isnull = false;
+        if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
+        long UserIDD = Long.parseLong(UserID);
         model.addAttribute("UserID", UserID);
-        if(UserID == -1){
+        model.addAttribute("products",products);
+        model.addAttribute("ShopID", SellerID);
+        model.addAttribute("seller", seller);
+        model.addAttribute("pro_isnull", pro_isnull);
+        if(UserIDD == -1){
             model.addAttribute("UserName", "UserName");
         }
         else{
-            User user = userService.findByUserId(UserID);
+            User user = userService.findByUserId(UserIDD);
             model.addAttribute("UserName", user.getUsername());
         }
-        return "/User/ProductDetail";
+        return "/User/sellersproduct";
     }
 }

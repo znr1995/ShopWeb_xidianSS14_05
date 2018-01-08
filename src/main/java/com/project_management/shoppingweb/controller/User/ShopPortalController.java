@@ -24,7 +24,7 @@ public class ShopPortalController {
     @Autowired
     private SellerService sellerService;
 
-    @RequestMapping(value = "/SPortal", method = RequestMethod.POST)
+    @RequestMapping(value = "/SPortal", method = RequestMethod.GET)
     public String ShopProtal(HttpServletRequest request, Model model){
         String SellerID = request.getParameter("SellerID");
         Seller seller = sellerService.findBySellerId(Long.parseLong(SellerID));
