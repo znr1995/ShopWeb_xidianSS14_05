@@ -74,6 +74,12 @@ public class UploadRemarkController {
                 TradeToShow tradeToShow = new TradeToShow();
                 tradeToShow.trade = MyOrderS0.get(i);
                 Seller seller = sellerService.findBySellerId(MyOrderS0.get(i).getSellerId());
+                if(seller == null){
+                    tradeToShow.SellerName = "Missed";
+                    tradeToShow.Photo = "233";
+                    continue;
+                }
+                tradeToShow.Photo = seller.getSculpture();
                 tradeToShow.SellerName = seller.getShopname();
                 tradeToShowsS0.add(tradeToShow);
             }
@@ -85,6 +91,12 @@ public class UploadRemarkController {
                 TradeToShow tradeToShow = new TradeToShow();
                 tradeToShow.trade = MyOrderS12.get(i);
                 Seller seller = sellerService.findBySellerId(MyOrderS12.get(i).getSellerId());
+                if(seller == null){
+                    tradeToShow.SellerName = "Missed";
+                    tradeToShow.Photo = "233";
+                    continue;
+                }
+                tradeToShow.Photo = seller.getSculpture();
                 tradeToShow.SellerName = seller.getShopname();
                 tradeToShowsS12.add(tradeToShow);
             }
@@ -96,6 +108,12 @@ public class UploadRemarkController {
                 TradeToShow tradeToShow = new TradeToShow();
                 tradeToShow.trade = MyOrderS3.get(i);
                 Seller seller = sellerService.findBySellerId(MyOrderS3.get(i).getSellerId());
+                if(seller == null){
+                    tradeToShow.SellerName = "Missed";
+                    tradeToShow.Photo = "233";
+                    continue;
+                }
+                tradeToShow.Photo = seller.getSculpture();
                 tradeToShow.SellerName = seller.getShopname();
                 tradeToShowsS3.add(tradeToShow);
             }
@@ -107,6 +125,12 @@ public class UploadRemarkController {
                 TradeToShow tradeToShow = new TradeToShow();
                 tradeToShow.trade = MyOrderS45.get(i);
                 Seller seller = sellerService.findBySellerId(MyOrderS45.get(i).getSellerId());
+                if(seller == null){
+                    tradeToShow.SellerName = "Missed";
+                    tradeToShow.Photo = "233";
+                    continue;
+                }
+                tradeToShow.Photo = seller.getSculpture();
                 tradeToShow.SellerName = seller.getShopname();
                 tradeToShowsS45.add(tradeToShow);
             }
