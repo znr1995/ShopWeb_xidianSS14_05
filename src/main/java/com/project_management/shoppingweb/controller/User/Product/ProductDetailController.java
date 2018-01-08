@@ -29,7 +29,19 @@ public class ProductDetailController {
         String ID = request.getParameter("productId");
         Product product = userProductService.findProductByProductID(Long.parseLong(ID));
         boolean isnull = false;
-        if(product == null) isnull = true;
+        if(product == null) {
+            isnull = true;
+            long UserID = Long.parseLong(request.getParameter("UserID"));
+            model.addAttribute("UserID", UserID);
+            if(UserID == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserID);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ProductNoFound";
+        }
         model.addAttribute("productdetail", product);
         model.addAttribute("proisnull", isnull);
         long UserID = Long.parseLong(request.getParameter("UserID"));
