@@ -197,7 +197,7 @@
         <div class="clear"></div>
     </div>
 </div >
-<form name="form1" th:action="@{/Pay/addAddressAfter}" method="post">
+<form name="form1" th:action="@{/Pay/addAddressAfter}" onsubmit="return checkVaild()" method="post">
     <input type="hidden" name="SellerName" th:value="${SellerName}" style="display: none">
     <input type="hidden" name="ProductName" th:value="${ProductName}" style="display: none">
     <input type="hidden" name="ProductAmount" th:value="${ProductAmount}" style="display: none">
@@ -212,31 +212,31 @@
             <table id="left_infor">
                 <tr>
                     <td><strong>addressName:</strong></td>
-                    <td> <input placeholder="please input addressName" type="text" name="addressName"/></td>
+                    <td> <input placeholder="please input addressName" type="text" id="addressName" name="addressName"/></td>
                 </tr>
                 <tr>
                     <td><strong>province:</strong></td>
-                    <td> <input placeholder="please input province" type="text" name="province"/></td>
+                    <td> <input placeholder="please input province" type="text" id="province" name="province"/></td>
                 </tr>
                 <tr>
                     <td><strong>city:</strong></td>
-                    <td> <input placeholder="please input city" type="text" name="city"/></td>
+                    <td> <input placeholder="please input city" type="text" id="city" name="city"/></td>
                 </tr>
                 <tr>
                     <td><strong>detailAddress:</strong></td>
-                    <td> <input placeholder="please input detailAddress" type="text" name="detailAddress"/></td>
+                    <td> <input placeholder="please input detailAddress" type="text" id="detailAddress" name="detailAddress"/></td>
                 </tr>
                 <tr>
                     <td><strong>district:</strong></td>
-                    <td> <input placeholder="please input district" type="text" name="district"/></td>
+                    <td> <input placeholder="please input district" type="text"  id="district" name="district"/></td>
                 </tr>
                 <tr>
                     <td><strong>tel:</strong></td>
-                    <td> <input placeholder="please input tel" type="text" name="tel"/></td>
+                    <td> <input placeholder="please input tel" type="text" id="tel" name="tel"/></td>
                 </tr>
                 <tr>
                     <td><strong>postcode:</strong></td>
-                    <td> <input placeholder="please input PostCode" type="text" name="postcode"/></td>
+                    <td> <input placeholder="please input PostCode" type="text" id="postcode" name="postcode"/></td>
                 </tr>
 
             </table>
@@ -298,4 +298,50 @@
     <p >@2017 by fifth team</p>
 </div>
 </body>
+<script>
+    var postcode = document.getElementById("postcode");
+    var tel = document.getElementById("tel");
+    var district = document.getElementById("district");
+    var detailAddress = document.getElementById("detailAddress");
+    var city = document.getElementById("detailAddress");
+    var province = document.getElementById("province");
+    var addressName = document.getElementById("addressName");
+
+    function checkVaild() {
+        if(postcode.value == "" ||
+            tel.value == "" ||
+            district.value == "" ||
+            detailAddress.value == "" ||
+            city.value == "" ||
+            province.value == "" ||
+            addressName.value == "" )
+        {
+            alert("input not allow empty!");
+            return false;
+        }
+
+        if(!isPhoneNumber(tel.value))
+        {
+            alert("tel not allow!");
+            return false;
+        }
+
+        if(parseInt(postcode.value).toString() == "NaN")
+        {
+            alert("postcode not number!");
+            return false;
+        }
+
+        return true;
+    }
+
+    function isPhoneNumber(string) {
+        var pattern = /^1[34578]\d{9}$/;
+        if (pattern.test(string)) {
+            return true;
+        }
+        console.log('check mobile phone ' + string + ' failed.');
+        return false;
+    };
+</script>
 </html>
