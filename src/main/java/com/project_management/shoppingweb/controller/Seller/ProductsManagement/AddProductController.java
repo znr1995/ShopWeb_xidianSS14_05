@@ -39,7 +39,13 @@ public class AddProductController {
     public String addProductAndReturnBack(@RequestParam(value = "productPhotoFile", required = false)MultipartFile file,
                                           HttpServletRequest request, RedirectAttributes attributes)
     {
+
         long sellerID = Long.valueOf(request.getParameter("SellerID"));
+        if(sellerID < 0)
+        {
+            attributes.addAttribute("errorMessage","sellerId not vaild, login  again!!");
+            return "redirect:/error/errorHandler";
+        }
         attributes.addAttribute("SellerID",sellerID);
 
         //TODO:保证添加商品时候每一个商品的属性都不为空

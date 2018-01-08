@@ -101,7 +101,10 @@
                                     <div class="h_nav">
                                         <h4>Health</h4>
                                         <ul>
-                                            <li><a href="category.html">Health, Fintiness & Sports</a></li>
+                                            <li><a th:href="@{'/search/type?producttype=Health&UserID='+${UserID}}">Health</a>
+                                                <a th:href="@{'/search/type?producttype=Fintiness&UserID='+${UserID}}">Fintiness</a>
+                                                <a th:href="@{'/search/type?producttype=Sports&UserID='+${UserID}}">Sports</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
@@ -109,7 +112,9 @@
                                     <div class="h_nav">
                                         <h4>Office</h4>
                                         <ul>
-                                            <li><a href="category.html">Home & Office</a></li>
+                                            <li><a th:href="@{'/search/type?producttype=Home&UserID='+${UserID}}">Home</a>
+                                                <a th:href="@{'/search/type?producttype=Office&UserID='+${UserID}}">Office</a>
+                                            </li>
                                         </ul>
                                     </div>
                                 </div>
