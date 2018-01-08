@@ -179,7 +179,7 @@
                 <td style="display: none"><input type="hidden" name="ShoppingCartID" th:value="*{GlobalShoppingCart.shoppingCart.shoppingcartId}" readonly="readonly" ></td>
                 <td width="250px" height="60px">
                     <button type="button" style="text-align: center;vertical-align:middle;width: 30px;line-height: 30px;height: 30px;border-radius: 15px" th:onclick="|jian(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >-</span></button>
-                    <input style="width: 20px;border: none;text-align: center" th:id="|inputid*{GlobalShoppingCart.shoppingCart.shoppingcartId}|" type="text" name="Amount" th:value="*{GlobalShoppingCart.shoppingCart.productAmount}" readonly="readonly"/>
+                    <input style="width: 50px;border: none;text-align: center" th:id="|inputid*{GlobalShoppingCart.shoppingCart.shoppingcartId}|" type="text" name="Amount" th:value="*{GlobalShoppingCart.shoppingCart.productAmount}" readonly="readonly"/>
                     <button type="button" style="text-align: center;vertical-align:middle;width: 30px;line-height: 30px;height: 30px;border-radius: 15px" th:onclick="|jia(*{{GlobalShoppingCart.shoppingCart.shoppingcartId}})|"><span >+</span></button>
                     <button type="submit" style="text-align: center;vertical-align:middle;width:60px;height: 30px;line-height: 30px" >ok</button>
                 </td>
