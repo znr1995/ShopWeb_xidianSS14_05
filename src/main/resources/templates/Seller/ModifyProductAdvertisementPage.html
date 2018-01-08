@@ -116,12 +116,11 @@
                     </div>
 
                     <div class="row text-center">
-                        <button type="submit" id="submitBtn" style="background: #258ecd;border-radius: 8px;">modify</button>
+                        <button type="submit" id="submitBtn" onclick="checkVaild()" style="background: #258ecd;border-radius: 8px;">modify</button>
                     </div>
                 </form>
             </div>
             <div class="col-lg-4 text-left">
-
                 <img id="photo" th:src="*{pictureUrl}" alt="nothing here" height="300" width="500" style="display: block;" />
             </div>
 
@@ -249,9 +248,21 @@
         if( button !== 'showLeftPush' ) {
             classie.toggle( showLeftPush, 'disabled' );
         }
+    }
+
+    var description = document.getElementById("description");
+    var endDate = document.getElementById("endDate");
+    var startDate = document.getElementById("startDate");
+
+    function checkVaild() {
+        if(description.value == "" || endDate.value == "" || startDate.value == "")
+        {
+            alert("not allow empty!");
+            return false;
+        }
 
     }
+
 </script>
 </body>
->>>>>>> origin/dev
 </html>

@@ -135,7 +135,7 @@
                 <br>
 
                 <div class="row text-center">
-                    <button class="button button1" id="submitBtn">Submit</button>
+                    <button class="button button1" onclick="checkVaild()" id="submitBtn">Submit</button>
                 </div>
             </form>
         </div>
@@ -245,8 +245,18 @@
 
     });
 
+    var description = document.getElementById("description");
+    var endDate = document.getElementById("endDate");
+    var startDate = document.getElementById("startDate");
 
+    function checkVaild() {
+        if(description.value == "" || endDate.value == "" || startDate.value == "")
+        {
+            alert("not allow empty!");
+            return false;
+        }
 
+    }
 </script>
 </body>
 </html>

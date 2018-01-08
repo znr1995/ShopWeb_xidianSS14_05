@@ -152,6 +152,8 @@
     }
 
     function register() {
+        if(!checkReigistVaild())
+            return false;
         if(pay.value == 'false')
         {
             alert("plase pay first!");
@@ -164,6 +166,49 @@
 
     }
 
+    function isPhoneNumber(string) {
+        var pattern = /^1[34578]\d{9}$/;
+        if (pattern.test(string)) {
+            return true;
+        }
+        console.log('check mobile phone ' + string + ' failed.');
+        return false;
+    };
+
+    function isEmail(str){
+
+        var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
+
+        return reg.test(str);
+
+    }
+
+    var username = document.getElementById('username');
+    var phone_number = document.getElementById('phone_number');
+    var email = document.getElementById('email');
+    var password_register = document.getElementById('password_register');
+    var Shopname = document.getElementById('Shopname');
+
+    function checkReigistVaild() {
+        if(username.value =="" || phone_number.value == "" || email.value == "" || password_register.value == "" || Shopname.value == "")
+        {
+            alert("not allow empty! please check input");
+            return false;
+        }
+
+        if(!isEmail(email.value))
+        {
+            alert("email not vaild!");
+            return false;
+        }
+
+        if(!isPhoneNumber(phone_number.value))
+        {
+            alert("phone number not vaild!");
+            return false;
+        }
+        return true;
+    }
 
 </script>
 </body>
