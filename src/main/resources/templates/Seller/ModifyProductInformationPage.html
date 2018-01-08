@@ -116,22 +116,6 @@
                             </div>
                         </div>
                         <br>
-                        <div class="form-group">
-                            <label class="col-lg-4 text-right">Product Attribute:</label>
-                            <div class="col-lg-8">
-                                <table class="table table-striped" id="otherAttributes">
-                                    <tr>
-                                        <button type="button" class="btn-default" onclick="addNewAttr()">addNewAttr</button>
-                                    </tr>
-                                    <tr>
-                                        <th>Attribute Name</th>
-                                        <th>Attribute Value</th>
-                                        <th>Modify</th>
-                                        <th>Delete</th>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
                         <div class="row text-center">
                             <button type="submit" class="btn-default">OK</button>
                         </div>
@@ -274,99 +258,6 @@
         reader.readAsDataURL(file);
 
     });
-
-    var index = 1;
-
-    var updateBriefInfo = function () {
-        var obj = {};
-        var attrs = document.getElementById('otherAttributes');
-        var len = attrs.rows.length;
-        if(len > index)
-        {
-            index = len;
-        }
-        else
-            len = index;
-
-        console.log(attrs);
-        for(var i =1; len>i; i++)
-        {
-            var attrName = document.getElementById('attribute'+i),
-                attrValue = document.getElementById('value'+i);
-            if(attrName != null )
-                if(attrValue != null)
-                {
-                    if(attrValue.value == "" || attrName.value == "")
-                    {
-                        alert("value not be empty");
-                        return;
-                    }
-                    obj[attrName.value] = attrValue.value;
-                }
-
-        }
-        console.log(obj);
-        var briefInfo = document.getElementById('productBriefInfo');
-        briefInfo.value = JSON.stringify(obj);
-    }
-
-    var deleteBtn =  function(name) {
-
-        var tr = document.getElementById('otherAttributes'+name);
-        tr.remove();
-        updateBriefInfo();
-        return false;
-
-    }
-
-    var modify = function (name) {
-        updateBriefInfo();
-        return false;
-    }
-
-    var addNewAttr = function () {
-        var tr = attrs.insertRow();
-        tr.id = "otherAttributes" + index;
-        var td1 = tr.insertCell(0),
-            td2 = tr.insertCell(1),
-            td3 = tr.insertCell(2),
-            td4 = tr.insertCell(3);
-        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "input attribute" ></input></td>';
-        td2.innerHTML = '<td><input id = "value' +index  + '" value= "input value"></input></td>';
-        td3.innerHTML = '<td>' + '<button id="addNewAttr'+ index  + '" name="'+ index +'" onclick="addNewAttrOk(id,name)"  type="button">add</button></td>';
-        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
-        index++;
-    }
-
-    var addNewAttrOk = function (id, name) {
-        var btn = document.getElementById(id);
-        console.log(btn);
-        btn.innerText = "modify";
-        btn.onclick = modify;
-        updateBriefInfo();
-    }
-
-    var attrs = document.getElementById('otherAttributes'),
-        info = document.getElementById('productBriefInfo');
-    console.log(info.value);
-    var obj = JSON.parse(info.value);
-    console.log(obj);
-
-
-    for(var i in obj)
-    {
-        var tr = attrs.insertRow();
-        tr.id = "otherAttributes" + index;
-        var td1 = tr.insertCell(0),
-            td2 = tr.insertCell(1),
-            td3 = tr.insertCell(2),
-            td4 = tr.insertCell(3);
-        td1.innerHTML = '<td><input id = "attribute' +index + '" value= "' + i + '" ></input></td>';
-        td2.innerHTML = '<td><input id = "value' +index  + '" value= "' + obj[i] + ' "></input></td>';
-        td3.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="modify(name)"  type="button">modify</button></td>';
-        td4.innerHTML = '<td>' + '<button name="'+ index  + '" onclick="deleteBtn(name)" type="button" >delete</button></td>';
-        index++;
-    }
 
 
 </script>
