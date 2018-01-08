@@ -63,7 +63,7 @@
     <div class="col-lg-10">
         <br><br><br><br>
         <div class="row col-lg-8">
-            <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
+            <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" onsubmit="return checkVaild()" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                 <input type="hidden" name="ProductID" th:value="*{ProdcutID}"/>
                 <input type="hidden" name="ProductAdvertisement" th:value="*{ProductAdvertisement}"/>
@@ -135,7 +135,7 @@
                 <br>
 
                 <div class="row text-center">
-                    <button class="button button1" id="submitBtn">Submit</button>
+                    <button class="button button1"  id="submitBtn">Submit</button>
                 </div>
             </form>
         </div>
@@ -245,8 +245,19 @@
 
     });
 
+    var description = document.getElementById("description");
+    var endDate = document.getElementById("endDate");
+    var startDate = document.getElementById("startDate");
+    var pictureUrl = document.getElementById("pictureUrl");
+    function checkVaild() {
+        if(description.value == "" || endDate.value == "" || startDate.value == "" || pictureUrl.value == "")
+        {
+            alert("not allow empty!");
+            return false;
+        }
+        return true;
 
-
+    }
 </script>
 </body>
 </html>

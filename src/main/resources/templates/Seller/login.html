@@ -35,7 +35,7 @@
     <div class="row row-centered">
         <div class="well col-md-6 col-centered">
             <h2>Shop Owner Log in</h2>
-            <form action="/login" method="post" role="form">
+            <form action="/login" onsubmit="return checkVaild()" method="post" role="form">
                 <div class="input-group input-group-md">
                     <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
                     <input type="text" class="form-control" id="account_login" name="account_login" placeholder="plase input your email"/>
@@ -46,7 +46,7 @@
                 </div>
                 <br/>
                 <div>
-                    <input type="submit"  class="btn btn-success btn-block" value="Shop Owner Login"/>
+                    <input type="submit" class="btn btn-success btn-block" value="Shop Owner Login"/>
                 </div>
             </form>
 
@@ -56,7 +56,17 @@
     </div>
 </div>
 
-
+<script>
+    var account = document.getElementById("account_login");
+    var passwd = document.getElementById("password_login");
+    function checkVaild() {
+        if(account.value == "" || passwd.value == "")
+        {
+            alert("intput account or passwd!");
+            return false;
+        }
+    }
+</script>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 <script th:src="'/jquery/jquery-3.2.1.min.js'"></script>
 

@@ -43,21 +43,21 @@
             <div class="row">
                 <br><br>
                 <div class="row col-lg-8">
-                    <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST"  enctype="multipart/form-data">
+                    <form role="form" class="form-horizontal" th:action="@{/Seller/ModifyProduct/ModifyInformation}" method="POST" onsubmit="return checkVaild()"  enctype="multipart/form-data">
                         <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                         <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
                         <div class="form-group">
                             <label class="col-lg-4 text-right">Product Name:</label>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" name="productName" th:value="*{productName}"></input>
+                                <input type="text" class="form-control" id="productName" name="productName" th:value="*{productName}"></input>
                             </div>
                         </div>
 
                         <div class="form-group ">
                             <label class="col-lg-4 text-right">Product Stock:</label>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" name="productStock" th:value="*{productStock}"></input></p>
+                                <input type="text" class="form-control" id="productStock" name="productStock" th:value="*{productStock}"></input></p>
                             </div>
                         </div>
 
@@ -98,7 +98,7 @@
                         <div class="form-group">
                             <label class="col-lg-4 text-right">Product Market Price:(HK$)</label>
                             <div class="col-lg-3">
-                                <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                                <input type="text" class="form-control"  id="productPrice" name="productPrice" th:value="*{productPrice}"/>
                             </div>
                         </div>
                         <div class="form-group">
@@ -147,6 +147,9 @@
     </div>
 </div>
 <div class="footer"></div>
+<script>
+
+</script>
 <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -195,7 +198,46 @@
     </div>
 </nav>
 <script>
+    var productname = document.getElementById("productName");
+    var productStock = document.getElementById("productStock");
+    var productPrice = document.getElementById("productPrice");
+    var productBriefInfo = document.getElementById("productBriefInfo");
 
+    function checkVaild() {
+
+        if(productname.value == "" || productBriefInfo.value == "" || productPrice == "" ||
+            productStock.value == "" )
+        {
+            alert("input not allow empty!");
+            return false;
+        }
+
+        if(parseFloat(productStock.value).toString() == "NaN")
+        {
+            alert("stock not number");
+            return false;
+        }
+
+        if(parseFloat(productPrice.value) .toString() == "NaN")
+        {
+            alert("price not number ");
+            return false;
+        }
+        if(parseFloat(productStock.value) < 0)
+        {
+            alert("stock not allow < 0 ");
+            return false;
+        }
+
+        if(parseFloat(productPrice.value) <= 0)
+        {
+            alert("price not allow < 0 ");
+            return false;
+        }
+
+        return true;
+
+    }
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById("photo");
     var brandNameInput = document.getElementById('brandName'),

@@ -380,6 +380,11 @@ public class ModifySellerAdvertisementController {
     //增加或修改商品广告信息
     public String modifyProductAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
+        if(sellerID < 0)
+        {
+            attributes.addAttribute("errorMessage","sellerId not vaild, login  again!!");
+            return "redirect:/error/errorHandler";
+        }
         model.addAttribute("SellerID",sellerID);
         attributes.addAttribute("SellerID",sellerID);
         //TODO:全部每一个修改选项有效,不能为空
@@ -477,6 +482,11 @@ public class ModifySellerAdvertisementController {
     //增加或修改商家广告信息
     public String modifySellerAdvertisement(String pictureUrl,Date startDate, Date endDate,HttpServletRequest request,Model model, RedirectAttributes attributes)
     {
+        if(sellerID < 0)
+        {
+            attributes.addAttribute("errorMessage","sellerId not vaild, login  again!!");
+            return "redirect:/error/errorHandler";
+        }
         model.addAttribute("SellerID",sellerID);
         attributes.addAttribute("SellerID",sellerID);
         //TODO:全部每一个修改选项有效,不能为空
