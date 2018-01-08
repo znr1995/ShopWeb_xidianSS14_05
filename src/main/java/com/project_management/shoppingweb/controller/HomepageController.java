@@ -91,8 +91,7 @@ public class HomepageController {
         if(pro_ads_list == null || pro_ads_list.isEmpty())  {
             pro_listad_isnull=true;//如果为空设为true
         }else{
-            for(int i = 0; i < pro_ads_list.size(); i++){
-                ProductAdvertisement pa= pro_ads_list.get(i);
+            for(ProductAdvertisement pa: pro_ads_list){
                 if(currentDate.after(pa.getEndDate())){
                     del_Product_adv2.add(pa);//广告过期加入删除列表
                 }else{
@@ -100,9 +99,9 @@ public class HomepageController {
                     if(product == null){//商品被删除
                         del_Product_adv2.add(pa);
                     }else {
-                        del_Product_adv2.add(pa);
                         pa.setPrice(product.getProductPrice());
-                        pro_ads_list.add(pa);
+                        int index = pro_ads_list.indexOf(pa);
+                        pro_ads_list.set(index ,pa);
                     }
                 }
             }
