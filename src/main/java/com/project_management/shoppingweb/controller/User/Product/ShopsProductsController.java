@@ -30,15 +30,30 @@ public class ShopsProductsController {
 
     @RequestMapping("/{sellerid}")//商铺内商品页面
     public String ShopsProduct(Model model, HttpServletRequest str, @PathVariable("sellerid") Long sellerid){
+        Seller seller = sellerService.findBySellerId(sellerid);
+        if(seller == null){
+            long UserID = Long.parseLong(str.getParameter("UserID"));
+            model.addAttribute("UserID", UserID);
+            if(UserID == -1){
+                model.addAttribute("UserName", "UserName");
+            }
+            else{
+                User user = userService.findByUserId(UserID);
+                model.addAttribute("UserName", user.getUsername());
+            }
+            return "/User/ShopNoFound";
+        }
+
         List<Product> products =
                userProductService.findAllBySellerID(sellerid);
         boolean pro_isnull = false;
-        if(products == null || products.isEmpty())  pro_isnull=true;//如果为空设为true
+        if(products == null || products.isEmpty()) {
+            pro_isnull=true;//如果为空设为true
+        }
         long UserID = Long.parseLong(str.getParameter("UserID"));
         model.addAttribute("UserID", UserID);
         model.addAttribute("products",products);
         model.addAttribute("ShopID", sellerid);
-        Seller seller = sellerService.findBySellerId(sellerid);
         model.addAttribute("seller", seller);
         model.addAttribute("pro_isnull", pro_isnull);
         if(UserID == -1){
