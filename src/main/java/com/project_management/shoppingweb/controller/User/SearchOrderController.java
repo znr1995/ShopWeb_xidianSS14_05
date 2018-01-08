@@ -1,5 +1,6 @@
 package com.project_management.shoppingweb.controller.User;
 
+import com.project_management.shoppingweb.domain.Seller;
 import com.project_management.shoppingweb.domain.Trade;
 import com.project_management.shoppingweb.domain.User;
 import com.project_management.shoppingweb.service.SellerService;
@@ -70,7 +71,14 @@ public class SearchOrderController {
             }
             TradeToShow tradeToShow = new TradeToShow();
             tradeToShow.trade = trades.get(i);
-            tradeToShow.SellerName = sellerService.findBySellerId(trades.get(i).getSellerId()).getShopname();
+            Seller seller = sellerService.findBySellerId(trades.get(i).getSellerId());
+            if(seller == null){
+                tradeToShow.SellerName = "Missed";
+                tradeToShow.Photo = "233";
+                continue;
+            }
+            tradeToShow.Photo = seller.getSculpture();
+            tradeToShow.SellerName = seller.getShopname();
             tradeToShows.add(tradeToShow);
         }
 

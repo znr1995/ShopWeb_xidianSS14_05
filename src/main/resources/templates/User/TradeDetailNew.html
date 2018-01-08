@@ -210,11 +210,13 @@
     <div id="clist1">
     <table id="list1" >
         <tr>
+            <td width="170px" height="60px"><strong>Product Photo</strong></td>
             <td width="250px" height="60px"><strong>ProductName</strong></td>
             <td width="250px" height="60px"><strong>ProudctAmount</strong></td>
             <td width="250px" height="60px"><strong>ProductTradePrice</strong></td>
         </tr>
         <tr th:each="TradeDetailList : ${TradeDetailList}">
+            <td width="170px" height="140px" ><img class="a" th:src="*{TradeDetailList.Photo}" width="170px" height="140px" alt="2333333333"/></td>
             <td width="250px" height="60px" name="ProductName" th:text="*{TradeDetailList.Name}">Onions</td>
             <td width="250px" height="60px" name="ProductAmount" th:text="*{TradeDetailList.tradeDetail.productAmount}">Onions</td>
             <td width="250px" height="60px" name="ProductTradePrice" th:text="*{TradeDetailList.tradeDetail.productTradePrice}">Onions</td>

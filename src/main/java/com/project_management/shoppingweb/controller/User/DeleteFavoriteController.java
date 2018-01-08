@@ -1,9 +1,6 @@
 package com.project_management.shoppingweb.controller.User;
 
-import com.project_management.shoppingweb.domain.Product;
-import com.project_management.shoppingweb.domain.ProductCollection;
-import com.project_management.shoppingweb.domain.ShopCollection;
-import com.project_management.shoppingweb.domain.User;
+import com.project_management.shoppingweb.domain.*;
 import com.project_management.shoppingweb.service.SellerService;
 import com.project_management.shoppingweb.service.User.User_ProductCollectionService;
 import com.project_management.shoppingweb.service.User.User_ProductService;
@@ -88,6 +85,12 @@ public class DeleteFavoriteController {
                 FavoriteToShow favoriteToShow = new FavoriteToShow();
                 favoriteToShow.ID = String.valueOf(FavoriteShop.get(i).getId());
                 favoriteToShow.SID = String.valueOf(FavoriteShop.get(i).getSellerId());
+                Seller seller = sellerService.findBySellerId(FavoriteShop.get(i).getSellerId());
+                if(seller == null){
+                    favoriteToShow.NameS = "Missed";
+                    favoriteToShow.Photo = "233";
+                    continue;
+                }
                 favoriteToShow.NameS = sellerService.findBySellerId(FavoriteShop.get(i).getSellerId()).getShopname();
                 favoriteToShow.Photo = sellerService.findBySellerId(FavoriteShop.get(i).getSellerId()).getSculpture();
                 FavoriteShops.add(favoriteToShow);

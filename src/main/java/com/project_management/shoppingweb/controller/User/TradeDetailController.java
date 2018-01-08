@@ -57,10 +57,12 @@ public class TradeDetailController {
             Product product = productService.findProductByProductID((long)TradeDetailList.get(i).getProductId());
             if(product == null){
                 tradeDetailToShow.Name = "undercarriage";
+                tradeDetailToShow.Photo = "233";
                 tradeDetailToShows.add(tradeDetailToShow);
                 continue;
             }
             tradeDetailToShow.Name = product.getProductName();
+            tradeDetailToShow.Photo = product.getProductPhoto();
             tradeDetailToShows.add(tradeDetailToShow);
         }
         model.addAttribute("TradeDetailList", tradeDetailToShows);
@@ -121,4 +123,5 @@ public class TradeDetailController {
 class TradeDetailToShow{
     public TradeDetail tradeDetail;
     public String Name;
+    public String Photo;
 }
