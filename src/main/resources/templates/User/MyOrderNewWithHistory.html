@@ -205,6 +205,7 @@
         <h2><strong>Finished</strong></h2><br>
         <table>
             <tr>
+                <td width="170px" height="60px"><strong>Shop Photo</strong></td>
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
@@ -213,6 +214,7 @@
             </tr>
             <tr th:each="tradeToShows : ${tradeToShows}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{tradeToShows.trade.sellerId}">Onions</td>
+                <td width="170px" height="140px" ><img class="a" th:src="*{tradeToShows.Photo}" width="170px" height="140px" alt="2333333333"/></td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{tradeToShows.SellerName}">Onions</td>
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{tradeToShows.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{tradeToShows.trade.tradePayWay}">Onions</td>

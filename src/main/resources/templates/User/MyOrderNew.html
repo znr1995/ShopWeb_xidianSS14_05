@@ -210,6 +210,7 @@
         <h2><strong>Processing Order</strong></h2><br>
         <table>
             <tr >
+                <td width="170px" height="60px"><strong>Shop Photo</strong></td>
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
@@ -220,6 +221,7 @@
                     <td style="display: none"><input type="hidden" name="TradeID" th:value="*{MyOrderS0.trade.tradeId}" readonly="readonly"></td>
                     <td style="display: none"><input type="hidden" name="UserID" th:value="${UserID}" readonly="readonly"></td>
                     <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS0.trade.sellerId}">Onions</td>
+                    <td width="170px" height="140px" ><img class="a" th:src="*{MyOrderS0.Photo}" width="170px" height="140px" alt="2333333333"/></td>
                     <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS0.SellerName}">Onions</td>
                     <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS0.trade.tradeTotalMoney}">Onions</td>
                     <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS0.trade.tradePayWay}">Onions</td>
@@ -235,6 +237,7 @@
         <h2><strong>To be received</strong></h2><br>
         <table>
             <tr>
+                <td width="170px" height="60px"><strong>Shop Photo</strong></td>
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
@@ -242,6 +245,7 @@
             </tr>
             <tr th:each="MyOrderS12 : ${MyOrderS12}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS12.trade.sellerId}">Onions</td>
+                <td width="170px" height="140px" ><img class="a" th:src="*{MyOrderS12.Photo}" width="170px" height="140px" alt="2333333333"/></td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS12.SellerName}">Onions</td>
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS12.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS12.trade.tradePayWay}">Onions</td>
@@ -274,6 +278,7 @@
         <h2><strong>Finished</strong></h2><br>
         <table>
             <tr>
+                <td width="170px" height="60px"><strong>Shop Photo</strong></td>
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
@@ -282,6 +287,7 @@
             </tr>
             <tr th:each="MyOrderS3 : ${MyOrderS3}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS3.trade.sellerId}">Onions</td>
+                <td width="170px" height="140px" ><img class="a" th:src="*{MyOrderS3.Photo}" width="170px" height="140px" alt="2333333333"/></td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS3.SellerName}">Onions</td>
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS3.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS3.trade.tradePayWay}">Onions</td>
@@ -308,6 +314,7 @@
         <h2><strong>Refund</strong></h2><br>
         <table>
             <tr>
+                <td width="170px" height="60px"><strong>Shop Photo</strong></td>
                 <td width="220px" height="60px"><strong>Shop Owner</strong></td>
                 <td width="220px" height="60px"><strong>Total Payment</strong></td>
                 <td width="220px" height="60px"><strong>PayWay</strong></td>
@@ -315,6 +322,7 @@
             </tr>
             <tr th:each="MyOrderS45 : ${MyOrderS45}">
                 <td style="display: none" width="220px" height="60px" name="SellerID" th:text="*{MyOrderS45.trade.sellerId}">Onions</td>
+                <td width="170px" height="140px" ><img class="a" th:src="*{MyOrderS45.Photo}" width="170px" height="140px" alt="2333333333"/></td>
                 <td width="220px" height="60px" name="SellerName" th:text="*{MyOrderS45.SellerName}">Onions</td>
                 <td width="220px" height="60px" name="TotalMoney" th:text="*{MyOrderS45.trade.tradeTotalMoney}">Onions</td>
                 <td width="220px" height="60px" name="PayWay" th:text="*{MyOrderS45.trade.tradePayWay}">Onions</td>
