@@ -49,7 +49,7 @@
         <div class="container" style="col-lg-10">
             <br><br>
             <div class="row col-lg-8" >
-                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" method="POST" enctype="multipart/form-data">
+                <form role="form" class="form-horizontal" th:action="@{/Seller/ModifySellerAdvertisement/ModifyAdvertisement}" onsubmit="return checkVaild()" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                     <input type="hidden" name="ProductID" th:value="*{ProdcutID}"/>
                     <input type="hidden" name="ProductAdvertisement" th:value="*{ProductAdvertisement}"/>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="row text-center">
-                        <button type="submit" id="submitBtn" onclick="checkVaild()" style="background: #258ecd;border-radius: 8px;">modify</button>
+                        <button type="submit" id="submitBtn"  style="background: #258ecd;border-radius: 8px;">modify</button>
                     </div>
                 </form>
             </div>
@@ -235,13 +235,6 @@
         body = document.body;
 
 
-    showLeftPush.onclick = function() {
-        classie.toggle( this, 'active' );
-        classie.toggle( body, 'cbp-spmenu-push-toright' );
-        classie.toggle( menuLeft, 'cbp-spmenu-open' );
-        disableOther( 'showLeftPush' );
-    };
-
 
     function disableOther( button ) {
 
@@ -251,15 +244,15 @@
     }
 
     var description = document.getElementById("description");
-    var endDate = document.getElementById("endDate");
-    var startDate = document.getElementById("startDate");
 
     function checkVaild() {
-        if(description.value == "" || endDate.value == "" || startDate.value == "")
+        if(description.value == "" )
         {
             alert("not allow empty!");
             return false;
         }
+
+        return true;
 
     }
 

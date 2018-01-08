@@ -72,14 +72,14 @@
             </p>
 
             <div class="row col-lg-8">
-                <form role="form" class="form-horizontal" th:action="@{/Seller/AddProduct/AddProduct}" method="POST" enctype="multipart/form-data">
+                <form role="form" class="form-horizontal" onsubmit="return checkVaild()" th:action="@{/Seller/AddProduct/AddProduct}" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="SellerID" th:value="*{SellerID}" />
                     <input type="hidden" name="ProductID" th:value="*{ProductID}" />
 
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Product Name:</label>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productName" th:value="*{productName}"/>
+                            <input type="text" class="form-control" id="productName" name="productName" th:value="*{productName}"/>
                         </div>
                     </div>
 
@@ -118,7 +118,7 @@
                     <div class="form-group ">
                         <label class="col-lg-4 text-right">Product Stock:</label>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productStock" th:value="*{productStock}"/></p>
+                            <input type="text" class="form-control" id="productStock" name="productStock" th:value="*{productStock}"/></p>
                         </div>
                     </div>
 
@@ -132,7 +132,7 @@
                     <div class="form-group">
                         <label class="col-lg-4 text-right">Product Market Price:</label>
                         <div class="col-lg-3">
-                            <input type="text" class="form-control" name="productPrice" th:value="*{productPrice}"/>
+                            <input type="text" class="form-control" id="productPrice" name="productPrice" th:value="*{productPrice}"/>
                         </div>
                     </div>
 
@@ -162,7 +162,7 @@
                     </div>
 
                     <div class="row text-center">
-                        <button  class="button button1">Submit</button>
+                        <button type="submit" class="button button1">Submit</button>
                     </div>
                     <br><br><br><br>
                 </form>
@@ -226,6 +226,52 @@
 </nav>
 
 <script>
+
+    var productname = document.getElementById("productName");
+    var productStock = document.getElementById("productStock");
+    var productPhotoFile = document.getElementById("productPhoto");
+    var productPrice = document.getElementById("productPrice");
+    var productBriefInfo = document.getElementById("productBriefInfo");
+
+    function checkVaild() {
+        console.log(productStock.value);
+        console.log(productname.value);
+        console.log(productPhotoFile.value);
+        console.log(productPrice.value);
+        console.log(productBriefInfo.value);
+        if(productname.value == "" || productBriefInfo.value == "" || productPrice == "" ||
+        productStock.value == "" || productPhotoFile.value=="")
+        {
+            alert("input not allow empty!");
+            return false;
+        }
+
+        if(parseFloat(productStock.value).toString() == "NaN")
+        {
+            alert("stock not number");
+            return false;
+        }
+
+        if(parseFloat(productPrice.value) .toString() == "NaN")
+        {
+            alert("price not number ");
+            return false;
+        }
+        if(parseFloat(productStock.value) < 0)
+        {
+            alert("stock not allow < 0 ");
+            return false;
+        }
+
+        if(parseFloat(productPrice.value) <= 0)
+        {
+            alert("price not allow < 0 ");
+            return false;
+        }
+
+        return true;
+
+    }
 
     var fileInput = document.getElementById('productPhoto'),
         photo = document.getElementById('photo');
